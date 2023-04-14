@@ -39,6 +39,8 @@ class _OnBoardingState extends State<OnBoarding> {
           padding: const EdgeInsets.all(25.0),
           child: Column(
             children: [
+
+
               Expanded(
                 child: PageView.builder(
                     itemCount: demo_data.length,
@@ -159,7 +161,7 @@ TelaBoarding(String image, String titulo, String descricao) {
       const Spacer(),
       Text(
         titulo,
-        style: GoogleFonts.inter(
+        style: GoogleFonts.cabin(
           fontSize: 35,
         ),
         textAlign: TextAlign.center,
