@@ -13,32 +13,26 @@ class PrincipalPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       backgroundColor: Colors.white,
-      drawer: const Drawer(
-        width: 300,
-        shape: RoundedRectangleBorder(
-
-          borderRadius: BorderRadius.only(
-
-            bottomRight: Radius.circular(40.0),
-            topRight: Radius.circular(40.0),
-          )
-        ),
-        elevation: 0,
-        backgroundColor: Colors.white,
-        child: DrawerPages(),
-      ),
-
+      drawer:
+      //Drawer,ou seja, o menu que aparece quando clica no botão
+      DrawerPages(),
 
       body: NestedScrollView(
-        floatHeaderSlivers: true,
-        headerSliverBuilder: (context, innerBoxIsScrolled) =>
-    [
-      AppBarPages(),
-    ],
-      body: ListView(),
-      ),
+          floatHeaderSlivers: true,
+          headerSliverBuilder: (context, innerBoxIsScrolled) =>
+          [
+            //appbar, ou seja, parte superior
+            AppBarPages(),
+          ],
+
+          //aqui é o corpo da página, ou seja,
+        // onde vai ficar o conteúdo dela, deixe ela dentro de um ListView com o Axis.vertical.
+          body: ListView(
+            scrollDirection: Axis.vertical,
+          ),
+        ),
+
 
     );
   }

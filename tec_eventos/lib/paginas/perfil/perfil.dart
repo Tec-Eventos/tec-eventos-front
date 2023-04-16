@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/paginas/pag_principal/principal_page.dart';
 
 class Perfil extends StatefulWidget {
   const Perfil({Key? key}) : super(key: key);
@@ -136,7 +137,7 @@ class _PerfilState extends State<Perfil> {
 }
 
 
-//classe da descricao de perfil do usuário
+//classe da descricao de perfil do usuário / appbar
 PerfilDescricao(context) {
   return SliverAppBar(
     elevation: 0,
@@ -150,23 +151,23 @@ PerfilDescricao(context) {
     leading: Builder(
       builder: (BuildContext context) {
         return IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-          tooltip: 'Menu',
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.black, size: 25.0,),
           onPressed: () {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(const SnackBar(content: Text('Menu')));
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => PrincipalPage()));
           },
         );
       },
     ),
     actions: [
-    IconButton(
-  icon: const Icon(Icons.menu_rounded, color: Colors.black),
-  tooltip: 'Menu',
-  onPressed: () {
-  ScaffoldMessenger.of(context)
-      .showSnackBar(const SnackBar(content: Text('Menu')));
-  },
+    GestureDetector(
+      child: Padding(
+        padding: const EdgeInsets.only(right: 10),
+        child: Image.asset("assets/Icons/menuicon.png"),
+      ),
+    onTap: () {},
   ),
     ],
 

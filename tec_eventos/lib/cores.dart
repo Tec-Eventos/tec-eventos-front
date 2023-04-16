@@ -8,5 +8,5 @@ abstract class Cores{
   static Color AzulBebe = Color(0xffE3F2FD);
   static Color Preto = Color(0xff000000);
   static Color AzulEscuroPerfilOption = Color(0xff1976D2);
-
+  static Color Cinza = Color(0xffEEEEEE);
 }

@@ -19,7 +19,20 @@ class _DrawerPagesState extends State<DrawerPages> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return
+      Drawer(
+        width: 300,
+        shape: RoundedRectangleBorder(
+
+            borderRadius: BorderRadius.only(
+
+              bottomRight: Radius.circular(40.0),
+              topRight: Radius.circular(40.0),
+            )
+        ),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        child: ListView(
       padding: EdgeInsets.zero,
       children: [
 
@@ -86,18 +99,18 @@ class _DrawerPagesState extends State<DrawerPages> {
                       child: Row(
 
                         children: [
-                          Text(
-                            "${seguindo} Seguindo",
-                            style: GoogleFonts.raleway(color: Colors.black),
-                            textAlign: TextAlign.start,
-                          ),
+
+                          Text("${seguindo} seguindo",
+                            style: GoogleFonts.raleway(color: Colors.black, fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.start),
+
 
 
                           VerticalDivider(),
 
                           Text(
                             "${seguidores} seguidores",
-                            style: GoogleFonts.raleway(color: Colors.black),
+                            style: GoogleFonts.raleway(color: Colors.black, fontWeight: FontWeight.bold),
                             textAlign: TextAlign.start,
                           ),
                         ],
@@ -188,7 +201,8 @@ class _DrawerPagesState extends State<DrawerPages> {
 
 
       ],
-    );
+    ),
+      );
   }
 }
 
