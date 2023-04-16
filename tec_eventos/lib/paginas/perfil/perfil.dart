@@ -46,21 +46,18 @@ class _PerfilState extends State<Perfil> {
 
                             AnimatedContainer(
                               duration: Duration(milliseconds: 100),
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width / 8,
+                              width: eventosParticipados ?  MediaQuery.of(context).size.width / 8 : 0.0,
                               height: 2,
 
                               decoration: BoxDecoration(
                                 color: eventosParticipados
-                                    ?  Colors.transparent
-                                    :  Cores.AzulEscuroPerfilOption,
+                                    ? Cores.AzulEscuroPerfilOption
+                                    :   Colors.transparent,
                               ),
                             ),
                           ),
 
-                          //medalhas do usuário
+                          //parte das medalhas
                           ParticipacaoPerfil(
                             false,
                             !medalhas,
@@ -70,47 +67,35 @@ class _PerfilState extends State<Perfil> {
 
                             AnimatedContainer(
                               duration: Duration(milliseconds: 100),
-                              width: medalhas
-                                  ? 0.0
-                                  : MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width / 8,
+                              width: medalhas ?  MediaQuery.of(context).size.width / 8 : 0.0,
                               height: 2,
 
                               decoration: BoxDecoration(
                                 color: medalhas
-                                    ?  Colors.transparent
-                                    :  Cores.AzulEscuroPerfilOption,
+                                    ? Cores.AzulEscuroPerfilOption
+                                    :   Colors.transparent,
                               ),
-
                             ),
                           ),
 
-                          //eventos que ele curtiu
+                          //parte dos eventos favoritados
                           ParticipacaoPerfil(
                             false,
                             false,
                             !favoritos,
-                            Icon(Icons.favorite_outline_rounded,
+                            Icon(Icons.favorite_border_outlined,
                                 color: Colors.black),
 
                             AnimatedContainer(
                               duration: Duration(milliseconds: 100),
-                              width: favoritos
-                                  ? 0.0
-                                  : MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width / 8,
+                              width: favoritos ?  MediaQuery.of(context).size.width / 8 : 0.0,
                               height: 2,
 
                               decoration: BoxDecoration(
                                 color: favoritos
-                                    ?  Colors.transparent
-                                    :  Cores.AzulEscuroPerfilOption,
+                                    ? Cores.AzulEscuroPerfilOption
+                                    :   Colors.transparent,
                               ),
-
                             ),
                           ),
 

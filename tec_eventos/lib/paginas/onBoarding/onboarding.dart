@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/paginas/pag_principal/principal_page.dart';
 import 'package:tec_eventos/paginas/perfil/perfil.dart';
 
 class OnBoarding extends StatefulWidget {
@@ -67,7 +68,7 @@ class _OnBoardingState extends State<OnBoarding> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Perfil()));
+                                    builder: (context) => PrincipalPage()));
                           },
                           child: Text('COMEÇAR',
                             style: GoogleFonts.inter(
