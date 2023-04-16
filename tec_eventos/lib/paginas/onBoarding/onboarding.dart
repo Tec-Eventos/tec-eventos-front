@@ -188,7 +188,7 @@ class DotIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 100),
-      height: isActive
+        height: isActive
           ? MediaQuery.of(context).size.height / 30
           : MediaQuery.of(context).size.height / 110,
       width: isActive

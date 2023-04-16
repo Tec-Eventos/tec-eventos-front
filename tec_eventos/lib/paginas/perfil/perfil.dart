@@ -9,7 +9,7 @@ class Perfil extends StatefulWidget {
   State<Perfil> createState() => _PerfilState();
 }
 
-bool eventosParticipados = false;
+bool eventosParticipados = true;
 bool medalhas = false;
 bool favoritos = false;
 
@@ -17,133 +17,282 @@ class _PerfilState extends State<Perfil> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Cores.Branco,
-      body: Column(
-        children: [
-
-          //container com a cor de fundo alterada e com seus radius específicado
-          Container(
-            height: MediaQuery.of(context).size.height / 2.6,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(50),
-                bottomRight: Radius.circular(50),
-              ),
-
-              color: Cores.AzulBebe,
-            ),
-
-
-
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-
+        backgroundColor: Cores.Branco,
+        body: NestedScrollView(
+            floatHeaderSlivers: true,
+            headerSliverBuilder: (context, innerBoxIsScrolled) =>
+            [
+              //Classe da appbar da página. Juntamente da descrição de perfil.
+              PerfilDescricao(context),
+            ],
+            body: ListView(
+              scrollDirection: Axis.vertical,
               children: [
-
-                SizedBox(height: MediaQuery.of(context).size.height / 40),
-                //descrição do perfil dentro do container
-                CircleAvatar(
-                  radius: 50.0,
-                  backgroundImage: AssetImage("assets/imgPerfil.png"),
-                ),
-
-                SizedBox(height: 10),
-                Text(
-                  "Gabriel Felix",
-                  style: GoogleFonts.raleway(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-
-                SizedBox(height: MediaQuery.of(context).size.height / 40),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                Column(
                   children: [
-                    Column(
-                      children: [
-                        Text("1000",
-                          style: GoogleFonts.raleway(
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.bold,
-                          ),),
-                        Text("Seguindo",
-                          style: GoogleFonts.raleway(
-                            fontSize: 12.0,
-                          ),),
-                      ],
-                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
 
-                    VerticalDivider(
-                      color: Colors.amber,
-                    ),
+                          //parte dos eventos participados
+                          ParticipacaoPerfil(
+                            !eventosParticipados,
+                            false,
+                            false,
+                            Icon(Icons.school_outlined,
+                                color: Colors.black),
 
-                    Column(
-                      children: [
-                        Text("1000",
-                          style: GoogleFonts.raleway(
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.bold,
-                          ),),
-                        Text("Seguidores",
-                          style: GoogleFonts.raleway(
-                            fontSize: 12.0,
-                          ),),
-                      ],
-                    )
+                            AnimatedContainer(
+                              duration: Duration(milliseconds: 100),
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 8,
+                              height: 2,
+
+                              decoration: BoxDecoration(
+                                color: eventosParticipados
+                                    ?  Colors.transparent
+                                    :  Cores.AzulEscuroPerfilOption,
+                              ),
+                            ),
+                          ),
+
+                          //medalhas do usuário
+                          ParticipacaoPerfil(
+                            false,
+                            !medalhas,
+                            false,
+                            Icon(Icons.workspace_premium_outlined,
+                                color: Colors.black),
+
+                            AnimatedContainer(
+                              duration: Duration(milliseconds: 100),
+                              width: medalhas
+                                  ? 0.0
+                                  : MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 8,
+                              height: 2,
+
+                              decoration: BoxDecoration(
+                                color: medalhas
+                                    ?  Colors.transparent
+                                    :  Cores.AzulEscuroPerfilOption,
+                              ),
+
+                            ),
+                          ),
+
+                          //eventos que ele curtiu
+                          ParticipacaoPerfil(
+                            false,
+                            false,
+                            !favoritos,
+                            Icon(Icons.favorite_outline_rounded,
+                                color: Colors.black),
+
+                            AnimatedContainer(
+                              duration: Duration(milliseconds: 100),
+                              width: favoritos
+                                  ? 0.0
+                                  : MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width / 8,
+                              height: 2,
+
+                              decoration: BoxDecoration(
+                                color: favoritos
+                                    ?  Colors.transparent
+                                    :  Cores.AzulEscuroPerfilOption,
+                              ),
+
+                            ),
+                          ),
+
+                        ],
+                      ),
+                    ),
                   ],
                 ),
-
-                SizedBox(height: MediaQuery.of(context).size.height / 40),
-
-                Text("Desempregado",
-                  style: GoogleFonts.raleway(
-                    fontSize: 13.0,
-                  ),),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.location_on_outlined),
-                    Text("Marília-SP",
-                      style: GoogleFonts.raleway(
-                        fontSize: 13.0,
-
-                      ),),
-                  ],
-                ),
-
               ],
-            ),
-          ),
+            )));
+  }
 
-          Container(
-            height: 50,
-            width: 550,
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 4.0)),
-            alignment: Alignment.center,
-
-            child: ListView(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-
-              children: [
-                Icon(Icons.location_on),
-                Icon(Icons.location_on),
-
-                Icon(Icons.location_on),
-                Icon(Icons.location_on),
-                Icon(Icons.location_on),
-                Icon(Icons.location_on),
-                Icon(Icons.location_on),
-
-              ],
-            ),
-          )
-        ],
+  //Classe para aparecer determinado conteúdo ao clicar
+  ParticipacaoPerfil(
+      bool eventos,
+      bool medal,
+      bool fav,
+      Icon icon,
+      AnimatedContainer animatedContainer) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          eventosParticipados = eventos;
+          medalhas = medal;
+          favoritos = fav;
+        });
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+        child: Column(
+            children: [
+              icon,
+              animatedContainer,
+            ]),
       ),
     );
   }
+}
+
+
+//classe da descricao de perfil do usuário
+PerfilDescricao(context) {
+  return SliverAppBar(
+    elevation: 0,
+    floating: true,
+    snap: true,
+    pinned: false,
+    backgroundColor: Cores.AzulBebe,
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(40), bottomRight: Radius.circular(40))),
+    leading: Builder(
+      builder: (BuildContext context) {
+        return IconButton(
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+          tooltip: 'Menu',
+          onPressed: () {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(const SnackBar(content: Text('Menu')));
+          },
+        );
+      },
+    ),
+    actions: [
+    IconButton(
+  icon: const Icon(Icons.menu_rounded, color: Colors.black),
+  tooltip: 'Menu',
+  onPressed: () {
+  ScaffoldMessenger.of(context)
+      .showSnackBar(const SnackBar(content: Text('Menu')));
+  },
+  ),
+    ],
+
+
+    //inicio das informações do usuário
+    bottom: PreferredSize(
+      preferredSize: Size.square(245.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+
+          //descrição do perfil dentro do PrefferedSize
+          CircleAvatar(
+            radius: 50.0,
+            backgroundImage: AssetImage("assets/imgPerfil.png"),
+          ),
+
+          SizedBox(height: MediaQuery
+              .of(context)
+              .size
+              .height / 50),
+          Text(
+            "Gabriel Felix",
+            style: GoogleFonts.raleway(
+              fontSize: 16.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+
+          SizedBox(height: MediaQuery
+              .of(context)
+              .size
+              .height / 50),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                children: [
+                  Text(
+                    "1000",
+                    style: GoogleFonts.raleway(
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    "Seguindo",
+                    style: GoogleFonts.raleway(
+                      fontSize: 12.0,
+                    ),
+                  ),
+                ],
+              ),
+              VerticalDivider(
+                color: Colors.amber,
+              ),
+              Column(
+                children: [
+                  Text(
+                    "1000",
+                    style: GoogleFonts.raleway(
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    "Seguidores",
+                    style: GoogleFonts.raleway(
+                      fontSize: 12.0,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+
+          SizedBox(height: MediaQuery
+              .of(context)
+              .size
+              .height / 50),
+
+          Text(
+            "Desempregado",
+            style: GoogleFonts.raleway(
+              fontSize: 13.0,
+            ),
+          ),
+
+          SizedBox(height: MediaQuery
+              .of(context)
+              .size
+              .height / 200),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.location_on_outlined),
+              Text(
+                "Marília-SP",
+                style: GoogleFonts.raleway(
+                  fontSize: 13.0,
+                ),
+              ),
+            ],
+          ),
+
+          SizedBox(height: MediaQuery
+              .of(context)
+              .size
+              .height / 30),
+        ],
+      ),
+    ),
+  );
 }

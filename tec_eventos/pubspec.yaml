@@ -41,6 +41,14 @@ dependencies:
   google_fonts: ^3.0.1
   shared_preferences: ^2.0.12
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/t!e_logo.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/t!e_logo.png"
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
