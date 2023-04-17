@@ -46,7 +46,7 @@ class _AppBarPagesState extends State<AppBarPages> {
                 Icons.search,
                 color: Colors.black,
               ),
-              contentPadding: const EdgeInsets.symmetric(vertical: 5.0),
+              contentPadding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 4.0),
               filled: true,
               fillColor: Color(0xffEEEEEE),
               focusedBorder: OutlineInputBorder(

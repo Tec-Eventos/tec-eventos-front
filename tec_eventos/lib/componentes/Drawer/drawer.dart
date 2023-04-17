@@ -123,8 +123,42 @@ class _DrawerPagesState extends State<DrawerPages> {
       ),
 
 
+        Padding(
+          padding: const EdgeInsets.only(top: 5, left: 10, right: 20),
+          child: Container(
+            alignment: Alignment.center,
+            height: MediaQuery.of(context).size.height / 22,
 
+            child: TextField(
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(
+                isDense: true,
 
+                prefixIcon: const Icon(
+                  Icons.search,
+                  color: Colors.black,
+                ),
+                contentPadding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 4.0),
+                filled: true,
+                fillColor: Colors.white,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.white, width: 1.0),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+
+                labelStyle: GoogleFonts.raleway(fontSize: 12),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.white, width: 1.0),
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+
+                hintText: "Pesquise eventos do seu interesse",
+                hintStyle: GoogleFonts.raleway(fontSize: 12)
+                ,
+              ),
+            ),
+          ),
+        ),
 
 
 
@@ -223,3 +257,6 @@ MenuOptions(Icon icone, String opcao) {
     },
   );
 }
+
+
+
