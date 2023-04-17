@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/paginas/pag_principal/principal_page.dart';
 import 'package:tec_eventos/paginas/perfil/perfil.dart';
 
 class OnBoarding extends StatefulWidget {
@@ -39,6 +40,8 @@ class _OnBoardingState extends State<OnBoarding> {
           padding: const EdgeInsets.all(25.0),
           child: Column(
             children: [
+
+
               Expanded(
                 child: PageView.builder(
                     itemCount: demo_data.length,
@@ -65,7 +68,7 @@ class _OnBoardingState extends State<OnBoarding> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Perfil()));
+                                    builder: (context) => PrincipalPage()));
                           },
                           child: Text('COMEÇAR',
                             style: GoogleFonts.inter(
@@ -159,7 +162,7 @@ TelaBoarding(String image, String titulo, String descricao) {
       const Spacer(),
       Text(
         titulo,
-        style: GoogleFonts.inter(
+        style: GoogleFonts.cabin(
           fontSize: 35,
         ),
         textAlign: TextAlign.center,
@@ -186,7 +189,7 @@ class DotIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 100),
-      height: isActive
+        height: isActive
           ? MediaQuery.of(context).size.height / 30
           : MediaQuery.of(context).size.height / 110,
       width: isActive
