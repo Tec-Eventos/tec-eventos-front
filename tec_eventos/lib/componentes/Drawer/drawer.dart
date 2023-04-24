@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:switch_button/switch_button.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/paginas/pag_principal/principal_page.dart';
 import 'package:tec_eventos/paginas/perfil/perfil.dart';
 
 class DrawerPages extends StatefulWidget {
@@ -124,35 +128,37 @@ class _DrawerPagesState extends State<DrawerPages> {
 
 
         Padding(
-          padding: const EdgeInsets.only(top: 5, left: 10, right: 20),
+          padding: const EdgeInsets.only(top: 5, right: 30, left: 40, bottom: 20),
           child: Container(
-            alignment: Alignment.center,
-            height: MediaQuery.of(context).size.height / 22,
 
+            height: 40.0,
             child: TextField(
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.start,
               decoration: InputDecoration(
                 isDense: true,
 
                 prefixIcon: const Icon(
                   Icons.search,
+                  size: 25,
                   color: Colors.black,
                 ),
-                contentPadding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 4.0),
+                contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 4.0),
                 filled: true,
                 fillColor: Colors.white,
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.white, width: 1.0),
-                  borderRadius: BorderRadius.circular(30),
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        width: 2.5, color: Cores.AzulInput
+                    )
                 ),
 
                 labelStyle: GoogleFonts.raleway(fontSize: 12),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.white, width: 1.0),
-                  borderRadius: BorderRadius.circular(30.0),
+                enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        width: 1, color: Cores.AzulInput
+                    )
                 ),
 
-                hintText: "Pesquise eventos do seu interesse",
+                hintText: "Pesquisar",
                 hintStyle: GoogleFonts.raleway(fontSize: 12)
                 ,
               ),
@@ -217,9 +223,7 @@ class _DrawerPagesState extends State<DrawerPages> {
     ],
     ),
     onTap: () {
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(builder: (_) =>),
-    // );
+      confirmacao(context);
     },
     ),
 
@@ -256,6 +260,41 @@ MenuOptions(Icon icone, String opcao) {
       // );
     },
   );
+}
+
+confirmacao(BuildContext context){
+    return showDialog(
+        context: context,
+      builder: (BuildContext context){
+       return AlertDialog(
+
+         shape: OutlineInputBorder(
+           borderRadius: BorderRadius.circular(20.0),
+         ),
+
+        title: Text("Deseja sair do app?", style: GoogleFonts.inter(
+          fontSize: 20.0, fontWeight: FontWeight.bold
+        ),),
+        content: Text("Ao clicar em sim, você sairá do nosso aplicativo.",
+          style: GoogleFonts.inter(
+            fontSize: 15.0,
+          ),),
+
+        actions: [
+          TextButton(onPressed: (){
+            SystemNavigator.pop();
+          }, child: Text("SIM", style: GoogleFonts.inter(
+            color: Cores.AzulInput, fontWeight: FontWeight.bold
+          ),)),
+
+          TextButton(onPressed: (){
+            Navigator.of(context).pop(context);
+          }, child: Text("NÃO", style: GoogleFonts.inter(
+              color: Cores.AzulInput, fontWeight: FontWeight.bold
+          ),)),
+        ],
+      );
+    });
 }
 
 

@@ -9,4 +9,5 @@ abstract class Cores{
   static Color Preto = Color(0xff000000);
   static Color AzulEscuroPerfilOption = Color(0xff1976D2);
   static Color Cinza = Color(0xffEEEEEE);
+  static Color AzulInput = Color(0xff42A5F5);
 }
