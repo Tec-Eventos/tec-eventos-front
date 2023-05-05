@@ -13,8 +13,10 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
+    var i = 300;
+    var hint = "E-mail";
     return Scaffold(
-      body:  SafeArea(
+      body:  Container(
             child: ListView(
               children: [
                 SizedBox(height: 10,),
@@ -41,30 +43,42 @@ class _LoginPageState extends State<LoginPage> {
 
                 Padding(
                   padding: 
-                    const EdgeInsets.only(top: 10, left:40, right: 40),
+                    const EdgeInsets.only(top: 30, left:40, right: 40),
                     // const EdgeInsets.symmetric(horizontal: 40.0),  
                   child: Container(
                     alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: [
+                        BoxShadow(
+                         color: Colors.grey[300]!,
+                          offset:const Offset(10, 10),
+                          blurRadius: 6,
+                          spreadRadius: -5,
+                        )
+                      ]
+                    ),
                     child: TextFormField(
                       decoration: InputDecoration(
                         isDense: true,
-                        hintText: "E-mail", 
+                        hintText: hint, 
                         border: InputBorder.none,
                         contentPadding: const EdgeInsets.symmetric(vertical: 25.0, horizontal: 30.0),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(width: 1, color: Color(0xffE9E3E3)),
-                          borderRadius: BorderRadius.circular(27),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(width: 1, color: Color(0xffE9E3E3)),
-                          borderRadius: BorderRadius.circular(27),
-                        ),
+                        // focusedBorder: OutlineInputBorder(
+                        //   borderSide: const BorderSide(width: 1, color: Color(0xffE9E3E3)),
+                        //   borderRadius: BorderRadius.circular(27),
+                        // ),
+                        // enabledBorder: OutlineInputBorder(
+                        //   borderSide: const BorderSide(width: 1, color: Color(0xffE9E3E3)),
+                        //   borderRadius: BorderRadius.circular(27),
+                        // ),
                       ),                    
                     ),
                   ),
-                )
+                ),
 
-                  
+                
               ],       
             ),
 
