@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/paginas/pag_principal/principal_page.dart';
+import 'package:tec_eventos/paginas/acesso/login.dart';
 import 'package:tec_eventos/paginas/perfil/perfil.dart';
 
 class OnBoarding extends StatefulWidget {
@@ -68,7 +69,7 @@ class _OnBoardingState extends State<OnBoarding> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => PrincipalPage()));
+                                    builder: (context) => LoginPage()));
                           },
                           child: Text('COMEÇAR',
                             style: GoogleFonts.inter(
