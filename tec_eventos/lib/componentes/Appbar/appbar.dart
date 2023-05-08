@@ -32,12 +32,8 @@ class _AppBarPagesState extends State<AppBarPages> {
       ),
       title: Padding(
         padding: const EdgeInsets.only(top: 5),
-        child: Container(
-          alignment: Alignment.center,
-          height: MediaQuery.of(context).size.height / 22,
-          width: MediaQuery.of(context).size.width / 1.5,
 
-          child: TextField(
+          child: TextFormField(
             textAlign: TextAlign.center,
             decoration: InputDecoration(
               isDense: true,
@@ -66,7 +62,7 @@ class _AppBarPagesState extends State<AppBarPages> {
             ),
           ),
         ),
-      ),
+
 
 
       actions: [
