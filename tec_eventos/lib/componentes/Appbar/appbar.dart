@@ -33,32 +33,37 @@ class _AppBarPagesState extends State<AppBarPages> {
       title: Padding(
         padding: const EdgeInsets.only(top: 5),
 
-          child: TextFormField(
-            textAlign: TextAlign.center,
-            decoration: InputDecoration(
-              isDense: true,
+          child:
+          Container(
+            height: 40,
+            child: TextFormField(
 
-              suffixIcon: const Icon(
-                Icons.search,
-                color: Colors.black,
-              ),
-              contentPadding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 4.0),
-              filled: true,
-              fillColor: Color(0xffEEEEEE),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Color(0xffEEEEEE), width: 1.0),
-                borderRadius: BorderRadius.circular(30),
-              ),
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(
+                isDense: true,
 
-              labelStyle: GoogleFonts.raleway(fontSize: 12),
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Color(0xffEEEEEE), width: 1.0),
-                borderRadius: BorderRadius.circular(30.0),
-              ),
+                suffixIcon: const Icon(
+                  Icons.search,
+                  color: Colors.black,
+                ),
+                contentPadding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 4.0),
+                filled: true,
+                fillColor: Color(0xffEEEEEE),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Color(0xffEEEEEE), width: 1.0),
+                  borderRadius: BorderRadius.circular(30),
+                ),
 
-              hintText: "Pesquise eventos do seu interesse",
-              hintStyle: GoogleFonts.raleway(fontSize: 12)
-              ,
+                labelStyle: GoogleFonts.raleway(fontSize: 12),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Color(0xffEEEEEE), width: 1.0),
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+
+                hintText: "Pesquise eventos do seu interesse",
+                hintStyle: GoogleFonts.raleway(fontSize: 12)
+                ,
+              ),
             ),
           ),
         ),
