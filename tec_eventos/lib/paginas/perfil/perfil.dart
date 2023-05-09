@@ -99,7 +99,7 @@ PerfilDescricao(context) {
           icon: const Icon(
             Icons.arrow_back_ios,
             color: Colors.black,
-            size: 25.0,
+            size: 18,
           ),
           onPressed: () {
             Navigator.pushReplacement(context,
@@ -112,7 +112,8 @@ PerfilDescricao(context) {
       GestureDetector(
         child: Padding(
           padding: const EdgeInsets.only(right: 10),
-          child: Image.asset("assets/Icons/menuicon.png"),
+          child: Image.asset("assets/Icons/menuicon.png",
+              width: 30,),
         ),
         onTap: () {},
       ),

@@ -1,5 +1,6 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tec_eventos/componentes/Appbar/appbar.dart';
 import 'package:tec_eventos/componentes/Drawer/drawer.dart';
@@ -70,61 +71,116 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     style: GoogleFonts.raleway(
                         fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-
-                  Card(
-                    margin: EdgeInsets.only(top: 20),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    color: Colors.pink,
-                    elevation: 10,
-                    child: Column(
-                      children: <Widget>[
-                        ListTile(
-                          leading: Padding(
-                            padding: const EdgeInsets.all(1.0),
-                            child: Column(
-                              children: [
-                                Text("Unicamp"),
-                                Text("É HOJE!"),
-                                Text("21/02/2023"),
-                                Text("13h00"),
-                                TextButton(
-                                    onPressed: () {}, child: Text("Ver mais"))
-                              ],
+                  Container(
+                    width: MediaQuery.of(context).size.width / 1.6,
+                    child: Card(
+                      margin: EdgeInsets.only(top: 20),
+                      shadowColor: Cores.Preto,
+                      borderOnForeground: false,
+                      clipBehavior: Clip.hardEdge,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(7.0),
+                      ),
+                      color: Colors.white,
+                      elevation: 6,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(children: [
+                            SizedBox(height: 9),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Text(
+                                "Unicamp",
+                                style: GoogleFonts.raleway(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13,
+                                ),
+                              ),
                             ),
-                          ),
-                          title: Image.network(
-                              "https://kleeventos.com.br/wp-content/uploads/2019/11/AdobeStock_100250075-1030x687.jpeg"),
-                        ),
-                      ],
+                            SizedBox(height: 5),
+                            Text(
+                              "É HOJE!",
+                              style: GoogleFonts.raleway(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                                color: Cores.Azul1E88E5,
+                              ),
+                            ),
+                            SizedBox(height: 5),
+                            Padding(
+                              padding: const EdgeInsets.all(1.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "21/02/2023",
+                                    style: GoogleFonts.inter(
+                                      fontSize: 9,
+                                    ),
+                                  ),
+                                  Text(
+                                    "13h00",
+                                    style: GoogleFonts.inter(
+                                      fontSize: 9,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      elevation: 2,
+                                      minimumSize: Size(10, 17),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7))),
+                                  onPressed: () {},
+                                  child: Text(
+                                    "Ver mais",
+                                    style: GoogleFonts.raleway(
+                                        fontSize: 9,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                            ),
+                          ]),
+                          Stack(
+                            alignment: Alignment.bottomCenter,
+                            children: [
+                              Image.network(
+                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKeOAXzBhqQCDcid2tD1HJiWUzECWBpuU_ozXny7mC&s",
+                                height: 120,
+                                width: 150,
+                                fit: BoxFit.fill,
+                              ),
+
+                                Container(
+                                  width: MediaQuery.of(context).size.width / 2.82,
+                                  height: 25,
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black,
+                                        blurRadius: 7,
+                                         // Shadow position
+                                      ),
+                                    ],
+                                  ),
+                                  child: Image.asset(
+
+                                    "assets/UnivemIMG.png",
+                                    height: 20,
+                                    alignment: Alignment.center,
+                                  ),
+                                ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
-
-
-
-
-                   Row(
-
-                      children: [
-
-
-                        Column(
-                          children: [
-                          Text("Unicamp"),
-                          Text("É HOJE!"),
-                          Text("21/02/2023"),
-                          Text("13h00"),
-                          TextButton(onPressed: () {}, child: Text("Ver mais"))
-                        ]),
-
-                        Image.network("https://distrito.me/wp-content/uploads/2022/06/Eventos-de-inovacao-confira-o-calendario-para-2022.png",
-                        height: 120,
-                        width: 240,
-                        ),
-
-                      ],
-                    ),
                 ],
               ),
             ],
@@ -176,14 +232,13 @@ class _PrincipalPageState extends State<PrincipalPage> {
                   padding: optionTrue
                       ? EdgeInsets.symmetric(horizontal: 10)
                       : EdgeInsets.all(0),
-                  child:
-                      //texto
-                      Text(
+                  child: Text(
                     optionTrue ? "Palestras" : "",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.raleway(
-                        fontSize: 12.0, color: Cores.Branco),
+                    style:
+                        GoogleFonts.raleway(fontSize: 12, color: Cores.Branco),
                   ),
+
+                  //texto do filtro em específico
                 ),
               ],
             ),
