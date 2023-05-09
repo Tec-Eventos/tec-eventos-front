@@ -77,7 +77,7 @@ class _DrawerPagesState extends State<DrawerPages> {
 
               //profissão do usuário, seus seguidores e quem ele está seguindo
               accountEmail: Padding(
-                padding: const EdgeInsets.only(top: 10.0),
+                padding: const EdgeInsets.only(),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -91,7 +91,7 @@ class _DrawerPagesState extends State<DrawerPages> {
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 10),
+                      padding: const EdgeInsets.only(top: 5),
                       child: Row(
                         children: [
                           Text("${seguindo} seguindo",
@@ -118,68 +118,69 @@ class _DrawerPagesState extends State<DrawerPages> {
 
 
 
-          MenuOptions(
-              Icon(Icons.workspace_premium_outlined, color: Colors.black),
-              "Medalhas"),
-          MenuOptions(
-              Icon(Icons.workspace_premium_outlined, color: Colors.black),
-              "Eventos"),
-          MenuOptions(
-              Icon(Icons.settings, color: Colors.black), "Configurações"),
-          MenuOptions(Icon(Icons.favorite_border_outlined, color: Colors.black),
-              "Favoritos"),
-          SizedBox(
-            height: 130,
-          ),
-          ListTile(
-            leading: Icon(Icons.brightness_6_outlined, color: Colors.black),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Modo Escuro", style: GoogleFonts.inter(fontSize: 12)),
-                LiteRollingSwitch(
-                  width: 120,
-                  value: true,
-                  textOn: "Ligado",
-                  textOff: "Desligado",
-                  colorOn: Cores.AzulClaro,
-                  colorOff: Cores.AzulCinzento,
-                  iconOn: Icons.dark_mode_outlined,
-                  iconOff: Icons.sunny,
-                  textSize: 12,
-                  onChanged: (bool state) {},
-                  onDoubleTap: () {},
-                  onTap: () {},
-                  onSwipe: () {},
-                )
+
+                MenuOptions(
+                    Icon(Icons.workspace_premium_outlined, color: Colors.black),
+                    "Medalhas"),
+                MenuOptions(
+                    Icon(Icons.workspace_premium_outlined, color: Colors.black),
+                    "Eventos"),
+                MenuOptions(
+                    Icon(Icons.settings, color: Colors.black), "Configurações"),
+                MenuOptions(Icon(Icons.favorite_border_outlined, color: Colors.black),
+                    "Favoritos"),
+                SizedBox(
+                  height: 130,
+                ),
+                ListTile(
+                  leading: Icon(Icons.brightness_6_outlined, color: Colors.black),
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Modo Escuro", style: GoogleFonts.inter(fontSize: 12)),
+                      LiteRollingSwitch(
+                        width: 120,
+                        value: true,
+                        textOn: "Ligado",
+                        textOff: "Desligado",
+                        colorOn: Cores.AzulClaro,
+                        colorOff: Cores.AzulCinzento,
+                        iconOn: Icons.dark_mode_outlined,
+                        iconOff: Icons.sunny,
+                        textSize: 12,
+                        onChanged: (bool state) {},
+                        onDoubleTap: () {},
+                        onTap: () {},
+                        onSwipe: () {},
+                      )
+                    ],
+                  ),
+                  onTap: () {
+                    // Navigator.of(context).push(
+                    //   MaterialPageRoute(builder: (_) =>),
+                    // );
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.exit_to_app_outlined, color: Colors.black),
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Sair", style: GoogleFonts.inter(fontSize: 12)),
+                    ],
+                  ),
+                  onTap: () {
+                    confirmacao(context);
+                  },
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 17, top: 25),
+                  alignment: Alignment.bottomLeft,
+                  height: 43,
+                  child: Image.asset("assets/t!e_logo.png"),
+                ),
               ],
             ),
-            onTap: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(builder: (_) =>),
-              // );
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.exit_to_app_outlined, color: Colors.black),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Sair", style: GoogleFonts.inter(fontSize: 12)),
-              ],
-            ),
-            onTap: () {
-              confirmacao(context);
-            },
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 17, top: 25),
-            alignment: Alignment.bottomLeft,
-            height: 43,
-            child: Image.asset("assets/t!e_logo.png"),
-          ),
-        ],
-      ),
     );
   }
 }
