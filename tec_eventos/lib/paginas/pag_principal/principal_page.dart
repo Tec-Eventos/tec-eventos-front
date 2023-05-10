@@ -51,6 +51,8 @@ class _PrincipalPageState extends State<PrincipalPage> {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: <Widget>[
+
+                        //BOTÕES DE FILTRAGEM
                           FiltragemEventos(false, !competicoes, false,
                               Icons.school_outlined, competicoes),
                           FiltragemEventos(!palestras, false, false,
@@ -71,9 +73,14 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     style: GoogleFonts.raleway(
                         fontSize: 18, fontWeight: FontWeight.bold),
                   ),
+
+
+                  //CARD PARA OS EVENTOS QUE O USUÁRIO ESTÁ INSCRITO
                   Container(
-                    width: MediaQuery.of(context).size.width / 1.6,
-                    child: Card(
+                    width: MediaQuery.of(context).size.width * 0.65,
+                    child:
+                    //CUSTOMIZAÇÃO DO CARD
+                    Card(
                       margin: EdgeInsets.only(top: 20),
                       shadowColor: Cores.Preto,
                       borderOnForeground: false,
@@ -83,14 +90,20 @@ class _PrincipalPageState extends State<PrincipalPage> {
                       ),
                       color: Colors.white,
                       elevation: 6,
-                      child: Row(
+                      child:
+
+                      //COMPONENTES QUE VÃO ESTAR DENTRO DO CARD
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(children: [
                             SizedBox(height: 9),
                             Padding(
                               padding: const EdgeInsets.only(left: 8.0),
-                              child: Text(
+                              child:
+
+                              //NOME DA INSTITUIÇÃO
+                              Text(
                                 "Unicamp",
                                 style: GoogleFonts.raleway(
                                   fontWeight: FontWeight.bold,
@@ -99,6 +112,8 @@ class _PrincipalPageState extends State<PrincipalPage> {
                               ),
                             ),
                             SizedBox(height: 5),
+
+                            //DIA QUE VAI ROLAR O EVENTO
                             Text(
                               "É HOJE!",
                               style: GoogleFonts.raleway(
@@ -108,6 +123,9 @@ class _PrincipalPageState extends State<PrincipalPage> {
                               ),
                             ),
                             SizedBox(height: 5),
+
+
+                            //DIA EM ESPECÍFICO, COM DATA E HORÁRIO
                             Padding(
                               padding: const EdgeInsets.all(1.0),
                               child: Column(
@@ -128,6 +146,9 @@ class _PrincipalPageState extends State<PrincipalPage> {
                                 ],
                               ),
                             ),
+
+
+                            //BOTÃO PARA VER MAIS SOBRE O EVENTO
                             Padding(
                               padding: const EdgeInsets.only(left: 8.0),
                               child: ElevatedButton(
@@ -146,47 +167,82 @@ class _PrincipalPageState extends State<PrincipalPage> {
                                   )),
                             ),
                           ]),
+
+
+                          //IMAGEM DO EVENTO
                           Stack(
                             alignment: Alignment.bottomCenter,
                             children: [
                               Image.network(
                                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKeOAXzBhqQCDcid2tD1HJiWUzECWBpuU_ozXny7mC&s",
                                 height: 120,
-                                width: 150,
+                                width: MediaQuery.of(context).size.width * 0.4,
                                 fit: BoxFit.fill,
                               ),
-
-                                Container(
-                                  width: MediaQuery.of(context).size.width / 2.82,
-                                  height: 25,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black,
-                                        blurRadius: 7,
-                                         // Shadow position
-                                      ),
-                                    ],
-                                  ),
-                                  child: Image.asset(
-
-                                    "assets/UnivemIMG.png",
-                                    height: 20,
-                                    alignment: Alignment.center,
-                                  ),
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                height: 25,
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black,
+                                      blurRadius: 7,
+                                      // Shadow position
+                                    ),
+                                  ],
                                 ),
+                                child: Image.asset(
+                                  "assets/UnivemIMG.png",
+                                  height: 20,
+                                  alignment: Alignment.center,
+                                ),
+                              ),
                             ],
                           )
                         ],
                       ),
                     ),
                   ),
+
+                  SizedBox(height: 50),
+
+                  Text(
+                    "Eventos que você está inscrito",
+                    style: GoogleFonts.raleway(
+                        fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+
+
                 ],
               ),
             ],
           ),
         ),
       ),
+
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(bottom: 10.0),
+        child: Container(
+          padding: EdgeInsets.all(12),
+          margin: EdgeInsets.symmetric(horizontal: 24),
+          decoration: BoxDecoration(
+            color: Cores.AzulCinzento,
+            borderRadius: BorderRadius.all(Radius.circular(24)),
+
+          ),
+
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Icon(Icons.home_filled),
+              Icon(Icons.home_filled),
+              Icon(Icons.home_filled),
+              Icon(Icons.home_filled),
+            ],
+          ),
+        ),
+      ),
+
     );
   }
 
@@ -206,7 +262,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
         child: Column(children: [
           AnimatedContainer(
             duration: Duration(milliseconds: 300),
-            width: optionTrue ? 120 : MediaQuery.of(context).size.width / 8,
+            width: optionTrue ? 120 : 50,
             height: 50,
             decoration: BoxDecoration(
               borderRadius: optionTrue
