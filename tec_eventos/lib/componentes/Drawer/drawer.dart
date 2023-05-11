@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:switch_button/switch_button.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/paginas/pag_principal/principal_page.dart';
@@ -50,9 +51,12 @@ class _DrawerPagesState extends State<DrawerPages> {
               currentAccountPictureSize: Size(83, 83),
               currentAccountPicture: GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => Perfil()),
-                  );
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: Perfil(),
+                          type: PageTransitionType.rightToLeft));
+
                 },
 
                 //imagem do perfil
@@ -141,8 +145,8 @@ class _DrawerPagesState extends State<DrawerPages> {
                       LiteRollingSwitch(
                         width: 120,
                         value: true,
-                        textOn: "Ligado",
-                        textOff: "Desligado",
+                        textOn: "",
+                        textOff: "",
                         colorOn: Cores.AzulClaro,
                         colorOff: Cores.AzulCinzento,
                         iconOn: Icons.dark_mode_outlined,

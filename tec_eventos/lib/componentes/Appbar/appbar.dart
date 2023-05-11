@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/componentes/Drawer/drawer.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/paginas/perfil/perfil.dart';
@@ -38,7 +39,7 @@ class _AppBarPagesState extends State<AppBarPages> {
             height: 40,
             child: TextFormField(
 
-              textAlign: TextAlign.center,
+
               decoration: InputDecoration(
                 isDense: true,
 
@@ -46,7 +47,7 @@ class _AppBarPagesState extends State<AppBarPages> {
                   Icons.search,
                   color: Colors.black,
                 ),
-                contentPadding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 4.0),
+                contentPadding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 8.0),
                 filled: true,
                 fillColor: Color(0xffEEEEEE),
                 focusedBorder: OutlineInputBorder(
@@ -73,9 +74,12 @@ class _AppBarPagesState extends State<AppBarPages> {
       actions: [
         IconButton(
           onPressed: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (_) => Perfil()));
+
+            Navigator.push(
+            context,
+            PageTransition(
+                child: Perfil(),
+                type: PageTransitionType.rightToLeft));
           },
           icon: const Icon(Icons.account_circle_outlined,
               size: 31.0,
