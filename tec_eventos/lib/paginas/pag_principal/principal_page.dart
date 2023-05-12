@@ -239,8 +239,9 @@ class _PrincipalPageState extends State<PrincipalPage> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Container(
+                            child: SizedBox(
                               width: MediaQuery.of(context).size.width / 1.5,
+
 
                               child:
                               //CUSTOMIZAÇÃO DO CARD

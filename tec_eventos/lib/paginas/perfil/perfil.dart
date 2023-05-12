@@ -54,29 +54,31 @@ class _PerfilState extends State<Perfil> {
 
   //Classe para aparecer determinado conteúdo ao clicar
   ParticipacaoPerfil(bool eventosBool, bool medalBool, bool favBool, Icon icon, bool optionTrue) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          eventosParticipados = eventosBool;
-          medalhas = medalBool;
-          favoritos = favBool;
-        });
-      },
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-        child: Column(children: [
-          icon,
-          AnimatedContainer(
-            duration: Duration(milliseconds: 100),
-            width: optionTrue ? MediaQuery.of(context).size.width / 8 : 0.0,
-            height: 2,
-            decoration: BoxDecoration(
-              color: optionTrue
-                  ? Cores.AzulEscuroPerfilOption
-                  : Colors.transparent,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            eventosParticipados = eventosBool;
+            medalhas = medalBool;
+            favoritos = favBool;
+          });
+        },
+        child:  Column(
+            children: [
+            icon,
+            AnimatedContainer(
+              duration: Duration(milliseconds: 100),
+              width: optionTrue ? MediaQuery.of(context).size.width / 8 : 0.0,
+              height: 2,
+              decoration: BoxDecoration(
+                color: optionTrue
+                    ? Cores.AzulEscuroPerfilOption
+                    : Colors.transparent,
+              ),
             ),
-          ),
-        ]),
+          ]),
+
       ),
     );
   }
@@ -85,29 +87,26 @@ class _PerfilState extends State<Perfil> {
 //classe da descricao de perfil do usuário / appbar
 PerfilDescricao(context) {
   return SliverAppBar(
-    elevation: 0,
-    floating: true,
-    snap: true,
-    pinned: false,
+    floating: false,
     backgroundColor: Cores.AzulBebe,
+    expandedHeight: 85,
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(40), bottomRight: Radius.circular(40))),
-    leading: Builder(
-      builder: (BuildContext context) {
-        return IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.black,
-            size: 18,
-          ),
-          onPressed: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => PrincipalPage()));
-          },
-        );
-      },
-    ),
+    leading:   IconButton(
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+                size: 18,
+              ),
+              onPressed: () {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => PrincipalPage()));
+              },
+            ),
+
+
+
     actions: [
       GestureDetector(
         child: Padding(
@@ -121,7 +120,7 @@ PerfilDescricao(context) {
 
     //inicio das informações do usuário
     bottom: PreferredSize(
-      preferredSize: Size.square(245.0),
+      preferredSize: Size.square(250),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

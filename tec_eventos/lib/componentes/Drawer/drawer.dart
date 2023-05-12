@@ -120,63 +120,65 @@ class _DrawerPagesState extends State<DrawerPages> {
             ),
           ),
 
+              const Column(
+                 children: [
 
+                   const MenuOptions(icone: Icons.workspace_premium_outlined, opcao: "Medalhas", nomePage: Perfil()),
+                   const MenuOptions(icone: Icons.workspace_premium_outlined, opcao: "Eventos", nomePage: Perfil()),
+                   const MenuOptions(icone: Icons.settings, opcao: "Configurações", nomePage: Perfil()),
+                   const MenuOptions(icone: Icons.favorite, opcao: "Favoritos", nomePage: Perfil()),
 
+                 ],
+               ),
 
-                MenuOptions(
-                    Icon(Icons.workspace_premium_outlined, color: Colors.black),
-                    "Medalhas"),
-                MenuOptions(
-                    Icon(Icons.workspace_premium_outlined, color: Colors.black),
-                    "Eventos"),
-                MenuOptions(
-                    Icon(Icons.settings, color: Colors.black), "Configurações"),
-                MenuOptions(Icon(Icons.favorite_border_outlined, color: Colors.black),
-                    "Favoritos"),
-                SizedBox(
+          SizedBox(
                   height: 130,
                 ),
-                ListTile(
-                  leading: Icon(Icons.brightness_6_outlined, color: Colors.black),
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Modo Escuro", style: GoogleFonts.inter(fontSize: 12)),
-                      LiteRollingSwitch(
-                        width: 120,
-                        value: true,
-                        textOn: "",
-                        textOff: "",
-                        colorOn: Cores.AzulClaro,
-                        colorOff: Cores.AzulCinzento,
-                        iconOn: Icons.dark_mode_outlined,
-                        iconOff: Icons.sunny,
-                        textSize: 12,
-                        onChanged: (bool state) {},
-                        onDoubleTap: () {},
-                        onTap: () {},
-                        onSwipe: () {},
-                      )
-                    ],
-                  ),
-                  onTap: () {
-                    // Navigator.of(context).push(
-                    //   MaterialPageRoute(builder: (_) =>),
-                    // );
-                  },
+
+                Column(
+                  children: [
+                    ListTile(
+                      leading: Icon(Icons.brightness_6_outlined, color: Colors.black),
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Modo Escuro", style: GoogleFonts.inter(fontSize: 12)),
+                          LiteRollingSwitch(
+                            width: 120,
+                            value: true,
+                            textOn: "",
+                            textOff: "",
+                            colorOn: Cores.AzulClaro,
+                            colorOff: Cores.AzulCinzento,
+                            iconOn: Icons.dark_mode_outlined,
+                            iconOff: Icons.sunny,
+                            textSize: 12,
+                            onChanged: (bool state) {},
+                            onDoubleTap: () {},
+                            onTap: () {},
+                            onSwipe: () {},
+                          )
+                        ],
+                      ),
+                      onTap: () {
+                        // Navigator.of(context).push(
+                        //   MaterialPageRoute(builder: (_) =>),
+                        // );
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.exit_to_app_outlined, color: Colors.black),
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [ Text("Sair", style: GoogleFonts.inter(fontSize: 12)),],
+                      ),
+                      onTap: () {
+                        confirmacao(context);
+                      },
+                    ),
+                  ],
                 ),
-                ListTile(
-                  leading: Icon(Icons.exit_to_app_outlined, color: Colors.black),
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Sair", style: GoogleFonts.inter(fontSize: 12)),
-                    ],
-                  ),
-                  onTap: () {
-                    confirmacao(context);
-                  },
-                ),
+
                 Container(
                   margin: EdgeInsets.only(left: 17, top: 25),
                   alignment: Alignment.bottomLeft,
@@ -189,23 +191,39 @@ class _DrawerPagesState extends State<DrawerPages> {
   }
 }
 
-MenuOptions(Icon icone, String opcao) {
-  return ListTile(
-    leading: icone,
-    title: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(opcao, style: GoogleFonts.inter(fontSize: 12)),
-        Icon(Icons.arrow_forward_ios_outlined, size: 12),
-      ],
-    ),
-    onTap: () {
-      // Navigator.of(context).push(
-      //   MaterialPageRoute(builder: (_) =>),
-      // );
-    },
-  );
+
+class MenuOptions extends StatelessWidget {
+  const MenuOptions({Key? key, required this.icone, required this.opcao, required this.nomePage}) : super(key: key);
+
+  final IconData icone;
+  final String opcao;
+  final Widget nomePage;
+
+  @override
+  Widget build(BuildContext context) {
+    return   ListTile(
+      leading: Icon(
+        icone, color: Colors.black
+      ),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(opcao, style: GoogleFonts.inter(fontSize: 12)),
+          Icon(Icons.arrow_forward_ios_outlined, size: 12),
+        ],
+      ),
+      onTap: () {
+        Navigator.push(
+            context,
+            PageTransition(
+                child: nomePage,
+                type: PageTransitionType.rightToLeft));
+      },
+    );
+  }
 }
+
+
 
 confirmacao(BuildContext context) {
   return showDialog(

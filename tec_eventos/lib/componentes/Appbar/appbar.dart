@@ -18,7 +18,7 @@ class _AppBarPagesState extends State<AppBarPages> {
     return SliverAppBar(
       floating: true,
       snap: true,
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       expandedHeight: 65,
 
       leading: Builder(
@@ -35,7 +35,7 @@ class _AppBarPagesState extends State<AppBarPages> {
         padding: const EdgeInsets.only(top: 5),
 
           child:
-          Container(
+          SizedBox(
             height: 40,
             child: TextFormField(
 
