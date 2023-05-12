@@ -120,7 +120,7 @@ class _DrawerPagesState extends State<DrawerPages> {
             ),
           ),
 
-              const Column(
+              Column(
                  children: [
 
                    const MenuOptions(icone: Icons.workspace_premium_outlined, opcao: "Medalhas", nomePage: Perfil()),

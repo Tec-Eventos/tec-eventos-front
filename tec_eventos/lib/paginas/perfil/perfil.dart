@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tec_eventos/componentes/Drawer/drawer.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/paginas/pag_principal/principal_page.dart';
 
@@ -18,6 +19,7 @@ class _PerfilState extends State<Perfil> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: DrawerPages(),
         backgroundColor: Cores.Branco,
         body: NestedScrollView(
             floatHeaderSlivers: true,
@@ -46,10 +48,99 @@ class _PerfilState extends State<Perfil> {
                         ],
                       ),
                     ),
-                  ],
-                ),
+
+                  SizedBox(height: 30),
+
+
+
+
+
+                    //se os eventos participados estiverem marcados
+                    eventosParticipados ?
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Eventos(
+                            imagem: "assets/UnivemIMG.png",
+                            nomeEvento: "Univem Nasa",
+                            descricao: "Aqui você terá todo o conhecimento dos trabalhos da NASA, juntamente de especialistas que estarão trabalhando conosco"
+                        ),
+                        Eventos(
+                            imagem: "assets/UnivemIMG.png",
+                            nomeEvento: "Univem Nasa",
+                            descricao: "Aqui você terá todo o conhecimento dos trabalhos da NASA, juntamente de especialistas que estarão trabalhando conosco"
+                        ),
+                        Eventos(
+                            imagem: "assets/UnivemIMG.png",
+                            nomeEvento: "Univem Nasa",
+                            descricao: "Aqui você terá todo o conhecimento dos trabalhos da NASA, juntamente de especialistas que estarão trabalhando conosco"
+                        ),
+                      ],
+                    ) :
+
+                    medalhas ?
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                       SizedBox(
+                         child: ListTile(
+                           autofocus: true,
+                           leading:
+                           Icon(
+                             Icons.workspace_premium_outlined,
+                           ),
+                           title: Text("Medalha de tal evento"),
+                           subtitle: Column(
+                             crossAxisAlignment: CrossAxisAlignment.start,
+                             children: [
+                               Text("Univem"),
+                               Text("3° lugar"),
+                             ],
+                           ),
+                           trailing: Image.asset("assets/UnivemIMG.png"),
+                         ),
+                       )
+                      ],
+                    )
+                      :
+                     favoritos ?
+                     Column(
+                       crossAxisAlignment: CrossAxisAlignment.center,
+                       children: [
+                         Eventos(
+                             imagem: "assets/UnivemIMG.png",
+                             nomeEvento: "Univem Na",
+                             descricao: "Aqui você terá todo o conhecimento dos trabalhos da NASA, juntamente de especialistas que estarão trabalhando conosco"
+                         ),
+                         Eventos(
+                             imagem: "assets/UnivemIMG.png",
+                             nomeEvento: "Univem Na",
+                             descricao: "Aqui você terá todo o conhecimento dos trabalhos da NASA, juntamente de especialistas que estarão trabalhando conosco"
+                         ),
+                         Eventos(
+                             imagem: "assets/UnivemIMG.png",
+                             nomeEvento: "Univem Na",
+                             descricao: "Aqui você terá todo o conhecimento dos trabalhos da NASA, juntamente de especialistas que estarão trabalhando conosco"
+                         ),
+                       ],
+                     )
+                     :
+                    Container(),
+
+
+
+
+
+
+
+
+
               ],
-            )));
+            ),
+    ]
+    ),
+    ),
+    );
   }
 
   //Classe para aparecer determinado conteúdo ao clicar
@@ -108,13 +199,20 @@ PerfilDescricao(context) {
 
 
     actions: [
-      GestureDetector(
-        child: Padding(
-          padding: const EdgeInsets.only(right: 10),
-          child: Image.asset("assets/Icons/menuicon.png",
-              width: 30,),
-        ),
-        onTap: () {},
+      Builder(
+        builder: (BuildContext context)  {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GestureDetector(
+              onTap: (){
+                Scaffold.of(context).openDrawer();
+              },
+              child: Image.asset("assets/Icons/menuicon.png",
+
+              ),
+            ),
+          );
+        },
       ),
     ],
 
@@ -212,3 +310,57 @@ PerfilDescricao(context) {
     ),
   );
 }
+
+
+class Eventos extends StatefulWidget {
+   const Eventos({Key? key, required this.imagem, required this.nomeEvento, required this.descricao}) : super(key: key);
+
+    //perguntar para o Menoi a respeito do tipo que devo passar para a imagem do usuário
+   final String imagem, nomeEvento, descricao;
+
+  @override
+  State<Eventos> createState() => _EventosState();
+}
+
+class _EventosState extends State<Eventos> {
+  @override
+  Widget build(BuildContext context) {
+
+
+    return SizedBox(
+      width: MediaQuery.of(context).size.width / 1.1,
+      height: MediaQuery.of(context).size.height / 6.5,
+      child: ListTile(
+        leading: Image.asset(widget.imagem),
+        title: Text(widget.nomeEvento),
+        subtitle: Text(widget.descricao),
+      ),
+    );
+  }
+}
+
+//
+// class Medalhas extends StatefulWidget {
+//   const Medalhas({Key? key}) : super(key: key);
+//
+//   @override
+//   State<Medalhas> createState() => _MedalhasState();
+// }
+//
+// class _MedalhasState extends State<Medalhas> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       width: MediaQuery.of(context).size.width / 1.1,
+//       height: MediaQuery.of(context).size.height / 6.5,
+//       child: ListTile(
+//        
+//         leading: Icons(icone),
+//         title: ,
+//         subtitle: ,
+//       ),
+//     );
+//   }
+// }
+//
+//
