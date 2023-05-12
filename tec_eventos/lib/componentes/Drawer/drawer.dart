@@ -179,8 +179,9 @@ class _DrawerPagesState extends State<DrawerPages> {
                   ],
                 ),
 
+
                 Container(
-                  margin: EdgeInsets.only(left: 17, top: 25),
+                  margin: EdgeInsets.only(left: 17, top: 70),
                   alignment: Alignment.bottomLeft,
                   height: 43,
                   child: Image.asset("assets/t!e_logo.png"),

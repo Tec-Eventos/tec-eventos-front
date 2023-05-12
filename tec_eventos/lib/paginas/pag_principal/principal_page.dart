@@ -167,12 +167,12 @@ class _PrincipalPageState extends State<PrincipalPage> {
       backgroundColor: Colors.white,
       drawer:
           //Drawer,ou seja, o menu que aparece quando clica no botão
-          DrawerPages(),
+          const DrawerPages(),
       body: NestedScrollView(
         floatHeaderSlivers: true,
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           //appbar, ou seja, parte superior
-          AppBarPages(),
+          const AppBarPages(),
         ],
 
         //aqui é o corpo da página, ou seja,
@@ -209,7 +209,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     ),
                   ),
 
-                  SizedBox(height: 50),
+                  const SizedBox(height: 50),
 
                   Text(
                     "Eventos que você está inscrito",
@@ -246,7 +246,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                               child:
                               //CUSTOMIZAÇÃO DO CARD
                               Card(
-                                margin: EdgeInsets.only(top: 20),
+                                margin: const EdgeInsets.only(top: 20),
                                 shadowColor: Cores.Preto,
                                 borderOnForeground: false,
                                 clipBehavior: Clip.hardEdge,
@@ -262,7 +262,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Column(children: [
-                                      SizedBox(height: 9),
+                                      const SizedBox(height: 9),
                                       Padding(
                                         padding: const EdgeInsets.only(left: 8.0),
                                         child:
@@ -276,7 +276,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                                         ),
                                       ),
                                       ),
-                                      SizedBox(height: 5),
+                                     const SizedBox(height: 5),
 
                                       //DIA QUE VAI ROLAR O EVENTO
                                       Text(
@@ -287,7 +287,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                                           color: Cores.Azul1E88E5,
                                         ),
                                       ),
-                                      SizedBox(height: 5),
+                                     const SizedBox(height: 5),
 
 
                                       //DIA EM ESPECÍFICO, COM DATA E HORÁRIO
@@ -350,7 +350,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                                         Container(
                                           width: MediaQuery.of(context).size.width / 2.5,
                                           height: 30,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             boxShadow: [
                                               BoxShadow(
                                                 color: Colors.black,
@@ -414,7 +414,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(height: 5),
+                                     const SizedBox(height: 5),
 
                                       //DIA QUE VAI ROLAR O EVENTO
                                       Text(
@@ -425,7 +425,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                                           color: Cores.Azul1E88E5,
                                         ),
                                       ),
-                                      SizedBox(height: 5),
+                                      const SizedBox(height: 5),
 
 
                                       //DIA EM ESPECÍFICO, COM DATA E HORÁRIO
@@ -488,7 +488,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                                         Container(
                                           width: MediaQuery.of(context).size.width / 2.5,
                                           height: 30,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             boxShadow: [
                                               BoxShadow(
                                                 color: Colors.black,
@@ -520,7 +520,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
 
 
 
-                  SizedBox(height: 50),
+                  const SizedBox(height: 50),
 
                   Text(
                     "Eventos que você está inscrito",
@@ -539,8 +539,8 @@ class _PrincipalPageState extends State<PrincipalPage> {
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(bottom: 10.0),
         child: Container(
-          padding: EdgeInsets.all(12),
-          margin: EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.all(12),
+          margin: const EdgeInsets.symmetric(horizontal: 24),
           decoration: BoxDecoration(
             color: Cores.AzulCinzento,
             borderRadius: BorderRadius.all(Radius.circular(24)),
@@ -552,10 +552,10 @@ class _PrincipalPageState extends State<PrincipalPage> {
             children: [
 
 
-                  Icon(Icons.home_filled),
-                  Icon(Icons.home_filled),
-                  Icon(Icons.home_filled),
-                  Icon(Icons.home_filled),
+                  const Icon(Icons.home_filled),
+              const Icon(Icons.home_filled),
+              const Icon(Icons.home_filled),
+              const Icon(Icons.home_filled),
 
 
             ],
@@ -580,7 +580,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
         },
         child: Column(children: [
           AnimatedContainer(
-            duration: Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 300),
             width: optionTrue ? 120 : 50,
             height: 50,
             decoration: BoxDecoration(
@@ -605,8 +605,8 @@ class _PrincipalPageState extends State<PrincipalPage> {
 
                 Padding(
                   padding: optionTrue
-                      ? EdgeInsets.symmetric(horizontal: 10)
-                      : EdgeInsets.all(0),
+                      ? const EdgeInsets.symmetric(horizontal: 10)
+                      : const EdgeInsets.all(0),
                   child: Text(
                     optionTrue ? "Palestras" : "",
                     style:
