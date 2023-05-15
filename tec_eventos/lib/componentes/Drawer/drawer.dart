@@ -121,12 +121,12 @@ class _DrawerPagesState extends State<DrawerPages> {
           ),
 
               Column(
-                 children: [
+                 children: const [
 
-                   const MenuOptions(icone: Icons.workspace_premium_outlined, opcao: "Medalhas", nomePage: Perfil()),
-                   const MenuOptions(icone: Icons.workspace_premium_outlined, opcao: "Eventos", nomePage: Perfil()),
-                   const MenuOptions(icone: Icons.settings, opcao: "Configurações", nomePage: Perfil()),
-                   const MenuOptions(icone: Icons.favorite, opcao: "Favoritos", nomePage: Perfil()),
+                    MenuOptionsAssetIcon(icone: "assets/Icons/medalhas.png", opcao: "Configurações", nomePage: Perfil()),
+                    MenuOptions(icone: Icons.confirmation_num_outlined, opcao: "Eventos", nomePage: Perfil()),
+                    MenuOptionsAssetIcon(icone: "assets/Icons/configuracao.png", opcao: "Configurações", nomePage: Perfil()),
+                    MenuOptions(icone: Icons.favorite_border, opcao: "Favoritos", nomePage: Perfil()),
 
                  ],
                ),
@@ -143,20 +143,23 @@ class _DrawerPagesState extends State<DrawerPages> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text("Modo Escuro", style: GoogleFonts.inter(fontSize: 12)),
-                          LiteRollingSwitch(
-                            width: 120,
-                            value: true,
-                            textOn: "",
-                            textOff: "",
-                            colorOn: Cores.AzulClaro,
-                            colorOff: Cores.AzulCinzento,
-                            iconOn: Icons.dark_mode_outlined,
-                            iconOff: Icons.sunny,
-                            textSize: 12,
-                            onChanged: (bool state) {},
-                            onDoubleTap: () {},
-                            onTap: () {},
-                            onSwipe: () {},
+                          SizedBox(
+                            height: 40,
+                            child: LiteRollingSwitch(
+                              width: 80,
+                              value: true,
+                              textOn: "",
+                              textOff: "",
+                              colorOn: Cores.AzulClaro,
+                              colorOff: Cores.AzulCinzento,
+                              iconOn: Icons.dark_mode_outlined,
+                              iconOff: Icons.sunny,
+                              textSize: 12,
+                              onChanged: (bool state) {},
+                              onDoubleTap: () {},
+                              onTap: () {},
+                              onSwipe: () {},
+                            ),
                           )
                         ],
                       ),
@@ -223,6 +226,35 @@ class MenuOptions extends StatelessWidget {
     );
   }
 }
+
+class MenuOptionsAssetIcon extends StatelessWidget {
+  const MenuOptionsAssetIcon({Key? key, required this.icone, required this.opcao, required this.nomePage}) : super(key: key);
+  final String icone;
+  final String opcao;
+  final Widget nomePage;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: ImageIcon(AssetImage(icone), color: Cores.Preto),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(opcao, style: GoogleFonts.inter(fontSize: 12)),
+          Icon(Icons.arrow_forward_ios_outlined, size: 12),
+        ],
+      ),
+      onTap: () {
+        Navigator.push(
+            context,
+            PageTransition(
+                child: nomePage,
+                type: PageTransitionType.rightToLeft));
+      },
+    );
+  }
+}
+
 
 
 

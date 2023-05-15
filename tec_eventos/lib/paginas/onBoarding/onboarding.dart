@@ -1,8 +1,10 @@
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/paginas/all_pages.dart';
 import 'package:tec_eventos/paginas/pag_principal/principal_page.dart';
 import 'package:tec_eventos/paginas/acesso/login.dart';
 import 'package:tec_eventos/paginas/perfil/perfil.dart';
@@ -79,10 +81,12 @@ class _OnBoardingState extends State<OnBoarding> {
                    ElevatedButton(
 
                      onPressed: () {
-                       Navigator.pushReplacement(
+
+                       Navigator.push(
                            context,
-                           MaterialPageRoute(
-                               builder: (context) => PrincipalPage()));
+                           PageTransition(
+                               child: AllPages(),
+                               type: PageTransitionType.rightToLeft));
                      },
                      child: Text('COMEÇAR',
                        style: GoogleFonts.inter(
