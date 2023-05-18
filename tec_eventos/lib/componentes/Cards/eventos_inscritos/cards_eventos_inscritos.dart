@@ -55,12 +55,12 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
                     children: [
                       //NOME DA INSTITUIÇÃO
                       SizedBox(
-                        width: 70,
+
                         child: Text(
                           widget.nomeEvento,
                           style: GoogleFonts.raleway(
                             fontWeight: FontWeight.bold,
-                            fontSize: 13,
+                            fontSize: 12,
                           ),
                         ),
                       ),
@@ -92,6 +92,7 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
                         ),
                       ),
 
+                      const SizedBox(height: 15),
                       //BOTÃO PARA VER MAIS SOBRE O EVENTO
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(

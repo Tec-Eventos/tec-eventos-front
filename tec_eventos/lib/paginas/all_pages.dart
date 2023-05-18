@@ -14,10 +14,10 @@ class AllPages extends StatefulWidget {
   @override
   State<AllPages> createState() => _AllPagesState();
 }
-
+int paginaAtual = 0;
 class _AllPagesState extends State<AllPages> {
   late PageController _pageController;
-  int paginaAtual = 0;
+
 
   //controle das páginas
   @override
@@ -62,9 +62,8 @@ class _AllPagesState extends State<AllPages> {
         ),
         bottomNavigationBar:
             Container(
-              margin: EdgeInsets.all(displayWidth / 30),
-
-              height: 50,
+              margin: EdgeInsets.all(displayWidth / 50),
+              height: 58,
               decoration: BoxDecoration(
                 color: Cores.AzulCinzento,
                 boxShadow: [
@@ -74,13 +73,20 @@ class _AllPagesState extends State<AllPages> {
                     offset: Offset(0, 10),
                   )
                 ],
-                borderRadius: BorderRadius.circular(50),
+                borderRadius: BorderRadius.circular(20),
               ),
-              child: ListView.builder(
+              child:
+
+
+              //lista com os itens que ficam dentro do menu
+              ListView.builder(
                   itemCount: 4,
                   scrollDirection: Axis.horizontal,
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  itemBuilder: (context, index) => InkWell(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  itemBuilder: (context, index) =>
+
+                  //botão para a transição de páginas
+                      InkWell(
                         onTap: () {
                           setState(() {
                             paginaAtual = index;
@@ -92,6 +98,7 @@ class _AllPagesState extends State<AllPages> {
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
+
                             AnimatedContainer(
                               duration: Duration(milliseconds: 300),
                               curve: Curves.fastLinearToSlowEaseIn,
@@ -130,7 +137,7 @@ class _AllPagesState extends State<AllPages> {
                                       AnimatedContainer(
                                         duration: Duration(milliseconds: 300),
                                         width: index == paginaAtual
-                                            ? 25 : 0,
+                                            ? 30 : 0,
                                       ),
                                       AnimatedOpacity(
                                         opacity: index == paginaAtual ? 1 : 0,
@@ -140,9 +147,9 @@ class _AllPagesState extends State<AllPages> {
                                             ? '${nomesPages[index]}'
                                             : '',
                                           style: TextStyle(
-                                            color: Colors.black,
+                                            color: Cores.Azul42A5F5,
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 12,
+                                            fontSize: MediaQuery.of(context).size.width / 40,
                                           ),
                                         ),
                                       ),
@@ -160,7 +167,7 @@ class _AllPagesState extends State<AllPages> {
                                       Icon(
                                         iconesPages[index],
                                         size: 25,
-                                        color: index == paginaAtual ? Colors.green : Colors.red,
+                                        color: index == paginaAtual ? Cores.Azul42A5F5 : Cores.Preto,
                                       )
                                     ],
                                   )
@@ -170,95 +177,6 @@ class _AllPagesState extends State<AllPages> {
                           ],
                         ),
                       )),
-              // child: ListView.builder(
-              //     itemCount: 5,
-              //     scrollDirection: Axis.horizontal,
-              //     padding: EdgeInsets.symmetric(horizontal: 10),
-              //     itemBuilder: (context, index) =>
-              //         InkWell(
-              //           onTap: () {
-              //             setState(() {
-              //               paginaAtual = index;
-              //               HapticFeedback.lightImpact();
-              //             }
-              //             );
-              //           },
-              //           splashColor: Colors.transparent,
-              //           highlightColor: Colors.transparent,
-              //           child: Stack(
-              //             children: [
-              //               AnimatedContainer(
-              //                 duration: Duration(seconds: 1),
-              //                 curve: Curves.fastLinearToSlowEaseIn,
-              //                 width: index == paginaAtual ? displayWidth * .30 : displayWidth * .10,
-              //                 alignment: Alignment.center,
-              //                 height: 60,
-              //
-              //                 child: AnimatedContainer(
-              //                   duration: Duration(seconds: 1),
-              //                   curve: Curves.fastLinearToSlowEaseIn,
-              //                   height: index == paginaAtual ? displayWidth * .10 : 0,
-              //                   width: index == paginaAtual ? displayWidth * .30 : 0,
-              //
-              //                   decoration: BoxDecoration(
-              //                       color: index == paginaAtual
-              //                           ? Colors.blue.withOpacity(.2) : Colors.transparent,
-              //                       borderRadius: BorderRadius.circular(50)),
-              //                 ),
-              //               ),
-              //               AnimatedContainer(
-              //                 duration: Duration(seconds: 1),
-              //                 curve: Curves.fastLinearToSlowEaseIn,
-              //                 width: index == paginaAtual ? displayWidth * .31 : displayWidth * .10,
-              //                 alignment: Alignment.center,
-              //                 child: Stack(
-              //                   children: [
-              //                     Row(
-              //                       children: [
-              //                         AnimatedContainer(
-              //                           duration: Duration(seconds: 1),
-              //                           curve: Curves.fastLinearToSlowEaseIn,
-              //                           width: index == paginaAtual ? displayWidth * .13 : 0,
-              //                         ),
-              //                         AnimatedOpacity(
-              //                           opacity: index == paginaAtual ? 1 : 0,
-              //                           duration: Duration(seconds: 1),
-              //                           curve: Curves.fastLinearToSlowEaseIn,
-              //                           child: Text(index == paginaAtual
-              //                               ? '${nomesPages[index]}'
-              //                               : '',
-              //                             style: const TextStyle(
-              //                               color: Colors.blue,
-              //                               fontWeight: FontWeight.w600,
-              //                               fontSize: 12,
-              //                             ),
-              //                           ),
-              //                         ),
-              //                       ],
-              //                     ),
-              //
-              //                     Row(
-              //                       children: [
-              //                         AnimatedContainer(
-              //                           duration: Duration(seconds: 1),
-              //                           curve: Curves.fastLinearToSlowEaseIn,
-              //                           width: index == paginaAtual ? displayWidth / 25 : 28,
-              //                         ),
-              //                         Icon(iconesPages[index],
-              //                           size: 20,
-              //                           color: index == paginaAtual
-              //                               ? Colors.blue
-              //                               : Colors.transparent,)
-              //                       ],
-              //                     )
-              //
-              //
-              //                   ],
-              //                 ),
-              //               )
-              //             ],
-              //           ),
-              //         )),
             ),
 
         );
@@ -291,10 +209,10 @@ List<Widget> lista_pages = [
 ];
 
 List<IconData> iconesPages = [
+  Icons.home_outlined,
+  Icons.confirmation_num_outlined,
+  Icons.workspace_premium_outlined,
   Icons.notifications_none_outlined,
-  Icons.ac_unit_rounded,
-  Icons.access_alarm_outlined,
-  Icons.accessible_forward_outlined,
 ];
 
 class Paginas extends StatefulWidget {
