@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/paginas/all_pages.dart';
 import 'package:tec_eventos/paginas/pag_principal/principal_page.dart';
 //classe da descricao de perfil do usuário / appbar
 class PerfilDescricao extends StatefulWidget {
@@ -32,7 +33,7 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
           Navigator.push(
               context,
               PageTransition(
-                  child: PrincipalPage(),
+                  child: AllPages(),
                   type: PageTransitionType.leftToRight));
         },
       ),
