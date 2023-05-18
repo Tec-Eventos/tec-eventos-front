@@ -60,200 +60,208 @@ class _AllPagesState extends State<AllPages> {
               itemBuilder: (context, index) =>
                   Paginas(paginas: lista_pages[index])),
         ),
-        bottomNavigationBar: Container(
-          margin: EdgeInsets.all(displayWidth / 30),
+        bottomNavigationBar:
+            Container(
+              margin: EdgeInsets.all(displayWidth / 30),
 
-          height: displayWidth * .155,
-          decoration: BoxDecoration(
-            color: Cores.Branco,
-            boxShadow: [
-              BoxShadow(
-                color: Cores.Preto.withOpacity(.1),
-                blurRadius: 30,
-                offset: Offset(0, 10),
-              )
-            ],
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: ListView.builder(
-              itemCount: 4,
-              scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              itemBuilder: (context, index) => InkWell(
-                    onTap: () {
-                      setState(() {
-                        paginaAtual = index;
-                        HapticFeedback.lightImpact();
-                      });
-                    },
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    child: Stack(
-                      children: [
-                        AnimatedContainer(
-                          duration: Duration(milliseconds: 300),
-                          curve: Curves.fastLinearToSlowEaseIn,
-                          width: index == paginaAtual
-                              ? displayWidth * .32
-                              : displayWidth * .18,
+              height: 50,
+              decoration: BoxDecoration(
+                color: Cores.AzulCinzento,
+                boxShadow: [
+                  BoxShadow(
+                    color: Cores.Preto.withOpacity(.1),
+                    blurRadius: 30,
+                    offset: Offset(0, 10),
+                  )
+                ],
+                borderRadius: BorderRadius.circular(50),
+              ),
+              child: ListView.builder(
+                  itemCount: 4,
+                  scrollDirection: Axis.horizontal,
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  itemBuilder: (context, index) => InkWell(
+                        onTap: () {
+                          setState(() {
+                            paginaAtual = index;
+                            HapticFeedback.lightImpact();
+                          });
+                        },
+                        splashColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        child: Stack(
                           alignment: Alignment.center,
-                          child: AnimatedContainer(
-                            duration: Duration(milliseconds: 300),
-                            curve: Curves.fastLinearToSlowEaseIn,
-                            height:
-                                index == paginaAtual ? displayWidth * .12 : 0,
-                            width:
-                                index == paginaAtual ? displayWidth * .32 : 0,
-                            decoration: BoxDecoration(
-                                color: index == paginaAtual
-                                    ? Colors.blue
-                                    : Colors.transparent,
-                                borderRadius: BorderRadius.circular(50)),
-                          ),
-                        ),
-                        AnimatedContainer(
-                          duration: Duration(milliseconds: 300),
-                          curve: Curves.fastLinearToSlowEaseIn,
-                          width: index == paginaAtual
-                              ? displayWidth * .31
-                              : displayWidth * .18,
-                          alignment: Alignment.center,
-                          child: Stack(
-                            children: [
-                              Row(
-                                children: [
-                                  AnimatedContainer(
-                                    duration: Duration(milliseconds: 300),
-                                    width: index == paginaAtual
-                                        ? displayWidth * .13 : 0,
-                                  ),
-                                  AnimatedOpacity(
-                                    opacity: index == paginaAtual ? 1 : 0,
-                                    duration: Duration(milliseconds: 300),
-                                    curve: Curves.fastLinearToSlowEaseIn,
-                                    child: Text(index == paginaAtual
-                                        ? '${nomesPages[index]}'
-                                        : '',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 13,
-                                      ),
-                                    ),
-                                  ),
+                          children: [
+                            AnimatedContainer(
+                              duration: Duration(milliseconds: 300),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              width: index == paginaAtual
+                                  ? 130
+                                  : displayWidth * .18,
+                              alignment: Alignment.center,
+                              child:
 
-                                ],
+                              //parte de fundo Branca da opção
+                              AnimatedContainer(
+                                duration: Duration(milliseconds: 300),
+                                curve: Curves.fastLinearToSlowEaseIn,
+                                height:
+                                    36,
+                                width: 170,
+                                decoration: BoxDecoration(
+                                    color: index == paginaAtual
+                                        ? Cores.Branco
+                                        : Colors.transparent,
+                                    borderRadius: BorderRadius.circular(50)),
                               ),
-
-                              Row(
+                            ),
+                            AnimatedContainer(
+                              duration: Duration(milliseconds: 300),
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              width: index == paginaAtual
+                                  ? 120
+                                  : displayWidth * .18,
+                              alignment: Alignment.center,
+                              child: Stack(
                                 children: [
-                                  AnimatedContainer(duration: Duration(milliseconds: 300),
-                                  curve: Curves.fastLinearToSlowEaseIn,
-                                  width: index == paginaAtual ? displayWidth * .03 : 20),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      AnimatedContainer(
+                                        duration: Duration(milliseconds: 300),
+                                        width: index == paginaAtual
+                                            ? 25 : 0,
+                                      ),
+                                      AnimatedOpacity(
+                                        opacity: index == paginaAtual ? 1 : 0,
+                                        duration: Duration(milliseconds: 300),
+                                        curve: Curves.fastLinearToSlowEaseIn,
+                                        child: Text(index == paginaAtual
+                                            ? '${nomesPages[index]}'
+                                            : '',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ),
 
-                                  Icon(
-                                    iconesPages[index],
-                                    size: displayWidth * .076,
-                                    color: index == paginaAtual ? Colors.green : Colors.red,
+                                    ],
+                                  ),
+
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      AnimatedContainer(duration: Duration(milliseconds: 300),
+                                      curve: Curves.fastLinearToSlowEaseIn,
+                                      width: index == paginaAtual ? 10 : 20),
+
+                                      Icon(
+                                        iconesPages[index],
+                                        size: 25,
+                                        color: index == paginaAtual ? Colors.green : Colors.red,
+                                      )
+                                    ],
                                   )
                                 ],
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  )),
-          // child: ListView.builder(
-          //     itemCount: 5,
-          //     scrollDirection: Axis.horizontal,
-          //     padding: EdgeInsets.symmetric(horizontal: 10),
-          //     itemBuilder: (context, index) =>
-          //         InkWell(
-          //           onTap: () {
-          //             setState(() {
-          //               paginaAtual = index;
-          //               HapticFeedback.lightImpact();
-          //             }
-          //             );
-          //           },
-          //           splashColor: Colors.transparent,
-          //           highlightColor: Colors.transparent,
-          //           child: Stack(
-          //             children: [
-          //               AnimatedContainer(
-          //                 duration: Duration(seconds: 1),
-          //                 curve: Curves.fastLinearToSlowEaseIn,
-          //                 width: index == paginaAtual ? displayWidth * .30 : displayWidth * .10,
-          //                 alignment: Alignment.center,
-          //                 height: 60,
-          //
-          //                 child: AnimatedContainer(
-          //                   duration: Duration(seconds: 1),
-          //                   curve: Curves.fastLinearToSlowEaseIn,
-          //                   height: index == paginaAtual ? displayWidth * .10 : 0,
-          //                   width: index == paginaAtual ? displayWidth * .30 : 0,
-          //
-          //                   decoration: BoxDecoration(
-          //                       color: index == paginaAtual
-          //                           ? Colors.blue.withOpacity(.2) : Colors.transparent,
-          //                       borderRadius: BorderRadius.circular(50)),
-          //                 ),
-          //               ),
-          //               AnimatedContainer(
-          //                 duration: Duration(seconds: 1),
-          //                 curve: Curves.fastLinearToSlowEaseIn,
-          //                 width: index == paginaAtual ? displayWidth * .31 : displayWidth * .10,
-          //                 alignment: Alignment.center,
-          //                 child: Stack(
-          //                   children: [
-          //                     Row(
-          //                       children: [
-          //                         AnimatedContainer(
-          //                           duration: Duration(seconds: 1),
-          //                           curve: Curves.fastLinearToSlowEaseIn,
-          //                           width: index == paginaAtual ? displayWidth * .13 : 0,
-          //                         ),
-          //                         AnimatedOpacity(
-          //                           opacity: index == paginaAtual ? 1 : 0,
-          //                           duration: Duration(seconds: 1),
-          //                           curve: Curves.fastLinearToSlowEaseIn,
-          //                           child: Text(index == paginaAtual
-          //                               ? '${nomesPages[index]}'
-          //                               : '',
-          //                             style: const TextStyle(
-          //                               color: Colors.blue,
-          //                               fontWeight: FontWeight.w600,
-          //                               fontSize: 12,
-          //                             ),
-          //                           ),
-          //                         ),
-          //                       ],
-          //                     ),
-          //
-          //                     Row(
-          //                       children: [
-          //                         AnimatedContainer(
-          //                           duration: Duration(seconds: 1),
-          //                           curve: Curves.fastLinearToSlowEaseIn,
-          //                           width: index == paginaAtual ? displayWidth / 25 : 28,
-          //                         ),
-          //                         Icon(iconesPages[index],
-          //                           size: 20,
-          //                           color: index == paginaAtual
-          //                               ? Colors.blue
-          //                               : Colors.transparent,)
-          //                       ],
-          //                     )
-          //
-          //
-          //                   ],
-          //                 ),
-          //               )
-          //             ],
-          //           ),
-          //         )),
-        ));
+                              ),
+                            )
+                          ],
+                        ),
+                      )),
+              // child: ListView.builder(
+              //     itemCount: 5,
+              //     scrollDirection: Axis.horizontal,
+              //     padding: EdgeInsets.symmetric(horizontal: 10),
+              //     itemBuilder: (context, index) =>
+              //         InkWell(
+              //           onTap: () {
+              //             setState(() {
+              //               paginaAtual = index;
+              //               HapticFeedback.lightImpact();
+              //             }
+              //             );
+              //           },
+              //           splashColor: Colors.transparent,
+              //           highlightColor: Colors.transparent,
+              //           child: Stack(
+              //             children: [
+              //               AnimatedContainer(
+              //                 duration: Duration(seconds: 1),
+              //                 curve: Curves.fastLinearToSlowEaseIn,
+              //                 width: index == paginaAtual ? displayWidth * .30 : displayWidth * .10,
+              //                 alignment: Alignment.center,
+              //                 height: 60,
+              //
+              //                 child: AnimatedContainer(
+              //                   duration: Duration(seconds: 1),
+              //                   curve: Curves.fastLinearToSlowEaseIn,
+              //                   height: index == paginaAtual ? displayWidth * .10 : 0,
+              //                   width: index == paginaAtual ? displayWidth * .30 : 0,
+              //
+              //                   decoration: BoxDecoration(
+              //                       color: index == paginaAtual
+              //                           ? Colors.blue.withOpacity(.2) : Colors.transparent,
+              //                       borderRadius: BorderRadius.circular(50)),
+              //                 ),
+              //               ),
+              //               AnimatedContainer(
+              //                 duration: Duration(seconds: 1),
+              //                 curve: Curves.fastLinearToSlowEaseIn,
+              //                 width: index == paginaAtual ? displayWidth * .31 : displayWidth * .10,
+              //                 alignment: Alignment.center,
+              //                 child: Stack(
+              //                   children: [
+              //                     Row(
+              //                       children: [
+              //                         AnimatedContainer(
+              //                           duration: Duration(seconds: 1),
+              //                           curve: Curves.fastLinearToSlowEaseIn,
+              //                           width: index == paginaAtual ? displayWidth * .13 : 0,
+              //                         ),
+              //                         AnimatedOpacity(
+              //                           opacity: index == paginaAtual ? 1 : 0,
+              //                           duration: Duration(seconds: 1),
+              //                           curve: Curves.fastLinearToSlowEaseIn,
+              //                           child: Text(index == paginaAtual
+              //                               ? '${nomesPages[index]}'
+              //                               : '',
+              //                             style: const TextStyle(
+              //                               color: Colors.blue,
+              //                               fontWeight: FontWeight.w600,
+              //                               fontSize: 12,
+              //                             ),
+              //                           ),
+              //                         ),
+              //                       ],
+              //                     ),
+              //
+              //                     Row(
+              //                       children: [
+              //                         AnimatedContainer(
+              //                           duration: Duration(seconds: 1),
+              //                           curve: Curves.fastLinearToSlowEaseIn,
+              //                           width: index == paginaAtual ? displayWidth / 25 : 28,
+              //                         ),
+              //                         Icon(iconesPages[index],
+              //                           size: 20,
+              //                           color: index == paginaAtual
+              //                               ? Colors.blue
+              //                               : Colors.transparent,)
+              //                       ],
+              //                     )
+              //
+              //
+              //                   ],
+              //                 ),
+              //               )
+              //             ],
+              //           ),
+              //         )),
+            ),
+
+        );
   }
 }
 
