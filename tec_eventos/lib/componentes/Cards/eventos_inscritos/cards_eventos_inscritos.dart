@@ -30,7 +30,7 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        height: 180,
+        height: 150,
         child:
             //CUSTOMIZAÇÃO DO CARD
             Card(
@@ -48,8 +48,9 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
               Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(9.5),
+                padding: const EdgeInsets.all(10),
                 child: Column(
+
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -92,7 +93,7 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
                         ),
                       ),
 
-                      const SizedBox(height: 15),
+
                       //BOTÃO PARA VER MAIS SOBRE O EVENTO
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(

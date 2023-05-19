@@ -4,7 +4,7 @@ import 'package:tec_eventos/splash/splash.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+    const SystemUiOverlayStyle(statusBarColor: Colors.white));
   runApp(const MyApp());
 }
 

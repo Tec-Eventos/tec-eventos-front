@@ -149,7 +149,7 @@ class _AllPagesState extends State<AllPages> {
                                           style: TextStyle(
                                             color: Cores.Azul42A5F5,
                                             fontWeight: FontWeight.w600,
-                                            fontSize: MediaQuery.of(context).size.width / 40,
+                                            fontSize: MediaQuery.of(context).size.width / 37,
                                           ),
                                         ),
                                       ),
