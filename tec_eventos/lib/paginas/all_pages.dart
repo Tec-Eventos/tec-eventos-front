@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/componentes/Appbar/appbar.dart';
 import 'package:tec_eventos/componentes/Drawer/drawer.dart';
@@ -14,10 +17,11 @@ class AllPages extends StatefulWidget {
   @override
   State<AllPages> createState() => _AllPagesState();
 }
+
 int paginaAtual = 0;
+
 class _AllPagesState extends State<AllPages> {
   late PageController _pageController;
-
 
   //controle das páginas
   @override
@@ -37,149 +41,91 @@ class _AllPagesState extends State<AllPages> {
     double displayWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        backgroundColor: Colors.white,
-        drawer:
-            //Drawer,ou seja, o menu que aparece quando clica no botão
-            const DrawerPages(),
-        body: NestedScrollView(
-          floatHeaderSlivers: true,
-          headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            //appbar, ou seja, parte superior
-            const AppBarPages(),
+      backgroundColor: Colors.white,
+      drawer:
+          //Drawer,ou seja, o menu que aparece quando clica no botão
+          const DrawerPages(),
+      body: NestedScrollView(
+        floatHeaderSlivers: true,
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          //appbar, ou seja, parte superior
+          const AppBarPages(),
+        ],
+        //aqui é o corpo da página, ou seja,
+        //onde vai ficar o conteúdo dela, deixe ela dentro de um ListView com o Axis.vertical.
+        body: PageView.builder(
+            itemCount: lista_pages.length,
+            controller: _pageController,
+            onPageChanged: (index) {
+              setState(() {
+                paginaAtual = index;
+              });
+            },
+            itemBuilder: (context, index) =>
+                Paginas(paginas: lista_pages[index])),
+      ),
+      bottomNavigationBar: Container(
+        margin: EdgeInsets.all(displayWidth / 50),
+        height: 58,
+        decoration: BoxDecoration(
+          color: Cores.AzulCinzento,
+          boxShadow: [
+            BoxShadow(
+              color: Cores.Preto.withOpacity(.1),
+              blurRadius: 30,
+              offset: Offset(0, 10),
+            )
           ],
-          //aqui é o corpo da página, ou seja,
-          //onde vai ficar o conteúdo dela, deixe ela dentro de um ListView com o Axis.vertical.
-          body: PageView.builder(
-              itemCount: lista_pages.length,
-              controller: _pageController,
-              onPageChanged: (index) {
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8),
+            child: GNav(
+              rippleColor: Colors.grey[300]!,
+              hoverColor: Colors.grey[100]!,
+              gap: 25,
+              activeColor: Cores.Azul42A5F5,
+              iconSize: 21,
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              duration: Duration(milliseconds: 400),
+              tabBackgroundColor: Colors.grey[100]!,
+              color: Cores.Preto,
+              tabs: [
+                GButton(
+                  icon: Icons.home_outlined,
+
+                  text: 'Página Inicial',
+                  textColor: Cores.Azul42A5F5
+                ),
+                GButton(
+                  icon: Icons.confirmation_num_outlined,
+                  text: 'Eventos',
+                    textColor: Cores.Azul42A5F5
+                ),
+                GButton(
+                  icon: Icons.workspace_premium_outlined,
+                  text: 'Medalhas',
+                    textColor: Cores.Azul42A5F5
+                ),
+                GButton(
+                  icon: Icons.notifications_none_outlined,
+                  text: 'Notificação',
+                    textColor: Cores.Azul42A5F5
+                ),
+              ],
+              selectedIndex: paginaAtual,
+              onTabChange: (index) {
                 setState(() {
                   paginaAtual = index;
+                  _pageController.jumpToPage(index);
                 });
               },
-              itemBuilder: (context, index) =>
-                  Paginas(paginas: lista_pages[index])),
-        ),
-        bottomNavigationBar:
-            Container(
-              margin: EdgeInsets.all(displayWidth / 50),
-              height: 58,
-              decoration: BoxDecoration(
-                color: Cores.AzulCinzento,
-                boxShadow: [
-                  BoxShadow(
-                    color: Cores.Preto.withOpacity(.1),
-                    blurRadius: 30,
-                    offset: Offset(0, 10),
-                  )
-                ],
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child:
-
-
-              //lista com os itens que ficam dentro do menu
-              ListView.builder(
-                  itemCount: 4,
-                  scrollDirection: Axis.horizontal,
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  itemBuilder: (context, index) =>
-
-                  //botão para a transição de páginas
-                      InkWell(
-                        onTap: () {
-                          setState(() {
-                            paginaAtual = index;
-                            HapticFeedback.lightImpact();
-                          });
-                        },
-                        splashColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-
-                            AnimatedContainer(
-                              duration: Duration(milliseconds: 300),
-                              curve: Curves.fastLinearToSlowEaseIn,
-                              width: index == paginaAtual
-                                  ? 130
-                                  : displayWidth * .18,
-                              alignment: Alignment.center,
-                              child:
-
-                              //parte de fundo Branca da opção
-                              AnimatedContainer(
-                                duration: Duration(milliseconds: 300),
-                                curve: Curves.fastLinearToSlowEaseIn,
-                                height:
-                                    36,
-                                width: 170,
-                                decoration: BoxDecoration(
-                                    color: index == paginaAtual
-                                        ? Cores.Branco
-                                        : Colors.transparent,
-                                    borderRadius: BorderRadius.circular(50)),
-                              ),
-                            ),
-                            AnimatedContainer(
-                              duration: Duration(milliseconds: 300),
-                              curve: Curves.fastLinearToSlowEaseIn,
-                              width: index == paginaAtual
-                                  ? 120
-                                  : displayWidth * .18,
-                              alignment: Alignment.center,
-                              child: Stack(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      AnimatedContainer(
-                                        duration: Duration(milliseconds: 300),
-                                        width: index == paginaAtual
-                                            ? 30 : 0,
-                                      ),
-                                      AnimatedOpacity(
-                                        opacity: index == paginaAtual ? 1 : 0,
-                                        duration: Duration(milliseconds: 300),
-                                        curve: Curves.fastLinearToSlowEaseIn,
-                                        child: Text(index == paginaAtual
-                                            ? '${nomesPages[index]}'
-                                            : '',
-                                          style: TextStyle(
-                                            color: Cores.Azul42A5F5,
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: MediaQuery.of(context).size.width / 37,
-                                          ),
-                                        ),
-                                      ),
-
-                                    ],
-                                  ),
-
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      AnimatedContainer(duration: Duration(milliseconds: 300),
-                                      curve: Curves.fastLinearToSlowEaseIn,
-                                      width: index == paginaAtual ? 10 : 20),
-
-                                      Icon(
-                                        iconesPages[index],
-                                        size: 25,
-                                        color: index == paginaAtual ? Cores.Azul42A5F5 : Cores.Preto,
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      )),
             ),
-
-        );
+          ),
+        ),
+      ),
+    );
   }
 }
 

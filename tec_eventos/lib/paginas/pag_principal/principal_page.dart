@@ -2,7 +2,9 @@ import 'dart:async';
 
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:fan_carousel_image_slider/fan_carousel_image_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tec_eventos/componentes/Appbar/appbar.dart';
 import 'package:tec_eventos/componentes/Cards/eventos_inscritos/cards_eventos_inscritos.dart';
@@ -20,6 +22,13 @@ class PrincipalPage extends StatefulWidget {
 bool palestras = true;
 bool competicoes = false;
 bool bootcamp = false;
+
+List<String> imagens = [
+  'assets/UnivemIMG.png',
+  'assets/UnivemIMG.png',
+  'assets/UnivemIMG.png',
+  'assets/UnivemIMG.png',
+];
 
 class _PrincipalPageState extends State<PrincipalPage> {
   @override
@@ -107,6 +116,8 @@ class _PrincipalPageState extends State<PrincipalPage> {
               style: GoogleFonts.raleway(
                   fontSize: 18, fontWeight: FontWeight.bold),
             ),
+
+     
           ],
         ),
       ],
@@ -172,6 +183,8 @@ class _PrincipalPageState extends State<PrincipalPage> {
     );
   }
 }
+
+
 
 
 

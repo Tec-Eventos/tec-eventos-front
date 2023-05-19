@@ -39,7 +39,7 @@ class _DrawerPagesState extends State<DrawerPages> {
           Container(
             height: 230,
             child: UserAccountsDrawerHeader(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topRight: Radius.circular(40.0),
                 ),
