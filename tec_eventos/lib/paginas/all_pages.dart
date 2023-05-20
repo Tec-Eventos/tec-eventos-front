@@ -86,32 +86,48 @@ class _AllPagesState extends State<AllPages> {
               hoverColor: Colors.grey[100]!,
               gap: 25,
               activeColor: Cores.Azul42A5F5,
-              iconSize: 21,
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              iconSize: 20,
+              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
               duration: Duration(milliseconds: 400),
               tabBackgroundColor: Colors.grey[100]!,
               color: Cores.Preto,
               tabs: [
                 GButton(
-                  icon: Icons.home_outlined,
 
+                  icon: Icons.home_outlined,
                   text: 'Página Inicial',
-                  textColor: Cores.Azul42A5F5
+                  textStyle: GoogleFonts.raleway(
+                     fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: Cores.Azul42A5F5
+                  ),
                 ),
                 GButton(
                   icon: Icons.confirmation_num_outlined,
                   text: 'Eventos',
-                    textColor: Cores.Azul42A5F5
+                  textStyle: GoogleFonts.raleway(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: Cores.Azul42A5F5
+                  ),
                 ),
                 GButton(
                   icon: Icons.workspace_premium_outlined,
                   text: 'Medalhas',
-                    textColor: Cores.Azul42A5F5
+                  textStyle: GoogleFonts.raleway(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: Cores.Azul42A5F5
+                  ),
                 ),
                 GButton(
                   icon: Icons.notifications_none_outlined,
                   text: 'Notificação',
-                    textColor: Cores.Azul42A5F5
+                  textStyle: GoogleFonts.raleway(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: Cores.Azul42A5F5
+                  ),
                 ),
               ],
               selectedIndex: paginaAtual,
@@ -137,17 +153,6 @@ List<String> nomesPages = [
   'Configurações',
 ];
 
-//
-// ImageIcon(
-//   const AssetImage("assets/Icons/home.png")),
-// Icon(Icons.confirmation_num_outlined,),
-// ImageIcon(
-//   const AssetImage("assets/Icons/medalhas.png"),),
-//
-// Icon(Icons.notifications_none_outlined,),
-// ImageIcon(
-//   const AssetImage("assets/Icons/configuracao.png"),
-// ),
 
 List<Widget> lista_pages = [
   PrincipalPage(),
@@ -177,78 +182,3 @@ class _PaginasState extends State<Paginas> {
   }
 }
 
-// //Indicador de qual etapa o usuário está
-// class Icone extends StatelessWidget {
-//   Icone({
-//     Key? key,
-//     this.isActive = false,
-//     required this.icone,
-//   }) : super(key: key);
-//
-//   final bool isActive;
-//   final IconData icone;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       height: 30,
-//       child: Column(
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//         children: [
-//
-//             child: Icon(
-//               icone,
-//               color: isActive ? Cores.Azul42A5F5 : Colors.black,
-//               size: 25,
-//             ),
-//
-//           AnimatedContainer(
-//             duration: Duration(milliseconds: 100),
-//             height: isActive ? 2 : 0,
-//             width: isActive ? 9 : 0,
-//             decoration: BoxDecoration(
-//               color: isActive ? Cores.Azul42A5F5 : Colors.transparent,
-//               borderRadius: BorderRadius.all(Radius.circular(5)),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-//
-// class IconeAssetIcon extends StatelessWidget {
-//   const IconeAssetIcon({
-//     Key? key,
-//     this.isActive = false,
-//     required this.icone,
-//   }) : super(key: key);
-//
-//   final bool isActive;
-//   final String icone;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       height: 30,
-//       child: Column(
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//         children: [
-//           ImageIcon(
-//             AssetImage(icone),
-//             color: isActive ? Cores.Azul42A5F5 : Colors.black,
-//           ),
-//           AnimatedContainer(
-//             duration: Duration(milliseconds: 100),
-//             height: isActive ? 2 : 0,
-//             width: isActive ? 9 : 0,
-//             decoration: BoxDecoration(
-//               color: isActive ? Cores.Azul42A5F5 : Colors.transparent,
-//               borderRadius: BorderRadius.all(Radius.circular(5)),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }

@@ -16,12 +16,11 @@ class OnBoarding extends StatefulWidget {
   State<OnBoarding> createState() => _OnBoardingState();
 }
 
+late PageController _pageController;
+int _pageIndex = 0;
+bool isLastPage = false;
+
 class _OnBoardingState extends State<OnBoarding> {
-  late PageController _pageController;
-
-  int _pageIndex = 0;
-  bool isLastPage = false;
-
   //controle das páginas
   @override
   void initState() {
@@ -63,34 +62,8 @@ class _OnBoardingState extends State<OnBoarding> {
           Padding(
             padding: const EdgeInsets.all(25.0),
             child: _pageIndex == 3
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      //botão de começar
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              PageTransition(
-                                  child: AllPages(),
-                                  type: PageTransitionType.rightToLeft));
-                        },
-                        child: Text(
-                          'COMEÇAR',
-                          style: GoogleFonts.inter(
-                            fontSize: 24,
-                          ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.only(
-                              right: 35, left: 35, top: 10, bottom: 10),
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15.0))),
-                        ),
-                      )
-                    ],
-                  )
+                //botão de começar, para entrar na página de login
+                ? const BotaoComecar()
 
                 //parte inferior do onBoarding mostrando em que parte o usuário está
                 : Row(
@@ -99,7 +72,7 @@ class _OnBoardingState extends State<OnBoarding> {
                       ...List.generate(
                           demo_data.length,
                           (index) => Padding(
-                                padding: EdgeInsets.only(right: 4),
+                                padding: const EdgeInsets.only(right: 4),
                                 child: DotIndicator(
                                   isActive: index == _pageIndex,
                                 ),
@@ -109,20 +82,7 @@ class _OnBoardingState extends State<OnBoarding> {
                       const Spacer(),
 
                       //botão de passar para a próxima página
-                      ElevatedButton(
-                        onPressed: () {
-                          _pageController.nextPage(
-                              duration: Duration(milliseconds: 300),
-                              curve: Curves.ease);
-                        },
-                        child:
-                            Icon(Icons.arrow_forward_ios, color: Colors.white),
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15.0))),
-                        ),
-                      ),
+                      const Botao_Proximo(),
                     ],
                   ),
           ),
@@ -221,6 +181,70 @@ class DotIndicator extends StatelessWidget {
         color: isActive ? Cores.AzulClaro : Cores.AzulCinzento,
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
+    );
+  }
+}
+
+class Botao_Proximo extends StatefulWidget {
+  const Botao_Proximo({Key? key}) : super(key: key);
+
+  @override
+  State<Botao_Proximo> createState() => _Botao_ProximoState();
+}
+
+class _Botao_ProximoState extends State<Botao_Proximo> {
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        _pageController.nextPage(
+            duration: Duration(milliseconds: 300), curve: Curves.ease);
+      },
+      child: const Icon(Icons.arrow_forward_ios, color: Colors.white),
+      style: ElevatedButton.styleFrom(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15.0))),
+      ),
+    );
+  }
+}
+
+//Botão de Começar quando as etapas foram passadas
+class BotaoComecar extends StatefulWidget {
+  const BotaoComecar({Key? key}) : super(key: key);
+
+  @override
+  State<BotaoComecar> createState() => _BotaoComecarState();
+}
+
+class _BotaoComecarState extends State<BotaoComecar> {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        //botão de começar
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                PageTransition(
+                    child: const AllPages(), type: PageTransitionType.rightToLeft));
+          },
+          child: Text(
+            'COMEÇAR',
+            style: GoogleFonts.inter(
+              fontSize: 24,
+            ),
+          ),
+          style: ElevatedButton.styleFrom(
+            padding:
+                const EdgeInsets.only(right: 35, left: 35, top: 10, bottom: 10),
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(15.0))),
+          ),
+        )
+      ],
     );
   }
 }
