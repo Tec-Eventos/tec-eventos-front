@@ -49,6 +49,8 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
                 },
                 child: Image.asset(
                   "assets/Icons/menuicon.png",
+                  height: 20,
+                  width: 40,
                 ),
               ),
             );
