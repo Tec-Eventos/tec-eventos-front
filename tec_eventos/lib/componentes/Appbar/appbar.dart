@@ -19,7 +19,7 @@ class _AppBarPagesState extends State<AppBarPages> {
       floating: true,
       snap: true,
       backgroundColor: Colors.white,
-      expandedHeight: 65,
+      expandedHeight: 35,
 
       leading: Builder(
         builder: (BuildContext context)  {

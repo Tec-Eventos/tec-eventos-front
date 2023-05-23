@@ -37,7 +37,7 @@ class _DrawerPagesState extends State<DrawerPages> {
         padding: EdgeInsets.zero,
         children: [
           Container(
-            height: 230,
+            height: 260,
             child: UserAccountsDrawerHeader(
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -122,7 +122,6 @@ class _DrawerPagesState extends State<DrawerPages> {
 
               Column(
                  children: const [
-
                     MenuOptionsAssetIcon(icone: "assets/Icons/medalhas.png", opcao: "Configurações", nomePage: Perfil()),
                     MenuOptions(icone: Icons.confirmation_num_outlined, opcao: "Eventos", nomePage: Perfil()),
                     MenuOptionsAssetIcon(icone: "assets/Icons/configuracao.png", opcao: "Configurações", nomePage: Perfil()),
@@ -132,7 +131,7 @@ class _DrawerPagesState extends State<DrawerPages> {
                ),
 
           SizedBox(
-                  height: 130,
+                  height: 60,
                 ),
 
                 Column(

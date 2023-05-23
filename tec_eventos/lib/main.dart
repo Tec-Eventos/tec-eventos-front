@@ -3,10 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:tec_eventos/splash/splash.dart';
 
 void main() {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(statusBarColor: Colors.white));
+    const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   runApp(const MyApp());
 }
+
 
 
 class MyApp extends StatelessWidget {
