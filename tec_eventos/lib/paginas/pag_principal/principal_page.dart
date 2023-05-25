@@ -24,6 +24,7 @@ class PrincipalPage extends StatefulWidget {
 bool palestras = true;
 bool competicoes = false;
 bool bootcamp = false;
+bool _isClicked = false;
 
 List<String> imagensEventos = [
   "assets/UnivemIMG.png",
@@ -33,6 +34,10 @@ List<String> imagensEventos = [
 ];
 
 class _PrincipalPageState extends State<PrincipalPage> {
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -49,6 +54,8 @@ class _PrincipalPageState extends State<PrincipalPage> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: <Widget>[
+
+
                       //BOTÕES DE FILTRAGEM
                       FiltragemEventos(false, !competicoes, false,
                           Icons.school_outlined, competicoes),
@@ -71,7 +78,9 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     fontSize: 18, fontWeight: FontWeight.bold),
               ),
 
-              //SingleScroll
+
+
+              //carrossel dos eventos que o usuário vai participar, mostrando os dias que faltam
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Padding(
@@ -116,6 +125,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
               ),
 
 
+              //carrossel dos eventos que as pessoas mais fizeram inscrições
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
 
@@ -144,6 +154,9 @@ class _PrincipalPageState extends State<PrincipalPage> {
               ),
 
 
+
+
+              //carrossel dos cards recomendados para o aluno
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
 
@@ -153,7 +166,6 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     Recomendados(),
                     Recomendados(),
                     Recomendados(),
-
                   ],
                 ),
               ),
@@ -169,6 +181,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
 
 
 
+              //imagens das instituições parceiras
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -223,7 +236,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
         ]);
   }
 
-  //Classe para A filtragem dos eventos
+  //Classe para a filtragem dos eventos
   FiltragemEventos(bool palestrasBool, bool compBool, bool bootcampBool,
       IconData icon, bool optionTrue) {
     return Padding(
@@ -268,7 +281,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                   child: Text(
                     optionTrue ? "Palestras" : "",
                     style:
-                        GoogleFonts.raleway(fontSize: 12, color: Cores.Branco),
+                    GoogleFonts.raleway(fontSize: 12, color: Cores.Branco),
                   ),
 
                   //texto do filtro em específico
@@ -281,3 +294,4 @@ class _PrincipalPageState extends State<PrincipalPage> {
     );
   }
 }
+
