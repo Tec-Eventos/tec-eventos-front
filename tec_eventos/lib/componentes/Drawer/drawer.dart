@@ -26,7 +26,7 @@ class _DrawerPagesState extends State<DrawerPages> {
   Widget build(BuildContext context) {
     return Drawer(
       width: 300,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
         bottomRight: Radius.circular(40.0),
         topRight: Radius.circular(40.0),
@@ -61,6 +61,7 @@ class _DrawerPagesState extends State<DrawerPages> {
 
                 //imagem do perfil
                 child: CircleAvatar(
+
                   radius: 50.0,
                   backgroundImage: AssetImage(
                     'assets/imgPerfil.png',

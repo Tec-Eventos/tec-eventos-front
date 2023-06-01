@@ -30,13 +30,19 @@ class _PerfilState extends State<Perfil> {
         floatHeaderSlivers: true,
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           //Classe da appbar da página. Juntamente da descrição de perfil.PerfilDescricao(),
-          PerfilDescricao(),
+          const PerfilDescricao(),
         ],
-        body: ListView(scrollDirection: Axis.vertical, children: [
+        body:
+
+        ListView(scrollDirection: Axis.vertical, 
+           padding: EdgeInsets.symmetric(vertical: 0),
+            children: [
+
+
           Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20),
+                padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -248,9 +254,8 @@ class _PerfilState extends State<Perfil> {
   //Classe para aparecer determinado conteúdo ao clicar
   ParticipacaoPerfil(bool eventosBool, bool medalBool, bool favBool, Icon icon,
       bool optionTrue) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: GestureDetector(
+    return
+      GestureDetector(
         onTap: () {
           setState(() {
             eventosParticipados = eventosBool;
@@ -261,6 +266,7 @@ class _PerfilState extends State<Perfil> {
         child: Column(children: [
           icon,
           AnimatedContainer(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
             duration: Duration(milliseconds: 100),
             width: optionTrue ? MediaQuery.of(context).size.width / 8 : 0.0,
             height: 2,
@@ -271,7 +277,7 @@ class _PerfilState extends State<Perfil> {
             ),
           ),
         ]),
-      ),
+
     );
   }
 }

@@ -4,6 +4,11 @@ import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/paginas/all_pages.dart';
 import 'package:tec_eventos/paginas/pag_principal/principal_page.dart';
+
+
+
+
+
 //classe da descricao de perfil do usuário / appbar
 class PerfilDescricao extends StatefulWidget {
   const PerfilDescricao({Key? key}) : super(key: key);
@@ -19,7 +24,7 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
       floating: false,
       backgroundColor: Cores.AzulBebe,
       expandedHeight: 85,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(40),
               bottomRight: Radius.circular(40))),
@@ -60,7 +65,7 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
 
       //inicio das informações do usuário
       bottom: PreferredSize(
-        preferredSize: Size.square(250),
+        preferredSize: const Size.square(250),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -146,7 +151,7 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
               ],
             ),
 
-            SizedBox(height: MediaQuery.of(context).size.height / 30),
+            SizedBox(height: MediaQuery.of(context).size.height / 40),
           ],
         ),
       ),

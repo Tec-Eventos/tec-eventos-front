@@ -262,6 +262,7 @@ class _BotaoComecarState extends State<BotaoComecar> {
             ),
           ),
           style: ElevatedButton.styleFrom(
+            backgroundColor: Cores.Azul42A5F5,
             padding:
                 const EdgeInsets.only(right: 35, left: 35, top: 10, bottom: 10),
             shape: const RoundedRectangleBorder(

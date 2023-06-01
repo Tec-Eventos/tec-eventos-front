@@ -7,6 +7,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/componentes/Appbar/appbar.dart';
 import 'package:tec_eventos/componentes/Drawer/drawer.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/paginas/configuracoes/config.dart';
 import 'package:tec_eventos/paginas/notificacao_page/notification_page.dart';
 import 'package:tec_eventos/paginas/pag_eventos/eventos_page.dart';
 import 'package:tec_eventos/paginas/pag_principal/principal_page.dart';
@@ -132,7 +133,7 @@ class _AllPagesState extends State<AllPages> {
                 ),
 
                 GButton(
-                  icon: Icons.settings,
+                  icon: Icons.settings_outlined,
                   text: 'Configurações',
                   textStyle: GoogleFonts.raleway(
                       fontSize: 13,
@@ -168,17 +169,11 @@ List<String> nomesPages = [
 const List<Widget> lista_pages = [
   PrincipalPage(),
   EventosPage(),
-  EventosPage(),
+  Ranking(),
   notification_page(),
-  Ranking()
+  configuration_page(),
 ];
 
-List<IconData> iconesPages = [
-  Icons.home_outlined,
-  Icons.confirmation_num_outlined,
-  Icons.workspace_premium_outlined,
-  Icons.notifications_none_outlined,
-];
 
 class Paginas extends StatefulWidget {
   const Paginas({Key? key, required this.paginas}) : super(key: key);
