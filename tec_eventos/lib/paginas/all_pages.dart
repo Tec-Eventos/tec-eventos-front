@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -8,8 +7,10 @@ import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/componentes/Appbar/appbar.dart';
 import 'package:tec_eventos/componentes/Drawer/drawer.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/paginas/notificacao_page/notification_page.dart';
 import 'package:tec_eventos/paginas/pag_eventos/eventos_page.dart';
 import 'package:tec_eventos/paginas/pag_principal/principal_page.dart';
+import 'package:tec_eventos/paginas/ranking_page/ranking.dart';
 
 class AllPages extends StatefulWidget {
   const AllPages({Key? key}) : super(key: key);
@@ -87,8 +88,8 @@ class _AllPagesState extends State<AllPages> {
               gap: 25,
               activeColor: Cores.Azul42A5F5,
               iconSize: 20,
-              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              duration: Duration(milliseconds: 400),
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+              duration: const Duration(milliseconds: 400),
               tabBackgroundColor: Colors.grey[100]!,
               color: Cores.Preto,
               tabs: [
@@ -129,6 +130,16 @@ class _AllPagesState extends State<AllPages> {
                       color: Cores.Azul42A5F5
                   ),
                 ),
+
+                GButton(
+                  icon: Icons.settings,
+                  text: 'Configurações',
+                  textStyle: GoogleFonts.raleway(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: Cores.Azul42A5F5
+                  ),
+                ),
               ],
               selectedIndex: paginaAtual,
               onTabChange: (index) {
@@ -154,9 +165,12 @@ List<String> nomesPages = [
 ];
 
 
-List<Widget> lista_pages = [
+const List<Widget> lista_pages = [
   PrincipalPage(),
   EventosPage(),
+  EventosPage(),
+  notification_page(),
+  Ranking()
 ];
 
 List<IconData> iconesPages = [

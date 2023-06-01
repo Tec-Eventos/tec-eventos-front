@@ -10,6 +10,13 @@ class notification_page extends StatefulWidget {
 class _notification_pageState extends State<notification_page> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return ListView(
+    scrollDirection: Axis.vertical,
+     children: [
+       Text("Notificações"),
+     ]
+
+
+    );
   }
 }

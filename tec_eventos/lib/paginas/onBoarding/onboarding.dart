@@ -154,7 +154,7 @@ TelaBoarding(String image, String titulo, String descricao, context) {
     children: [
       Column(
         children: [
-          Image.asset(image, fit: BoxFit.fill, width: double.infinity),
+          Image.asset(image, fit: BoxFit.fill, width: double.infinity, height: MediaQuery.of(context).size.height / 1.2,),
           Text(
             titulo,
             style: GoogleFonts.cabin(
