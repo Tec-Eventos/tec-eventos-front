@@ -4,6 +4,7 @@ import 'package:carousel_images/carousel_images.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fan_carousel_image_slider/fan_carousel_image_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tec_eventos/componentes/Appbar/appbar.dart';
@@ -21,11 +22,6 @@ class PrincipalPage extends StatefulWidget {
   State<PrincipalPage> createState() => _PrincipalPageState();
 }
 
-bool palestras = true;
-bool competicoes = false;
-bool bootcamp = false;
-bool _isClicked = false;
-
 List<String> imagensEventos = [
   "assets/UnivemIMG.png",
   "assets/UnivemIMG.png",
@@ -34,12 +30,16 @@ List<String> imagensEventos = [
 ];
 
 class _PrincipalPageState extends State<PrincipalPage> {
-
-
-
-
   @override
   Widget build(BuildContext context) {
+    //responsividades - Largura e Altura
+    double displayWidth = MediaQuery.of(context).size.width;
+    double displayHeight = MediaQuery.of(context).size.height;
+
+    bool palestras = true;
+    bool competicoes = false;
+    bool bootcamp = false;
+
     return ListView(
         padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 23),
         scrollDirection: Axis.vertical,
@@ -54,17 +54,27 @@ class _PrincipalPageState extends State<PrincipalPage> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: <Widget>[
-
-
                       //BOTÕES DE FILTRAGEM
-                      FiltragemEventos(false, !competicoes, false,
-                          Icons.school_outlined, competicoes),
-                      FiltragemEventos(!palestras, false, false,
-                          Icons.school_outlined, palestras),
-                      FiltragemEventos(!palestras, false, false,
-                          Icons.school_outlined, palestras),
-                      FiltragemEventos(!palestras, false, false,
-                          Icons.school_outlined, palestras),
+                      Filtros(
+                          palestrasBool: false,
+                          compBool: !competicoes,
+                          bootcampBool: false,
+                          optionTrue: palestras,
+                          icon: Icons.school_outlined),
+
+                      Filtros(
+                          palestrasBool: !palestras,
+                          compBool: false,
+                          bootcampBool: false,
+                          optionTrue: competicoes,
+                          icon: Icons.school_outlined),
+
+                      Filtros(
+                          palestrasBool: false,
+                          compBool: false,
+                          bootcampBool: !bootcamp,
+                          optionTrue: bootcamp,
+                          icon: Icons.school_outlined),
                     ],
                   ),
                 ),
@@ -77,8 +87,6 @@ class _PrincipalPageState extends State<PrincipalPage> {
                 style: GoogleFonts.raleway(
                     fontSize: 18, fontWeight: FontWeight.bold),
               ),
-
-
 
               //carrossel dos eventos que o usuário vai participar, mostrando os dias que faltam
               SingleChildScrollView(
@@ -124,11 +132,9 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     fontSize: 18, fontWeight: FontWeight.bold),
               ),
 
-
               //carrossel dos eventos que as pessoas mais fizeram inscrições
-              SingleChildScrollView(
+              const SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-
                 child: Row(
                   children: [
                     Eventos_Alta(),
@@ -138,12 +144,9 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     Eventos_Alta(),
                     Eventos_Alta(),
                     Eventos_Alta(),
-
                   ],
                 ),
               ),
-
-
 
               const SizedBox(height: 50),
 
@@ -153,13 +156,9 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     fontSize: 18, fontWeight: FontWeight.bold),
               ),
 
-
-
-
               //carrossel dos cards recomendados para o aluno
-              SingleChildScrollView(
+              const SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-
                 child: Row(
                   children: [
                     Recomendados(),
@@ -169,7 +168,6 @@ class _PrincipalPageState extends State<PrincipalPage> {
                   ],
                 ),
               ),
-
 
               const SizedBox(height: 50),
 
@@ -179,8 +177,6 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     fontSize: 18, fontWeight: FontWeight.bold),
               ),
 
-
-
               //imagens das instituições parceiras
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -188,46 +184,49 @@ class _PrincipalPageState extends State<PrincipalPage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Image.asset("assets/UnimarIMG.png",
+                      child: Image.asset(
+                        "assets/UnimarIMG.png",
                         height: 55,
-                        width: 55,),
+                        width: 55,
+                      ),
                     ),
-
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Image.asset("assets/UnimarIMG.png",
+                      child: Image.asset(
+                        "assets/UnimarIMG.png",
                         height: 55,
-                      width: 55,),
+                        width: 55,
+                      ),
                     ),
-
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Image.asset("assets/UnimarIMG.png",
+                      child: Image.asset(
+                        "assets/UnimarIMG.png",
                         height: 55,
-                        width: 55,),
+                        width: 55,
+                      ),
                     ),
-
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Image.asset("assets/EtecIMG.png",
+                      child: Image.asset(
+                        "assets/EtecIMG.png",
                         height: 55,
-                        width: 55,),
+                        width: 55,
+                      ),
                     ),
-
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Image.asset("assets/FaipIMG.png",
-                        height: 55,
-                        width: 55),
+                          height: 55, width: 55),
                     ),
-
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Image.asset("assets/UnimarIMG.png",
+                      child: Image.asset(
+                        "assets/UnimarIMG.png",
                         height: 55,
-                        width: 55,),
+                        width: 55,
+                      ),
                     ),
-
                   ],
                 ),
               )
@@ -235,63 +234,85 @@ class _PrincipalPageState extends State<PrincipalPage> {
           ),
         ]);
   }
+}
 
-  //Classe para a filtragem dos eventos
-  FiltragemEventos(bool palestrasBool, bool compBool, bool bootcampBool,
-      IconData icon, bool optionTrue) {
+//Classe para a filtragem dos eventos
+class Filtros extends StatefulWidget {
+  Filtros(
+      {Key? key,
+      required this.palestrasBool,
+      required this.compBool,
+      required this.bootcampBool,
+      required this.optionTrue,
+      required this.icon})
+      : super(key: key);
+
+  bool palestrasBool, compBool, bootcampBool, optionTrue;
+  IconData icon;
+
+  @override
+  State<Filtros> createState() => _FiltrosState();
+}
+
+bool palestras = true;
+bool competicoes = false;
+bool bootcamp = false;
+
+class _FiltrosState extends State<Filtros> {
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
       child: GestureDetector(
         onTap: () {
           setState(() {
-            palestras = palestrasBool;
-            competicoes = compBool;
-            bootcamp = bootcampBool;
+            palestras = widget.palestrasBool;
+            competicoes = widget.compBool;
+            bootcamp = widget.bootcampBool;
           });
         },
         child: Column(children: [
           AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
-            width: optionTrue ? 120 : 50,
-            height: 50,
-            decoration: BoxDecoration(
-              borderRadius: optionTrue
-                  ? BorderRadius.circular(10.0)
-                  : BorderRadius.circular(50.0),
-              border: Border.all(
-                  color: optionTrue ? Colors.transparent : Cores.Azul42A5F5),
+              duration: const Duration(milliseconds: 300),
+              width: 72,
+              height: 72,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50.0),
+                border: Border.all(
+                    color: widget.optionTrue
+                        ? Colors.transparent
+                        : Cores.Azul42A5F5),
 
-              //cor de fundo
-              color: optionTrue ? Cores.Azul42A5F5 : Colors.transparent,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                //icone
-                Icon(
-                  icon,
-                  color: optionTrue ? Cores.Branco : Cores.Azul42A5F5,
-                ),
+                //cor de fundo
+                color:
+                    widget.optionTrue ? Cores.Azul42A5F5 : Colors.transparent,
+              ),
+              child: widget.optionTrue
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        //icone
+                        Icon(
+                          widget.icon,
+                          color: Cores.Branco,
+                          size: 30,
+                        ),
 
-                Padding(
-                  padding: optionTrue
-                      ? const EdgeInsets.symmetric(horizontal: 10)
-                      : const EdgeInsets.all(0),
-                  child: Text(
-                    optionTrue ? "Palestras" : "",
-                    style:
-                    GoogleFonts.raleway(fontSize: 12, color: Cores.Branco),
-                  ),
+                        Text(
+                          "Palestras",
+                          style: GoogleFonts.raleway(
+                              fontSize: 10,
+                              color: Cores.Branco,
+                              fontWeight: FontWeight.bold),
+                        ),
 
-                  //texto do filtro em específico
-                ),
-              ],
-            ),
-          ),
+                        //texto do filtro em específico
+                      ],
+                    )
+                  : Icon(widget.icon, color: Cores.Azul42A5F5, size: 30)),
         ]),
       ),
     );
   }
 }
-

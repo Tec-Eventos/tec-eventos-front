@@ -41,10 +41,12 @@ class _AllPagesState extends State<AllPages> {
   @override
   Widget build(BuildContext context) {
     double displayWidth = MediaQuery.of(context).size.width;
+    double displayHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       backgroundColor: Colors.white,
       drawer:
+
           //Drawer,ou seja, o menu que aparece quando clica no botão
           const DrawerPages(),
       body: NestedScrollView(
@@ -53,6 +55,8 @@ class _AllPagesState extends State<AllPages> {
           //appbar, ou seja, parte superior
           const AppBarPages(),
         ],
+
+
         //aqui é o corpo da página, ou seja,
         //onde vai ficar o conteúdo dela, deixe ela dentro de um ListView com o Axis.vertical.
         body: PageView.builder(
@@ -157,7 +161,7 @@ class _AllPagesState extends State<AllPages> {
   }
 }
 
-List<String> nomesPages = [
+const List<String> nomesPages = [
   'Início',
   'Eventos',
   'Medalhas',
