@@ -28,9 +28,9 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.only(right: 15, top: 10, bottom: 10),
+      padding: const EdgeInsets.only(right: 15, top: 10, bottom: 10),
       child: SizedBox(
-        height: 150,
+        height: 160,
         child:
             //CUSTOMIZAÇÃO DO CARD
             Card(
@@ -50,13 +50,11 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Column(
-
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       //NOME DA INSTITUIÇÃO
                       SizedBox(
-
                         child: Text(
                           widget.nomeEvento,
                           style: GoogleFonts.raleway(
@@ -93,7 +91,6 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
                         ),
                       ),
 
-
                       //BOTÃO PARA VER MAIS SOBRE O EVENTO
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -105,7 +102,9 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
                           child: Text(
                             "Ver mais",
                             style: GoogleFonts.raleway(
-                                fontSize: 12, fontWeight: FontWeight.bold, color: Cores.Branco),
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Cores.Branco),
                           )),
                     ]),
               ),
