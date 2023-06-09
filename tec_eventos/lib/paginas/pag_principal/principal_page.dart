@@ -133,7 +133,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
               ),
 
               //carrossel dos eventos que as pessoas mais fizeram inscrições
-              const SingleChildScrollView(
+              SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
@@ -157,7 +157,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
               ),
 
               //carrossel dos cards recomendados para o aluno
-              const SingleChildScrollView(
+               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
