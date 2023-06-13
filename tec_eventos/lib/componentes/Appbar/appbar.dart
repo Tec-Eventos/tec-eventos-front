@@ -16,6 +16,7 @@ class _AppBarPagesState extends State<AppBarPages> {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      elevation: 0,
       floating: true,
       snap: true,
       backgroundColor: Colors.white,

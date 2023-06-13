@@ -54,7 +54,7 @@ class _DrawerPagesState extends State<DrawerPages> {
                   Navigator.push(
                       context,
                       PageTransition(
-                          child: Perfil(),
+                          child: const Perfil(),
                           type: PageTransitionType.rightToLeft));
 
                 },

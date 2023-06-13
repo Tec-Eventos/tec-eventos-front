@@ -37,8 +37,6 @@ class _PerfilState extends State<Perfil> {
         ListView(scrollDirection: Axis.vertical, 
            padding: EdgeInsets.symmetric(vertical: 0),
             children: [
-
-
           Column(
             children: [
               Padding(
@@ -47,8 +45,7 @@ class _PerfilState extends State<Perfil> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     //parte dos eventos participados
-                    ParticipacaoPerfil(
-                        !eventosParticipados, false, false, Icon(Icons.school_outlined, color: Colors.black), eventosParticipados),
+                    ParticipacaoPerfil(!eventosParticipados, false, false, Icon(Icons.school_outlined, color: Colors.black), eventosParticipados),
 
                     //parte das medalhas
                     ParticipacaoPerfil(false, !medalhas, false, Icon(Icons.workspace_premium_outlined, color: Colors.black), medalhas),

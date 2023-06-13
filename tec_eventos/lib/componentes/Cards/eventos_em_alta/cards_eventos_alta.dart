@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/paginas/pag_inscricao_evento/info_evento/info_evento.dart';
 
 class Eventos_Alta extends StatefulWidget {
   const Eventos_Alta({Key? key}) : super(key: key);
@@ -43,17 +45,17 @@ class _Eventos_AltaState extends State<Eventos_Alta> {
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
                       width: 95,
-                      height: 20,
+                      height: 15,
                       decoration: BoxDecoration(
                           color: Colors.blue,
                           borderRadius: BorderRadius.circular(50)),
                       child: Text(
-                        "Competição",
-                        style: GoogleFonts.raleway(
-                            fontSize: 12,
-                            color: Cores.Branco,
-                            fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
+                          "Competição",
+                          style: GoogleFonts.raleway(
+                              fontSize: 12,
+                              color: Cores.Branco,
+                              fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
                       ),
                     ),
                   ),
@@ -118,7 +120,13 @@ class _Eventos_AltaState extends State<Eventos_Alta> {
                                   minimumSize: Size(100, 18),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(7))),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        child: const info_evento(),
+                                        type: PageTransitionType.bottomToTop));
+                              },
                               child: Text(
                                 "Ver mais",
                                 style: GoogleFonts.raleway(

@@ -144,7 +144,7 @@ final List<Onboard> demo_data = [
   Onboard(
     image: 'assets/onBoarding/comecar.png',
     titulo: '',
-    descricao: '',
+    descricao: 'Bem vindo ao nosso aplicativo',
   ),
 ];
 
@@ -154,7 +154,8 @@ TelaBoarding(String image, String titulo, String descricao, context) {
     children: [
       Column(
         children: [
-          Image.asset(image, fit: BoxFit.fill, width: double.infinity, height: MediaQuery.of(context).size.height / 1.2,),
+          Image.asset(image, width: 400, height: 450, fit: BoxFit.contain,),
+          const SizedBox(height: 20),
           Text(
             titulo,
             style: GoogleFonts.cabin(
@@ -163,12 +164,8 @@ TelaBoarding(String image, String titulo, String descricao, context) {
                 fontSize: 30),
             textAlign: TextAlign.center,
           ),
+          const SizedBox(height: 30),
 
-          Container(
-            height: 1.0,
-            width: 174.03,
-            color: Cores.Azul42A5F5,
-          ),
           Text(
             descricao,
             style: GoogleFonts.raleway(

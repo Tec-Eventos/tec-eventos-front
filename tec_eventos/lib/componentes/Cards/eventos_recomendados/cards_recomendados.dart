@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/paginas/pag_inscricao_evento/info_evento/info_evento.dart';
 
 class Recomendados extends StatefulWidget {
   const Recomendados({Key? key}) : super(key: key);
@@ -55,7 +57,13 @@ class _RecomendadosState extends State<Recomendados> {
                               shape: RoundedRectangleBorder(
                                   borderRadius:
                                   BorderRadius.circular(7))),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    child: const info_evento(),
+                                    type: PageTransitionType.bottomToTop));
+                          },
                           child: Text(
                             "Info",
                             style: GoogleFonts.raleway(

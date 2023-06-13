@@ -32,15 +32,16 @@ class configuration_page extends StatelessWidget {
       ),
 
 
-       Config_Geral(icone: Icons.lock_outlined, opcao: "Privacidade"),
+      Config_Geral(icone: Icons.lock_outlined, opcao: "Privacidade"),
       Config_Geral(icone: Icons.person_outline, opcao: "Perfil"),
       Config_Geral(icone: Icons.notifications_none_outlined, opcao: "Notificações"),
       Config_Geral(icone: Icons.exit_to_app_outlined, opcao: "Sair"),
       Config_Geral(icone: Icons.person_off_outlined, opcao: "Deletar conta"),
 
 
-
       const SizedBox(height: 50),
+
+
       Text(
         "FEEDBACK",
         style: GoogleFonts.inter(

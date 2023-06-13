@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/paginas/pag_inscricao_evento/info_evento/info_evento.dart';
 
 class CardEventosInscritos extends StatefulWidget {
   CardEventosInscritos(
@@ -98,7 +100,13 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
                               minimumSize: Size(87, 17),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(7))),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    child: const info_evento(),
+                                    type: PageTransitionType.bottomToTop));
+                          },
                           child: Text(
                             "Ver mais",
                             style: GoogleFonts.raleway(
