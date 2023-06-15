@@ -87,7 +87,7 @@ class _Config_GeralState extends State<Config_Geral> {
               width: 1.0,
           ),
           ),
-          titleAlignment: ListTileTitleAlignment.center,
+          // titleAlignment: ListTileTitleAlignment.center,
           leading: Icon(widget.icone, color: Cores.Preto, size: 20),
           title: Text(widget.opcao, style: GoogleFonts.raleway(fontWeight: FontWeight.w600, fontSize: 16),),
 

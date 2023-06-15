@@ -256,9 +256,6 @@ class Filtros extends StatefulWidget {
   State<Filtros> createState() => _FiltrosState();
 }
 
-bool palestras = true;
-bool competicoes = false;
-bool bootcamp = false;
 
 class _FiltrosState extends State<Filtros> {
   @override
@@ -268,9 +265,9 @@ class _FiltrosState extends State<Filtros> {
       child: GestureDetector(
         onTap: () {
           setState(() {
-            palestras = widget.palestrasBool;
-            competicoes = widget.compBool;
-            bootcamp = widget.bootcampBool;
+            widget.palestrasBool = widget.palestrasBool;
+            widget.compBool;
+            widget.bootcampBool;
           });
         },
         child: Column(children: [

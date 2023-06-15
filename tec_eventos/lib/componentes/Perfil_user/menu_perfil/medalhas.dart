@@ -50,7 +50,7 @@ class _MedalhasState extends State<Medalhas> {
               width: 30,
               height: 53,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(10),
                       bottomLeft: Radius.circular(10)),
                   color: widget.corPodio,

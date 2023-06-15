@@ -3,9 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:tec_eventos/splash/splash.dart';
 
 void main() {
+  //runApp(const Splash(nextScreen: false,));
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+
   runApp(const MyApp());
 }
 
@@ -22,7 +25,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: Splash(),
+      home: const Splash(nextScreen: true,),
 
 
     );

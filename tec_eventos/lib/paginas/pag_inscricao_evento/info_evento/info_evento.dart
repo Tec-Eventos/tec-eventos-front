@@ -74,21 +74,50 @@ class _info_eventoState extends State<info_evento> {
                     style: GoogleFonts.raleway(
                         fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-
                   const SizedBox(height: 20),
-
                   const ListTile(
                     visualDensity: VisualDensity.comfortable,
                     leading: const Icon(Icons.chair_outlined),
                     title: Text("10 ingressos restantes"),
                   ),
-
                   const ListTile(
-                     visualDensity: VisualDensity.comfortable,
+                    visualDensity: VisualDensity.comfortable,
                     leading: const Icon(Icons.payments_outlined),
                     title: Text("Grátis"),
                   ),
+                  const SizedBox(height: 20),
+                  Text(
+                    "Descrição",
+                    style: GoogleFonts.raleway(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    "Um texto qualquer sobre a descrição do evento que está acontecendo em tal lugar e agora eu fiquei sem ideia então vou encher de lorem ipsum lorem lorem ipsum lorem ipsum pasdafsd dsdajk lorem.",
+                    style: GoogleFonts.raleway(fontSize: 13),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    "Local",
+                    style: GoogleFonts.raleway(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    "O evento acontecerá na universidade Univem em Marília, SP.",
+                    style: GoogleFonts.raleway(fontSize: 13),
+                  ),
 
+
+                    ElevatedButton(
+                        onPressed: () {},
+                        child: Row(
+                          children: [
+                            Icon(Icons.local_activity),
+                            Text("Ver no mapa")
+                          ],
+                        ),
+                  )
                 ],
               ),
             )

@@ -89,7 +89,7 @@ class _SeguirState extends State<Seguir> {
     return   ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 0.0),
       horizontalTitleGap: 0,
-      titleAlignment: ListTileTitleAlignment.bottom,
+      // titleAlignment: ListTileTitleAlignment.bottom,
 
       leading: CircleAvatar(
         radius: 50.0,
