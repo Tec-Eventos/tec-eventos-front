@@ -134,7 +134,7 @@ class _info_eventoState extends State<info_evento> {
                     style: GoogleFonts.raleway(fontSize: 13),
                   ),
                   SizedBox(
-                    width: 125,
+                    width: MediaQuery.of(context).size.width / 25,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Cores.Branco,
