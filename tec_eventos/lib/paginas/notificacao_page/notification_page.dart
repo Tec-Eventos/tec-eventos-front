@@ -89,7 +89,7 @@ class _SeguirState extends State<Seguir> {
     return   ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 0.0),
       horizontalTitleGap: 0,
-      // titleAlignment: ListTileTitleAlignment.bottom,
+      titleAlignment: ListTileTitleAlignment.bottom,
 
       leading: CircleAvatar(
         radius: 50.0,
@@ -110,6 +110,13 @@ class _SeguirState extends State<Seguir> {
             seguir = !seguir;
           });
         },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: seguir ? Cores.Azul47BBEC : Cores.Preto,
+          padding:
+          const EdgeInsets.symmetric(horizontal: 10),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8.0))),
+        ),
         child: Text(
           seguir ? 'Seguir' : 'Seguindo',
           style: GoogleFonts.raleway(
@@ -117,13 +124,6 @@ class _SeguirState extends State<Seguir> {
             fontWeight: FontWeight.bold,
           ),
 
-        ),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: seguir ? Cores.Azul47BBEC : Cores.Preto,
-          padding:
-          const EdgeInsets.symmetric(horizontal: 10),
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8.0))),
         ),
       ),
     );

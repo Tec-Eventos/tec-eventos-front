@@ -38,7 +38,7 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
           Navigator.push(
               context,
               PageTransition(
-                  child: AllPages(),
+                  child: AllPages(paginaAtual: 0),
                   type: PageTransitionType.leftToRight));
         },
       ),

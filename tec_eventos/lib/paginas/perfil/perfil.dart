@@ -7,7 +7,6 @@ import 'package:tec_eventos/componentes/Perfil_user/menu_perfil/eventosParticipa
 import 'package:tec_eventos/componentes/Perfil_user/menu_perfil/favoritos.dart';
 import 'package:tec_eventos/componentes/Perfil_user/menu_perfil/medalhas.dart';
 import 'package:tec_eventos/cores.dart';
-import 'package:tec_eventos/paginas/pag_principal/principal_page.dart';
 
 class Perfil extends StatefulWidget {
   const Perfil({Key? key}) : super(key: key);

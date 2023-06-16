@@ -7,6 +7,7 @@ import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:switch_button/switch_button.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/paginas/all_pages.dart';
 import 'package:tec_eventos/paginas/pag_principal/principal_page.dart';
 import 'package:tec_eventos/paginas/perfil/perfil.dart';
 
@@ -38,6 +39,10 @@ class _DrawerPagesState extends State<DrawerPages> {
         children: [
           Container(
             height: 260,
+
+
+
+            //widget para o cabeçalho do Menu/Drawer
             child: UserAccountsDrawerHeader(
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -48,7 +53,7 @@ class _DrawerPagesState extends State<DrawerPages> {
                 //     color: Colors.white
                 // ),
               ),
-              currentAccountPictureSize: Size(83, 83),
+              currentAccountPictureSize: const Size(83, 83),
               currentAccountPicture: GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -60,7 +65,7 @@ class _DrawerPagesState extends State<DrawerPages> {
                 },
 
                 //imagem do perfil
-                child: CircleAvatar(
+                child: const CircleAvatar(
 
                   radius: 50.0,
                   backgroundImage: AssetImage(
@@ -104,7 +109,7 @@ class _DrawerPagesState extends State<DrawerPages> {
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
                               textAlign: TextAlign.start),
-                          VerticalDivider(),
+                          const VerticalDivider(),
                           Text(
                             "${seguidores} seguidores",
                             style: GoogleFonts.raleway(
@@ -121,24 +126,24 @@ class _DrawerPagesState extends State<DrawerPages> {
             ),
           ),
 
-              Column(
-                 children: const [
-                    MenuOptionsAssetIcon(icone: "assets/Icons/medalhas.png", opcao: "Configurações", nomePage: Perfil()),
-                    MenuOptions(icone: Icons.confirmation_num_outlined, opcao: "Eventos", nomePage: Perfil()),
-                    MenuOptionsAssetIcon(icone: "assets/Icons/configuracao.png", opcao: "Configurações", nomePage: Perfil()),
-                    MenuOptions(icone: Icons.favorite_border, opcao: "Favoritos", nomePage: Perfil()),
+              const Column(
+                 children: [
+                    MenuOptionsAssetIcon(icone: "assets/Icons/medalhas.png", opcao: "Medalhas", pagina: 2,),
+                    MenuOptions(icone: Icons.confirmation_num_outlined, opcao: "Eventos", pagina: 1),
+                    MenuOptionsAssetIcon(icone: "assets/Icons/configuracao.png", opcao: "Configurações", pagina: 4,),
+                    MenuOptions(icone: Icons.favorite_border, opcao: "Favoritos", pagina: 0),
 
                  ],
                ),
 
-          SizedBox(
+          const SizedBox(
                   height: 60,
                 ),
 
                 Column(
                   children: [
                     ListTile(
-                      leading: Icon(Icons.brightness_6_outlined, color: Colors.black),
+                      leading: const Icon(Icons.brightness_6_outlined, color: Colors.black),
                       title: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -170,7 +175,7 @@ class _DrawerPagesState extends State<DrawerPages> {
                       },
                     ),
                     ListTile(
-                      leading: Icon(Icons.exit_to_app_outlined, color: Colors.black),
+                      leading: const Icon(Icons.exit_to_app_outlined, color: Colors.black),
                       title: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [ Text("Sair", style: GoogleFonts.inter(fontSize: 12)),],
@@ -184,7 +189,7 @@ class _DrawerPagesState extends State<DrawerPages> {
 
 
                 Container(
-                  margin: EdgeInsets.only(left: 17, top: 70),
+                  margin: const EdgeInsets.only(left: 17, top: 70),
                   alignment: Alignment.bottomLeft,
                   height: 43,
                   child: Image.asset("assets/t!e_logo.png"),
@@ -197,11 +202,11 @@ class _DrawerPagesState extends State<DrawerPages> {
 
 
 class MenuOptions extends StatelessWidget {
-  const MenuOptions({Key? key, required this.icone, required this.opcao, required this.nomePage}) : super(key: key);
+  const MenuOptions({Key? key, required this.icone, required this.opcao, required this.pagina}) : super(key: key);
 
   final IconData icone;
   final String opcao;
-  final Widget nomePage;
+  final int pagina;
 
   @override
   Widget build(BuildContext context) {
@@ -213,14 +218,14 @@ class MenuOptions extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(opcao, style: GoogleFonts.inter(fontSize: 12)),
-          Icon(Icons.arrow_forward_ios_outlined, size: 12),
+          const Icon(Icons.arrow_forward_ios_outlined, size: 12),
         ],
       ),
       onTap: () {
         Navigator.push(
             context,
             PageTransition(
-                child: nomePage,
+                child: AllPages(paginaAtual: pagina),
                 type: PageTransitionType.rightToLeft));
       },
     );
@@ -228,10 +233,10 @@ class MenuOptions extends StatelessWidget {
 }
 
 class MenuOptionsAssetIcon extends StatelessWidget {
-  const MenuOptionsAssetIcon({Key? key, required this.icone, required this.opcao, required this.nomePage}) : super(key: key);
+  const MenuOptionsAssetIcon({Key? key, required this.icone, required this.opcao, required this.pagina}) : super(key: key);
   final String icone;
   final String opcao;
-  final Widget nomePage;
+  final int pagina;
 
   @override
   Widget build(BuildContext context) {
@@ -241,14 +246,14 @@ class MenuOptionsAssetIcon extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(opcao, style: GoogleFonts.inter(fontSize: 12)),
-          Icon(Icons.arrow_forward_ios_outlined, size: 12),
+          const Icon(Icons.arrow_forward_ios_outlined, size: 12),
         ],
       ),
       onTap: () {
         Navigator.push(
             context,
             PageTransition(
-                child: nomePage,
+                child: AllPages(paginaAtual: pagina),
                 type: PageTransitionType.rightToLeft));
       },
     );

@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: TextButton(
                   onPressed: () {
                     PageTransition(
-                        child: AllPages(),
+                        child: AllPages(paginaAtual: 0),
                         type: PageTransitionType.rightToLeft);
                   },
                   child: const Text(

@@ -14,13 +14,13 @@ import 'package:tec_eventos/paginas/pag_principal/principal_page.dart';
 import 'package:tec_eventos/paginas/ranking_page/ranking.dart';
 
 class AllPages extends StatefulWidget {
-  const AllPages({Key? key}) : super(key: key);
-
+  AllPages({Key? key, required this.paginaAtual}) : super(key: key);
+  int paginaAtual;
   @override
   State<AllPages> createState() => _AllPagesState();
 }
 
-int paginaAtual = 0;
+
 
 class _AllPagesState extends State<AllPages> {
   late PageController _pageController;
@@ -28,7 +28,7 @@ class _AllPagesState extends State<AllPages> {
   //controle das páginas
   @override
   void initState() {
-    _pageController = PageController(initialPage: paginaAtual);
+    _pageController = PageController(initialPage: widget.paginaAtual);
     super.initState();
   }
 
@@ -64,7 +64,7 @@ class _AllPagesState extends State<AllPages> {
             controller: _pageController,
             onPageChanged: (index) {
               setState(() {
-                paginaAtual = index;
+                widget.paginaAtual = index;
               });
             },
             itemBuilder: (context, index) =>
@@ -146,10 +146,10 @@ class _AllPagesState extends State<AllPages> {
                   ),
                 ),
               ],
-              selectedIndex: paginaAtual,
+              selectedIndex: widget.paginaAtual,
               onTabChange: (index) {
                 setState(() {
-                  paginaAtual = index;
+                  widget.paginaAtual = index;
                   _pageController.jumpToPage(index);
                 });
               },

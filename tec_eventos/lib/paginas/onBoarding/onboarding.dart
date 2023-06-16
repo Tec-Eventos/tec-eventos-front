@@ -249,7 +249,7 @@ class _BotaoComecarState extends State<BotaoComecar> {
             Navigator.push(
                 context,
                 PageTransition(
-                    child: const AllPages(),
+                    child: AllPages(paginaAtual: 0),
                     type: PageTransitionType.rightToLeft));
           },
           child: Text(
