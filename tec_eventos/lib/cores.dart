@@ -1,7 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
-abstract class Cores{
+
+
+class Cores{
+  late Color Branco;
+
+  late Future<bool?> _modoEscuro;
+
+
+  Cores(){
+    _modoEscuro = GetCores();
+    modoEscuro == true ? Branco = Color(0xFF000000) : Branco = Color(0xFFFaFaFa);
+  }
+
+  Future<bool?> GetCores() async{
+    final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+    final SharedPreferences prefs = await _prefs;
+
+    final bool? modoEscuro = prefs.getBool('modo_escuro');
+
+    if(modoEscuro == true || modoEscuro == false){
+      return modoEscuro;
+    }
+    else{
+      prefs.setBool("modoEscuro", false);
+      return false;
+    }
+  }
+
+  Future get modoEscuro => _modoEscuro;
+
+
 
   //Azul
   static Color AzulClaro = Color(0xff64B5F6);
@@ -14,7 +45,7 @@ abstract class Cores{
   static Color Azul47BBEC = Color(0xff47BBEC);
 
   //Branco
-  static Color Branco = Color(0xFFFaFaFa);
+
 
   //Preto
   static Color Preto = Color(0xff000000);

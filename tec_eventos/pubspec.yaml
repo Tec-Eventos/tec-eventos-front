@@ -39,7 +39,7 @@ dependencies:
   page_route_transition:
   flare_splash_screen: ^4.0.0
   google_fonts: ^4.0.4
-  shared_preferences: ^2.0.12
+  shared_preferences: ^2.1.2
   flutter_native_splash:
   flutter_launcher_icons:
   switch_button: ^0.0.1

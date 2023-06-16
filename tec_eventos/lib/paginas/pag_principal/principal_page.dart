@@ -260,7 +260,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                         //icone
                         Icon(
                           icon,
-                          color: Cores.Branco,
+                          color: Cores().Branco,
                           size: 30,
                         ),
 
@@ -268,7 +268,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                           "Palestras",
                           style: GoogleFonts.raleway(
                               fontSize: 10,
-                              color: Cores.Branco,
+                              color: Cores().Branco,
                               fontWeight: FontWeight.bold),
                         ),
 

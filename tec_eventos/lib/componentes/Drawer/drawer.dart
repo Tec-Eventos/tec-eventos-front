@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:switch_button/switch_button.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/paginas/all_pages.dart';
@@ -21,7 +22,7 @@ class DrawerPages extends StatefulWidget {
 class _DrawerPagesState extends State<DrawerPages> {
   int seguindo = 115;
   int seguidores = 2000;
-  bool state = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -162,13 +163,26 @@ class _DrawerPagesState extends State<DrawerPages> {
                               textSize: 12,
                               onChanged: (bool state) {},
                               onDoubleTap: () {},
-                              onTap: () {},
+                              onTap: () {
+
+                              },
                               onSwipe: () {},
                             ),
                           )
                         ],
                       ),
-                      onTap: () {
+                      onTap: () async {
+                        final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+                        final SharedPreferences prefs = await _prefs;
+
+                        final bool? modoEscuro = prefs.getBool('modo_escuro');
+
+                        if(modoEscuro == true){
+                          prefs.setBool("modoEscuro", false);
+                        }
+                        else{
+                          prefs.setBool("modoEscuro", true);
+                        }
                         // Navigator.of(context).push(
                         //   MaterialPageRoute(builder: (_) =>),
                         // );

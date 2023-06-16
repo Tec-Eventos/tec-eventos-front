@@ -46,7 +46,7 @@ class _info_eventoState extends State<info_evento> {
               icon: Icon(
                 Icons.arrow_back_ios,
                 size: 30,
-                color: Cores.Branco,
+                color: Cores().Branco,
               ),
             ),
           ),
@@ -92,7 +92,7 @@ class _info_eventoState extends State<info_evento> {
                       width: 40,
                       child: CircleAvatar(
                           backgroundColor: Cores.Azul42A5F5,
-                          child: Icon(Icons.chair_outlined, color: Cores.Branco, size: 20,)),
+                          child: Icon(Icons.chair_outlined, color: Cores().Branco, size: 20,)),
                     ),
                     title: const Text("10 ingressos restantes"),
                   ),
@@ -105,7 +105,7 @@ class _info_eventoState extends State<info_evento> {
                     width: 40,
                     child: CircleAvatar(
                         backgroundColor: Cores.Azul42A5F5,
-                        child: Icon(Icons.payments_outlined, color: Cores.Branco, size: 20,)),
+                        child: Icon(Icons.payments_outlined, color: Cores().Branco, size: 20,)),
                   ),
                   title: const Text("Grátis"),
                 ),
@@ -134,10 +134,10 @@ class _info_eventoState extends State<info_evento> {
                     style: GoogleFonts.raleway(fontSize: 13),
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width / 25,
+                    width: 135,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Cores.Branco,
+                        backgroundColor: Cores().Branco,
                         side: BorderSide(
                           color: Cores.Azul42A5F5,
                         ),
@@ -213,7 +213,7 @@ class _info_eventoState extends State<info_evento> {
           child: Text(
             "Inscrever-se",
             style: GoogleFonts.raleway(
-                fontSize: 29, fontWeight: FontWeight.bold, color: Cores.Branco),
+                fontSize: 29, fontWeight: FontWeight.bold, color: Cores().Branco),
             textAlign: TextAlign.center,
           ),
         ),

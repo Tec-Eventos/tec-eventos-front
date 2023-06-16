@@ -53,7 +53,7 @@ class _Eventos_AltaState extends State<Eventos_Alta> {
                           "Competição",
                           style: GoogleFonts.raleway(
                               fontSize: 12,
-                              color: Cores.Branco,
+                              color: Cores().Branco,
                               fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
                       ),
@@ -132,7 +132,7 @@ class _Eventos_AltaState extends State<Eventos_Alta> {
                                 style: GoogleFonts.raleway(
                                     fontSize: 12,
                                     fontWeight: FontWeight.bold,
-                                    color: Cores.Branco),
+                                    color: Cores().Branco),
                               )),
                         ],
                       ),
