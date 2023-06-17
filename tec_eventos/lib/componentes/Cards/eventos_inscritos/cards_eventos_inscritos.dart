@@ -112,7 +112,7 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
                             style: GoogleFonts.raleway(
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
-                                color: Cores().Branco),
+                                color: Cores.Branco),
                           )),
                     ]),
               ),

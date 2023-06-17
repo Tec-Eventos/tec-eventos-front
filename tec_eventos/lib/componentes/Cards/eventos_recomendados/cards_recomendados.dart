@@ -69,7 +69,7 @@ class _RecomendadosState extends State<Recomendados> {
                             style: GoogleFonts.raleway(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
-                                color: Cores().Branco),
+                                color: Cores.Branco),
                           )),
                     )),
               ],

@@ -22,7 +22,7 @@ class _PerfilState extends State<Perfil> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const DrawerPages(),
-      backgroundColor: Cores().Branco,
+      backgroundColor: Cores.Branco,
       body: NestedScrollView(
         floatHeaderSlivers: true,
         headerSliverBuilder: (context, innerBoxIsScrolled) => [

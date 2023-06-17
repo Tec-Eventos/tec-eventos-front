@@ -218,7 +218,7 @@ class _Botao_ProximoState extends State<Botao_Proximo> {
     return ElevatedButton(
       onPressed: () {
         _pageController.nextPage(
-            duration: Duration(milliseconds: 300), curve: Curves.ease);
+            duration: const Duration(milliseconds: 300), curve: Curves.ease);
       },
       child: const Icon(Icons.arrow_forward_ios, color: Colors.white),
       style: ElevatedButton.styleFrom(
@@ -249,7 +249,7 @@ class _BotaoComecarState extends State<BotaoComecar> {
             Navigator.push(
                 context,
                 PageTransition(
-                    child: AllPages(paginaAtual: 0),
+                    child: const LoginPage(),
                     type: PageTransitionType.rightToLeft));
           },
           child: Text(

@@ -44,9 +44,9 @@ class _LoginPageState extends State<LoginPage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextBox(hint: "E-mail"),
-              TextBox(hint: "E-mail"),
-              TextBox(hint: "E-mail"),
+              TextBox(icon: Icons.email_outlined,hint: "E-mail"),
+              TextBox(icon: Icons.person_2_outlined, hint: "Usuário"),
+              TextBox(icon: Icons.lock_outlined, hint: "Senha"),
               Padding(
                 padding: const EdgeInsets.only(left: 30),
                 child: TextButton(
@@ -70,8 +70,8 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 class TextBox extends StatefulWidget {
-  TextBox({Key? key, required this.hint}) : super(key: key);
-
+  TextBox({Key? key, required this.hint, required this.icon}) : super(key: key);
+  IconData icon;
   String hint;
 
   @override
@@ -97,6 +97,7 @@ class _TextBoxState extends State<TextBox> {
             ]),
         child: TextFormField(
           decoration: InputDecoration(
+            prefixIcon: Icon(widget.icon),
             isDense: true,
             hintText: widget.hint,
             hintStyle: const TextStyle(color: Color(0xffA69F9F)),
