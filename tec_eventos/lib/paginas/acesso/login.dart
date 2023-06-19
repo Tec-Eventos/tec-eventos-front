@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/paginas/all_pages.dart';
@@ -19,11 +17,12 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Cores.Branco,
       body: ListView(
+
         scrollDirection: Axis.vertical,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Image.asset(
@@ -32,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
             height: 120,
             width: 120,
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           const Text('Login',
@@ -41,27 +40,161 @@ class _LoginPageState extends State<LoginPage> {
                 color: Color(0xff47BBEC),
                 fontSize: 38.0,
               )),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextBox(icon: Icons.email_outlined,hint: "E-mail"),
-              TextBox(icon: Icons.person_2_outlined, hint: "Usuário"),
-              TextBox(icon: Icons.lock_outlined, hint: "Senha"),
-              Padding(
-                padding: const EdgeInsets.only(left: 30),
-                child: TextButton(
-                  onPressed: () {
-                    PageTransition(
-                        child: AllPages(paginaAtual: 0),
-                        type: PageTransitionType.rightToLeft);
-                  },
-                  child: const Text(
-                    'Esqueceu a senha?',
-                    textAlign: TextAlign.center,
-                  ),
+          Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+            CaixaTexto(icon: Icons.email_outlined, hint: "E-mail"),
+            CaixaTexto(icon: Icons.person_2_outlined, hint: "Usuário"),
+            CaixaTexto(icon: Icons.lock_outlined, hint: "Senha")
+          ]),
+
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+            child: GestureDetector(
+
+              onTap: () {
+                PageTransition(
+                    child: AllPages(paginaAtual: 0),
+                    type: PageTransitionType.rightToLeft);
+              },
+              child: Text(
+                'Esqueceu a senha?',
+                style: GoogleFonts.inter(
+                  color: Cores.Azul45B0F0,
+                  fontWeight: FontWeight.w400,
                 ),
-              )
-            ],
+                textAlign: TextAlign.start,
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 30),
+
+          Text(
+            "Faça login por outras mídias sociais",
+            style: GoogleFonts.inter(
+              fontSize: 15,
+              color: Cores.Cinza,
+            ),
+            textAlign: TextAlign.center,
+          ),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 40),
+            child: Row(
+
+             mainAxisAlignment: MainAxisAlignment.center,
+
+             children: [
+               Column(
+                 children: [
+                   CircleAvatar(
+                     backgroundColor: Cores.Cinza,
+
+                     child: Image.asset('assets/acesso/microsoft.png'),
+
+                   ),
+                   Text('Microsoft',
+                   style: GoogleFonts.inter(
+                     fontSize: 15,
+                     color: Cores.Cinza,
+                   ),
+                   )
+                 ],
+               ),
+
+
+                const SizedBox(
+                  width: 50,
+                ),
+
+               Column(
+                 children: [
+                   CircleAvatar(
+
+                     backgroundColor: Cores.Cinza,
+                     child: Image.asset(
+                         'assets/acesso/google.png',
+                     ),
+
+                   ),
+                   Text('Google',
+                     style: GoogleFonts.inter(
+                       fontSize: 15,
+                       color: Cores.Cinza,
+                     ),)
+                 ],
+               ),
+
+               const SizedBox(
+                 width: 50,
+               ),
+
+               Column(
+                 children: [
+                   CircleAvatar(
+                     backgroundColor: Cores.Cinza,
+                     child: Image.asset('assets/acesso/convidado.png'),
+
+                   ),
+                   Text('Convidado',
+                     style: GoogleFonts.inter(
+                       fontSize: 15,
+                       color: Cores.Cinza,
+                     ),
+                   )
+                 ],
+               ),
+             ],
+            ),
+          ),
+
+
+
+
+          Padding(
+            padding: const EdgeInsets.symmetric( horizontal: 30),
+            child: Container(
+              width: 282,
+              height: 52,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: [
+                        Cores.Azul47BBEC,
+                        Cores.Azul42A5F5,
+                      ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight),
+
+                  borderRadius: BorderRadius.circular(20)),
+              child: Center(
+                child: Text(
+                  "Login",
+                  style: GoogleFonts.raleway(
+                      fontSize: 28, fontWeight: FontWeight.bold, color: Cores.Branco),
+                ),
+              ),
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+            child: GestureDetector(
+
+              onTap: () {
+                PageTransition(
+                    child: AllPages(paginaAtual: 0),
+                    type: PageTransitionType.rightToLeft);
+              },
+              child: Text(
+                'Não tem uma conta? Cadastre-se',
+                style: GoogleFonts.inter(
+                  color: Cores.Azul45B0F0,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
           ),
         ],
       ),
@@ -69,16 +202,16 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-class TextBox extends StatefulWidget {
-  TextBox({Key? key, required this.hint, required this.icon}) : super(key: key);
+class CaixaTexto extends StatefulWidget {
+  CaixaTexto({Key? key, required this.hint, required this.icon}) : super(key: key);
   IconData icon;
   String hint;
 
   @override
-  State<TextBox> createState() => _TextBoxState();
+  State<CaixaTexto> createState() => _CaixaTextoState();
 }
 
-class _TextBoxState extends State<TextBox> {
+class _CaixaTextoState extends State<CaixaTexto> {
   @override
   Widget build(BuildContext context) {
     return Padding(
