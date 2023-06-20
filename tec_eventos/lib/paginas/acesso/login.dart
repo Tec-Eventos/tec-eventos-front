@@ -13,6 +13,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool selectedValue = true;
+  bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -44,18 +45,37 @@ class _LoginPageState extends State<LoginPage> {
             CaixaTexto(icon: Icons.person_2_outlined, hint: "Usuário"),
             CaixaTexto(icon: Icons.lock_outlined, hint: "Senha")
           ]),
+          ListTile(
+            titleAlignment: ListTileTitleAlignment.center,
+            autofocus: true,
+            dense: true,
+            leading: Checkbox(
+              activeColor: Cores.Azul42A5F5,
+              value: isChecked,
+              onChanged: (value) {
+                isChecked = !isChecked;
+                setState(() {});
+              },
+            ),
+            title: Text(
+              "Lembrar-se de mim",
+              style: GoogleFonts.inter(
+                fontSize: 15,
+              ),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
             child: GestureDetector(
               onTap: () {
+                //a tela que aparecerá a respeito do usuário esquecer a senha
                 showModalBottomSheet(
-
                     context: context,
                     isScrollControlled: true,
                     // padding: EdgeIn
                     shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(25))
-                    ),
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(25))),
                     builder: (context) {
                       return Padding(
                         padding: MediaQuery.of(context).viewInsets,
@@ -64,75 +84,81 @@ class _LoginPageState extends State<LoginPage> {
                           child: Padding(
                             padding: const EdgeInsets.all(20.0),
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                  "Esqueceu sua senha?",
-                                  style: GoogleFonts.inter(
-                                    fontSize: 23,
-                                    fontWeight: FontWeight.w500,
+                                    "Esqueceu sua senha?",
+                                    style: GoogleFonts.inter(
+                                      fontSize: 23,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
-                                  ),
-
                                   const SizedBox(height: 20),
-
-                                  Text("Informe seu e-mail para que possamos lhe enviar um código de confirmação",
+                                  Text(
+                                    "Informe seu e-mail para que possamos lhe enviar um código de confirmação",
                                     style: GoogleFonts.inter(
                                       fontSize: 16,
                                     ),
                                   ),
-
                                   const SizedBox(height: 50),
-
-                                  Text('Email',
+                                  Text(
+                                    'Email',
                                     style: GoogleFonts.inter(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500,
                                     ),
-
                                   ),
-
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 10),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(30),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey[300]!,
-                                          offset: const Offset(10, 10),
-                                          blurRadius: 6,
-                                          spreadRadius: -5,
-                                        )
-                                      ]),
-                                  child: TextFormField(
-                                    decoration: const InputDecoration(
-                                      prefixIcon: Icon(Icons.email_outlined),
-                                      isDense: true,
-                                      hintText: "Email",
-                                      hintStyle: TextStyle(color: Color(0xffA69F9F)),
-                                      border: InputBorder.none,
-
-                                      contentPadding: EdgeInsets.only(
-                                          top: 18.0, right: 20, bottom: 18.0, left: 40),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.grey[300]!,
+                                              offset: const Offset(10, 10),
+                                              blurRadius: 6,
+                                              spreadRadius: -5,
+                                            )
+                                          ]),
+                                      child: TextFormField(
+                                        decoration: const InputDecoration(
+                                          prefixIcon:
+                                              Icon(Icons.email_outlined),
+                                          isDense: true,
+                                          hintText: "Email",
+                                          hintStyle: TextStyle(
+                                              color: Color(0xffA69F9F)),
+                                          border: InputBorder.none,
+                                          contentPadding: EdgeInsets.only(
+                                              top: 18.0,
+                                              right: 20,
+                                              bottom: 18.0,
+                                              left: 40),
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ),
-
                                   const SizedBox(height: 20),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 30),
                                     child: Container(
                                       width: 282,
                                       height: 52,
                                       decoration: BoxDecoration(
-                                          gradient: LinearGradient(colors: [
-                                            Cores.Azul47BBEC,
-                                            Cores.Azul42A5F5,
-                                          ], begin: Alignment.topLeft, end: Alignment.bottomRight),
-                                          borderRadius: BorderRadius.circular(20)),
+                                          gradient: LinearGradient(
+                                              colors: [
+                                                Cores.Azul47BBEC,
+                                                Cores.Azul42A5F5,
+                                              ],
+                                              begin: Alignment.topLeft,
+                                              end: Alignment.bottomRight),
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
                                       child: Center(
                                         child: Text(
                                           "Enviar",
@@ -144,8 +170,7 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                                     ),
                                   ),
-                                ]
-                            ),
+                                ]),
                           ),
                         ),
                       );
