@@ -50,6 +50,7 @@ class _LoginPageState extends State<LoginPage> {
             autofocus: true,
             dense: true,
             leading: Checkbox(
+              shape: const CircleBorder(),
               activeColor: Cores.Azul42A5F5,
               value: isChecked,
               onChanged: (value) {
@@ -256,28 +257,39 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: Container(
-              width: 282,
-              height: 52,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [
-                    Cores.Azul47BBEC,
-                    Cores.Azul42A5F5,
-                  ], begin: Alignment.topLeft, end: Alignment.bottomRight),
-                  borderRadius: BorderRadius.circular(20)),
-              child: Center(
-                child: Text(
-                  "Login",
-                  style: GoogleFonts.raleway(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Cores.Branco),
+          GestureDetector(
+            onTap: (){
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      child: AllPages(paginaAtual: 0),
+                      type: PageTransitionType.rightToLeft));
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Container(
+                width: 282,
+                height: 52,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(colors: [
+                      Cores.Azul47BBEC,
+                      Cores.Azul42A5F5,
+                    ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                    borderRadius: BorderRadius.circular(20)),
+                child: Center(
+                  child: Text(
+                    "Login",
+                    style: GoogleFonts.raleway(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Cores.Branco),
+                  ),
                 ),
               ),
             ),
           ),
+          
+          
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
             child: GestureDetector(

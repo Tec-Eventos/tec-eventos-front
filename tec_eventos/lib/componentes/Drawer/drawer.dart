@@ -1,3 +1,4 @@
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -130,7 +131,7 @@ class _DrawerPagesState extends State<DrawerPages> {
               const Column(
                  children: [
                     MenuOptionsAssetIcon(icone: "assets/Icons/medalhas.png", opcao: "Medalhas", pagina: 2,),
-                    MenuOptions(icone: Icons.confirmation_num_outlined, opcao: "Eventos", pagina: 1),
+                    MenuOptions(icone: Icons.confirmation_num_outlined, opcao: "Meus Eventos", pagina: 1),
                     MenuOptionsAssetIcon(icone: "assets/Icons/configuracao.png", opcao: "Configurações", pagina: 4,),
                     MenuOptions(icone: Icons.favorite_border, opcao: "Favoritos", pagina: 0),
 
