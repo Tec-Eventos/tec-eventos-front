@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/paginas/acesso/cadastro.dart';
 import 'package:tec_eventos/paginas/all_pages.dart';
 
 class LoginPage extends StatefulWidget {
@@ -34,12 +35,13 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(
             height: 30,
           ),
-          const Text('Login',
+          Text('Login',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Color(0xff47BBEC),
-                fontSize: 38.0,
-              )),
+              style: GoogleFonts.inter(
+                fontWeight: FontWeight.w500,
+                color: Cores.Azul47BBEC,
+                fontSize: 28,
+              ),),
           Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
             CaixaTexto(icon: Icons.email_outlined, hint: "E-mail"),
             CaixaTexto(icon: Icons.person_2_outlined, hint: "Usuário"),
@@ -288,15 +290,18 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          
-          
+
+
+
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
             child: GestureDetector(
               onTap: () {
+                Navigator.push(
+                    context,
                 PageTransition(
-                    child: AllPages(paginaAtual: 0),
-                    type: PageTransitionType.rightToLeft);
+                    child: const Cadastro(),
+                    type: PageTransitionType.rightToLeft));
               },
               child: Text(
                 'Não tem uma conta? Cadastre-se',
