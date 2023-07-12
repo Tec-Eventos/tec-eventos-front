@@ -80,34 +80,7 @@ class _OnBoardingState extends State<OnBoarding> {
       ),
     );
 
-    //se a função estiver na terceira etapa, aparece o botão de começar
-    Padding(
-      padding: const EdgeInsets.all(25.0),
-      child: _pageIndex == 3
-          //botão de começar, para entrar na página de login
-          ? const BotaoComecar()
 
-          //parte inferior do onBoarding mostrando em que parte o usuário está
-          : Row(
-              children: [
-                //as bolinhas para indicar a etapa, lista gerada para passar a informação para a classe DotIndicator
-                ...List.generate(
-                    demo_data.length,
-                    (index) => Padding(
-                          padding: const EdgeInsets.only(right: 4),
-                          child: DotIndicator(
-                            isActive: index == _pageIndex,
-                          ),
-                        )),
-
-                //espaçamento
-                const Spacer(),
-
-                //botão de passar para a próxima página
-                const Botao_Proximo(),
-              ],
-            ),
-    );
   }
 }
 

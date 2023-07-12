@@ -54,6 +54,7 @@ dependencies:
   google_maps_flutter: ^2.3.0
   google_maps_flutter_web: ^0.5.0+1
   expansion_tile_card: ^3.0.0
+  pinput: ^2.2.31
 
 flutter_native_splash:
     color: "#FFFFFF"

@@ -59,4 +59,7 @@ class Cores{
   static Color Bronze = Color(0xffCD7F32);
   static Color Amarelo = Color(0xffFFE533);
 
+  //Verde
+  static Color verde = Color(0xff137B02);
+
 }

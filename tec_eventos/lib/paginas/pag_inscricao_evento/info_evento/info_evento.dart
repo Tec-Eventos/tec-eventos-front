@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/componentes/Perfil_user/menu_perfil/favoritos.dart';
 import 'package:tec_eventos/cores.dart';
