@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/pagamento/editarPerfil.dart';
 import 'package:tec_eventos/paginas/all_pages.dart';
-import 'package:tec_eventos/paginas/pag_principal/principal_page.dart';
+
 
 
 
@@ -70,9 +71,19 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             //descrição do perfil dentro do PrefferedSize
-            CircleAvatar(
-              radius: 50.0,
-              backgroundImage: AssetImage("assets/imgPerfil.png"),
+            GestureDetector(
+              onTap: (){
+                 Navigator.push(
+                            context,
+                            PageTransition(
+                                child:  const EditProfileUser(),
+                                type: PageTransitionType.rightToLeft));
+               
+              },
+              child: const CircleAvatar(
+                radius: 50.0,
+                backgroundImage: AssetImage("assets/imgPerfil.png"),
+              ),
             ),
 
             SizedBox(height: MediaQuery.of(context).size.height / 50),
@@ -105,7 +116,7 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
                     ),
                   ],
                 ),
-                VerticalDivider(
+                const VerticalDivider(
                   color: Colors.amber,
                 ),
                 Column(
@@ -141,7 +152,7 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.location_on_outlined),
+                const Icon(Icons.location_on_outlined),
                 Text(
                   "Marília-SP",
                   style: GoogleFonts.raleway(

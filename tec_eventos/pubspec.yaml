@@ -55,6 +55,11 @@ dependencies:
   google_maps_flutter_web: ^0.5.0+1
   expansion_tile_card: ^3.0.0
   pinput: ^2.2.31
+  awesome_dialog: ^3.1.0
+  flutter_credit_card: ^3.0.7
+  permission_handler: ^10.4.3
+  image_cropper: ^5.0.0
+  image_picker: ^1.0.1
 
 flutter_native_splash:
     color: "#FFFFFF"
@@ -99,6 +104,7 @@ flutter:
     - assets/Icons/
     - assets/onBoarding/
     - assets/acesso/
+    - assets/bancos_pagamento/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/componentes/Perfil_user/menu_perfil/favoritos.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/pagamento/metodospagamento.dart';
 import 'package:tec_eventos/paginas/pag_inscricao_evento/google_maps.dart';
 
 class info_evento extends StatefulWidget {
@@ -145,7 +146,7 @@ class _info_eventoState extends State<info_evento> {
                         Navigator.push(
                             context,
                             PageTransition(
-                                child: GooglePage(),
+                                child: const GooglePage(),
                                 type: PageTransitionType.bottomToTop));
                       },
                       child: Row(
@@ -202,18 +203,27 @@ class _info_eventoState extends State<info_evento> {
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        height: 64,
-        decoration: BoxDecoration(
-            color: Cores.Azul42A5F5,
-            borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(15), topLeft: Radius.circular(15))),
-        child: Center(
-          child: Text(
-            "Inscrever-se",
-            style: GoogleFonts.raleway(
-                fontSize: 29, fontWeight: FontWeight.bold, color: Cores.Branco),
-            textAlign: TextAlign.center,
+      bottomNavigationBar: GestureDetector(
+        onTap: (){
+           Navigator.push(
+                            context,
+                            PageTransition(
+                                child: MetodosPagamento(),
+                                type: PageTransitionType.bottomToTop));
+        },
+        child: Container(
+          height: 64,
+          decoration: BoxDecoration(
+              color: Cores.Azul42A5F5,
+              borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(15), topLeft: Radius.circular(15))),
+          child: Center(
+            child: Text(
+              "Inscrever-se",
+              style: GoogleFonts.raleway(
+                  fontSize: 29, fontWeight: FontWeight.bold, color: Cores.Branco),
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
       ),
