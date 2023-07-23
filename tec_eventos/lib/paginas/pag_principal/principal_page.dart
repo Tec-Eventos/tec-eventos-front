@@ -29,14 +29,14 @@ class _PrincipalPageState extends State<PrincipalPage> {
   @override
   Widget build(BuildContext context) {
     //responsividades - Largura e Altura
-    double displayWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
-    double displayHeight = MediaQuery
-        .of(context)
-        .size
-        .height;
+    // double displayWidth = MediaQuery
+    //     .of(context)
+    //     .size
+    //     .width;
+    // double displayHeight = MediaQuery
+    //     .of(context)
+    //     .size
+    //     .height;
 
 
     return ListView(

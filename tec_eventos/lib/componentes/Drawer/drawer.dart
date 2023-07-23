@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +6,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/paginas/all_pages.dart';
+import 'package:tec_eventos/paginas/eventos_inscritos/eventos_inscritos.dart';
 import 'package:tec_eventos/paginas/perfil/perfil.dart';
 
 class DrawerPages extends StatefulWidget {
@@ -19,7 +19,6 @@ class DrawerPages extends StatefulWidget {
 class _DrawerPagesState extends State<DrawerPages> {
   int seguindo = 115;
   int seguidores = 2000;
-
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +36,6 @@ class _DrawerPagesState extends State<DrawerPages> {
         children: [
           Container(
             height: 260,
-
-
 
             //widget para o cabeçalho do Menu/Drawer
             child: UserAccountsDrawerHeader(
@@ -59,12 +56,10 @@ class _DrawerPagesState extends State<DrawerPages> {
                       PageTransition(
                           child: const Perfil(),
                           type: PageTransitionType.rightToLeft));
-
                 },
 
                 //imagem do perfil
                 child: const CircleAvatar(
-
                   radius: 50.0,
                   backgroundImage: AssetImage(
                     'assets/imgPerfil.png',
@@ -81,7 +76,6 @@ class _DrawerPagesState extends State<DrawerPages> {
                     fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
-
 
               //profissão do usuário, seus seguidores e quem ele está seguindo
               accountEmail: Padding(
@@ -123,97 +117,127 @@ class _DrawerPagesState extends State<DrawerPages> {
               ),
             ),
           ),
+          Column(
+            children: [
+              //item das medalhas
+              const MenuOptionsAssetIcon(
+                  icone: "assets/Icons/medalhas.png",
+                  opcao: "Medalhas",
+                  pagina: 2),
 
-              const Column(
-                 children: [
-                    MenuOptionsAssetIcon(icone: "assets/Icons/medalhas.png", opcao: "Medalhas", pagina: 2,),
-                    MenuOptions(icone: Icons.confirmation_num_outlined, opcao: "Meus Eventos", pagina: 1),
-                    MenuOptionsAssetIcon(icone: "assets/Icons/configuracao.png", opcao: "Configurações", pagina: 4,),
-                    MenuOptions(icone: Icons.favorite_border, opcao: "Favoritos", pagina: 0),
+              //item dos eventos que o usuário participou
+              ListTile(
+                leading: const Icon(Icons.confirmation_num_outlined,
+                    color: Colors.black),
+                title: Text("Meus Eventos",
+                    style: GoogleFonts.inter(fontSize: 12)),
+                trailing:
+                    const Icon(Icons.arrow_forward_ios_outlined, size: 12),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: const EventosInscritos(),
+                          type: PageTransitionType.rightToLeft));
+                },
+              ),
 
-                 ],
-               ),
+              //item das configurações
+              const MenuOptionsAssetIcon(
+                icone: "assets/Icons/configuracao.png",
+                opcao: "Configurações",
+                pagina: 4,
+              ),
 
+              //item dos eventos favoritados
+              const MenuOptions(
+                  icone: Icons.favorite_border, opcao: "Favoritos", pagina: 0),
+            ],
+          ),
           const SizedBox(
-                  height: 60,
-                ),
-
-                Column(
+            height: 60,
+          ),
+          Column(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.brightness_6_outlined,
+                    color: Colors.black),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ListTile(
-                      leading: const Icon(Icons.brightness_6_outlined, color: Colors.black),
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Modo Escuro", style: GoogleFonts.inter(fontSize: 12)),
-                          SizedBox(
-                            height: 40,
-                            child: LiteRollingSwitch(
-                              width: 80,
-                              value: true,
-                              textOn: "",
-                              textOff: "",
-                              colorOn: Cores.AzulClaro,
-                              colorOff: Cores.AzulCinzento,
-                              iconOn: Icons.dark_mode_outlined,
-                              iconOff: Icons.sunny,
-                              textSize: 12,
-                              onChanged: (bool state) {},
-                              onDoubleTap: () {},
-                              onTap: () {
-
-                              },
-                              onSwipe: () {},
-                            ),
-                          )
-                        ],
+                    Text("Modo Escuro", style: GoogleFonts.inter(fontSize: 12)),
+                    SizedBox(
+                      height: 40,
+                      child: LiteRollingSwitch(
+                        width: 80,
+                        value: true,
+                        textOn: "",
+                        textOff: "",
+                        colorOn: Cores.AzulClaro,
+                        colorOff: Cores.AzulCinzento,
+                        iconOn: Icons.dark_mode_outlined,
+                        iconOff: Icons.sunny,
+                        textSize: 12,
+                        onChanged: (bool state) {},
+                        onDoubleTap: () {},
+                        onTap: () {},
+                        onSwipe: () {},
                       ),
-                      onTap: () async {
-                        final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-                        final SharedPreferences prefs = await _prefs;
-
-                        final bool? modoEscuro = prefs.getBool('modo_escuro');
-
-                        if(modoEscuro == true){
-                          prefs.setBool("modoEscuro", false);
-                        }
-                        else{
-                          prefs.setBool("modoEscuro", true);
-                        }
-                        // Navigator.of(context).push(
-                        //   MaterialPageRoute(builder: (_) =>),
-                        // );
-                      },
-                    ),
-                    ListTile(
-                      leading: const Icon(Icons.exit_to_app_outlined, color: Colors.black),
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [ Text("Sair", style: GoogleFonts.inter(fontSize: 12)),],
-                      ),
-                      onTap: () {
-                        confirmacao(context);
-                      },
-                    ),
+                    )
                   ],
                 ),
+                onTap: () async {
+                  final Future<SharedPreferences> _prefs =
+                      SharedPreferences.getInstance();
+                  final SharedPreferences prefs = await _prefs;
 
+                  final bool? modoEscuro = prefs.getBool('modo_escuro');
 
-                Container(
-                  margin: const EdgeInsets.only(left: 17, top: 70),
-                  alignment: Alignment.bottomLeft,
-                  height: 43,
-                  child: Image.asset("assets/t!e_logo.png"),
+                  if (modoEscuro == true) {
+                    prefs.setBool("modoEscuro", false);
+                  } else {
+                    prefs.setBool("modoEscuro", true);
+                  }
+                  // Navigator.of(context).push(
+                  //   MaterialPageRoute(builder: (_) =>),
+                  // );
+                },
+              ),
+              ListTile(
+                leading:
+                    const Icon(Icons.exit_to_app_outlined, color: Colors.black),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Sair", style: GoogleFonts.inter(fontSize: 12)),
+                  ],
                 ),
-              ],
-            ),
+                onTap: () {
+                  confirmacao(context);
+                },
+              ),
+            ],
+          ),
+          Container(
+            margin: const EdgeInsets.only(left: 17, top: 70),
+            alignment: Alignment.bottomLeft,
+            height: 43,
+            child: Image.asset("assets/t!e_logo.png"),
+          ),
+        ],
+      ),
     );
   }
 }
 
-
+//opções do Drawer, só que com os icones padrões do flutter
 class MenuOptions extends StatelessWidget {
-  const MenuOptions({Key? key, required this.icone, required this.opcao, required this.pagina}) : super(key: key);
+  const MenuOptions(
+      {Key? key,
+      required this.icone,
+      required this.opcao,
+      required this.pagina})
+      : super(key: key);
 
   final IconData icone;
   final String opcao;
@@ -221,17 +245,10 @@ class MenuOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return   ListTile(
-      leading: Icon(
-        icone, color: Colors.black
-      ),
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(opcao, style: GoogleFonts.inter(fontSize: 12)),
-          const Icon(Icons.arrow_forward_ios_outlined, size: 12),
-        ],
-      ),
+    return ListTile(
+      leading: Icon(icone, color: Colors.black),
+      title: Text(opcao, style: GoogleFonts.inter(fontSize: 12)),
+      trailing: const Icon(Icons.arrow_forward_ios_outlined, size: 12),
       onTap: () {
         Navigator.push(
             context,
@@ -243,8 +260,14 @@ class MenuOptions extends StatelessWidget {
   }
 }
 
+//opções do Drawer, só que com os icones de acordo com imagem
 class MenuOptionsAssetIcon extends StatelessWidget {
-  const MenuOptionsAssetIcon({Key? key, required this.icone, required this.opcao, required this.pagina}) : super(key: key);
+  const MenuOptionsAssetIcon(
+      {Key? key,
+      required this.icone,
+      required this.opcao,
+      required this.pagina})
+      : super(key: key);
   final String icone;
   final String opcao;
   final int pagina;
@@ -253,13 +276,8 @@ class MenuOptionsAssetIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: ImageIcon(AssetImage(icone), color: Cores.Preto),
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(opcao, style: GoogleFonts.inter(fontSize: 12)),
-          const Icon(Icons.arrow_forward_ios_outlined, size: 12),
-        ],
-      ),
+      title: Text(opcao, style: GoogleFonts.inter(fontSize: 12)),
+      trailing: const Icon(Icons.arrow_forward_ios_outlined, size: 12),
       onTap: () {
         Navigator.push(
             context,
@@ -270,9 +288,6 @@ class MenuOptionsAssetIcon extends StatelessWidget {
     );
   }
 }
-
-
-
 
 confirmacao(BuildContext context) {
   return showDialog(
