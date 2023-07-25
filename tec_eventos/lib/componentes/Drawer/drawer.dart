@@ -137,7 +137,9 @@ class _DrawerPagesState extends State<DrawerPages> {
                   Navigator.push(
                       context,
                       PageTransition(
-                          child: const EventosInscritos(),
+                          child: EventosInscritos(
+                            paginaAtual: 1,
+                          ),
                           type: PageTransitionType.rightToLeft));
                 },
               ),

@@ -3,13 +3,30 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tec_eventos/cores.dart';
 
 class EventosInscritos extends StatefulWidget {
-  const EventosInscritos({super.key});
+  EventosInscritos({super.key, required this.paginaAtual});
+
+  int paginaAtual = 0;
 
   @override
   State<EventosInscritos> createState() => _EventosInscritosState();
 }
 
 class _EventosInscritosState extends State<EventosInscritos> {
+  late PageController _pageController;
+
+  //controle das páginas
+  @override
+  void initState() {
+    _pageController = PageController(initialPage: widget.paginaAtual);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,9 +37,47 @@ class _EventosInscritosState extends State<EventosInscritos> {
           //appbar, ou seja, parte superior
           const AppBarMyEvents(),
         ],
-        body: Container(),
+        body: PageView.builder(
+            itemCount: listaEventosGeral.length,
+            controller: _pageController,
+            onPageChanged: (index) {
+              setState(() {
+                widget.paginaAtual = index;
+              });
+            },
+            itemBuilder: (context, index) =>
+                Testes(nome: listaEventosGeral[index])),
       ),
     );
+  }
+}
+
+List<Widget> listaEventosGeral = [
+  Testes(
+      nome: Container(
+    height: 200,
+    color: Colors.amber,
+  )),
+  Testes(
+      nome: Container(
+    height: 200,
+    color: Colors.green,
+  ))
+];
+
+class Testes extends StatefulWidget {
+  const Testes({super.key, required this.nome});
+
+  final Widget nome;
+
+  @override
+  State<Testes> createState() => _TestesState();
+}
+
+class _TestesState extends State<Testes> {
+  @override
+  Widget build(BuildContext context) {
+    return widget.nome;
   }
 }
 
@@ -72,39 +127,54 @@ class _AppBarMyEventsState extends State<AppBarMyEvents> {
               color: Cores.Preto,
             ))
       ],
+      bottom: const PreferredSize(
+          preferredSize: Size.square(50),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              OptionMyEvents(icon: Icons.timer_outlined, nome: "Pendentes"),
+              OptionMyEvents(
+                  icon: Icons.check_circle_outline_rounded, nome: "Concluidos")
+            ],
+          )),
+    );
+  }
+}
 
-      bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(10),
-          child: Container(
-              child: Row(
-            children: [Text("oi"), Text("oi")],
-          ))),
+class OptionMyEvents extends StatelessWidget {
+  const OptionMyEvents({super.key, required this.icon, required this.nome});
 
-      // bottom: PreferredSize(
-      //     preferredSize: const Size.square(100),
-      //     child: Column(
-      //       mainAxisAlignment: MainAxisAlignment.center,
-      //       children: [
-      //         Row(
-      //           children: [
-      //             ListTile(
-      //               leading: Icon(
-      //                 Icons.access_time,
-      //                 size: 19,
-      //                 color: Cores.Preto,
-      //               ),
-      //               title: Text(
-      //                 "Pendentes",
-      //                 style: GoogleFonts.raleway(
-      //                     fontWeight: FontWeight.w900,
-      //                     fontSize: 17,
-      //                     color: Cores.Preto),
-      //               ),
-      //             )
-      //           ],
-      //         ),
-      //       ],
-      //     ))
+  final IconData icon;
+  final String nome;
+
+  @override
+  Widget build(BuildContext context) {
+    double displayWidth = MediaQuery.of(context).size.width;
+
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      height: 50,
+      width: displayWidth / 2,
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(color: Cores.Cinza_mais_claro)),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            size: 20,
+            color: Cores.Preto,
+          ),
+          const SizedBox(width: 10),
+          Text(
+            nome,
+            style: GoogleFonts.raleway(
+                fontSize: 17, fontWeight: FontWeight.bold, color: Cores.Preto),
+          )
+        ],
+      ),
     );
   }
 }

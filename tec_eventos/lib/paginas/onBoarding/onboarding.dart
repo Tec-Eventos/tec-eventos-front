@@ -5,7 +5,6 @@ import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/paginas/acesso/login.dart';
 
-
 class OnBoarding extends StatefulWidget {
   const OnBoarding({Key? key}) : super(key: key);
 
@@ -37,15 +36,15 @@ class _OnBoardingState extends State<OnBoarding> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: PageView.builder(
-          itemCount: demo_data.length,
+          itemCount: demoData.length,
           controller: _pageController,
           onPageChanged: (index) {
             setState(() {
               _pageIndex = index;
             });
           },
-          itemBuilder: (context, index) => TelaBoarding(demo_data[index].image,
-              demo_data[index].titulo, demo_data[index].descricao, context)),
+          itemBuilder: (context, index) => telaBoarding(demoData[index].image,
+              demoData[index].titulo, demoData[index].descricao, context)),
 
       //parte de baixo, com os botões e etapas passadas
       bottomNavigationBar: Padding(
@@ -59,7 +58,7 @@ class _OnBoardingState extends State<OnBoarding> {
                 children: [
                   //as bolinhas para indicar a etapa, lista gerada para passar a informação para a classe DotIndicator
                   ...List.generate(
-                      demo_data.length,
+                      demoData.length,
                       (index) => Padding(
                             padding: const EdgeInsets.only(right: 4),
                             child: DotIndicator(
@@ -76,8 +75,6 @@ class _OnBoardingState extends State<OnBoarding> {
               ),
       ),
     );
-
-
   }
 }
 
@@ -89,7 +86,7 @@ class Onboard {
 }
 
 //coisas que devem aparecer em cada etapa
-final List<Onboard> demo_data = [
+final List<Onboard> demoData = [
   //tutorial 1
   Onboard(
     image: 'assets/onBoarding/conecte.png',
@@ -119,12 +116,17 @@ final List<Onboard> demo_data = [
 ];
 
 //classe para as informações de cada tutorial
-TelaBoarding(String image, String titulo, String descricao, context) {
+telaBoarding(String image, String titulo, String descricao, context) {
   return ListView(
     children: [
       Column(
         children: [
-          Image.asset(image, width: 400, height: 450, fit: BoxFit.contain,),
+          Image.asset(
+            image,
+            width: 400,
+            height: 450,
+            fit: BoxFit.contain,
+          ),
           const SizedBox(height: 20),
           Text(
             titulo,
@@ -135,7 +137,6 @@ TelaBoarding(String image, String titulo, String descricao, context) {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 30),
-
           Text(
             descricao,
             style: GoogleFonts.raleway(
@@ -164,12 +165,12 @@ class DotIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 100),
+      duration: const Duration(milliseconds: 100),
       height: isActive ? 24 : 5,
       width: isActive ? 6 : 15,
       decoration: BoxDecoration(
         color: isActive ? Cores.AzulClaro : Cores.AzulCinzento,
-        borderRadius: BorderRadius.all(Radius.circular(12)),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
     );
   }
@@ -190,11 +191,11 @@ class _Botao_ProximoState extends State<Botao_Proximo> {
         _pageController.nextPage(
             duration: const Duration(milliseconds: 300), curve: Curves.ease);
       },
-      child: const Icon(Icons.arrow_forward_ios, color: Colors.white),
       style: ElevatedButton.styleFrom(
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(15.0))),
       ),
+      child: const Icon(Icons.arrow_forward_ios, color: Colors.white),
     );
   }
 }
@@ -222,18 +223,18 @@ class _BotaoComecarState extends State<BotaoComecar> {
                     child: const LoginPage(),
                     type: PageTransitionType.rightToLeft));
           },
-          child: Text(
-            'COMEÇAR',
-            style: GoogleFonts.inter(
-              fontSize: 24,
-            ),
-          ),
           style: ElevatedButton.styleFrom(
             backgroundColor: Cores.Azul42A5F5,
             padding:
                 const EdgeInsets.only(right: 35, left: 35, top: 10, bottom: 10),
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(15.0))),
+          ),
+          child: Text(
+            'COMEÇAR',
+            style: GoogleFonts.inter(
+              fontSize: 24,
+            ),
           ),
         )
       ],
