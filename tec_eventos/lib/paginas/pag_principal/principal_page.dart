@@ -5,7 +5,6 @@ import 'package:tec_eventos/componentes/Cards/eventos_inscritos/cards_eventos_in
 import 'package:tec_eventos/componentes/Cards/eventos_recomendados/cards_recomendados.dart';
 import 'package:tec_eventos/cores.dart';
 
-
 class PrincipalPage extends StatefulWidget {
   const PrincipalPage({Key? key}) : super(key: key);
 
@@ -24,7 +23,6 @@ bool palestras = true;
 bool competicoes = false;
 bool bootcamp = false;
 
-
 class _PrincipalPageState extends State<PrincipalPage> {
   @override
   Widget build(BuildContext context) {
@@ -37,7 +35,6 @@ class _PrincipalPageState extends State<PrincipalPage> {
     //     .of(context)
     //     .size
     //     .height;
-
 
     return ListView(
         padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 23),
@@ -53,15 +50,12 @@ class _PrincipalPageState extends State<PrincipalPage> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: <Widget>[
-
-
                       FiltragemEventos(false, !competicoes, false,
                           Icons.school_outlined, competicoes),
                       FiltragemEventos(!palestras, false, false,
                           Icons.school_outlined, palestras),
                       FiltragemEventos(false, false, !bootcamp,
                           Icons.school_outlined, bootcamp),
-
                     ],
                   ),
                 ),
@@ -88,7 +82,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                           dia_realizacao: "12/02/2222",
                           horas: "13h00",
                           imagemEvento:
-                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKeOAXzBhqQCDcid2tD1HJiWUzECWBpuU_ozXny7mC&s",
+                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKeOAXzBhqQCDcid2tD1HJiWUzECWBpuU_ozXny7mC&s",
                           organizacao: "assets/UnivemIMG.png"),
                       CardEventosInscritos(
                           nomeEvento: "Festa de Formatura",
@@ -96,7 +90,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                           dia_realizacao: "15/12/2023",
                           horas: "19h00",
                           imagemEvento:
-                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZh_ed8ebxamWQoJtWg8cF1fOvOYIEr0Tkaw17UpGV1RGydNI3TxyfoqwNTbvOxrpOMN0&usqp=CAU",
+                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZh_ed8ebxamWQoJtWg8cF1fOvOYIEr0Tkaw17UpGV1RGydNI3TxyfoqwNTbvOxrpOMN0&usqp=CAU",
                           organizacao: "assets/UnivemIMG.png"),
                       CardEventosInscritos(
                           nomeEvento: "Visita Técnica",
@@ -104,7 +98,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                           dia_realizacao: "20/05/2023",
                           horas: "7h10",
                           imagemEvento:
-                          "https://i0.wp.com/eztravel.com.br/wp-content/uploads/2022/01/elizeu-dias-seq9dyzse6c-unsplash.jpeg",
+                              "https://i0.wp.com/eztravel.com.br/wp-content/uploads/2022/01/elizeu-dias-seq9dyzse6c-unsplash.jpeg",
                           organizacao: "assets/UnivemIMG.png")
                     ],
                   ),
@@ -216,17 +210,47 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     ),
                   ],
                 ),
-              )
+              ),
+
+              Card(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Image.asset(
+                      "assets/evento1.png",
+                      fit: BoxFit.fitWidth,
+                      height: 166,
+                    ),
+                    ListTile(
+                      leading: Text("Mês 17"),
+                      title: Text("Evento tal, que vai acontecer ali e aqui"),
+                      trailing: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.amber),
+                            // borderRadius: BorderRadius.all()
+                            ),
+                       
+                        child: IconButton(
+                            color: Colors.amber,
+                            highlightColor: Colors.blueAccent,
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.notifications_none_outlined,
+                            )),
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ],
           ),
         ]);
   }
 
-
   //filtragem
   FiltragemEventos(bool palestrasBool, bool compBool, bool bootcampBool,
       IconData icon, bool optionTrue) {
-     return Padding(
+    return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
       child: GestureDetector(
         onTap: () {
@@ -244,13 +268,10 @@ class _PrincipalPageState extends State<PrincipalPage> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50.0),
                 border: Border.all(
-                    color: optionTrue
-                        ? Colors.transparent
-                        : Cores.Azul42A5F5),
+                    color: optionTrue ? Colors.transparent : Cores.Azul42A5F5),
 
                 //cor de fundo
-                color:
-                    optionTrue ? Cores.Azul42A5F5 : Colors.transparent,
+                color: optionTrue ? Cores.Azul42A5F5 : Colors.transparent,
               ),
               child: optionTrue
                   ? Column(
@@ -277,7 +298,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     )
                   : Icon(icon, color: Cores.Azul42A5F5, size: 30)),
         ]),
-            ),
+      ),
     );
   }
 }

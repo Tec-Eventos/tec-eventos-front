@@ -53,11 +53,22 @@ class _EventosInscritosState extends State<EventosInscritos> {
 }
 
 List<Widget> listaEventosGeral = [
-  Testes(
-      nome: Container(
-    height: 200,
-    color: Colors.amber,
-  )),
+  Card(
+    child: Column(
+      children: [
+        Image.asset("assets/evento1.png"),
+        ListTile(
+          leading: Text("Mês 17"),
+          title: Text("Evento tal, que vai acontecer ali e aqui"),
+          trailing: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.notifications_none_outlined,
+              )),
+        )
+      ],
+    ),
+  ),
   Testes(
       nome: Container(
     height: 200,
@@ -91,7 +102,7 @@ class AppBarMyEvents extends StatefulWidget {
 class _AppBarMyEventsState extends State<AppBarMyEvents> {
   @override
   Widget build(BuildContext context) {
-    bool campo_pesquisa = true;
+    // bool campo_pesquisa = true;
     return SliverAppBar(
       elevation: 0,
       floating: true,

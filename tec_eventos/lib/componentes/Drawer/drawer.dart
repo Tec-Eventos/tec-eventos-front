@@ -138,7 +138,7 @@ class _DrawerPagesState extends State<DrawerPages> {
                       context,
                       PageTransition(
                           child: EventosInscritos(
-                            paginaAtual: 1,
+                            paginaAtual: 0,
                           ),
                           type: PageTransitionType.rightToLeft));
                 },
