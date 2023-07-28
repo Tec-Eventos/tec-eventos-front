@@ -1,4 +1,4 @@
-import 'dart:ui';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -14,7 +14,7 @@ class OnBoarding extends StatefulWidget {
 
 late PageController _pageController;
 int _pageIndex = 0;
-bool isLastPage = false;
+
 
 class _OnBoardingState extends State<OnBoarding> {
   //controle das páginas
@@ -70,7 +70,7 @@ class _OnBoardingState extends State<OnBoarding> {
                   const Spacer(),
 
                   //botão de passar para a próxima página
-                  const Botao_Proximo(),
+                  const BotaoProximo(),
                 ],
               ),
       ),
@@ -176,14 +176,14 @@ class DotIndicator extends StatelessWidget {
   }
 }
 
-class Botao_Proximo extends StatefulWidget {
-  const Botao_Proximo({Key? key}) : super(key: key);
+class BotaoProximo extends StatefulWidget {
+  const BotaoProximo({Key? key}) : super(key: key);
 
   @override
-  State<Botao_Proximo> createState() => _Botao_ProximoState();
+  State<BotaoProximo> createState() => _BotaoProximoState();
 }
 
-class _Botao_ProximoState extends State<Botao_Proximo> {
+class _BotaoProximoState extends State<BotaoProximo> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(

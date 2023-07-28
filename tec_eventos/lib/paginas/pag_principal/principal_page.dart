@@ -4,6 +4,7 @@ import 'package:tec_eventos/componentes/Cards/eventos_em_alta/cards_eventos_alta
 import 'package:tec_eventos/componentes/Cards/eventos_inscritos/cards_eventos_inscritos.dart';
 import 'package:tec_eventos/componentes/Cards/eventos_recomendados/cards_recomendados.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/paginas/notificacao_page/notification_page.dart';
 
 class PrincipalPage extends StatefulWidget {
   const PrincipalPage({Key? key}) : super(key: key);
@@ -22,6 +23,7 @@ List<String> imagensEventos = [
 bool palestras = true;
 bool competicoes = false;
 bool bootcamp = false;
+bool notificationButton = false;
 
 class _PrincipalPageState extends State<PrincipalPage> {
   @override
@@ -212,36 +214,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                 ),
               ),
 
-              Card(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Image.asset(
-                      "assets/evento1.png",
-                      fit: BoxFit.fitWidth,
-                      height: 166,
-                    ),
-                    ListTile(
-                      leading: Text("Mês 17"),
-                      title: Text("Evento tal, que vai acontecer ali e aqui"),
-                      trailing: Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.amber),
-                            // borderRadius: BorderRadius.all()
-                            ),
-                       
-                        child: IconButton(
-                            color: Colors.amber,
-                            highlightColor: Colors.blueAccent,
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.notifications_none_outlined,
-                            )),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+         
             ],
           ),
         ]);
@@ -302,3 +275,4 @@ class _PrincipalPageState extends State<PrincipalPage> {
     );
   }
 }
+

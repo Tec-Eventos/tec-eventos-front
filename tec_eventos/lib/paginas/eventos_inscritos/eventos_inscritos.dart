@@ -46,49 +46,108 @@ class _EventosInscritosState extends State<EventosInscritos> {
               });
             },
             itemBuilder: (context, index) =>
-                Testes(nome: listaEventosGeral[index])),
+                Paginas(pagina: listaEventosGeral[index])),
       ),
     );
   }
 }
 
 List<Widget> listaEventosGeral = [
-  Card(
-    child: Column(
-      children: [
-        Image.asset("assets/evento1.png"),
-        ListTile(
-          leading: Text("Mês 17"),
-          title: Text("Evento tal, que vai acontecer ali e aqui"),
-          trailing: IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.notifications_none_outlined,
-              )),
-        )
-      ],
-    ),
-  ),
-  Testes(
-      nome: Container(
-    height: 200,
-    color: Colors.green,
-  ))
+  const EventosPendentes(),
+  const EventosConcluidos(),
 ];
 
-class Testes extends StatefulWidget {
-  const Testes({super.key, required this.nome});
-
-  final Widget nome;
+//pagina Pendentes
+class EventosPendentes extends StatefulWidget {
+  const EventosPendentes({Key? key}) : super(key: key);
 
   @override
-  State<Testes> createState() => _TestesState();
+  _EventosPendentesState createState() => _EventosPendentesState();
 }
 
-class _TestesState extends State<Testes> {
+class _EventosPendentesState extends State<EventosPendentes> {
   @override
   Widget build(BuildContext context) {
-    return widget.nome;
+    return ListView(
+      scrollDirection: Axis.vertical,
+      children: [
+        Card(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Image.asset(
+                "assets/evento1.png",
+                fit: BoxFit.fitWidth,
+                height: 166,
+              ),
+              ListTile(
+                minVerticalPadding: 20,
+                tileColor: Colors.transparent,
+                leading: Text(
+                  "Mês  \n 17",
+                  style: GoogleFonts.raleway(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      color: Cores.Preto),
+                ),
+                title: Text("Evento, que vai acontecer ali e aqui",
+                    style: GoogleFonts.inter(
+                        fontSize: 18, fontWeight: FontWeight.w300)),
+                trailing: GestureDetector(
+                  onTap: () {
+                    // notificationButton = botaoIcone;
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 100),
+                    decoration: BoxDecoration(
+                        color: Cores.Branco,
+                        border: Border.all(color: Cores.Azul42A5F5),
+                        borderRadius: BorderRadius.circular(100)),
+                    child: IconButton(
+                        onPressed: () {},
+                        color: Cores.Azul42A5F5,
+                        icon: Icon(Icons.notifications_none_outlined)),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+//pagina Concluidos
+class EventosConcluidos extends StatefulWidget {
+  const EventosConcluidos({Key? key}) : super(key: key);
+
+  @override
+  _EventosConcluidosState createState() => _EventosConcluidosState();
+}
+
+class _EventosConcluidosState extends State<EventosConcluidos> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Cores.Amarelo,
+    );
+  }
+}
+
+class Paginas extends StatefulWidget {
+  const Paginas({super.key, required this.pagina});
+
+  final Widget pagina;
+
+  @override
+  State<Paginas> createState() => _PaginasState();
+}
+
+class _PaginasState extends State<Paginas> {
+  @override
+  Widget build(BuildContext context) {
+    return widget.pagina;
   }
 }
 
@@ -152,16 +211,21 @@ class _AppBarMyEventsState extends State<AppBarMyEvents> {
   }
 }
 
-class OptionMyEvents extends StatelessWidget {
-  const OptionMyEvents({super.key, required this.icon, required this.nome});
+class OptionMyEvents extends StatefulWidget {
+  const OptionMyEvents({Key? key, required this.icon, required this.nome})
+      : super(key: key);
 
   final IconData icon;
   final String nome;
 
   @override
+  _OptionMyEventsState createState() => _OptionMyEventsState();
+}
+
+class _OptionMyEventsState extends State<OptionMyEvents> {
+  @override
   Widget build(BuildContext context) {
     double displayWidth = MediaQuery.of(context).size.width;
-
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       height: 50,
@@ -174,13 +238,13 @@ class OptionMyEvents extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
-            icon,
+            widget.icon,
             size: 20,
             color: Cores.Preto,
           ),
           const SizedBox(width: 10),
           Text(
-            nome,
+            widget.nome,
             style: GoogleFonts.raleway(
                 fontSize: 17, fontWeight: FontWeight.bold, color: Cores.Preto),
           )

@@ -68,12 +68,12 @@ flutter_native_splash:
     ios: true
 
 flutter_icons:
-    image_path: "assets/t!e_logo.png"
+    image_path: "assets/tec_eventosLogo.png"
     ios: true
     remove_alpha_ios: true
     android: "launcher_icon"
     adaptive_icon_background: "#47bbec"
-    adaptive_icon_foreground: "assets/t!e_logo.png"
+    adaptive_icon_foreground: "assets/tec_eventosLogo.png"
 
 
 dev_dependencies:
