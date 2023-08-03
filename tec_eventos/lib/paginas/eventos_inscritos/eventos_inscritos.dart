@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 
 class EventosInscritos extends StatefulWidget {
@@ -35,7 +36,16 @@ class _EventosInscritosState extends State<EventosInscritos> {
         floatHeaderSlivers: true,
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           //appbar, ou seja, parte superior
-          const AppBarMyEvents(),
+          AppBarMyEvents(
+            pendentes: OptionMyEvents(
+                isActive: widget.paginaAtual == 0,
+                icon: Icons.timer_outlined,
+                nome: "Pendentes"),
+            concluidos: OptionMyEvents(
+                isActive: widget.paginaAtual == 1,
+                icon: Icons.check_circle_outline_rounded,
+                nome: "Concluidos"),
+          ),
         ],
         body: PageView.builder(
             itemCount: listaEventosGeral.length,
@@ -70,50 +80,7 @@ class _EventosPendentesState extends State<EventosPendentes> {
   Widget build(BuildContext context) {
     return ListView(
       scrollDirection: Axis.vertical,
-      children: [
-        Card(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Image.asset(
-                "assets/evento1.png",
-                fit: BoxFit.fitWidth,
-                height: 166,
-              ),
-              ListTile(
-                minVerticalPadding: 20,
-                tileColor: Colors.transparent,
-                leading: Text(
-                  "Mês  \n 17",
-                  style: GoogleFonts.raleway(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                      color: Cores.Preto),
-                ),
-                title: Text("Evento, que vai acontecer ali e aqui",
-                    style: GoogleFonts.inter(
-                        fontSize: 18, fontWeight: FontWeight.w300)),
-                trailing: GestureDetector(
-                  onTap: () {
-                    // notificationButton = botaoIcone;
-                  },
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 100),
-                    decoration: BoxDecoration(
-                        color: Cores.Branco,
-                        border: Border.all(color: Cores.Azul42A5F5),
-                        borderRadius: BorderRadius.circular(100)),
-                    child: IconButton(
-                        onPressed: () {},
-                        color: Cores.Azul42A5F5,
-                        icon: Icon(Icons.notifications_none_outlined)),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
+      children: const [CardPendentes(), CardPendentes(), CardPendentes()],
     );
   }
 }
@@ -129,8 +96,119 @@ class EventosConcluidos extends StatefulWidget {
 class _EventosConcluidosState extends State<EventosConcluidos> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Cores.Amarelo,
+    return ListView(
+      scrollDirection: Axis.vertical,
+      children: [
+        //card do evento que o usuário esteve presente
+        Card(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Image.asset(
+                "assets/evento1.png",
+                fit: BoxFit.fitWidth,
+                height: 166,
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30.0, vertical: 14),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("UnivemFest",
+                            style: GoogleFonts.raleway(
+                                fontSize: 17, fontWeight: FontWeight.bold)),
+                        ElevatedButton(
+                          onPressed: () {
+                            // Navigator.push(
+                            //     context,
+                            //     PageTransition(
+                            //         child: const LoginPage(),
+                            //         type: PageTransitionType.rightToLeft));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            backgroundColor: Cores.Branco,
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(color: Cores.Azul42A5F5),
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(7))),
+                          ),
+                          child: Text(
+                            'Questionário',
+                            style: GoogleFonts.inter(
+                                fontSize: 17, color: Cores.Azul42A5F5),
+                          ),
+                        )
+                      ],
+                    ),
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 100),
+                      decoration: BoxDecoration(
+                          color: Cores.Branco,
+                          border: Border.all(color: Cores.verde),
+                          borderRadius: BorderRadius.circular(100)),
+                      child: IconButton(
+                          onPressed: () {},
+                          color: Cores.verde,
+                          icon: const Icon(Icons.check)),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+
+        Card(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Image.asset(
+                "assets/evento1.png",
+                fit: BoxFit.fitWidth,
+                height: 166,
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30.0, vertical: 14),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("UnivemFest",
+                            style: GoogleFonts.raleway(
+                                fontSize: 17, fontWeight: FontWeight.bold)),
+                        Text("17",
+                            style: GoogleFonts.raleway(
+                                fontSize: 17, fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 100),
+                      decoration: BoxDecoration(
+                          color: Cores.Branco,
+                          border: Border.all(color: Cores.vermelho),
+                          borderRadius: BorderRadius.circular(100)),
+                      child: IconButton(
+                          onPressed: () {},
+                          color: Cores.vermelho,
+                          icon: const Icon(Icons.close)),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+
+        //card do evento que o usuário não esteve presente
+      ],
     );
   }
 }
@@ -152,7 +230,11 @@ class _PaginasState extends State<Paginas> {
 }
 
 class AppBarMyEvents extends StatefulWidget {
-  const AppBarMyEvents({super.key});
+  const AppBarMyEvents(
+      {super.key, required this.pendentes, required this.concluidos});
+
+  final Widget pendentes;
+  final Widget concluidos;
 
   @override
   State<AppBarMyEvents> createState() => _AppBarMyEventsState();
@@ -197,14 +279,13 @@ class _AppBarMyEventsState extends State<AppBarMyEvents> {
               color: Cores.Preto,
             ))
       ],
-      bottom: const PreferredSize(
-          preferredSize: Size.square(50),
+      bottom: PreferredSize(
+          preferredSize: const Size.square(50),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              OptionMyEvents(icon: Icons.timer_outlined, nome: "Pendentes"),
-              OptionMyEvents(
-                  icon: Icons.check_circle_outline_rounded, nome: "Concluidos")
+              widget.pendentes,
+              widget.concluidos,
             ],
           )),
     );
@@ -212,9 +293,11 @@ class _AppBarMyEventsState extends State<AppBarMyEvents> {
 }
 
 class OptionMyEvents extends StatefulWidget {
-  const OptionMyEvents({Key? key, required this.icon, required this.nome})
+  const OptionMyEvents(
+      {Key? key, required this.icon, required this.nome, this.isActive = false})
       : super(key: key);
 
+  final bool isActive;
   final IconData icon;
   final String nome;
 
@@ -231,7 +314,11 @@ class _OptionMyEventsState extends State<OptionMyEvents> {
       height: 50,
       width: displayWidth / 2,
       decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: Cores.Cinza_mais_claro)),
+        border: Border(
+            bottom: BorderSide(
+                color: widget.isActive
+                    ? Cores.Azul42A5F5
+                    : Cores.Cinza_mais_claro)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -240,7 +327,7 @@ class _OptionMyEventsState extends State<OptionMyEvents> {
           Icon(
             widget.icon,
             size: 20,
-            color: Cores.Preto,
+            color: widget.isActive ? Cores.Azul42A5F5 : Cores.Preto,
           ),
           const SizedBox(width: 10),
           Text(
@@ -248,6 +335,62 @@ class _OptionMyEventsState extends State<OptionMyEvents> {
             style: GoogleFonts.raleway(
                 fontSize: 17, fontWeight: FontWeight.bold, color: Cores.Preto),
           )
+        ],
+      ),
+    );
+  }
+}
+
+//Cards Eventos
+class CardPendentes extends StatefulWidget {
+  const CardPendentes({Key? key}) : super(key: key);
+
+  @override
+  _CardPendentesState createState() => _CardPendentesState();
+}
+
+class _CardPendentesState extends State<CardPendentes> {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Image.asset(
+            "assets/evento1.png",
+            fit: BoxFit.fitWidth,
+            height: 166,
+          ),
+          ListTile(
+            minVerticalPadding: 20,
+            tileColor: Colors.transparent,
+            leading: Text(
+              "Mês  \n 17",
+              style: GoogleFonts.raleway(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Cores.Preto),
+            ),
+            title: Text("Evento, que vai acontecer ali e aqui",
+                style: GoogleFonts.inter(
+                    fontSize: 18, fontWeight: FontWeight.w300)),
+            trailing: GestureDetector(
+              onTap: () {
+                // notificationButton = botaoIcone;
+              },
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 100),
+                decoration: BoxDecoration(
+                    color: Cores.Branco,
+                    border: Border.all(color: Cores.Azul42A5F5),
+                    borderRadius: BorderRadius.circular(100)),
+                child: IconButton(
+                    onPressed: () {},
+                    color: Cores.Azul42A5F5,
+                    icon: const Icon(Icons.notifications_none_outlined)),
+              ),
+            ),
+          ),
         ],
       ),
     );

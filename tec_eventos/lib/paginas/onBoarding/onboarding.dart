@@ -1,4 +1,3 @@
-
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -14,7 +13,6 @@ class OnBoarding extends StatefulWidget {
 
 late PageController _pageController;
 int _pageIndex = 0;
-
 
 class _OnBoardingState extends State<OnBoarding> {
   //controle das páginas
@@ -232,9 +230,7 @@ class _BotaoComecarState extends State<BotaoComecar> {
           ),
           child: Text(
             'COMEÇAR',
-            style: GoogleFonts.inter(
-              fontSize: 24,
-            ),
+            style: GoogleFonts.inter(fontSize: 24, color: Cores.Branco),
           ),
         )
       ],
