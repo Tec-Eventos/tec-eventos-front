@@ -19,7 +19,7 @@ class _Eventos_AltaState extends State<Eventos_Alta> {
       child: SizedBox(
         width: 285,
         child: Card(
-          margin: EdgeInsets.only(top: 20),
+          margin: const EdgeInsets.only(top: 20),
           shadowColor: Cores.Preto,
           borderOnForeground: false,
           clipBehavior: Clip.hardEdge,
@@ -50,12 +50,12 @@ class _Eventos_AltaState extends State<Eventos_Alta> {
                           color: Colors.blue,
                           borderRadius: BorderRadius.circular(50)),
                       child: Text(
-                          "Competição",
-                          style: GoogleFonts.raleway(
-                              fontSize: 12,
-                              color: Cores.Branco,
-                              fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
+                        "Competição",
+                        style: GoogleFonts.raleway(
+                            fontSize: 12,
+                            color: Cores.Branco,
+                            fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
@@ -68,12 +68,23 @@ class _Eventos_AltaState extends State<Eventos_Alta> {
                     children: [
                       //NOME DA INSTITUIÇÃO
                       SizedBox(
-                        child: Text(
-                          "Univem Fest",
-                          style: GoogleFonts.raleway(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Univem Fest",
+                              style: GoogleFonts.raleway(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                            Text(
+                              "Univem Fest",
+                              style: GoogleFonts.raleway(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       const SizedBox(height: 5),
@@ -117,15 +128,15 @@ class _Eventos_AltaState extends State<Eventos_Alta> {
                           ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   elevation: 2,
-                                  minimumSize: Size(100, 18),
+                                  minimumSize: const Size(100, 18),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(7))),
                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        child: const info_evento(),
-                                        type: PageTransitionType.bottomToTop));
+                                // Navigator.push(
+                                //     context,
+                                // PageTransition(
+                                //     // child: const info_evento(),
+                                //     type: PageTransitionType.bottomToTop));
                               },
                               child: Text(
                                 "Ver mais",

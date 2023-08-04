@@ -3,14 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/paginas/perfil/perfil.dart';
 
-class AppBarPages extends StatefulWidget {
+class AppBarPages extends StatelessWidget {
   const AppBarPages({Key? key}) : super(key: key);
 
-  @override
-  State<AppBarPages> createState() => _AppBarPagesState();
-}
-
-class _AppBarPagesState extends State<AppBarPages> {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(

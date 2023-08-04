@@ -8,16 +8,16 @@ class CardEventosInscritos extends StatefulWidget {
   CardEventosInscritos(
       {Key? key,
       required this.nomeEvento,
-      required this.dias_faltam,
-      required this.dia_realizacao,
+      required this.diasFaltam,
+      required this.diaRealizacao,
       required this.horas,
       required this.imagemEvento,
       required this.organizacao})
       : super(key: key);
 
   String nomeEvento,
-      dias_faltam,
-      dia_realizacao,
+      diasFaltam,
+      diaRealizacao,
       horas,
       imagemEvento,
       organizacao;
@@ -36,7 +36,7 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
         child:
             //CUSTOMIZAÇÃO DO CARD
             Card(
-          margin: EdgeInsets.only(top: 20),
+          margin: const EdgeInsets.only(top: 20),
           shadowColor: Cores.Preto,
           borderOnForeground: false,
           clipBehavior: Clip.hardEdge,
@@ -69,7 +69,7 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
 
                       //DIA QUE VAI ROLAR O EVENTO
                       Text(
-                        widget.dias_faltam,
+                        widget.diasFaltam,
                         style: GoogleFonts.raleway(
                           fontWeight: FontWeight.bold,
                           fontSize: 13,
@@ -81,7 +81,7 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
                       //DIA EM ESPECÍFICO, COM DATA E HORÁRIO
 
                       Text(
-                        widget.dia_realizacao,
+                        widget.diaRealizacao,
                         style: GoogleFonts.inter(
                           fontSize: 9,
                         ),
@@ -97,14 +97,19 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               elevation: 2,
-                              minimumSize: Size(87, 17),
+                              minimumSize: const Size(87, 17),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(7))),
                           onPressed: () {
                             Navigator.push(
                                 context,
                                 PageTransition(
-                                    child: const info_evento(),
+                                    child: info_evento(
+                                        imagemEvento: widget.imagemEvento,
+                                        imagemOrganizacao: widget.organizacao,
+                                        diaRealizacao: widget.diaRealizacao,
+                                        nomeEvento: widget.nomeEvento,
+                                        horarioRealizacao: widget.horas),
                                     type: PageTransitionType.bottomToTop));
                           },
                           child: Text(
@@ -140,6 +145,8 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
                             ),
                       ],
                     ),
+
+                    //imagem da organização do evento
                     child: Image.asset(
                       widget.organizacao,
                       height: 16,

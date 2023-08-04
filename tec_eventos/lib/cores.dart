@@ -49,7 +49,7 @@ class Cores {
   static Color Cinza = const Color(0xffB8B3AF);
   static Color Cinza_mais_escuro = const Color(0xff4D4A4A);
   static Color Cinza_mais_claro = const Color(0xffD1CFCF);
-
+  static Color cinza6A6666 = const Color(0xff6A6666);
   //Cores do pódio
   static Color Bronze = const Color(0xffCD7F32);
   static Color Amarelo = const Color(0xffFFE533);

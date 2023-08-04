@@ -7,7 +7,6 @@ class EventosInscritos extends StatefulWidget {
   EventosInscritos({super.key, required this.paginaAtual});
 
   int paginaAtual = 0;
-
   @override
   State<EventosInscritos> createState() => _EventosInscritosState();
 }
@@ -37,14 +36,24 @@ class _EventosInscritosState extends State<EventosInscritos> {
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           //appbar, ou seja, parte superior
           AppBarMyEvents(
-            pendentes: OptionMyEvents(
-                isActive: widget.paginaAtual == 0,
-                icon: Icons.timer_outlined,
-                nome: "Pendentes"),
-            concluidos: OptionMyEvents(
-                isActive: widget.paginaAtual == 1,
-                icon: Icons.check_circle_outline_rounded,
-                nome: "Concluidos"),
+            pendentes: GestureDetector(
+              onTap: () {
+                _pageController.jumpToPage(widget.paginaAtual = 0);
+              },
+              child: OptionMyEvents(
+                  isActive: widget.paginaAtual == 0,
+                  icon: Icons.timer_outlined,
+                  nome: "Pendentes"),
+            ),
+            concluidos: GestureDetector(
+              onTap: () {
+                _pageController.jumpToPage(widget.paginaAtual = 1);
+              },
+              child: OptionMyEvents(
+                  isActive: widget.paginaAtual == 1,
+                  icon: Icons.check_circle_outline_rounded,
+                  nome: "Concluidos"),
+            ),
           ),
         ],
         body: PageView.builder(

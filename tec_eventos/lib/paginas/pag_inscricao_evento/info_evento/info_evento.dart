@@ -7,49 +7,35 @@ import 'package:tec_eventos/pagamento/metodospagamento.dart';
 import 'package:tec_eventos/paginas/pag_inscricao_evento/google_maps.dart';
 
 class info_evento extends StatefulWidget {
-  const info_evento({super.key});
+  const info_evento(
+      {super.key,
+      required this.imagemEvento,
+      required this.imagemOrganizacao,
+      required this.diaRealizacao,
+      required this.nomeEvento,
+      required this.horarioRealizacao});
+
+  final String imagemEvento;
+  final String imagemOrganizacao;
+  final String diaRealizacao;
+  final String horarioRealizacao;
+  final String nomeEvento;
 
   @override
   State<info_evento> createState() => _info_eventoState();
 }
 
 class _info_eventoState extends State<info_evento> {
-
-
   @override
   Widget build(BuildContext context) {
     double displayWidth = MediaQuery.of(context).size.width;
-    double displayHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: NestedScrollView(
         floatHeaderSlivers: true,
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          SliverAppBar(
-            expandedHeight: displayHeight / 3,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Image.network(
-                "https://i0.wp.com/eztravel.com.br/wp-content/uploads/2022/01/elizeu-dias-seq9dyzse6c-unsplash.jpeg",
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
-            ),
-            floating: true,
-            snap: true,
-            pinned: true,
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              icon: Icon(
-                Icons.arrow_back_ios,
-                size: 30,
-                color: Cores.Branco,
-              ),
-            ),
-          ),
+          //AppBar
+          AppBarEventosInfo(imagem: widget.imagemEvento)
         ],
         body: ListView(
           scrollDirection: Axis.vertical,
@@ -58,15 +44,22 @@ class _info_eventoState extends State<info_evento> {
             ListTile(
               shape: Border(bottom: BorderSide(color: Cores.Cinza)),
               style: ListTileStyle.drawer,
-              title: Text("Mês e horário"),
-              subtitle: Text("Nome do evento"),
-              trailing: SizedBox(
-                height: 36,
-                width: 108,
-                child: Image.asset(
-                  "assets/UnivemIMG.png",
-                  fit: BoxFit.fill,
-                ),
+              title: Text(
+                  "${widget.diaRealizacao} às ${widget.horarioRealizacao}",
+                  style: GoogleFonts.raleway(
+                      fontSize: 18,
+                      color: Cores.cinza6A6666,
+                      fontWeight: FontWeight.bold)),
+              subtitle: Text(widget.nomeEvento,
+                  style: GoogleFonts.raleway(
+                      fontSize: 20,
+                      color: Cores.Preto,
+                      fontWeight: FontWeight.bold)),
+              trailing: Image.asset(
+                widget.imagemOrganizacao,
+                fit: BoxFit.scaleDown,
+                height: 70,
+                width: 70,
               ),
             ),
 
@@ -82,34 +75,38 @@ class _info_eventoState extends State<info_evento> {
                   ),
                   const SizedBox(height: 20),
 
-
-
                   //parte dos ingressos restantes
                   ListTile(
-
                     leading: SizedBox(
                       height: 40,
                       width: 40,
                       child: CircleAvatar(
                           backgroundColor: Cores.Azul42A5F5,
-                          child: Icon(Icons.chair_outlined, color: Cores.Branco, size: 20,)),
+                          child: Icon(
+                            Icons.chair_outlined,
+                            color: Cores.Branco,
+                            size: 20,
+                          )),
                     ),
                     title: const Text("10 ingressos restantes"),
                   ),
 
                   //parte do preço
 
-                ListTile(
-                  leading: SizedBox(
-                    height: 40,
-                    width: 40,
-                    child: CircleAvatar(
-                        backgroundColor: Cores.Azul42A5F5,
-                        child: Icon(Icons.payments_outlined, color: Cores.Branco, size: 20,)),
+                  ListTile(
+                    leading: SizedBox(
+                      height: 40,
+                      width: 40,
+                      child: CircleAvatar(
+                          backgroundColor: Cores.Azul42A5F5,
+                          child: Icon(
+                            Icons.payments_outlined,
+                            color: Cores.Branco,
+                            size: 20,
+                          )),
+                    ),
+                    title: const Text("Grátis"),
                   ),
-                  title: const Text("Grátis"),
-                ),
-
 
                   const SizedBox(height: 20),
                   Text(
@@ -204,12 +201,12 @@ class _info_eventoState extends State<info_evento> {
         ),
       ),
       bottomNavigationBar: GestureDetector(
-        onTap: (){
-           Navigator.push(
-                            context,
-                            PageTransition(
-                                child: MetodosPagamento(),
-                                type: PageTransitionType.bottomToTop));
+        onTap: () {
+          Navigator.push(
+              context,
+              PageTransition(
+                  child: MetodosPagamento(),
+                  type: PageTransitionType.bottomToTop));
         },
         child: Container(
           height: 64,
@@ -221,10 +218,54 @@ class _info_eventoState extends State<info_evento> {
             child: Text(
               "Inscrever-se",
               style: GoogleFonts.raleway(
-                  fontSize: 29, fontWeight: FontWeight.bold, color: Cores.Branco),
+                  fontSize: 29,
+                  fontWeight: FontWeight.bold,
+                  color: Cores.Branco),
               textAlign: TextAlign.center,
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class AppBarEventosInfo extends StatefulWidget {
+  const AppBarEventosInfo({Key? key, required this.imagem}) : super(key: key);
+
+  final String imagem;
+
+  @override
+  _AppBarEventosInfoState createState() => _AppBarEventosInfoState();
+}
+
+class _AppBarEventosInfoState extends State<AppBarEventosInfo> {
+  @override
+  Widget build(BuildContext context) {
+    double displayHeight = MediaQuery.of(context).size.height;
+
+    return SliverAppBar(
+      expandedHeight: displayHeight / 3,
+      flexibleSpace: FlexibleSpaceBar(
+        background: Image.network(
+          widget.imagem,
+          fit: BoxFit.cover,
+          width: double.infinity,
+        ),
+      ),
+      floating: true,
+      snap: true,
+      pinned: true,
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      leading: IconButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        icon: Icon(
+          Icons.arrow_back_ios,
+          size: 30,
+          color: Cores.Branco,
         ),
       ),
     );

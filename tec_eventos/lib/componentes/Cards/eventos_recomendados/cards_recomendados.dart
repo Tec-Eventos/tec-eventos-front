@@ -58,11 +58,11 @@ class _RecomendadosState extends State<Recomendados> {
                                   borderRadius:
                                   BorderRadius.circular(7))),
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                PageTransition(
-                                    child: const info_evento(),
-                                    type: PageTransitionType.bottomToTop));
+                          //   Navigator.push(
+                          //       context,
+                          //       PageTransition(
+                          //           child: const info_evento(),
+                          //           type: PageTransitionType.bottomToTop));
                           },
                           child: Text(
                             "Info",
