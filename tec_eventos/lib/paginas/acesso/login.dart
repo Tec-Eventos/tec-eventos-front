@@ -240,10 +240,10 @@ class _LoginPageState extends State<LoginPage> {
 
 //CAIXAS DE TEXTO PEDINDO A INFORMAÇÃO AO USUÁRIO
 class CaixaTexto extends StatefulWidget {
-  CaixaTexto({Key? key, required this.hint, required this.icon})
+  const CaixaTexto({Key? key, required this.hint, required this.icon})
       : super(key: key);
-  IconData icon;
-  String hint;
+  final IconData icon;
+  final String hint;
 
   @override
   State<CaixaTexto> createState() => _CaixaTextoState();
@@ -481,6 +481,8 @@ class _CodigoVerificadorState extends State<CodigoVerificador> {
                 } else {
                   return "Pin incorreto";
                 }
+
+                return '';
               },
               hapticFeedbackType: HapticFeedbackType.lightImpact,
               onCompleted: (pin) {

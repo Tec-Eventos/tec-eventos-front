@@ -14,7 +14,7 @@ class Cadastro extends StatefulWidget {
 class _CadastroState extends State<Cadastro> {
   @override
   Widget build(BuildContext context) {
-    bool selectedValue = true;
+    // bool selectedValue = true;
     bool isChecked = false;
 
     return Scaffold(
@@ -319,10 +319,10 @@ class _CadastroState extends State<Cadastro> {
 }
 
 class CaixaTexto extends StatefulWidget {
-  CaixaTexto({Key? key, required this.hint, required this.icon})
+  const CaixaTexto({Key? key, required this.hint, required this.icon})
       : super(key: key);
-  IconData icon;
-  String hint;
+  final IconData icon;
+  final String hint;
 
   @override
   State<CaixaTexto> createState() => _CaixaTextoState();

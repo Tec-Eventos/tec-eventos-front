@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tec_eventos/componentes/Cards/eventos_em_alta/cards_eventos_alta.dart';
 import 'package:tec_eventos/componentes/Cards/eventos_inscritos/cards_eventos_inscritos.dart';
 import 'package:tec_eventos/componentes/Cards/eventos_recomendados/cards_recomendados.dart';
+import 'package:tec_eventos/componentes/InstituicaoSugerida/instituicao_sugerida.dart';
 import 'package:tec_eventos/cores.dart';
 
 class PrincipalPage extends StatefulWidget {
@@ -72,10 +72,10 @@ class _PrincipalPageState extends State<PrincipalPage> {
               ),
 
               //carrossel dos eventos que o usuário vai participar, mostrando os dias que faltam
-              SingleChildScrollView(
+              const SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  padding: EdgeInsets.symmetric(vertical: 10),
                   child: Row(
                     children: [
                       CardEventosInscritos(
@@ -157,55 +157,13 @@ class _PrincipalPageState extends State<PrincipalPage> {
               ),
 
               //imagens das instituições parceiras
-              SingleChildScrollView(
+              const SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Image.asset(
-                        "assets/UnimarIMG.png",
-                        height: 55,
-                        width: 55,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Image.asset(
-                        "assets/UnimarIMG.png",
-                        height: 55,
-                        width: 55,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Image.asset(
-                        "assets/UnimarIMG.png",
-                        height: 55,
-                        width: 55,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Image.asset(
-                        "assets/EtecIMG.png",
-                        height: 55,
-                        width: 55,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Image.asset("assets/FaipIMG.png",
-                          height: 55, width: 55),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Image.asset(
-                        "assets/UnimarIMG.png",
-                        height: 55,
-                        width: 55,
-                      ),
-                    ),
+                    InstituicaoSugerida(imagem: "assets/unimarImagem.png"),
+                    InstituicaoSugerida(imagem: "assets/unimarImagem.png"),
+                    InstituicaoSugerida(imagem: "assets/unimarImagem.png")
                   ],
                 ),
               ),
@@ -269,6 +227,3 @@ class _PrincipalPageState extends State<PrincipalPage> {
     );
   }
 }
-
-
-

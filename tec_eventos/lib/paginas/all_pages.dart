@@ -10,6 +10,25 @@ import 'package:tec_eventos/paginas/pag_eventos/eventos_page.dart';
 import 'package:tec_eventos/paginas/pag_principal/principal_page.dart';
 import 'package:tec_eventos/paginas/ranking_page/ranking.dart';
 
+
+const List<String> nomesPages = [
+  'Início',
+  'Eventos',
+  'Medalhas',
+  'Notificações',
+  'Configurações',
+];
+
+const List<Widget> listaPages = [
+  PrincipalPage(),
+  EventosPage(),
+  Ranking(),
+  NotificationPage(),
+  ConfigurationPage(),
+];
+
+
+
 class AllPages extends StatefulWidget {
   AllPages({Key? key, required this.paginaAtual}) : super(key: key);
 
@@ -81,8 +100,8 @@ class _AllPagesState extends State<AllPages> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8),
             child: GNav(
-              rippleColor: Colors.grey[300]!,
-              hoverColor: Colors.grey[100]!,
+              rippleColor: Colors.transparent,
+              hoverColor: Colors.transparent,
               gap: 25,
               activeColor: Cores.azul42A5F5,
               iconSize: 20,
@@ -147,21 +166,7 @@ class _AllPagesState extends State<AllPages> {
   }
 }
 
-const List<String> nomesPages = [
-  'Início',
-  'Eventos',
-  'Medalhas',
-  'Notificações',
-  'Configurações',
-];
 
-const List<Widget> listaPages = [
-  PrincipalPage(),
-  EventosPage(),
-  Ranking(),
-  NotificationPage(),
-  ConfigurationPage(),
-];
 
 class Paginas extends StatefulWidget {
   const Paginas({Key? key, required this.paginas}) : super(key: key);

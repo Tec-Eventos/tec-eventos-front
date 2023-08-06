@@ -89,9 +89,8 @@ class _OptionMyEventsState extends State<OptionMyEvents> {
       decoration: BoxDecoration(
         border: Border(
             bottom: BorderSide(
-                color: widget.isActive
-                    ? Cores.azul42A5F5
-                    : Cores.cinzaMaisClaro)),
+                color:
+                    widget.isActive ? Cores.azul42A5F5 : Cores.cinzaMaisClaro)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
