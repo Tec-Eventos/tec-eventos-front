@@ -14,20 +14,16 @@ class LoginPage extends StatefulWidget {
 }
 
 int mudancaBottomSheet = 0;
-  Widget conteudoBottomSheet = const EnvioEmail();
+Widget conteudoBottomSheet = const EnvioEmail();
 
 class _LoginPageState extends State<LoginPage> {
   bool selectedValue = true;
   bool isChecked = false;
 
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Cores.Branco,
+      backgroundColor: Cores.branco,
       body: ListView(
         scrollDirection: Axis.vertical,
         children: [
@@ -48,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
               fontWeight: FontWeight.w500,
-              color: Cores.Azul47BBEC,
+              color: Cores.azul47BBEC,
               fontSize: 28,
             ),
           ),
@@ -63,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
             dense: true,
             leading: Checkbox(
               shape: const CircleBorder(),
-              activeColor: Cores.Azul42A5F5,
+              activeColor: Cores.azul42A5F5,
               value: isChecked,
               onChanged: (value) {
                 isChecked = !isChecked;
@@ -90,8 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius:
                             BorderRadius.vertical(top: Radius.circular(25))),
                     builder: (context) {
-                    
-                    return Padding(
+                      return Padding(
                         padding: MediaQuery.of(context).viewInsets,
                         child: SizedBox(
                           height: 371,
@@ -99,21 +94,16 @@ class _LoginPageState extends State<LoginPage> {
                             padding: const EdgeInsets.all(20.0),
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                   conteudoBottomSheet 
-                                ]),
+                                children: [conteudoBottomSheet]),
                           ),
                         ),
                       );
-
-      
-                  
                     });
               },
               child: Text(
                 'Esqueceu a senha?',
                 style: GoogleFonts.inter(
-                  color: Cores.Azul45B0F0,
+                  color: Cores.azul45B0F0,
                   fontWeight: FontWeight.w400,
                 ),
                 textAlign: TextAlign.start,
@@ -125,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
             "Faça login por outras mídias sociais",
             style: GoogleFonts.inter(
               fontSize: 15,
-              color: Cores.Cinza,
+              color: Cores.cinza,
             ),
             textAlign: TextAlign.center,
           ),
@@ -137,14 +127,14 @@ class _LoginPageState extends State<LoginPage> {
                 Column(
                   children: [
                     CircleAvatar(
-                      backgroundColor: Cores.Cinza,
+                      backgroundColor: Cores.cinza,
                       child: Image.asset('assets/acesso/microsoft.png'),
                     ),
                     Text(
                       'Microsoft',
                       style: GoogleFonts.inter(
                         fontSize: 15,
-                        color: Cores.Cinza,
+                        color: Cores.cinza,
                       ),
                     )
                   ],
@@ -155,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                 Column(
                   children: [
                     CircleAvatar(
-                      backgroundColor: Cores.Cinza,
+                      backgroundColor: Cores.cinza,
                       child: Image.asset(
                         'assets/acesso/google.png',
                       ),
@@ -164,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                       'Google',
                       style: GoogleFonts.inter(
                         fontSize: 15,
-                        color: Cores.Cinza,
+                        color: Cores.cinza,
                       ),
                     )
                   ],
@@ -175,14 +165,14 @@ class _LoginPageState extends State<LoginPage> {
                 Column(
                   children: [
                     CircleAvatar(
-                      backgroundColor: Cores.Cinza,
+                      backgroundColor: Cores.cinza,
                       child: Image.asset('assets/acesso/convidado.png'),
                     ),
                     Text(
                       'Convidado',
                       style: GoogleFonts.inter(
                         fontSize: 15,
-                        color: Cores.Cinza,
+                        color: Cores.cinza,
                       ),
                     )
                   ],
@@ -205,8 +195,8 @@ class _LoginPageState extends State<LoginPage> {
                 height: 52,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [
-                      Cores.Azul47BBEC,
-                      Cores.Azul42A5F5,
+                      Cores.azul47BBEC,
+                      Cores.azul42A5F5,
                     ], begin: Alignment.topLeft, end: Alignment.bottomRight),
                     borderRadius: BorderRadius.circular(20)),
                 child: Center(
@@ -215,7 +205,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: GoogleFonts.raleway(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color: Cores.Branco),
+                        color: Cores.branco),
                   ),
                 ),
               ),
@@ -234,7 +224,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Text(
                 'Não tem uma conta? Cadastre-se',
                 style: GoogleFonts.inter(
-                  color: Cores.Azul45B0F0,
+                  color: Cores.azul45B0F0,
                   fontSize: 18,
                   fontWeight: FontWeight.w400,
                 ),
@@ -247,9 +237,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-
-
 
 //CAIXAS DE TEXTO PEDINDO A INFORMAÇÃO AO USUÁRIO
 class CaixaTexto extends StatefulWidget {
@@ -295,15 +282,11 @@ class _CaixaTextoState extends State<CaixaTexto> {
   }
 }
 
-
-
 //LISTA DE CADA ETAPA PARA VERIFICAR SE O USUÁRIO ESQUECEU A SENHA
 List<Widget> etapasVerificacao = [
   const EnvioEmail(),
   const VerificacaoCodigo()
 ];
-
-
 
 class EnvioEmail extends StatefulWidget {
   const EnvioEmail({super.key});
@@ -315,99 +298,90 @@ class EnvioEmail extends StatefulWidget {
 class _EnvioEmailState extends State<EnvioEmail> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start, 
-      children: [
-        Text(
-    "Esqueceu sua senha?",
-    style: GoogleFonts.inter(
-      fontSize: 23,
-      fontWeight: FontWeight.w500,
-    ),
-        ),
-        const SizedBox(height: 20),
-        Text(
-    "Informe seu e-mail para que possamos lhe enviar um código de confirmação",
-    style: GoogleFonts.inter(
-      fontSize: 16,
-    ),
-        ),
-        const SizedBox(height: 50),
-        Text(
-    'Email',
-    style: GoogleFonts.inter(
-      fontSize: 16,
-      fontWeight: FontWeight.w500,
-    ),
-        ),
-        Padding(
-    padding: const EdgeInsets.symmetric(vertical: 10),
-    child: Container(
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(30),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey[300]!,
-              offset: const Offset(10, 10),
-              blurRadius: 6,
-              spreadRadius: -5,
-            )
-          ]),
-      child: TextFormField(
-        decoration: const InputDecoration(
-          prefixIcon: Icon(Icons.email_outlined),
-          isDense: true,
-          hintText: "Email",
-          hintStyle: TextStyle(color: Color(0xffA69F9F)),
-          border: InputBorder.none,
-          contentPadding: EdgeInsets.only(
-              top: 18.0, right: 20, bottom: 18.0, left: 40),
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(
+        "Esqueceu sua senha?",
+        style: GoogleFonts.inter(
+          fontSize: 23,
+          fontWeight: FontWeight.w500,
         ),
       ),
-    ),
+      const SizedBox(height: 20),
+      Text(
+        "Informe seu e-mail para que possamos lhe enviar um código de confirmação",
+        style: GoogleFonts.inter(
+          fontSize: 16,
         ),
-        const SizedBox(height: 20),
-        GestureDetector(
-    onTap: (){
-        setState(() {
-          conteudoBottomSheet = const VerificacaoCodigo();
-        });
-        Navigator.of(context);
-    },
-    child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: Container(
-        width: 282,
-        height: 52,
-        decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Cores.Azul47BBEC,
-              Cores.Azul42A5F5,
-            ], begin: Alignment.topLeft, end: Alignment.bottomRight),
-            borderRadius: BorderRadius.circular(20)),
-        child: Center(
-          child: Text(
-            "Enviar",
-            style: GoogleFonts.raleway(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Cores.Branco),
+      ),
+      const SizedBox(height: 50),
+      Text(
+        'Email',
+        style: GoogleFonts.inter(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey[300]!,
+                  offset: const Offset(10, 10),
+                  blurRadius: 6,
+                  spreadRadius: -5,
+                )
+              ]),
+          child: TextFormField(
+            decoration: const InputDecoration(
+              prefixIcon: Icon(Icons.email_outlined),
+              isDense: true,
+              hintText: "Email",
+              hintStyle: TextStyle(color: Color(0xffA69F9F)),
+              border: InputBorder.none,
+              contentPadding:
+                  EdgeInsets.only(top: 18.0, right: 20, bottom: 18.0, left: 40),
+            ),
           ),
         ),
       ),
-    ),
+      const SizedBox(height: 20),
+      GestureDetector(
+        onTap: () {
+          setState(() {
+            conteudoBottomSheet = const VerificacaoCodigo();
+          });
+          Navigator.of(context);
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: Container(
+            width: 282,
+            height: 52,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [
+                  Cores.azul47BBEC,
+                  Cores.azul42A5F5,
+                ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                borderRadius: BorderRadius.circular(20)),
+            child: Center(
+              child: Text(
+                "Enviar",
+                style: GoogleFonts.raleway(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Cores.branco),
+              ),
+            ),
+          ),
         ),
-      ]);
+      ),
+    ]);
   }
 }
-
-
-
-
-
-
-
 
 class VerificacaoCodigo extends StatefulWidget {
   const VerificacaoCodigo({super.key});
@@ -419,39 +393,33 @@ class VerificacaoCodigo extends StatefulWidget {
 class _VerificacaoCodigoState extends State<VerificacaoCodigo> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Informe o código",
-            style: GoogleFonts.inter(
-              fontSize: 23,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          const SizedBox(height: 20),
-          Text(
-            "Informe o código de 4 digitos que mandamos para o email ************584@gmail.com",
-            style: GoogleFonts.inter(
-              fontSize: 16,
-            ),
-          ),
-          const SizedBox(height: 50),
-          Text(
-            'Código',
-            style: GoogleFonts.inter(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          const CodigoVerificador(),
-        ]);
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(
+        "Informe o código",
+        style: GoogleFonts.inter(
+          fontSize: 23,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      const SizedBox(height: 20),
+      Text(
+        "Informe o código de 4 digitos que mandamos para o email ************584@gmail.com",
+        style: GoogleFonts.inter(
+          fontSize: 16,
+        ),
+      ),
+      const SizedBox(height: 50),
+      Text(
+        'Código',
+        style: GoogleFonts.inter(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      const CodigoVerificador(),
+    ]);
   }
 }
-
-
-
-
 
 class CodigoVerificador extends StatefulWidget {
   const CodigoVerificador({super.key});
@@ -475,12 +443,12 @@ class _CodigoVerificadorState extends State<CodigoVerificador> {
   @override
   Widget build(BuildContext context) {
     final focusedBorderColor = Cores.verde;
-    final borderColor = Cores.Preto;
+    final borderColor = Cores.preto;
 
     final defaultPinTheme = PinTheme(
       width: 54,
       height: 50,
-      textStyle: GoogleFonts.inter(fontSize: 28, color: Cores.Preto),
+      textStyle: GoogleFonts.inter(fontSize: 28, color: Cores.preto),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(3),
         border: Border.all(color: borderColor),

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tec_eventos/componentes/Cards/eventos_em_alta/cards_eventos_alta.dart';
@@ -93,14 +94,6 @@ class _PrincipalPageState extends State<PrincipalPage> {
                           imagemEvento:
                               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZh_ed8ebxamWQoJtWg8cF1fOvOYIEr0Tkaw17UpGV1RGydNI3TxyfoqwNTbvOxrpOMN0&usqp=CAU",
                           organizacao: "assets/EtecIMG.png"),
-                      CardEventosInscritos(
-                          nomeEvento: "Visita Técnica",
-                          diasFaltam: "10 DIAS",
-                          diaRealizacao: "20/05/2023",
-                          horas: "7h10",
-                          imagemEvento:
-                              "https://i0.wp.com/eztravel.com.br/wp-content/uploads/2022/01/elizeu-dias-seq9dyzse6c-unsplash.jpeg",
-                          organizacao: "assets/UnimarIMG.png")
                     ],
                   ),
                 ),
@@ -119,13 +112,14 @@ class _PrincipalPageState extends State<PrincipalPage> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    Eventos_Alta(),
-                    Eventos_Alta(),
-                    Eventos_Alta(),
-                    Eventos_Alta(),
-                    Eventos_Alta(),
-                    Eventos_Alta(),
-                    Eventos_Alta(),
+                    EventosAlta(
+                        imagemEvento:
+                            "https://i0.wp.com/eztravel.com.br/wp-content/uploads/2022/01/elizeu-dias-seq9dyzse6c-unsplash.jpeg",
+                        modalidade: "Competição",
+                        nomeEvento: "Unvem Nasa",
+                        descricao:
+                            "LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremmLoremLoremLoremLoremLorem",
+                        organizacaoImagem: "assets/UnivemIMG.png")
                   ],
                 ),
               ),
@@ -143,10 +137,13 @@ class _PrincipalPageState extends State<PrincipalPage> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    Recomendados(),
-                    Recomendados(),
-                    Recomendados(),
-                    Recomendados(),
+                    Recomendados(
+                        nomeEvento: "UnimarFest",
+                        imagemEvento:
+                            "https://i0.wp.com/eztravel.com.br/wp-content/uploads/2022/01/elizeu-dias-seq9dyzse6c-unsplash.jpeg",
+                        imagemOrganizacao: "assets/UnimarIMG.png",
+                        descricao:
+                            "Venha ver nosso evento hoje, será muito legal!")
                   ],
                 ),
               ),
@@ -238,10 +235,10 @@ class _PrincipalPageState extends State<PrincipalPage> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50.0),
                 border: Border.all(
-                    color: optionTrue ? Colors.transparent : Cores.Azul42A5F5),
+                    color: optionTrue ? Colors.transparent : Cores.azul42A5F5),
 
                 //cor de fundo
-                color: optionTrue ? Cores.Azul42A5F5 : Colors.transparent,
+                color: optionTrue ? Cores.azul42A5F5 : Colors.transparent,
               ),
               child: optionTrue
                   ? Column(
@@ -251,7 +248,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                         //icone
                         Icon(
                           icon,
-                          color: Cores.Branco,
+                          color: Cores.branco,
                           size: 30,
                         ),
 
@@ -259,16 +256,19 @@ class _PrincipalPageState extends State<PrincipalPage> {
                           "Palestras",
                           style: GoogleFonts.raleway(
                               fontSize: 10,
-                              color: Cores.Branco,
+                              color: Cores.branco,
                               fontWeight: FontWeight.bold),
                         ),
 
                         //texto do filtro em específico
                       ],
                     )
-                  : Icon(icon, color: Cores.Azul42A5F5, size: 30)),
+                  : Icon(icon, color: Cores.azul42A5F5, size: 30)),
         ]),
       ),
     );
   }
 }
+
+
+

@@ -5,7 +5,15 @@ import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/paginas/pag_inscricao_evento/info_evento/info_evento.dart';
 
 class Recomendados extends StatefulWidget {
-  const Recomendados({Key? key}) : super(key: key);
+  const Recomendados(
+      {Key? key,
+      required this.nomeEvento,
+      required this.imagemEvento,
+      required this.imagemOrganizacao,
+      required this.descricao})
+      : super(key: key);
+
+  final String nomeEvento, imagemEvento, imagemOrganizacao, descricao;
 
   @override
   State<Recomendados> createState() => _RecomendadosState();
@@ -14,14 +22,27 @@ class Recomendados extends StatefulWidget {
 class _RecomendadosState extends State<Recomendados> {
   @override
   Widget build(BuildContext context) {
-    return
-      Padding(
-        padding: const EdgeInsets.only(right: 15, top: 10, bottom: 10),
-        child: SizedBox(
-          width: 305,
+    final InfoEvento navegacao = InfoEvento(
+        imagemEvento: widget.imagemEvento,
+        imagemOrganizacao: widget.imagemOrganizacao,
+        diaRealizacao: "10/06",
+        nomeEvento: widget.nomeEvento,
+        horarioRealizacao: "10:00");
+
+    return Padding(
+      padding: const EdgeInsets.only(right: 15, top: 10, bottom: 10),
+      child: SizedBox(
+        width: 305,
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                PageTransition(
+                    child: navegacao, type: PageTransitionType.bottomToTop));
+          },
           child: Card(
-            margin: EdgeInsets.only(top: 20),
-            shadowColor: Cores.Preto,
+            margin: const EdgeInsets.only(top: 20),
+            shadowColor: Cores.preto,
             borderOnForeground: false,
             clipBehavior: Clip.hardEdge,
             shape: RoundedRectangleBorder(
@@ -30,14 +51,14 @@ class _RecomendadosState extends State<Recomendados> {
             color: Colors.white,
             elevation: 6,
             child:
-            // COMPONENTES QUE VÃO ESTAR DENTRO DO CARD
-            Column(
+                // COMPONENTES QUE VÃO ESTAR DENTRO DO CARD
+                Column(
               children: [
                 Stack(
                   alignment: Alignment.bottomRight,
                   children: [
                     Image.network(
-                      "https://i0.wp.com/eztravel.com.br/wp-content/uploads/2022/01/elizeu-dias-seq9dyzse6c-unsplash.jpeg",
+                      widget.imagemEvento,
                       height: 180,
                       width: 305,
                       fit: BoxFit.fill,
@@ -47,35 +68,49 @@ class _RecomendadosState extends State<Recomendados> {
                 Padding(
                     padding: const EdgeInsets.all(10),
                     child: ListTile(
-                      leading: Image.asset("assets/UnivemIMG.png"),
-                      title: Text("Univem"),
-                      subtitle: Text("LoreLoremLoremLoremLoremLoremm"),
+                      leading: Image.asset(widget.imagemOrganizacao),
+
+                      //nome do Evento
+                      title: Text(
+                        widget.nomeEvento,
+                        style: GoogleFonts.raleway(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Cores.preto),
+                      ),
+
+                      //descrição dele
+                      subtitle: Text(
+                        widget.descricao,
+                        style: GoogleFonts.raleway(
+                            fontSize: 7, color: Cores.preto),
+                      ),
                       trailing: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               elevation: 2,
-                              minimumSize: Size(14, 18),
+                              minimumSize: const Size(14, 18),
                               shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                  BorderRadius.circular(7))),
+                                  borderRadius: BorderRadius.circular(7))),
                           onPressed: () {
-                          //   Navigator.push(
-                          //       context,
-                          //       PageTransition(
-                          //           child: const info_evento(),
-                          //           type: PageTransitionType.bottomToTop));
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    child: navegacao,
+                                    type: PageTransitionType.bottomToTop));
                           },
                           child: Text(
                             "Info",
                             style: GoogleFonts.raleway(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
-                                color: Cores.Branco),
+                                color: Cores.branco),
                           )),
                     )),
               ],
             ),
           ),
         ),
-      );
+      ),
+    );
   }
 }

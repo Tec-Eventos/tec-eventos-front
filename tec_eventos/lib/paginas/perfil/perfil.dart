@@ -22,7 +22,7 @@ class _PerfilState extends State<Perfil> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const DrawerPages(),
-      backgroundColor: Cores.Branco,
+      backgroundColor: Cores.branco,
       body: NestedScrollView(
         floatHeaderSlivers: true,
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -96,25 +96,25 @@ class _PerfilState extends State<Perfil> {
                             organizacao: "Univem",
                             posicao: "3°Lugar",
                             imgOrg: "assets/UnivemIMG.png",
-                            corPodio: Cores.Bronze),
+                            corPodio: Cores.bronze),
                         Medalhas(
                             nomeEvento: "Univem NASA",
                             organizacao: "Univem",
                             posicao: "2°Lugar",
                             imgOrg: "assets/UnivemIMG.png",
-                            corPodio: Cores.Cinza),
+                            corPodio: Cores.cinza),
                         Medalhas(
                             nomeEvento: "Univem NASA",
                             organizacao: "Univem",
                             posicao: "1°Lugar",
                             imgOrg: "assets/UnivemIMG.png",
-                            corPodio: Cores.Amarelo),
+                            corPodio: Cores.amarelo),
                         Medalhas(
                             nomeEvento: "Univem NASA",
                             organizacao: "Univem",
                             posicao: "9°Lugar",
                             imgOrg: "assets/UnivemIMG.png",
-                            corPodio: Cores.Azul45B0F0)
+                            corPodio: Cores.azul45B0F0)
                       ],
                     )
                   ] else if (menu == 3) ...[
@@ -247,7 +247,7 @@ class _PerfilState extends State<Perfil> {
           height: 2,
           decoration: BoxDecoration(
             color: menu == item
-                ? Cores.AzulEscuroPerfilOption
+                ? Cores.azulEscuroPerfilOption
                 : Colors.transparent,
           ),
         ),

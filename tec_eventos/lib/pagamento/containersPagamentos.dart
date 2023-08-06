@@ -1,4 +1,4 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
+// import 'package:awesome_dialog/awesome_dialog.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,69 +17,69 @@ class CardsGeral extends StatelessWidget{
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               Center(
                 child: Container(
                   width: MediaQuery.of(context).size.width/1.10,
                   decoration: BoxDecoration(
-                    color: Color(0xffE9E9E9),
+                    color: const Color(0xffE9E9E9),
                     borderRadius: BorderRadius.circular(18.0),
                   ),
                   child:  ElevatedButton(
                     onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => CardsComponent()),);
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const CardsComponent()),);
                     },
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          margin: EdgeInsets.only(left: 20),
-                          child: Icon(
+                          margin: const EdgeInsets.only(left: 20),
+                          child: const Icon(
                             Icons.add,
                             color: Colors.black,
                             size: 30,
                           ),
                         ),
-                        SizedBox(width: 72,),
-                        Text("Adicionar cartão",
+                        const SizedBox(width: 72,),
+                        const Text("Adicionar cartão",
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800, fontSize: 16),
                         ),
                       ],
                     ),
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 33),
+                      padding: const EdgeInsets.symmetric(vertical: 33),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      primary: Color(0xffE9E9E9),
+                      primary: const Color(0xffE9E9E9),
                     ),
                   ),
                 ),
               ),
 
-              SizedBox(height: 26,),
+              const SizedBox(height: 26,),
 
               Container(
                 decoration: BoxDecoration(
-                color: Color(0xffE9E9E9),
+                color: const Color(0xffE9E9E9),
                 borderRadius: BorderRadius.circular(18.0),
               ),
                 width: MediaQuery.of(context).size.width/1.10,
                   child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 29),
+                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 29),
                               elevation: 0,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
-                              primary: Color(0xffE9E9E9),
+                              primary: const Color(0xffE9E9E9),
                             ),
                             onPressed: (){},
                             child: Column(
                               children: [
-                                Row(
+                                const Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text("MasterCard", style: TextStyle(fontSize: 10, fontWeight: FontWeight.w800, color: Colors.black),),
@@ -92,8 +92,8 @@ class CardsGeral extends StatelessWidget{
                                       padding: const EdgeInsets.only(left: 10),
                                       child: Image.asset('assets/bancos_pagamento/logoMasterCard.png'),
                                     ),
-                                    Text('21091', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.black),),
-                                    Icon(Icons.check_circle_outline, color: Color(0xff1565C0),)
+                                    const Text('21091', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.black),),
+                                    const Icon(Icons.check_circle_outline, color: Color(0xff1565C0),)
                                   ],
                                 ),
                               ],
@@ -101,27 +101,27 @@ class CardsGeral extends StatelessWidget{
                           ),
                   ),
 
-              SizedBox(height: 26,),
+              const SizedBox(height: 26,),
 
               Container(
                 decoration: BoxDecoration(
-                  color: Color(0xffE9E9E9),
+                  color: const Color(0xffE9E9E9),
                   borderRadius: BorderRadius.circular(18.0),
                 ),
                 width: MediaQuery.of(context).size.width/1.10,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 29),
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 29),
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
-                    primary: Color(0xffE9E9E9),
+                    primary: const Color(0xffE9E9E9),
                   ),
                   onPressed: (){},
                   child: Column(
                     children: [
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text("NuBank", style: TextStyle(fontSize: 10, fontWeight: FontWeight.w800, color: Colors.black),),
@@ -134,8 +134,8 @@ class CardsGeral extends StatelessWidget{
                             padding: const EdgeInsets.only(left: 10.0),
                             child: Image.asset('assets/bancos_pagamento/logoNuBank.png'),
                           ),
-                          Text('21092', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.black),),
-                          Icon(Icons.check_circle_outline, color: Color(0xff1565C0),)
+                          const Text('21092', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.black),),
+                          const Icon(Icons.check_circle_outline, color: Color(0xff1565C0),)
                         ],
                       ),
                     ],
@@ -143,11 +143,11 @@ class CardsGeral extends StatelessWidget{
                 ),
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 75,
               ),
 
-              PrecosComponent(),
+              const PrecosComponent(),
     ],
           ),
         ),
@@ -161,7 +161,7 @@ class SearchBarPix extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(height: 25,),
+          const SizedBox(height: 25,),
           Container(
             width: MediaQuery.of(context).size.width/1.10,
             decoration: BoxDecoration(
@@ -176,14 +176,14 @@ class SearchBarPix extends StatelessWidget {
                     color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 2,
                     blurRadius: 5,
-                    offset: Offset(0, 3),
+                    offset: const Offset(0, 3),
                   )
                 ]
             ),
             child: Padding(
               padding: const EdgeInsets.only(left: 25.0),
               child: TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
                   hintText: "Insira o pix aqui",
@@ -196,18 +196,18 @@ class SearchBarPix extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 35,),
+          const SizedBox(height: 35,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 width: MediaQuery.of(context).size.width/1.10,
-                child: Text("Pagamentos Recentes",
+                child: const Text("Pagamentos Recentes",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),),
               ),
             ],
           ),
-          SizedBox(height: 17,),
+          const SizedBox(height: 17,),
 
           //Colocar os dados dos últimos pix feitos aqui
 
@@ -217,22 +217,22 @@ class SearchBarPix extends StatelessWidget {
                 itemCount: 10,
                 itemBuilder: (context, index) {
                 return Container(
-                    padding: EdgeInsets.only(bottom: 21),
-                    margin: EdgeInsets.symmetric(horizontal: 19),
+                    padding: const EdgeInsets.only(bottom: 21),
+                    margin: const EdgeInsets.symmetric(horizontal: 19),
                     child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Image.asset('assets/UnivemIMG.png'),
-                            Text("R\$120,00",style: TextStyle(fontSize: 12, fontStyle: FontStyle.normal),),
+                            const Text("R\$120,00",style: TextStyle(fontSize: 12, fontStyle: FontStyle.normal),),
                           ],
                       ),
                   );
               },),
           ),
-          SizedBox(height: 75,),
+          const SizedBox(height: 75,),
           //////////////////////////////////////////////
-          PrecosComponent(),
-          SizedBox(height: 30,),
+          const PrecosComponent(),
+          const SizedBox(height: 30,),
         ],
       ),
     );
@@ -245,7 +245,7 @@ class ContainerTres extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.yellow,
-      child: Center(
+      child: const Center(
         child: Text('AINDA PENSANDO NO QUE COLOCAR AQUI',
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),

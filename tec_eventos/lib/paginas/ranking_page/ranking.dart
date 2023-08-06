@@ -46,7 +46,7 @@ class _RankingState extends State<Ranking> {
                 Container(
                   width: 163,
                   height: 2,
-                  color: Cores.AzulClaro,
+                  color: Cores.azulClaro,
                 )
               ],
             ),
@@ -57,7 +57,7 @@ class _RankingState extends State<Ranking> {
 
                 //card que expande e mostra as medalhas de um usuário
                 ExpansionTileCard(
-              baseColor: Cores.Branco,
+              baseColor: Cores.branco,
               key: GlobalKey(),
               leading: CircleAvatar(child: Image.asset("assets/imgPerfil.png")),
 
@@ -70,7 +70,7 @@ class _RankingState extends State<Ranking> {
                     style: GoogleFonts.raleway(
                       fontWeight: FontWeight.bold,
                       fontSize: 13,
-                      color: Cores.Preto,
+                      color: Cores.preto,
                     ),
                   ),
                   const Icon(
@@ -78,7 +78,7 @@ class _RankingState extends State<Ranking> {
                     size: 25,
                   ),
                   VerticalDivider(
-                    color: Cores.Amarelo,
+                    color: Cores.amarelo,
                     width: 5,
                     indent: 10,
                     thickness: 2.0,
@@ -91,19 +91,19 @@ class _RankingState extends State<Ranking> {
                   style: GoogleFonts.raleway(
                     fontWeight: FontWeight.w300,
                     fontSize: 13,
-                    color: Cores.Preto,
+                    color: Cores.preto,
                   )),
 
               trailing: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.workspace_premium_outlined, color: Cores.Preto),
+                  Icon(Icons.workspace_premium_outlined, color: Cores.preto),
                   Text(
                     "50",
                     style: GoogleFonts.inter(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
-                        color: Cores.Preto),
+                        color: Cores.preto),
                   )
                 ],
               ),
@@ -129,28 +129,28 @@ class _RankingState extends State<Ranking> {
                         children: [
                           //medalhas de primeiro lugar
                           Icon(Icons.workspace_premium_outlined,
-                              color: Cores.Amarelo),
+                              color: Cores.amarelo),
                           Text('10',
                               style: GoogleFonts.inter(
                                   fontWeight: FontWeight.bold, fontSize: 15)),
 
                           //medalhas de segundo lugar
                           Icon(Icons.workspace_premium_outlined,
-                              color: Cores.Cinza),
+                              color: Cores.cinza),
                           Text('10',
                               style: GoogleFonts.inter(
                                   fontWeight: FontWeight.bold, fontSize: 15)),
 
                           //medalhas de terceiro lugar
                           Icon(Icons.workspace_premium_outlined,
-                              color: Cores.Bronze),
+                              color: Cores.bronze),
                           Text('10',
                               style: GoogleFonts.inter(
                                   fontWeight: FontWeight.bold, fontSize: 15)),
 
                           //medalhas sem serem as do pódio
                           Icon(Icons.workspace_premium_outlined,
-                              color: Cores.Azul45B0F0),
+                              color: Cores.azul45B0F0),
                           Text('20',
                               style: GoogleFonts.inter(
                                   fontWeight: FontWeight.bold, fontSize: 15)),
@@ -190,7 +190,7 @@ class _RankingState extends State<Ranking> {
 
                 //card que expande e mostra as medalhas de um usuário
                 ExpansionTileCard(
-              baseColor: Cores.Branco,
+              baseColor: Cores.branco,
               key: GlobalKey(),
               leading: CircleAvatar(child: Image.asset("assets/imgPerfil.png")),
 
@@ -203,7 +203,7 @@ class _RankingState extends State<Ranking> {
                     style: GoogleFonts.raleway(
                       fontWeight: FontWeight.bold,
                       fontSize: 13,
-                      color: Cores.Preto,
+                      color: Cores.preto,
                     ),
                   ),
                   const Icon(
@@ -211,7 +211,7 @@ class _RankingState extends State<Ranking> {
                     size: 25,
                   ),
                   VerticalDivider(
-                    color: Cores.Amarelo,
+                    color: Cores.amarelo,
                     width: 5,
                     indent: 10,
                     thickness: 2.0,
@@ -224,19 +224,19 @@ class _RankingState extends State<Ranking> {
                   style: GoogleFonts.raleway(
                     fontWeight: FontWeight.w300,
                     fontSize: 13,
-                    color: Cores.Preto,
+                    color: Cores.preto,
                   )),
 
               trailing: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.workspace_premium_outlined, color: Cores.Preto),
+                  Icon(Icons.workspace_premium_outlined, color: Cores.preto),
                   Text(
                     "50",
                     style: GoogleFonts.inter(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
-                        color: Cores.Preto),
+                        color: Cores.preto),
                   )
                 ],
               ),
@@ -262,28 +262,28 @@ class _RankingState extends State<Ranking> {
                         children: [
                           //medalhas de primeiro lugar
                           Icon(Icons.workspace_premium_outlined,
-                              color: Cores.Amarelo),
+                              color: Cores.amarelo),
                           Text('10',
                               style: GoogleFonts.inter(
                                   fontWeight: FontWeight.bold, fontSize: 15)),
 
                           //medalhas de segundo lugar
                           Icon(Icons.workspace_premium_outlined,
-                              color: Cores.Cinza),
+                              color: Cores.cinza),
                           Text('10',
                               style: GoogleFonts.inter(
                                   fontWeight: FontWeight.bold, fontSize: 15)),
 
                           //medalhas de terceiro lugar
                           Icon(Icons.workspace_premium_outlined,
-                              color: Cores.Bronze),
+                              color: Cores.bronze),
                           Text('10',
                               style: GoogleFonts.inter(
                                   fontWeight: FontWeight.bold, fontSize: 15)),
 
                           //medalhas sem serem as do pódio
                           Icon(Icons.workspace_premium_outlined,
-                              color: Cores.Azul45B0F0),
+                              color: Cores.azul45B0F0),
                           Text('20',
                               style: GoogleFonts.inter(
                                   fontWeight: FontWeight.bold, fontSize: 15)),
@@ -323,7 +323,7 @@ class _RankingState extends State<Ranking> {
 
                 //card que expande e mostra as medalhas de um usuário
                 ExpansionTileCard(
-              baseColor: Cores.Branco,
+              baseColor: Cores.branco,
               key: GlobalKey(),
               leading: CircleAvatar(child: Image.asset("assets/imgPerfil.png")),
 
@@ -336,7 +336,7 @@ class _RankingState extends State<Ranking> {
                     style: GoogleFonts.raleway(
                       fontWeight: FontWeight.bold,
                       fontSize: 13,
-                      color: Cores.Preto,
+                      color: Cores.preto,
                     ),
                   ),
                   const Icon(
@@ -344,7 +344,7 @@ class _RankingState extends State<Ranking> {
                     size: 25,
                   ),
                   VerticalDivider(
-                    color: Cores.Amarelo,
+                    color: Cores.amarelo,
                     width: 5,
                     indent: 10,
                     thickness: 2.0,
@@ -357,19 +357,19 @@ class _RankingState extends State<Ranking> {
                   style: GoogleFonts.raleway(
                     fontWeight: FontWeight.w300,
                     fontSize: 13,
-                    color: Cores.Preto,
+                    color: Cores.preto,
                   )),
 
               trailing: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.workspace_premium_outlined, color: Cores.Preto),
+                  Icon(Icons.workspace_premium_outlined, color: Cores.preto),
                   Text(
                     "50",
                     style: GoogleFonts.inter(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
-                        color: Cores.Preto),
+                        color: Cores.preto),
                   )
                 ],
               ),
@@ -395,28 +395,28 @@ class _RankingState extends State<Ranking> {
                         children: [
                           //medalhas de primeiro lugar
                           Icon(Icons.workspace_premium_outlined,
-                              color: Cores.Amarelo),
+                              color: Cores.amarelo),
                           Text('10',
                               style: GoogleFonts.inter(
                                   fontWeight: FontWeight.bold, fontSize: 15)),
 
                           //medalhas de segundo lugar
                           Icon(Icons.workspace_premium_outlined,
-                              color: Cores.Cinza),
+                              color: Cores.cinza),
                           Text('10',
                               style: GoogleFonts.inter(
                                   fontWeight: FontWeight.bold, fontSize: 15)),
 
                           //medalhas de terceiro lugar
                           Icon(Icons.workspace_premium_outlined,
-                              color: Cores.Bronze),
+                              color: Cores.bronze),
                           Text('10',
                               style: GoogleFonts.inter(
                                   fontWeight: FontWeight.bold, fontSize: 15)),
 
                           //medalhas sem serem as do pódio
                           Icon(Icons.workspace_premium_outlined,
-                              color: Cores.Azul45B0F0),
+                              color: Cores.azul45B0F0),
                           Text('20',
                               style: GoogleFonts.inter(
                                   fontWeight: FontWeight.bold, fontSize: 15)),

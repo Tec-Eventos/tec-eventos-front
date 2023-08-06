@@ -129,7 +129,7 @@ telaBoarding(String image, String titulo, String descricao, context) {
           Text(
             titulo,
             style: GoogleFonts.cabin(
-                color: Cores.Azul42A5F5,
+                color: Cores.azul42A5F5,
                 fontWeight: FontWeight.bold,
                 fontSize: 30),
             textAlign: TextAlign.center,
@@ -167,7 +167,7 @@ class DotIndicator extends StatelessWidget {
       height: isActive ? 24 : 5,
       width: isActive ? 6 : 15,
       decoration: BoxDecoration(
-        color: isActive ? Cores.AzulClaro : Cores.AzulCinzento,
+        color: isActive ? Cores.azulClaro : Cores.azulCinzento,
         borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
     );
@@ -222,7 +222,7 @@ class _BotaoComecarState extends State<BotaoComecar> {
                     type: PageTransitionType.rightToLeft));
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: Cores.Azul42A5F5,
+            backgroundColor: Cores.azul42A5F5,
             padding:
                 const EdgeInsets.only(right: 35, left: 35, top: 10, bottom: 10),
             shape: const RoundedRectangleBorder(
@@ -230,7 +230,7 @@ class _BotaoComecarState extends State<BotaoComecar> {
           ),
           child: Text(
             'COMEÇAR',
-            style: GoogleFonts.inter(fontSize: 24, color: Cores.Branco),
+            style: GoogleFonts.inter(fontSize: 24, color: Cores.branco),
           ),
         )
       ],

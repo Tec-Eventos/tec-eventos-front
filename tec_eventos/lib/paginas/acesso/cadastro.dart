@@ -4,7 +4,6 @@ import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/paginas/all_pages.dart';
 
-
 class Cadastro extends StatefulWidget {
   const Cadastro({Key? key}) : super(key: key);
 
@@ -18,9 +17,8 @@ class _CadastroState extends State<Cadastro> {
     bool selectedValue = true;
     bool isChecked = false;
 
-
     return Scaffold(
-      backgroundColor: Cores.Branco,
+      backgroundColor: Cores.branco,
       body: ListView(
         scrollDirection: Axis.vertical,
         children: [
@@ -36,15 +34,15 @@ class _CadastroState extends State<Cadastro> {
           const SizedBox(
             height: 30,
           ),
-         Text(
-              'Cadastre-se',
-              textAlign: TextAlign.center,
-              style: GoogleFonts.inter(
-                fontWeight: FontWeight.w500,
-                color: Cores.Azul47BBEC,
-                fontSize: 28,
-              ),
-              ),
+          Text(
+            'Cadastre-se',
+            textAlign: TextAlign.center,
+            style: GoogleFonts.inter(
+              fontWeight: FontWeight.w500,
+              color: Cores.azul47BBEC,
+              fontSize: 28,
+            ),
+          ),
           Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
             CaixaTexto(icon: Icons.email_outlined, hint: "E-mail"),
             CaixaTexto(icon: Icons.person_2_outlined, hint: "Usuário"),
@@ -56,7 +54,7 @@ class _CadastroState extends State<Cadastro> {
             dense: true,
             leading: Checkbox(
               shape: const CircleBorder(),
-              activeColor: Cores.Azul42A5F5,
+              activeColor: Cores.azul42A5F5,
               value: isChecked,
               onChanged: (value) {
                 isChecked = !isChecked;
@@ -81,7 +79,7 @@ class _CadastroState extends State<Cadastro> {
                     // padding: EdgeIn
                     shape: const RoundedRectangleBorder(
                         borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(25))),
+                            BorderRadius.vertical(top: Radius.circular(25))),
                     builder: (context) {
                       return Padding(
                         padding: MediaQuery.of(context).viewInsets,
@@ -121,7 +119,7 @@ class _CadastroState extends State<Cadastro> {
                                       decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius:
-                                          BorderRadius.circular(30),
+                                              BorderRadius.circular(30),
                                           boxShadow: [
                                             BoxShadow(
                                               color: Colors.grey[300]!,
@@ -133,7 +131,7 @@ class _CadastroState extends State<Cadastro> {
                                       child: TextFormField(
                                         decoration: const InputDecoration(
                                           prefixIcon:
-                                          Icon(Icons.email_outlined),
+                                              Icon(Icons.email_outlined),
                                           isDense: true,
                                           hintText: "Email",
                                           hintStyle: TextStyle(
@@ -158,20 +156,20 @@ class _CadastroState extends State<Cadastro> {
                                       decoration: BoxDecoration(
                                           gradient: LinearGradient(
                                               colors: [
-                                                Cores.Azul47BBEC,
-                                                Cores.Azul42A5F5,
+                                                Cores.azul47BBEC,
+                                                Cores.azul42A5F5,
                                               ],
                                               begin: Alignment.topLeft,
                                               end: Alignment.bottomRight),
                                           borderRadius:
-                                          BorderRadius.circular(20)),
+                                              BorderRadius.circular(20)),
                                       child: Center(
                                         child: Text(
                                           "Enviar",
                                           style: GoogleFonts.raleway(
                                               fontSize: 28,
                                               fontWeight: FontWeight.bold,
-                                              color: Cores.Branco),
+                                              color: Cores.branco),
                                         ),
                                       ),
                                     ),
@@ -185,7 +183,7 @@ class _CadastroState extends State<Cadastro> {
               child: Text(
                 'Esqueceu a senha?',
                 style: GoogleFonts.inter(
-                  color: Cores.Azul45B0F0,
+                  color: Cores.azul45B0F0,
                   fontWeight: FontWeight.w400,
                 ),
                 textAlign: TextAlign.start,
@@ -197,7 +195,7 @@ class _CadastroState extends State<Cadastro> {
             "Faça login por outras mídias sociais",
             style: GoogleFonts.inter(
               fontSize: 15,
-              color: Cores.Cinza,
+              color: Cores.cinza,
             ),
             textAlign: TextAlign.center,
           ),
@@ -209,14 +207,14 @@ class _CadastroState extends State<Cadastro> {
                 Column(
                   children: [
                     CircleAvatar(
-                      backgroundColor: Cores.Cinza,
+                      backgroundColor: Cores.cinza,
                       child: Image.asset('assets/acesso/microsoft.png'),
                     ),
                     Text(
                       'Microsoft',
                       style: GoogleFonts.inter(
                         fontSize: 15,
-                        color: Cores.Cinza,
+                        color: Cores.cinza,
                       ),
                     )
                   ],
@@ -227,7 +225,7 @@ class _CadastroState extends State<Cadastro> {
                 Column(
                   children: [
                     CircleAvatar(
-                      backgroundColor: Cores.Cinza,
+                      backgroundColor: Cores.cinza,
                       child: Image.asset(
                         'assets/acesso/google.png',
                       ),
@@ -236,7 +234,7 @@ class _CadastroState extends State<Cadastro> {
                       'Google',
                       style: GoogleFonts.inter(
                         fontSize: 15,
-                        color: Cores.Cinza,
+                        color: Cores.cinza,
                       ),
                     )
                   ],
@@ -247,14 +245,14 @@ class _CadastroState extends State<Cadastro> {
                 Column(
                   children: [
                     CircleAvatar(
-                      backgroundColor: Cores.Cinza,
+                      backgroundColor: Cores.cinza,
                       child: Image.asset('assets/acesso/convidado.png'),
                     ),
                     Text(
                       'Convidado',
                       style: GoogleFonts.inter(
                         fontSize: 15,
-                        color: Cores.Cinza,
+                        color: Cores.cinza,
                       ),
                     )
                   ],
@@ -263,11 +261,13 @@ class _CadastroState extends State<Cadastro> {
             ),
           ),
           GestureDetector(
-            onTap: (){
+            onTap: () {
               Navigator.push(
                   context,
                   PageTransition(
-                      child: AllPages(paginaAtual: 0),
+                      child: AllPages(
+                        paginaAtual: 0,
+                      ),
                       type: PageTransitionType.rightToLeft));
             },
             child: Padding(
@@ -277,8 +277,8 @@ class _CadastroState extends State<Cadastro> {
                 height: 52,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [
-                      Cores.Azul47BBEC,
-                      Cores.Azul42A5F5,
+                      Cores.azul47BBEC,
+                      Cores.azul42A5F5,
                     ], begin: Alignment.topLeft, end: Alignment.bottomRight),
                     borderRadius: BorderRadius.circular(20)),
                 child: Center(
@@ -287,14 +287,12 @@ class _CadastroState extends State<Cadastro> {
                     style: GoogleFonts.raleway(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color: Cores.Branco),
+                        color: Cores.branco),
                   ),
                 ),
               ),
             ),
           ),
-
-
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
             child: GestureDetector(
@@ -306,7 +304,7 @@ class _CadastroState extends State<Cadastro> {
               child: Text(
                 'Não tem uma conta? Cadastre-se',
                 style: GoogleFonts.inter(
-                  color: Cores.Azul45B0F0,
+                  color: Cores.azul45B0F0,
                   fontSize: 18,
                   fontWeight: FontWeight.w400,
                 ),
@@ -319,7 +317,6 @@ class _CadastroState extends State<Cadastro> {
     );
   }
 }
-
 
 class CaixaTexto extends StatefulWidget {
   CaixaTexto({Key? key, required this.hint, required this.icon})

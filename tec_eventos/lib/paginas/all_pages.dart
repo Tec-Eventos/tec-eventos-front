@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:tec_eventos/componentes/Appbar/appbar.dart';
+import 'package:tec_eventos/componentes/Appbar/AppBarPaginaPrincipal/appbarpages.dart';
 import 'package:tec_eventos/componentes/Drawer/drawer.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/paginas/configuracoes/config.dart';
@@ -13,16 +12,14 @@ import 'package:tec_eventos/paginas/ranking_page/ranking.dart';
 
 class AllPages extends StatefulWidget {
   AllPages({Key? key, required this.paginaAtual}) : super(key: key);
+
   int paginaAtual;
   @override
   State<AllPages> createState() => _AllPagesState();
 }
 
-
-
 class _AllPagesState extends State<AllPages> {
   late PageController _pageController;
-
   //controle das páginas
   @override
   void initState() {
@@ -40,7 +37,6 @@ class _AllPagesState extends State<AllPages> {
   Widget build(BuildContext context) {
     double displayWidth = MediaQuery.of(context).size.width;
 
-
     return Scaffold(
       backgroundColor: Colors.white,
       drawer:
@@ -54,11 +50,10 @@ class _AllPagesState extends State<AllPages> {
           const AppBarPages(),
         ],
 
-
         //aqui é o corpo da página, ou seja,
         //onde vai ficar o conteúdo dela, deixe ela dentro de um ListView com o Axis.vertical.
         body: PageView.builder(
-            itemCount: lista_pages.length,
+            itemCount: listaPages.length,
             controller: _pageController,
             onPageChanged: (index) {
               setState(() {
@@ -66,18 +61,18 @@ class _AllPagesState extends State<AllPages> {
               });
             },
             itemBuilder: (context, index) =>
-                Paginas(paginas: lista_pages[index])),
+                Paginas(paginas: listaPages[index])),
       ),
       bottomNavigationBar: Container(
         margin: EdgeInsets.all(displayWidth / 50),
         height: 58,
         decoration: BoxDecoration(
-          color: Cores.AzulCinzento,
+          color: Cores.azulCinzento,
           boxShadow: [
             BoxShadow(
-              color: Cores.Preto.withOpacity(.1),
+              color: Cores.preto.withOpacity(.1),
               blurRadius: 30,
-              offset: Offset(0, 10),
+              offset: const Offset(0, 10),
             )
           ],
           borderRadius: BorderRadius.circular(20),
@@ -89,22 +84,20 @@ class _AllPagesState extends State<AllPages> {
               rippleColor: Colors.grey[300]!,
               hoverColor: Colors.grey[100]!,
               gap: 25,
-              activeColor: Cores.Azul42A5F5,
+              activeColor: Cores.azul42A5F5,
               iconSize: 20,
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
               duration: const Duration(milliseconds: 400),
               tabBackgroundColor: Colors.grey[100]!,
-              color: Cores.Preto,
+              color: Cores.preto,
               tabs: [
                 GButton(
-
                   icon: Icons.home_outlined,
                   text: 'Página Inicial',
                   textStyle: GoogleFonts.raleway(
-                     fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                    color: Cores.Azul42A5F5
-                  ),
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: Cores.azul42A5F5),
                 ),
                 GButton(
                   icon: Icons.confirmation_num_outlined,
@@ -112,8 +105,7 @@ class _AllPagesState extends State<AllPages> {
                   textStyle: GoogleFonts.raleway(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
-                      color: Cores.Azul42A5F5
-                  ),
+                      color: Cores.azul42A5F5),
                 ),
                 GButton(
                   icon: Icons.workspace_premium_outlined,
@@ -121,8 +113,7 @@ class _AllPagesState extends State<AllPages> {
                   textStyle: GoogleFonts.raleway(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
-                      color: Cores.Azul42A5F5
-                  ),
+                      color: Cores.azul42A5F5),
                 ),
                 GButton(
                   icon: Icons.notifications_none_outlined,
@@ -130,18 +121,15 @@ class _AllPagesState extends State<AllPages> {
                   textStyle: GoogleFonts.raleway(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
-                      color: Cores.Azul42A5F5
-                  ),
+                      color: Cores.azul42A5F5),
                 ),
-
                 GButton(
                   icon: Icons.settings_outlined,
                   text: 'Configurações',
                   textStyle: GoogleFonts.raleway(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
-                      color: Cores.Azul42A5F5
-                  ),
+                      color: Cores.azul42A5F5),
                 ),
               ],
               selectedIndex: widget.paginaAtual,
@@ -167,15 +155,13 @@ const List<String> nomesPages = [
   'Configurações',
 ];
 
-
-const List<Widget> lista_pages = [
+const List<Widget> listaPages = [
   PrincipalPage(),
   EventosPage(),
   Ranking(),
-  notification_page(),
-  configuration_page(),
+  NotificationPage(),
+  ConfigurationPage(),
 ];
-
 
 class Paginas extends StatefulWidget {
   const Paginas({Key? key, required this.paginas}) : super(key: key);
@@ -192,4 +178,3 @@ class _PaginasState extends State<Paginas> {
     return widget.paginas;
   }
 }
-

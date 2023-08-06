@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/paginas/all_pages.dart';
 import 'package:tec_eventos/paginas/eventos_inscritos/eventos_inscritos.dart';
@@ -137,9 +136,7 @@ class _DrawerPagesState extends State<DrawerPages> {
                   Navigator.push(
                       context,
                       PageTransition(
-                          child: EventosInscritos(
-                            paginaAtual: 0,
-                          ),
+                          child: const EventosInscritos(),
                           type: PageTransitionType.rightToLeft));
                 },
               ),
@@ -175,8 +172,8 @@ class _DrawerPagesState extends State<DrawerPages> {
                         value: true,
                         textOn: "",
                         textOff: "",
-                        colorOn: Cores.AzulClaro,
-                        colorOff: Cores.AzulCinzento,
+                        colorOn: Cores.azulClaro,
+                        colorOff: Cores.azulCinzento,
                         iconOn: Icons.dark_mode_outlined,
                         iconOff: Icons.sunny,
                         textSize: 12,
@@ -188,22 +185,7 @@ class _DrawerPagesState extends State<DrawerPages> {
                     )
                   ],
                 ),
-                onTap: () async {
-                  final Future<SharedPreferences> _prefs =
-                      SharedPreferences.getInstance();
-                  final SharedPreferences prefs = await _prefs;
-
-                  final bool? modoEscuro = prefs.getBool('modo_escuro');
-
-                  if (modoEscuro == true) {
-                    prefs.setBool("modoEscuro", false);
-                  } else {
-                    prefs.setBool("modoEscuro", true);
-                  }
-                  // Navigator.of(context).push(
-                  //   MaterialPageRoute(builder: (_) =>),
-                  // );
-                },
+                onTap: () {},
               ),
               ListTile(
                 leading:
@@ -277,7 +259,7 @@ class MenuOptionsAssetIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: ImageIcon(AssetImage(icone), color: Cores.Preto),
+      leading: ImageIcon(AssetImage(icone), color: Cores.preto),
       title: Text(opcao, style: GoogleFonts.inter(fontSize: 12)),
       trailing: const Icon(Icons.arrow_forward_ios_outlined, size: 12),
       onTap: () {
@@ -318,7 +300,7 @@ confirmacao(BuildContext context) {
                 child: Text(
                   "SIM",
                   style: GoogleFonts.inter(
-                      color: Cores.Azul42A5F5, fontWeight: FontWeight.bold),
+                      color: Cores.azul42A5F5, fontWeight: FontWeight.bold),
                 )),
             TextButton(
                 onPressed: () {
@@ -327,7 +309,7 @@ confirmacao(BuildContext context) {
                 child: Text(
                   "NÃO",
                   style: GoogleFonts.inter(
-                      color: Cores.Azul42A5F5, fontWeight: FontWeight.bold),
+                      color: Cores.azul42A5F5, fontWeight: FontWeight.bold),
                 )),
           ],
         );

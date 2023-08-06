@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tec_eventos/cores.dart';
 
-class notification_page extends StatefulWidget {
-  const notification_page({Key? key}) : super(key: key);
+class NotificationPage extends StatefulWidget {
+  const NotificationPage({Key? key}) : super(key: key);
 
   @override
-  State<notification_page> createState() => _notification_pageState();
+  State<NotificationPage> createState() => _NotificationPageState();
 }
 
 
 
 
-class _notification_pageState extends State<notification_page> {
+class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -33,20 +33,20 @@ class _notification_pageState extends State<notification_page> {
 
       const SizedBox(height: 30),
 
-      Seguir(imagem: 'assets/imgPerfil.png', nomeUser: 'Gabriel', profissao: "Desempregado"),
-      Seguir(imagem: 'assets/imgPerfil.png', nomeUser: 'Rodinei', profissao: "Desempregado"),
-      Seguir(imagem: 'assets/imgPerfil.png', nomeUser: 'Chamego', profissao: "Desempregado"),
-      Seguir(imagem: 'assets/imgPerfil.png', nomeUser: 'Lorosvaldo', profissao: "Desempregado"),
-      Seguir(imagem: 'assets/imgPerfil.png', nomeUser: 'Gabriel', profissao: "Desempregado"),
+      const Seguir(imagem: 'assets/imgPerfil.png', nomeUser: 'Gabriel', profissao: "Desempregado"),
+      const Seguir(imagem: 'assets/imgPerfil.png', nomeUser: 'Rodinei', profissao: "Desempregado"),
+      const Seguir(imagem: 'assets/imgPerfil.png', nomeUser: 'Chamego', profissao: "Desempregado"),
+      const Seguir(imagem: 'assets/imgPerfil.png', nomeUser: 'Lorosvaldo', profissao: "Desempregado"),
+      const Seguir(imagem: 'assets/imgPerfil.png', nomeUser: 'Gabriel', profissao: "Desempregado"),
 
       const SizedBox(height: 30),
       data('Mês anterior'),
 
-      Seguir(imagem: 'assets/imgPerfil.png', nomeUser: 'Gabriel', profissao: "Desempregado"),
-      Seguir(imagem: 'assets/imgPerfil.png', nomeUser: 'Phineas', profissao: "Desempregado"),
-      Seguir(imagem: 'assets/imgPerfil.png', nomeUser: 'Ferp', profissao: "Desempregado"),
-      Seguir(imagem: 'assets/imgPerfil.png', nomeUser: 'Gabriel', profissao: "Desempregado"),
-      Seguir(imagem: 'assets/imgPerfil.png', nomeUser: 'Gabriel', profissao: "Desempregado"),
+      const Seguir(imagem: 'assets/imgPerfil.png', nomeUser: 'Gabriel', profissao: "Desempregado"),
+      const Seguir(imagem: 'assets/imgPerfil.png', nomeUser: 'Phineas', profissao: "Desempregado"),
+      const Seguir(imagem: 'assets/imgPerfil.png', nomeUser: 'Ferp', profissao: "Desempregado"),
+      const Seguir(imagem: 'assets/imgPerfil.png', nomeUser: 'Gabriel', profissao: "Desempregado"),
+      const Seguir(imagem: 'assets/imgPerfil.png', nomeUser: 'Gabriel', profissao: "Desempregado"),
 
 
 
@@ -69,11 +69,9 @@ data(String dias){
 
 
 class Seguir extends StatefulWidget {
-  Seguir({Key? key, required this.imagem, required this.nomeUser, required this.profissao}) : super(key: key);
+  const Seguir({Key? key, required this.imagem, required this.nomeUser, required this.profissao}) : super(key: key);
 
-  String imagem;
-  String nomeUser;
-  String profissao;
+  final String imagem, nomeUser, profissao;
 
 
   @override
@@ -111,7 +109,7 @@ class _SeguirState extends State<Seguir> {
           });
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: seguir ? Cores.Azul47BBEC : Cores.Preto,
+          backgroundColor: seguir ? Cores.azul47BBEC : Cores.preto,
           padding:
           const EdgeInsets.symmetric(horizontal: 10),
           shape: const RoundedRectangleBorder(

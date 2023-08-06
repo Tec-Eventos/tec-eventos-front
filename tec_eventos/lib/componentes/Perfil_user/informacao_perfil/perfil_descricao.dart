@@ -23,7 +23,7 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
   Widget build(BuildContext context) {
     return SliverAppBar(
       floating: false,
-      backgroundColor: Cores.AzulBebe,
+      backgroundColor: Cores.azulBebe,
       expandedHeight: 85,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(

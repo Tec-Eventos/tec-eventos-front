@@ -6,8 +6,8 @@ import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/pagamento/metodospagamento.dart';
 import 'package:tec_eventos/paginas/pag_inscricao_evento/google_maps.dart';
 
-class info_evento extends StatefulWidget {
-  const info_evento(
+class InfoEvento extends StatefulWidget {
+  const InfoEvento(
       {super.key,
       required this.imagemEvento,
       required this.imagemOrganizacao,
@@ -22,13 +22,13 @@ class info_evento extends StatefulWidget {
   final String nomeEvento;
 
   @override
-  State<info_evento> createState() => _info_eventoState();
+  State<InfoEvento> createState() => _InfoEventoState();
 }
 
-class _info_eventoState extends State<info_evento> {
+class _InfoEventoState extends State<InfoEvento> {
   @override
   Widget build(BuildContext context) {
-    double displayWidth = MediaQuery.of(context).size.width;
+    // double displayWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       body: NestedScrollView(
@@ -42,7 +42,7 @@ class _info_eventoState extends State<info_evento> {
           children: [
             //parte do nome, horário e organização do evento
             ListTile(
-              shape: Border(bottom: BorderSide(color: Cores.Cinza)),
+              shape: Border(bottom: BorderSide(color: Cores.cinza)),
               style: ListTileStyle.drawer,
               title: Text(
                   "${widget.diaRealizacao} às ${widget.horarioRealizacao}",
@@ -53,7 +53,7 @@ class _info_eventoState extends State<info_evento> {
               subtitle: Text(widget.nomeEvento,
                   style: GoogleFonts.raleway(
                       fontSize: 20,
-                      color: Cores.Preto,
+                      color: Cores.preto,
                       fontWeight: FontWeight.bold)),
               trailing: Image.asset(
                 widget.imagemOrganizacao,
@@ -81,10 +81,10 @@ class _info_eventoState extends State<info_evento> {
                       height: 40,
                       width: 40,
                       child: CircleAvatar(
-                          backgroundColor: Cores.Azul42A5F5,
+                          backgroundColor: Cores.azul42A5F5,
                           child: Icon(
                             Icons.chair_outlined,
-                            color: Cores.Branco,
+                            color: Cores.branco,
                             size: 20,
                           )),
                     ),
@@ -98,10 +98,10 @@ class _info_eventoState extends State<info_evento> {
                       height: 40,
                       width: 40,
                       child: CircleAvatar(
-                          backgroundColor: Cores.Azul42A5F5,
+                          backgroundColor: Cores.azul42A5F5,
                           child: Icon(
                             Icons.payments_outlined,
-                            color: Cores.Branco,
+                            color: Cores.branco,
                             size: 20,
                           )),
                     ),
@@ -134,9 +134,9 @@ class _info_eventoState extends State<info_evento> {
                     width: 135,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Cores.Branco,
+                        backgroundColor: Cores.branco,
                         side: BorderSide(
-                          color: Cores.Azul42A5F5,
+                          color: Cores.azul42A5F5,
                         ),
                       ),
                       onPressed: () {
@@ -150,13 +150,13 @@ class _info_eventoState extends State<info_evento> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Icon(Icons.location_on_outlined,
-                              color: Cores.Azul42A5F5),
+                              color: Cores.azul42A5F5),
                           Text(
                             "Ver no mapa",
                             style: GoogleFonts.raleway(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w400,
-                                color: Cores.Azul42A5F5),
+                                color: Cores.azul42A5F5),
                           ),
                         ],
                       ),
@@ -211,7 +211,7 @@ class _info_eventoState extends State<info_evento> {
         child: Container(
           height: 64,
           decoration: BoxDecoration(
-              color: Cores.Azul42A5F5,
+              color: Cores.azul42A5F5,
               borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(15), topLeft: Radius.circular(15))),
           child: Center(
@@ -220,7 +220,7 @@ class _info_eventoState extends State<info_evento> {
               style: GoogleFonts.raleway(
                   fontSize: 29,
                   fontWeight: FontWeight.bold,
-                  color: Cores.Branco),
+                  color: Cores.branco),
               textAlign: TextAlign.center,
             ),
           ),
@@ -265,7 +265,7 @@ class _AppBarEventosInfoState extends State<AppBarEventosInfo> {
         icon: Icon(
           Icons.arrow_back_ios,
           size: 30,
-          color: Cores.Branco,
+          color: Cores.branco,
         ),
       ),
     );
