@@ -75,6 +75,7 @@ class _EventosInscritosState extends State<EventosInscritos> {
   }
 }
 
+
 class Paginas extends StatefulWidget {
   const Paginas({super.key, required this.pagina});
 
@@ -104,7 +105,9 @@ class _EventosConcluidosState extends State<EventosConcluidos> {
   Widget build(BuildContext context) {
     return ListView(
       scrollDirection: Axis.vertical,
-      children: const [CardEventosConcluidos(), CardEventosNaoPresentes()],
+      children: const [
+        CardEventosConcluidos(), 
+        CardEventosNaoPresentes()],
     );
   }
 }
@@ -122,7 +125,10 @@ class _EventosPendentesState extends State<EventosPendentes> {
   Widget build(BuildContext context) {
     return ListView(
       scrollDirection: Axis.vertical,
-      children: const [CardPendentes(), CardPendentes(), CardPendentes()],
+      children: const [
+        CardPendentes(), 
+        CardPendentes(), 
+        CardPendentes()],
     );
   }
 }

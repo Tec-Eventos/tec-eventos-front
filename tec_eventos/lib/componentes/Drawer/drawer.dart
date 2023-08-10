@@ -33,7 +33,7 @@ class _DrawerPagesState extends State<DrawerPages> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          Container(
+          SizedBox(
             height: 260,
 
             //widget para o cabeçalho do Menu/Drawer

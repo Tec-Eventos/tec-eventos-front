@@ -50,7 +50,7 @@ class _AppBarMyEventsState extends State<AppBarMyEvents> {
               Icons.search,
               size: 24,
               color: Cores.preto,
-            ))
+            ))    
       ],
       bottom: PreferredSize(
           preferredSize: const Size.square(50),
