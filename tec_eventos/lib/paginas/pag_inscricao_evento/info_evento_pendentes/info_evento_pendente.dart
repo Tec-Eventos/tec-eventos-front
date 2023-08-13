@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/componentes/Perfil_user/menu_perfil/favoritos.dart';
-import 'package:tec_eventos/componentes/botaoInfoEvento/meuIngresso/meuingresso.dart';
+import 'package:tec_eventos/componentes/botaoInfoEvento/meuIngressoButton/meuingresso_button.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/paginas/pag_inscricao_evento/google_maps.dart';
 
-class InfoEventoConcluidos extends StatefulWidget {
-  const InfoEventoConcluidos({super.key});
+class InfoEventoPendentes extends StatefulWidget {
+  const InfoEventoPendentes({super.key});
 
   @override
-  State<InfoEventoConcluidos> createState() => _InfoEventoConcluidosState();
+  State<InfoEventoPendentes> createState() => _InfoEventoPendentesState();
 }
 
-class _InfoEventoConcluidosState extends State<InfoEventoConcluidos> {
+class _InfoEventoPendentesState extends State<InfoEventoPendentes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -156,7 +156,7 @@ class _InfoEventoConcluidosState extends State<InfoEventoConcluidos> {
                         fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 10),
-                  SingleChildScrollView(
+                  const SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -187,7 +187,7 @@ class _InfoEventoConcluidosState extends State<InfoEventoConcluidos> {
           ],
         ),
       ),
-      bottomNavigationBar: const MeuIngresso(),
+      bottomNavigationBar: const MeuIngressoButton(),
     );
   }
 }

@@ -38,9 +38,13 @@ class Cores {
   static Color azul1E88E5 = const Color(0xff1E88E5);
   static Color azul45B0F0 = const Color(0xff45B0F0);
   static Color azul47BBEC = const Color(0xff47BBEC);
+  static Color azul1565C0 = const Color(0xff1565C0);
+
+
 
   //Branco
   static Color branco = const Color(0xffFFFFFF);
+  static Color brancoCinzento = const Color(0xffEEEEEE);
 
   //Preto
   static Color preto = const Color(0xff000000);
@@ -50,7 +54,9 @@ class Cores {
   static Color cinzaMaisEscuro = const Color(0xff4D4A4A);
   static Color cinzaMaisClaro = const Color(0xffD1CFCF);
   static Color cinza6A6666 = const Color(0xff6A6666);
-  
+  static Color cinzaACB0B6 = const Color(0xffACB0B6);
+    static Color cinzaD8D7D7 = const Color(0xffD8D7D7);
+
   //Cores do pódio
   static Color bronze = const Color(0xffCD7F32);
   static Color amarelo = const Color(0xffFFE533);

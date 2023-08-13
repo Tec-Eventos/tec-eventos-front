@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 //Eventos favoritos do usuário
 class Favoritos extends StatefulWidget {
-  Favoritos({Key? key, required this.imgEvento, required this.imgOrg})
+  const Favoritos({Key? key, required this.imgEvento, required this.imgOrg})
       : super(key: key);
 
   final String imgEvento, imgOrg;

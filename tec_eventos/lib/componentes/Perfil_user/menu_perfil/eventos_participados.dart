@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 //Eventos participados pelo usuário
 class EventosParticipados extends StatefulWidget {
-  EventosParticipados(
+  const EventosParticipados(
       {Key? key,
         required this.imagem,
         required this.nomeEvento,

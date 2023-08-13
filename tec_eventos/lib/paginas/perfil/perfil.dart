@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:tec_eventos/componentes/Drawer/drawer.dart';
 import 'package:tec_eventos/componentes/Perfil_user/informacao_perfil/perfil_descricao.dart';
-import 'package:tec_eventos/componentes/Perfil_user/menu_perfil/eventosParticipados.dart';
+import 'package:tec_eventos/componentes/Perfil_user/menu_perfil/eventos_participados.dart';
 import 'package:tec_eventos/componentes/Perfil_user/menu_perfil/favoritos.dart';
 import 'package:tec_eventos/componentes/Perfil_user/menu_perfil/medalhas.dart';
 import 'package:tec_eventos/cores.dart';
@@ -42,19 +42,19 @@ class _PerfilState extends State<Perfil> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         //parte dos eventos participados
-                        ParticipacaoPerfil(
+                        participacaoPerfil(
                             1,
                             const Icon(Icons.school_outlined,
                                 color: Colors.black)),
 
                         //parte das medalhas
-                        ParticipacaoPerfil(
+                        participacaoPerfil(
                             2,
                             const Icon(Icons.workspace_premium_outlined,
                                 color: Colors.black)),
 
                         //parte dos eventos favoritados
-                        ParticipacaoPerfil(
+                        participacaoPerfil(
                             3,
                             const Icon(Icons.favorite_border_outlined,
                                 color: Colors.black)),
@@ -67,7 +67,7 @@ class _PerfilState extends State<Perfil> {
                   //se os eventos participados estiverem marcados
 
                   if (menu == 1) ...[
-                    Column(
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         EventosParticipados(
@@ -128,7 +128,7 @@ class _PerfilState extends State<Perfil> {
                             style: GoogleFonts.raleway(
                                 fontSize: 22, fontWeight: FontWeight.bold),
                           ),
-                          SingleChildScrollView(
+                          const SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisAlignment:
@@ -159,7 +159,7 @@ class _PerfilState extends State<Perfil> {
                             style: GoogleFonts.raleway(
                                 fontSize: 22, fontWeight: FontWeight.bold),
                           ),
-                          SingleChildScrollView(
+                          const SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisAlignment:
@@ -190,7 +190,7 @@ class _PerfilState extends State<Perfil> {
                             style: GoogleFonts.raleway(
                                 fontSize: 22, fontWeight: FontWeight.bold),
                           ),
-                          SingleChildScrollView(
+                          const SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisAlignment:
@@ -228,7 +228,7 @@ class _PerfilState extends State<Perfil> {
   }
 
   //Classe para aparecer determinado conteúdo ao clicar
-  ParticipacaoPerfil(
+  participacaoPerfil(
     int item,
     Icon icon,
   ) {

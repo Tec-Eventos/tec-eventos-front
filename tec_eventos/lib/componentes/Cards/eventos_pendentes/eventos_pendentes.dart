@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
-import 'package:tec_eventos/paginas/pag_inscricao_evento/info_evento_concluido/info_evento_concluido.dart';
+import 'package:tec_eventos/paginas/pag_inscricao_evento/info_evento_pendentes/info_evento_pendente.dart';
 
 class CardPendentes extends StatefulWidget {
   const CardPendentes({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class _CardPendentesState extends State<CardPendentes> {
         Navigator.push(
             context,
             PageTransition(
-                child: const InfoEventoConcluidos(),
+                child: const InfoEventoPendentes(),
                 type: PageTransitionType.bottomToTop));
       },
       child: Card(

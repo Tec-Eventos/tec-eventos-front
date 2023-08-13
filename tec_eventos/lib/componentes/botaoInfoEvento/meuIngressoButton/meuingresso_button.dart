@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
+import 'package:tec_eventos/paginas/meuIngresso/meu_ingresso.dart';
 
-class MeuIngresso extends StatelessWidget {
-  const MeuIngresso({super.key});
+class MeuIngressoButton extends StatelessWidget {
+  const MeuIngressoButton({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.push(
-        //     context,
-        //     PageTransition(
-        //         child: (),
-        //         type: PageTransitionType.bottomToTop));
+        Navigator.push(
+            context,
+            PageTransition(
+                child: const MeuIngresso(),
+                type: PageTransitionType.bottomToTop));
       },
       child: Container(
         height: 64,

@@ -1,21 +1,19 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/splash/splash.dart';
 
-void main() async{
+void main() async {
   //runApp(const Splash(nextScreen: false,));
 
-
-
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.dark,
+  ));
 
   runApp(const MyApp());
 }
-
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -25,12 +23,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Projeto Tec!Eventos',
       theme: ThemeData(
-
         primarySwatch: Colors.blue,
       ),
-      home: const Splash(nextScreen: true,),
-
-
+      home: const Splash(
+        nextScreen: true,
+      ),
     );
   }
 }

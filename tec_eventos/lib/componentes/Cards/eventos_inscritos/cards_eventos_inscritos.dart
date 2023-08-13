@@ -57,7 +57,7 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(7.0),
             ),
-            color: Colors.white,
+            color: Cores.branco,
             elevation: 6,
             child:
                 // COMPONENTES QUE VÃO ESTAR DENTRO DO CARD

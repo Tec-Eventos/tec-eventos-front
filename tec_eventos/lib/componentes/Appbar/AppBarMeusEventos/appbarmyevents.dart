@@ -21,6 +21,7 @@ class _AppBarMyEventsState extends State<AppBarMyEvents> {
       elevation: 0,
       floating: true,
       snap: true,
+      centerTitle: true,
       backgroundColor: Colors.white,
       expandedHeight: 35,
       leading: Builder(
@@ -36,12 +37,10 @@ class _AppBarMyEventsState extends State<AppBarMyEvents> {
               ));
         },
       ),
-      title: Center(
-        child: Text(
-          "Meus Eventos",
-          style: GoogleFonts.raleway(
-              fontWeight: FontWeight.bold, fontSize: 22, color: Cores.preto),
-        ),
+      title: Text(
+        "Meus Eventos",
+        style: GoogleFonts.raleway(
+            fontWeight: FontWeight.bold, fontSize: 22, color: Cores.preto),
       ),
       actions: [
         IconButton(
@@ -50,7 +49,7 @@ class _AppBarMyEventsState extends State<AppBarMyEvents> {
               Icons.search,
               size: 24,
               color: Cores.preto,
-            ))    
+            ))
       ],
       bottom: PreferredSize(
           preferredSize: const Size.square(50),

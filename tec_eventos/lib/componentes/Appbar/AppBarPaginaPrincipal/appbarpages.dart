@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/paginas/perfil/perfil.dart';
 
 class AppBarPages extends StatelessWidget {
@@ -12,7 +13,8 @@ class AppBarPages extends StatelessWidget {
       elevation: 0,
       floating: true,
       snap: true,
-      backgroundColor: Colors.white,
+      centerTitle: true,
+      backgroundColor: Cores.branco,
       expandedHeight: 35,
       leading: Builder(
         builder: (BuildContext context) {
@@ -31,23 +33,21 @@ class AppBarPages extends StatelessWidget {
           child: TextFormField(
             decoration: InputDecoration(
               isDense: true,
-              suffixIcon: const Icon(
+              suffixIcon: Icon(
                 Icons.search,
-                color: Colors.black,
+                color: Cores.preto,
               ),
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 5.0, horizontal: 8.0),
               filled: true,
-              fillColor: Color(0xffEEEEEE),
+              fillColor: Cores.brancoCinzento,
               focusedBorder: OutlineInputBorder(
-                borderSide:
-                    const BorderSide(color: Color(0xffEEEEEE), width: 1.0),
+                borderSide: BorderSide(color: Cores.branco, width: 1.0),
                 borderRadius: BorderRadius.circular(30),
               ),
               labelStyle: GoogleFonts.raleway(fontSize: 12),
               enabledBorder: OutlineInputBorder(
-                borderSide:
-                    const BorderSide(color: Color(0xffEEEEEE), width: 1.0),
+                borderSide: BorderSide(color: Cores.branco, width: 1.0),
                 borderRadius: BorderRadius.circular(30.0),
               ),
               hintText: "Pesquise eventos do seu interesse",
@@ -65,8 +65,8 @@ class AppBarPages extends StatelessWidget {
                     child: const Perfil(),
                     type: PageTransitionType.rightToLeft));
           },
-          icon: const Icon(Icons.account_circle_outlined,
-              size: 31.0, color: Colors.black),
+          icon: Icon(Icons.account_circle_outlined,
+              size: 31.0, color: Cores.preto),
         )
       ],
     );
