@@ -5,7 +5,7 @@ import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_credit_card/credit_card_form.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
 
-import 'package:tec_eventos/pagamento/metodospagamento.dart';
+import 'package:tec_eventos/paginas/pagamento/metodospagamento.dart';
 
 class CardsComponent extends StatefulWidget {
   const CardsComponent({Key? key}) : super(key: key);

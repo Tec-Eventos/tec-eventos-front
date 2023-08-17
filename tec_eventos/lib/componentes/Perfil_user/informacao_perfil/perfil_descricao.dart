@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
-import 'package:tec_eventos/pagamento/editarPerfil.dart';
+import 'package:tec_eventos/paginas/perfil/editarPerfil/editarPerfil.dart';
 import 'package:tec_eventos/paginas/all_pages.dart';
 
 

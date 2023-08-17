@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/splash/splash.dart';
 
 void main() async {

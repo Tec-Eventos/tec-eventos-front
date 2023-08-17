@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/pagamento/metodospagamento.dart';
+import 'package:tec_eventos/paginas/pagamento/metodospagamento.dart';
 
 class Inscrever extends StatelessWidget {
   const Inscrever({super.key});

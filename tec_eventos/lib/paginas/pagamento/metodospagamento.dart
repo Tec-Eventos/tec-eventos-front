@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 // import 'package:page_transition/page_transition.dart';
-import 'package:tec_eventos/pagamento/containersPagamentos.dart';
-import 'package:tec_eventos/pagamento/filtroPagamentos.dart';
+import 'package:tec_eventos/paginas/pagamento/componentsPagamentos/containersPagamentos.dart';
+import 'package:tec_eventos/paginas/pagamento/componentsPagamentos/filtroPagamentos.dart';
 
 class MetodosPagamento extends StatefulWidget {
 

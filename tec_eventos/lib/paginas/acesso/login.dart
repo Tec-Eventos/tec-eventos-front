@@ -14,7 +14,7 @@ class LoginPage extends StatefulWidget {
 }
 
 int mudancaBottomSheet = 0;
-Widget conteudoBottomSheet = const EnvioEmail();
+Widget conteudoVerificacao = EnvioEmail();
 
 class _LoginPageState extends State<LoginPage> {
   bool selectedValue = true;
@@ -48,11 +48,13 @@ class _LoginPageState extends State<LoginPage> {
               fontSize: 28,
             ),
           ),
-          Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-            CaixaTexto(icon: Icons.email_outlined, hint: "E-mail"),
-            CaixaTexto(icon: Icons.person_2_outlined, hint: "Usuário"),
-            CaixaTexto(icon: Icons.lock_outlined, hint: "Senha")
-          ]),
+          const Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                CaixaTexto(icon: Icons.email_outlined, hint: "E-mail"),
+                CaixaTexto(icon: Icons.person_2_outlined, hint: "Usuário"),
+                CaixaTexto(icon: Icons.lock_outlined, hint: "Senha")
+              ]),
           ListTile(
             titleAlignment: ListTileTitleAlignment.center,
             autofocus: true,
@@ -86,18 +88,19 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius:
                             BorderRadius.vertical(top: Radius.circular(25))),
                     builder: (context) {
-                      return Padding(
-                        padding: MediaQuery.of(context).viewInsets,
-                        child: SizedBox(
-                          height: 371,
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [conteudoBottomSheet]),
+                      return StatefulBuilder(builder:
+                          (BuildContext context, StateSetter setState) {
+                        return Padding(
+                          padding: MediaQuery.of(context).viewInsets,
+                          child: SizedBox(
+                            height: 371,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: conteudoVerificacao,
+                            ),
                           ),
-                        ),
-                      );
+                        );
+                      });
                     });
               },
               child: Text(
@@ -352,9 +355,8 @@ class _EnvioEmailState extends State<EnvioEmail> {
       GestureDetector(
         onTap: () {
           setState(() {
-            conteudoBottomSheet = const VerificacaoCodigo();
+            conteudoVerificacao = VerificacaoCodigo();
           });
-          Navigator.of(context);
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -477,7 +479,8 @@ class _CodigoVerificadorState extends State<CodigoVerificador> {
                       context,
                       PageTransition(
                           child: AllPages(paginaAtual: 0),
-                          type: PageTransitionType.rightToLeft));
+                          type: PageTransitionType.rightToLeft,
+                          duration: const Duration(milliseconds: 200)));
                 } else {
                   return "Pin incorreto";
                 }

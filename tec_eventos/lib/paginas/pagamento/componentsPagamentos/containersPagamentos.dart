@@ -3,8 +3,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tec_eventos/pagamento/cardsteceventos.dart';
-import 'package:tec_eventos/pagamento/precos.dart';
+import 'package:tec_eventos/paginas/pagamento/componentsPagamentos/cardsteceventos.dart';
+import 'package:tec_eventos/paginas/pagamento/componentsPagamentos/precos.dart';
 
 class CardsGeral extends StatelessWidget{
 
