@@ -19,6 +19,7 @@ class ConfigurationPage extends StatelessWidget {
               fontFamily: Fontes.raleway,
               fontWeight: FontWeight.w600,
               color: Cores.preto,
+              fontSize: 24
             ),
             textAlign: TextAlign.center,
           ),

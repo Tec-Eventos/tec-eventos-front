@@ -57,7 +57,7 @@ class _EventosPageState extends State<EventosPage> {
                     fontSize: 22,
                     color: Cores.preto)),
 
-            SingleChildScrollView(
+            const SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
