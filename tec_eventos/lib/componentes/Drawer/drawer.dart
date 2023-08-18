@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/paginas/all_pages.dart';
 import 'package:tec_eventos/paginas/eventos_inscritos/eventos_inscritos.dart';
 import 'package:tec_eventos/paginas/perfil/perfil.dart';
@@ -281,36 +282,35 @@ confirmacao(BuildContext context) {
           shape: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
-          title: Text(
-            "Deseja sair do app?",
-            style:
-                GoogleFonts.inter(fontSize: 20.0, fontWeight: FontWeight.bold),
-          ),
-          content: Text(
-            "Ao clicar em sim, você sairá do nosso aplicativo.",
-            style: GoogleFonts.inter(
-              fontSize: 15.0,
-            ),
-          ),
+          title: Text("Deseja sair do app?",
+              style: TextStyle(
+                  fontFamily: Fontes.inter,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold)),
+          content: Text("Ao clicar em sim, você sairá do nosso aplicativo.",
+              style: TextStyle(
+                  fontFamily: Fontes.inter,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold)),
           actions: [
             TextButton(
                 onPressed: () {
                   SystemNavigator.pop();
                 },
-                child: Text(
-                  "SIM",
-                  style: GoogleFonts.inter(
-                      color: Cores.azul42A5F5, fontWeight: FontWeight.bold),
-                )),
+                child: Text("SIM",
+                    style: TextStyle(
+                        fontFamily: Fontes.inter,
+                        fontWeight: FontWeight.bold,
+                        color: Cores.azul42A5F5))),
             TextButton(
                 onPressed: () {
                   Navigator.of(context).pop(context);
                 },
-                child: Text(
-                  "NÃO",
-                  style: GoogleFonts.inter(
-                      color: Cores.azul42A5F5, fontWeight: FontWeight.bold),
-                )),
+                child: Text("NÃO",
+                    style: TextStyle(
+                        fontFamily: Fontes.inter,
+                        fontWeight: FontWeight.bold,
+                        color: Cores.azul42A5F5))),
           ],
         );
       });
