@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'package:camera_camera/camera_camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -18,6 +20,8 @@ class _EditProfileUserState extends State<EditProfileUser> {
 
   @override
   Widget build(BuildContext context) {
+    File arquivo;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xffE3F2FD),
@@ -106,8 +110,31 @@ class _EditProfileUserState extends State<EditProfileUser> {
                                                           padding:
                                                               const EdgeInsets
                                                                   .all(20.0),
-                                                          child: Container(
-                                                            child: Text("data"),
+                                                          child: Column(
+                                                            children: [
+                                                              ElevatedButton
+                                                                  .icon(
+                                                                      onPressed: () => Get.to(() => CameraCamera(
+                                                                          onFile: (file) => print(
+                                                                              file))),
+                                                                      icon: Icon(
+                                                                          Icons
+                                                                              .camera),
+                                                                      label:
+                                                                          Padding(
+                                                                        padding:
+                                                                            EdgeInsets.all(16.0),
+                                                                        child: Text(
+                                                                            "Tire uma foto"),
+                                                                      )),
+                                                              OutlinedButton.icon(
+                                                                  onPressed:
+                                                                      () => {},
+                                                                  icon: Icon(Icons
+                                                                      .attach_email),
+                                                                  label: Text(
+                                                                      "Selecione um arquivo"))
+                                                            ],
                                                           )),
                                                     ),
                                                   );

@@ -1,9 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tec_eventos">
+
+     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+
    <application
         android:label="Tec!Eventos"
         android:name="${applicationName}"
+        android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/launcher_icon">
+
 
        <meta-data android:name="com.google.android.geo.API_KEY"
            android:value="AIzaSyDwCs-IN58OuPxx5NSWvLknS7uLghl8yhc"/>
