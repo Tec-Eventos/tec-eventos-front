@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:tec_eventos/cameraAccess/preview_page.dart';
 import 'package:tec_eventos/paginas/perfil/editarPerfil/componentsPerfil/textFormFieldEditUser.dart';
+import 'package:tec_eventos/widgets/anexo.dart';
 
 class EditProfileUser extends StatefulWidget {
   const EditProfileUser({Key? key}) : super(key: key);
@@ -87,86 +88,10 @@ class _EditProfileUserState extends State<EditProfileUser> {
                       children: [
                         Stack(
                           children: [
-                            Container(
-                              margin: const EdgeInsets.only(top: 4),
-                              child: SizedBox(
-                                height: 130,
-                                width: 130,
-                                child: imagePerfil == null
-                                    ? GestureDetector(
-                                        onTap: () {
-                                          showModalBottomSheet(
-                                              context: context,
-                                              isScrollControlled: true,
-                                              // padding: EdgeIn
-                                              shape:
-                                                  const RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.vertical(
-                                                              top: Radius
-                                                                  .circular(
-                                                                      25))),
-                                              builder: (context) {
-                                                return StatefulBuilder(builder:
-                                                    (BuildContext context,
-                                                        StateSetter setState) {
-                                                  return Padding(
-                                                    padding:
-                                                        MediaQuery.of(context)
-                                                            .viewInsets,
-                                                    child: SizedBox(
-                                                      height: 171,
-                                                      child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(20.0),
-                                                          child: Column(
-                                                            children: [
-                                                              ElevatedButton
-                                                                  .icon(
-                                                                      onPressed: () => Get.to(() => CameraCamera(
-                                                                          onFile: (file) => showPreview(
-                                                                              file))),
-                                                                      icon: const Icon(
-                                                                          Icons
-                                                                              .camera),
-                                                                      label:
-                                                                          const Padding(
-                                                                        padding:
-                                                                            EdgeInsets.all(16.0),
-                                                                        child: Text(
-                                                                            "Tire uma foto"),
-                                                                      )),
-                                                              OutlinedButton.icon(
-                                                                  onPressed:
-                                                                      () => {},
-                                                                  icon: const Icon(
-                                                                      Icons
-                                                                          .attach_email),
-                                                                  label: const Text(
-                                                                      "Selecione um arquivo"))
-                                                            ],
-                                                          )),
-                                                    ),
-                                                  );
-                                                });
-                                              });
-                                        },
-                                        child: Image.asset(
-                                          'assets/imgPerfil.png',
-                                        ),
-                                      )
-                                    : ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        child: Image.file(
-                                          imagePerfil!,
-                                          key: ValueKey(imagePerfil!.path),
-                                          fit: BoxFit.fill,
-                                        ),
-                                      ),
-                              ),
-                            ),
+                            if (arquivo != null) ...[
+                              Anexo(arquivo: arquivo)
+                            ] else
+                              Icon(Icons.check),
                             Positioned(
                               top: 12,
                               right: 0,
@@ -178,21 +103,58 @@ class _EditProfileUserState extends State<EditProfileUser> {
                                   color: const Color(0xffEBEBEB),
                                 ),
                                 child: IconButton(
-                                  onPressed: () async {
-                                    Map<Permission, PermissionStatus> statuses =
-                                        await [
-                                      Permission.storage,
-                                      Permission.camera,
-                                    ].request();
-                                    if (statuses[Permission.storage]!
-                                            .isGranted &&
-                                        statuses[Permission.camera]!
-                                            .isGranted) {
-                                      showImagePicker(context);
-                                    } else {
-                                      print(
-                                          "Alou, ta podendo falar ou ta negando permissão?");
-                                    }
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                        context: context,
+                                        isScrollControlled: true,
+                                        // padding: EdgeIn
+                                        shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.vertical(
+                                                top: Radius.circular(25))),
+                                        builder: (context) {
+                                          return StatefulBuilder(builder:
+                                              (BuildContext context,
+                                                  StateSetter setState) {
+                                            return Padding(
+                                              padding: MediaQuery.of(context)
+                                                  .viewInsets,
+                                              child: SizedBox(
+                                                height: 171,
+                                                child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            20.0),
+                                                    child: Column(
+                                                      children: [
+                                                        ElevatedButton.icon(
+                                                            onPressed: () => Get.to(
+                                                                () => CameraCamera(
+                                                                    onFile: (file) =>
+                                                                        showPreview(
+                                                                            file))),
+                                                            icon: const Icon(
+                                                                Icons.camera),
+                                                            label:
+                                                                const Padding(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(
+                                                                          16.0),
+                                                              child: Text(
+                                                                  "Tire uma foto"),
+                                                            )),
+                                                        OutlinedButton.icon(
+                                                            onPressed: () => {},
+                                                            icon: const Icon(Icons
+                                                                .attach_email),
+                                                            label: const Text(
+                                                                "Selecione um arquivo"))
+                                                      ],
+                                                    )),
+                                              ),
+                                            );
+                                          });
+                                        });
                                   },
                                   icon: const Icon(Icons.photo_camera_outlined),
                                 ),
