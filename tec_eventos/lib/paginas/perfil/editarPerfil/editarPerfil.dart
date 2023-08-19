@@ -78,80 +78,59 @@ class _EditProfileUserState extends State<EditProfileUser> {
                         Stack(
                           children: [
                             Container(
-                              margin: EdgeInsets.only(top: 4),
+                              margin: const EdgeInsets.only(top: 4),
                               child: SizedBox(
                                 height: 130,
                                 width: 130,
                                 child: imagePerfil == null
-                                    ? GestureDetector(
-                                        onTap: () {
-                                          showModalBottomSheet(
-                                              context: context,
-                                              isScrollControlled: true,
-                                              // padding: EdgeIn
-                                              shape:
-                                                  const RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.vertical(
-                                                              top: Radius
-                                                                  .circular(
-                                                                      25))),
-                                              builder: (context) {
-                                                return StatefulBuilder(builder:
-                                                    (BuildContext context,
-                                                        StateSetter setState) {
-                                                  return Padding(
-                                                    padding:
-                                                        MediaQuery.of(context)
-                                                            .viewInsets,
-                                                    child: SizedBox(
-                                                      height: 171,
-                                                      child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(20.0),
-                                                          child: Column(
-                                                            children: [
-                                                              ElevatedButton
-                                                                  .icon(
-                                                                      onPressed: () => Get.to(() => CameraCamera(
-                                                                          onFile: (file) => print(
-                                                                              file))),
-                                                                      icon: Icon(
-                                                                          Icons
-                                                                              .camera),
-                                                                      label:
-                                                                          Padding(
-                                                                        padding:
-                                                                            EdgeInsets.all(16.0),
-                                                                        child: Text(
-                                                                            "Tire uma foto"),
-                                                                      )),
-                                                              OutlinedButton.icon(
-                                                                  onPressed:
-                                                                      () => {},
-                                                                  icon: Icon(Icons
-                                                                      .attach_email),
-                                                                  label: Text(
-                                                                      "Selecione um arquivo"))
-                                                            ],
-                                                          )),
-                                                    ),
-                                                  );
-                                                });
-                                              });
+                ? GestureDetector(
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                              // padding: EdgeIn
+                            shape:const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(top: Radius.circular(25))),
+                            builder: (context) {
+                            return StatefulBuilder(builder:(BuildContext context, StateSetter setState) {
+        return Padding(
+          padding: MediaQuery.of(context).viewInsets,
+          child: SizedBox(
+            height: 171,
+            child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    ElevatedButton.icon(
+                            onPressed: () => Get.to(() => CameraCamera(onFile: (file) => print(file))),
+                            icon: const Icon(
+                                Icons.camera),
+                            label: const Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Text( "Tire uma foto"),
+                            )),
+                    OutlinedButton.icon(
+                        onPressed: () => {},
+                        icon: const Icon(Icons.attach_email),
+                        label: const Text("Selecione um arquivo"))
+                  ],
+                )),
+          ),
+        );
+      });
+    });
                                         },
                                         child: Image.asset(
-                                          'assets/imgPerfil.png',
+'assets/imgPerfil.png',
                                         ),
                                       )
                                     : ClipRRect(
                                         borderRadius:
-                                            BorderRadius.circular(100),
+                       BorderRadius.circular(100),
                                         child: Image.file(
-                                          imagePerfil!,
-                                          key: ValueKey(imagePerfil!.path),
-                                          fit: BoxFit.fill,
+                     imagePerfil!,
+                     key: ValueKey(imagePerfil!.path),
+                     fit: BoxFit.fill,
                                         ),
                                       ),
                               ),
@@ -174,13 +153,13 @@ class _EditProfileUserState extends State<EditProfileUser> {
                                       Permission.camera,
                                     ].request();
                                     if (statuses[Permission.storage]!
-                                            .isGranted &&
+                       .isGranted &&
                                         statuses[Permission.camera]!
-                                            .isGranted) {
+                       .isGranted) {
                                       showImagePicker(context);
                                     } else {
                                       print(
-                                          "Alou, ta podendo falar ou ta negando permissão?");
+                     "Alou, ta podendo falar ou ta negando permissão?");
                                     }
                                   },
                                   icon: const Icon(Icons.photo_camera_outlined),
@@ -219,7 +198,7 @@ class _EditProfileUserState extends State<EditProfileUser> {
             const SizedBox(
               height: 35,
             ),
-            TextFFEditUser(
+            const TextFFEditUser(
               keyBoardType: TextInputType.text,
               conteudoCampo: "Gabriel Felix",
               iconeInicio: Icon(
@@ -232,14 +211,14 @@ class _EditProfileUserState extends State<EditProfileUser> {
             ),
             TextFFEditUser(
               conteudoCampo: "+55 (14) 997684312",
-              iconeInicio: Icon(Icons.call_outlined, size: 17),
+              iconeInicio: const Icon(Icons.call_outlined, size: 17),
               keyBoardType: TextInputType.phone,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             ),
             const SizedBox(
               height: 20,
             ),
-            TextFFEditUser(
+            const TextFFEditUser(
               keyBoardType: TextInputType.emailAddress,
               conteudoCampo: "gabriel123@etec.com",
               iconeInicio: Icon(Icons.email_outlined, size: 17),
@@ -250,13 +229,13 @@ class _EditProfileUserState extends State<EditProfileUser> {
             TextFFEditUser(
               keyBoardType: TextInputType.number,
               conteudoCampo: "RM - 21091",
-              iconeInicio: Icon(Icons.qr_code_2, size: 17),
+              iconeInicio: const Icon(Icons.qr_code_2, size: 17),
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             ),
             const SizedBox(
               height: 20,
             ),
-            TextFFEditUser(
+            const TextFFEditUser(
               keyBoardType: TextInputType.text,
               conteudoCampo: "Etec Antonio Devisate",
               iconeInicio: Icon(Icons.school_outlined, size: 17),
@@ -264,7 +243,7 @@ class _EditProfileUserState extends State<EditProfileUser> {
             const SizedBox(
               height: 20,
             ),
-            TextFFEditUser(
+            const TextFFEditUser(
               keyBoardType: TextInputType.text,
               conteudoCampo: "Marília, SP",
               iconeInicio: Icon(Icons.location_on_outlined, size: 17),
@@ -287,7 +266,7 @@ class _EditProfileUserState extends State<EditProfileUser> {
 
   void showImagePicker(BuildContext context) {
     showModalBottomSheet(
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topRight: Radius.circular(15), topLeft: Radius.circular(15)),
         ),
@@ -311,14 +290,14 @@ class _EditProfileUserState extends State<EditProfileUser> {
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.close,
                                 size: 30,
                               ),
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width / 1.4,
-                              child: Text(
+                              child: const Text(
                                 "Foto de perfil",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -329,7 +308,7 @@ class _EditProfileUserState extends State<EditProfileUser> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     Column(
@@ -338,7 +317,7 @@ class _EditProfileUserState extends State<EditProfileUser> {
                           child: Row(
                             children: [
                               Container(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 9),
                                 width: MediaQuery.of(context).size.width / 1.1,
                                 decoration: BoxDecoration(
@@ -351,24 +330,24 @@ class _EditProfileUserState extends State<EditProfileUser> {
                                     Container(
                                       width: 55,
                                       height: 55,
-                                      child: Icon(
+                                      child: const Icon(
                                         Icons.add_photo_alternate_outlined,
                                         size: 25,
                                         color: Color(0xff1565C0),
                                       ),
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Color(0xffE3F2FD),
                                         shape: BoxShape.circle,
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 32,
                                     ),
-                                    Text(
+                                    const Text(
                                       "Ir à galeria",
                                       style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16),
+                     fontWeight: FontWeight.bold,
+                     fontSize: 16),
                                     )
                                   ],
                                 ),
@@ -382,7 +361,7 @@ class _EditProfileUserState extends State<EditProfileUser> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 21,
                     ),
                     Column(
@@ -391,7 +370,7 @@ class _EditProfileUserState extends State<EditProfileUser> {
                           child: Row(
                             children: [
                               Container(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 9),
                                 width: MediaQuery.of(context).size.width / 1.1,
                                 decoration: BoxDecoration(
@@ -404,24 +383,24 @@ class _EditProfileUserState extends State<EditProfileUser> {
                                     Container(
                                       width: 55,
                                       height: 55,
-                                      child: Icon(
+                                      child: const Icon(
                                         Icons.add_a_photo_outlined,
                                         size: 25,
                                         color: Color(0xff1565C0),
                                       ),
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Color(0xffE3F2FD),
                                         shape: BoxShape.circle,
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 32,
                                     ),
-                                    Text(
+                                    const Text(
                                       "Tirar uma foto agora",
                                       style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16),
+                     fontWeight: FontWeight.bold,
+                     fontSize: 16),
                                     )
                                   ],
                                 ),
