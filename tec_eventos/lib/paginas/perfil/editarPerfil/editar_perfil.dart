@@ -20,7 +20,7 @@ class EditProfileUser extends StatefulWidget {
 class _EditProfileUserState extends State<EditProfileUser> {
   File? imagePerfil;
 
-  late File arquivo;
+  dynamic arquivo;
 
   showPreview(file) async {
     file = await Get.to(() => PreviewPage(file: file));
@@ -88,10 +88,6 @@ class _EditProfileUserState extends State<EditProfileUser> {
                       children: [
                         Stack(
                           children: [
-                            if (arquivo != null) ...[
-                              Anexo(arquivo: arquivo)
-                            ] else
-                              Icon(Icons.check),
                             Positioned(
                               top: 12,
                               right: 0,
