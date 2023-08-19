@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:tec_eventos/cameraAccess/preview_page.dart';
 import 'package:tec_eventos/paginas/perfil/editarPerfil/componentsPerfil/textFormFieldEditUser.dart';
 
 class EditProfileUser extends StatefulWidget {
@@ -18,10 +19,19 @@ class EditProfileUser extends StatefulWidget {
 class _EditProfileUserState extends State<EditProfileUser> {
   File? imagePerfil;
 
+  late File arquivo;
+
+  showPreview(file) async {
+    file = await Get.to(() => PreviewPage(file: file));
+
+    if (file != null) {
+      setState(() => arquivo = file);
+      Get.back();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    File arquivo;
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xffE3F2FD),
@@ -83,54 +93,76 @@ class _EditProfileUserState extends State<EditProfileUser> {
                                 height: 130,
                                 width: 130,
                                 child: imagePerfil == null
-                ? GestureDetector(
-                        onTap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            isScrollControlled: true,
-                              // padding: EdgeIn
-                            shape:const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical(top: Radius.circular(25))),
-                            builder: (context) {
-                            return StatefulBuilder(builder:(BuildContext context, StateSetter setState) {
-        return Padding(
-          padding: MediaQuery.of(context).viewInsets,
-          child: SizedBox(
-            height: 171,
-            child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  children: [
-                    ElevatedButton.icon(
-                            onPressed: () => Get.to(() => CameraCamera(onFile: (file) => print(file))),
-                            icon: const Icon(
-                                Icons.camera),
-                            label: const Padding(
-                              padding: EdgeInsets.all(16.0),
-                              child: Text( "Tire uma foto"),
-                            )),
-                    OutlinedButton.icon(
-                        onPressed: () => {},
-                        icon: const Icon(Icons.attach_email),
-                        label: const Text("Selecione um arquivo"))
-                  ],
-                )),
-          ),
-        );
-      });
-    });
+                                    ? GestureDetector(
+                                        onTap: () {
+                                          showModalBottomSheet(
+                                              context: context,
+                                              isScrollControlled: true,
+                                              // padding: EdgeIn
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.vertical(
+                                                              top: Radius
+                                                                  .circular(
+                                                                      25))),
+                                              builder: (context) {
+                                                return StatefulBuilder(builder:
+                                                    (BuildContext context,
+                                                        StateSetter setState) {
+                                                  return Padding(
+                                                    padding:
+                                                        MediaQuery.of(context)
+                                                            .viewInsets,
+                                                    child: SizedBox(
+                                                      height: 171,
+                                                      child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(20.0),
+                                                          child: Column(
+                                                            children: [
+                                                              ElevatedButton
+                                                                  .icon(
+                                                                      onPressed: () => Get.to(() => CameraCamera(
+                                                                          onFile: (file) => showPreview(
+                                                                              file))),
+                                                                      icon: const Icon(
+                                                                          Icons
+                                                                              .camera),
+                                                                      label:
+                                                                          const Padding(
+                                                                        padding:
+                                                                            EdgeInsets.all(16.0),
+                                                                        child: Text(
+                                                                            "Tire uma foto"),
+                                                                      )),
+                                                              OutlinedButton.icon(
+                                                                  onPressed:
+                                                                      () => {},
+                                                                  icon: const Icon(
+                                                                      Icons
+                                                                          .attach_email),
+                                                                  label: const Text(
+                                                                      "Selecione um arquivo"))
+                                                            ],
+                                                          )),
+                                                    ),
+                                                  );
+                                                });
+                                              });
                                         },
                                         child: Image.asset(
-'assets/imgPerfil.png',
+                                          'assets/imgPerfil.png',
                                         ),
                                       )
                                     : ClipRRect(
                                         borderRadius:
-                       BorderRadius.circular(100),
+                                            BorderRadius.circular(100),
                                         child: Image.file(
-                     imagePerfil!,
-                     key: ValueKey(imagePerfil!.path),
-                     fit: BoxFit.fill,
+                                          imagePerfil!,
+                                          key: ValueKey(imagePerfil!.path),
+                                          fit: BoxFit.fill,
                                         ),
                                       ),
                               ),
@@ -153,13 +185,13 @@ class _EditProfileUserState extends State<EditProfileUser> {
                                       Permission.camera,
                                     ].request();
                                     if (statuses[Permission.storage]!
-                       .isGranted &&
+                                            .isGranted &&
                                         statuses[Permission.camera]!
-                       .isGranted) {
+                                            .isGranted) {
                                       showImagePicker(context);
                                     } else {
                                       print(
-                     "Alou, ta podendo falar ou ta negando permissão?");
+                                          "Alou, ta podendo falar ou ta negando permissão?");
                                     }
                                   },
                                   icon: const Icon(Icons.photo_camera_outlined),
@@ -346,8 +378,8 @@ class _EditProfileUserState extends State<EditProfileUser> {
                                     const Text(
                                       "Ir à galeria",
                                       style: TextStyle(
-                     fontWeight: FontWeight.bold,
-                     fontSize: 16),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16),
                                     )
                                   ],
                                 ),
@@ -399,8 +431,8 @@ class _EditProfileUserState extends State<EditProfileUser> {
                                     const Text(
                                       "Tirar uma foto agora",
                                       style: TextStyle(
-                     fontWeight: FontWeight.bold,
-                     fontSize: 16),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16),
                                     )
                                   ],
                                 ),
