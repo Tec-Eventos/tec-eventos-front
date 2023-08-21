@@ -20,7 +20,7 @@ class EditProfileUser extends StatefulWidget {
 class _EditProfileUserState extends State<EditProfileUser> {
   File? imagePerfil;
 
-  dynamic arquivo;
+  File? arquivo;
 
   showPreview(file) async {
     file = await Get.to(() => PreviewPage(file: file));
@@ -88,6 +88,10 @@ class _EditProfileUserState extends State<EditProfileUser> {
                       children: [
                         Stack(
                           children: [
+                            if (arquivo != null)
+                              Anexo(arquivo: arquivo!)
+                            else
+                              const Icon(Icons.check),
                             Positioned(
                               top: 12,
                               right: 0,
@@ -123,11 +127,14 @@ class _EditProfileUserState extends State<EditProfileUser> {
                                                     child: Column(
                                                       children: [
                                                         ElevatedButton.icon(
-                                                            onPressed: () => Get.to(
-                                                                () => CameraCamera(
-                                                                    onFile: (file) =>
-                                                                        showPreview(
-                                                                            file))),
+                                                            onPressed:
+                                                                () => Get.to(
+                                                                      () =>
+                                                                          CameraCamera(
+                                                                        onFile: (file) =>
+                                                                            showPreview(file),
+                                                                      ),
+                                                                    ),
                                                             icon: const Icon(
                                                                 Icons.camera),
                                                             label:
