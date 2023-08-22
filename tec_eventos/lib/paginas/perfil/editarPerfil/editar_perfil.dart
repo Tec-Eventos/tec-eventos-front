@@ -83,7 +83,7 @@ class _EditProfileUserState extends State<EditProfileUser> {
                                 height: 130,
                                 width: 130,
                                 child: imagePerfil == null
-                                    ? Image.asset('assets/imgPerfil.png')
+                                    ? Image.asset('assets/userperfil.png')
                                     : ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(100),
