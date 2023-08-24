@@ -189,7 +189,7 @@ class _LoginPageState extends State<LoginPage> {
                   context,
                   PageTransition(
                       child: AllPages(paginaAtual: 0),
-                      type: PageTransitionType.rightToLeft));
+                      type: PageTransitionType.bottomToTop));
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),

@@ -1,14 +1,10 @@
 import 'dart:io';
-import 'package:camera_camera/camera_camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:tec_eventos/cameraAccess/preview_page.dart';
 import 'package:tec_eventos/paginas/perfil/editarPerfil/componentsPerfil/textFormFieldEditUser.dart';
-import 'package:tec_eventos/widgets/anexo.dart';
 
 class EditProfileUser extends StatefulWidget {
   const EditProfileUser({Key? key}) : super(key: key);
@@ -78,7 +74,7 @@ class _EditProfileUserState extends State<EditProfileUser> {
                         Stack(
                           children: [
                             Container(
-                              margin: EdgeInsets.only(top: 13),
+                              margin: const EdgeInsets.only(top: 13),
                               child: SizedBox(
                                 height: 130,
                                 width: 130,
@@ -116,7 +112,7 @@ class _EditProfileUserState extends State<EditProfileUser> {
                                             .isGranted &&
                                         statuses[Permission.camera]!
                                             .isGranted) {
-                                      showImagePicker(context);
+                                      showImagePicker();
                                     } else {
                                       print(
                                           "Alou, ta podendo falar ou ta negando permissão?");
@@ -158,7 +154,7 @@ class _EditProfileUserState extends State<EditProfileUser> {
             const SizedBox(
               height: 35,
             ),
-            TextFFEditUser(
+            const TextFFEditUser(
               keyBoardType: TextInputType.text,
               conteudoCampo: "Gabriel Felix",
               iconeInicio: Icon(
@@ -171,14 +167,14 @@ class _EditProfileUserState extends State<EditProfileUser> {
             ),
             TextFFEditUser(
               conteudoCampo: "+55 (14) 997684312",
-              iconeInicio: Icon(Icons.call_outlined, size: 17),
+              iconeInicio: const Icon(Icons.call_outlined, size: 17),
               keyBoardType: TextInputType.phone,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             ),
             const SizedBox(
               height: 20,
             ),
-            TextFFEditUser(
+            const TextFFEditUser(
               keyBoardType: TextInputType.emailAddress,
               conteudoCampo: "gabriel123@etec.com",
               iconeInicio: Icon(Icons.email_outlined, size: 17),
@@ -189,13 +185,13 @@ class _EditProfileUserState extends State<EditProfileUser> {
             TextFFEditUser(
               keyBoardType: TextInputType.number,
               conteudoCampo: "RM - 21091",
-              iconeInicio: Icon(Icons.qr_code_2, size: 17),
+              iconeInicio: const Icon(Icons.qr_code_2, size: 17),
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             ),
             const SizedBox(
               height: 20,
             ),
-            TextFFEditUser(
+            const TextFFEditUser(
               keyBoardType: TextInputType.text,
               conteudoCampo: "Etec Antonio Devisate",
               iconeInicio: Icon(Icons.school_outlined, size: 17),
@@ -203,7 +199,7 @@ class _EditProfileUserState extends State<EditProfileUser> {
             const SizedBox(
               height: 20,
             ),
-            TextFFEditUser(
+            const TextFFEditUser(
               keyBoardType: TextInputType.text,
               conteudoCampo: "Marília, SP",
               iconeInicio: Icon(Icons.location_on_outlined, size: 17),
@@ -224,9 +220,9 @@ class _EditProfileUserState extends State<EditProfileUser> {
 
   final picker = ImagePicker();
 
-  void showImagePicker(BuildContext context) {
+  void showImagePicker() {
     showModalBottomSheet(
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topRight: Radius.circular(15), topLeft: Radius.circular(15)),
         ),
@@ -250,14 +246,14 @@ class _EditProfileUserState extends State<EditProfileUser> {
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.close,
                                 size: 30,
                               ),
                             ),
-                            Container(
+                            SizedBox(
                               width: MediaQuery.of(context).size.width / 1.4,
-                              child: Text(
+                              child: const Text(
                                 "Foto de perfil",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -268,7 +264,7 @@ class _EditProfileUserState extends State<EditProfileUser> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     Column(
@@ -277,7 +273,7 @@ class _EditProfileUserState extends State<EditProfileUser> {
                           child: Row(
                             children: [
                               Container(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 9),
                                 width: MediaQuery.of(context).size.width / 1.1,
                                 decoration: BoxDecoration(
@@ -290,20 +286,20 @@ class _EditProfileUserState extends State<EditProfileUser> {
                                     Container(
                                       width: 55,
                                       height: 55,
-                                      child: Icon(
+                                      child: const Icon(
                                         Icons.add_photo_alternate_outlined,
                                         size: 25,
                                         color: Color(0xff1565C0),
                                       ),
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Color(0xffE3F2FD),
                                         shape: BoxShape.circle,
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 32,
                                     ),
-                                    Text(
+                                    const Text(
                                       "Ir à galeria",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
@@ -321,7 +317,7 @@ class _EditProfileUserState extends State<EditProfileUser> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 21,
                     ),
                     Column(
@@ -330,7 +326,7 @@ class _EditProfileUserState extends State<EditProfileUser> {
                           child: Row(
                             children: [
                               Container(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 9),
                                 width: MediaQuery.of(context).size.width / 1.1,
                                 decoration: BoxDecoration(
@@ -343,20 +339,20 @@ class _EditProfileUserState extends State<EditProfileUser> {
                                     Container(
                                       width: 55,
                                       height: 55,
-                                      child: Icon(
+                                      child: const Icon(
                                         Icons.add_a_photo_outlined,
                                         size: 25,
                                         color: Color(0xff1565C0),
                                       ),
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Color(0xffE3F2FD),
                                         shape: BoxShape.circle,
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 32,
                                     ),
-                                    Text(
+                                    const Text(
                                       "Tirar uma foto agora",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,

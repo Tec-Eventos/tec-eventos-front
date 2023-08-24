@@ -3,12 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/paginas/perfil/editarPerfil/editar_perfil.dart';
-import 'package:tec_eventos/paginas/all_pages.dart';
-
-
-
-
-
 
 //classe da descricao de perfil do usuário / appbar
 class PerfilDescricao extends StatefulWidget {
@@ -36,11 +30,7 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
           size: 18,
         ),
         onPressed: () {
-          Navigator.push(
-              context,
-              PageTransition(
-                  child: AllPages(paginaAtual: 0),
-                  type: PageTransitionType.leftToRight));
+          Navigator.pop(context);
         },
       ),
 
@@ -72,13 +62,12 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
           children: [
             //descrição do perfil dentro do PrefferedSize
             GestureDetector(
-              onTap: (){
-                 Navigator.push(
-                            context,
-                            PageTransition(
-                                child:  const EditProfileUser(),
-                                type: PageTransitionType.rightToLeft));
-               
+              onTap: () {
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        child: const EditProfileUser(),
+                        type: PageTransitionType.rightToLeft));
               },
               child: const CircleAvatar(
                 radius: 50.0,
