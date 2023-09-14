@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/paginas/acesso/cadastro.dart';
+import 'package:tec_eventos/paginas/acesso/forgetPasswordProccess/verificacao_codigo.dart';
 import 'package:tec_eventos/paginas/all_pages.dart';
-import 'package:pinput/pinput.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -53,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 CaixaTexto(icon: Icons.email_outlined, hint: "E-mail"),
                 CaixaTexto(icon: Icons.person_2_outlined, hint: "Usuário"),
-                CaixaTexto(icon: Icons.lock_outlined, hint: "Senha")
+                CaixaTextoSenha(icon: Icons.lock_outlined, hint: "Senha"),
               ]),
           ListTile(
             titleAlignment: ListTileTitleAlignment.center,
@@ -385,153 +386,6 @@ class _EnvioEmailState extends State<EnvioEmail> {
   }
 }
 
-class VerificacaoCodigo extends StatefulWidget {
-  const VerificacaoCodigo({super.key});
-
-  @override
-  State<VerificacaoCodigo> createState() => _VerificacaoCodigoState();
-}
-
-class _VerificacaoCodigoState extends State<VerificacaoCodigo> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(
-        "Informe o código",
-        style: GoogleFonts.inter(
-          fontSize: 23,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-      const SizedBox(height: 20),
-      Text(
-        "Informe o código de 4 digitos que mandamos para o email ************584@gmail.com",
-        style: GoogleFonts.inter(
-          fontSize: 16,
-        ),
-      ),
-      const SizedBox(height: 50),
-      Text(
-        'Código',
-        style: GoogleFonts.inter(
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-      const CodigoVerificador(),
-    ]);
-  }
-}
-
-class CodigoVerificador extends StatefulWidget {
-  const CodigoVerificador({super.key});
-
-  @override
-  State<CodigoVerificador> createState() => _CodigoVerificadorState();
-}
-
-class _CodigoVerificadorState extends State<CodigoVerificador> {
-  final pinController = TextEditingController();
-  final focusNode = FocusNode();
-  final formKey = GlobalKey<FormState>();
-
-  @override
-  void dispose() {
-    pinController.dispose();
-    focusNode.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final focusedBorderColor = Cores.verde;
-    final borderColor = Cores.preto;
-
-    final defaultPinTheme = PinTheme(
-      width: 54,
-      height: 50,
-      textStyle: GoogleFonts.inter(fontSize: 28, color: Cores.preto),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(3),
-        border: Border.all(color: borderColor),
-      ),
-    );
-
-    return Form(
-      key: formKey,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Directionality(
-            // Specify direction if desired
-            textDirection: TextDirection.ltr,
-            child: Pinput(
-              controller: pinController,
-              focusNode: focusNode,
-              androidSmsAutofillMethod:
-                  AndroidSmsAutofillMethod.smsUserConsentApi,
-              listenForMultipleSmsOnAndroid: true,
-              defaultPinTheme: defaultPinTheme,
-              validator: (value) {
-                if (value == "2222") {
-                  setState(() {
-                    conteudoVerificacao = const RedefinaSuaSenha();
-                  });
-                } else {
-                  return "Pin incorreto";
-                }
-
-                return '';
-              },
-              hapticFeedbackType: HapticFeedbackType.lightImpact,
-              onCompleted: (pin) {
-                debugPrint('onCompleted: $pin');
-              },
-              onChanged: (value) {
-                debugPrint('onChanged: $value');
-              },
-              cursor: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 9),
-                    width: 22,
-                    height: 1,
-                    color: focusedBorderColor,
-                  ),
-                ],
-              ),
-              focusedPinTheme: defaultPinTheme.copyWith(
-                decoration: defaultPinTheme.decoration!.copyWith(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: focusedBorderColor),
-                ),
-              ),
-              submittedPinTheme: defaultPinTheme.copyWith(
-                decoration: defaultPinTheme.decoration!.copyWith(
-                  borderRadius: BorderRadius.circular(19),
-                  border: Border.all(color: focusedBorderColor),
-                ),
-              ),
-              errorPinTheme: defaultPinTheme.copyBorderWith(
-                border: Border.all(color: Colors.redAccent),
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              focusNode.unfocus();
-              formKey.currentState!.validate();
-            },
-            child: const Text('Validate'),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class RedefinaSuaSenha extends StatefulWidget {
   const RedefinaSuaSenha({Key? key}) : super(key: key);
 
@@ -576,7 +430,7 @@ class _RedefinaSuaSenhaState extends State<RedefinaSuaSenha> {
               ]),
           child: TextFormField(
             decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.abc_rounded),
+              suffixIcon: Icon(Icons.visibility_off_outlined),
               isDense: true,
               hintText: "*********",
               hintStyle: TextStyle(color: Color(0xffA69F9F)),
@@ -611,10 +465,11 @@ class _RedefinaSuaSenhaState extends State<RedefinaSuaSenha> {
                 )
               ]),
           child: TextFormField(
+            obscureText: true,
             decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.email_outlined),
+              suffixIcon: Icon(Icons.visibility_off_outlined),
               isDense: true,
-              hintText: "Email",
+              hintText: "*********",
               hintStyle: TextStyle(color: Color(0xffA69F9F)),
               border: InputBorder.none,
               contentPadding:
@@ -623,8 +478,36 @@ class _RedefinaSuaSenhaState extends State<RedefinaSuaSenha> {
           ),
         ),
       ),
+      const SizedBox(height: 20),
       GestureDetector(
-        onTap: () {},
+        onTap: () {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  shape: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  title: Text("Senha redefinida!",
+                      style: TextStyle(
+                          fontFamily: Fontes.inter,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500)),
+                  actions: [
+                    TextButton(
+                        onPressed: () {
+
+                          Navigator.pop(context);
+                        },
+                        child: Text("OK",
+                            style: TextStyle(
+                                fontFamily: Fontes.inter,
+                                fontWeight: FontWeight.bold,
+                                color: Cores.azul42A5F5))),
+                  ],
+                );
+              });
+        },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Container(
@@ -637,13 +520,12 @@ class _RedefinaSuaSenhaState extends State<RedefinaSuaSenha> {
                 ], begin: Alignment.topLeft, end: Alignment.bottomRight),
                 borderRadius: BorderRadius.circular(20)),
             child: Center(
-              child: Text(
-                "Redefinir a senha",
-                style: GoogleFonts.raleway(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Cores.branco),
-              ),
+              child: Text("Redefinir a senha",
+                  style: TextStyle(
+                      fontSize: 28,
+                      fontFamily: Fontes.inter,
+                      color: Cores.branco,
+                      fontWeight: FontWeight.w500)),
             ),
           ),
         ),
@@ -651,3 +533,45 @@ class _RedefinaSuaSenhaState extends State<RedefinaSuaSenha> {
     ]);
   }
 }
+
+
+class CaixaTextoSenha extends StatelessWidget {
+  const CaixaTextoSenha({Key? key, required this.icon, required this.hint})
+      : super(key: key);
+  final IconData icon;
+  final String hint;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(30),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey[300]!,
+                offset: const Offset(10, 10),
+                blurRadius: 6,
+                spreadRadius: -5,
+              )
+            ]),
+        child: TextFormField(
+          obscureText: true,
+          decoration: InputDecoration(
+            prefixIcon: Icon(icon),
+            isDense: true,
+            hintText: hint,
+            hintStyle:
+            TextStyle(color: Color(0xffA69F9F), fontFamily: Fontes.inter),
+            border: InputBorder.none,
+            contentPadding: const EdgeInsets.only(
+                top: 18.0, right: 20, bottom: 18.0, left: 40),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
