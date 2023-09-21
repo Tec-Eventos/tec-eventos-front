@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
-import 'package:tec_eventos/paginas/pag_inscricao_evento/info_evento/info_evento.dart';
+import 'package:tec_eventos/fontes.dart';
+import 'package:tec_eventos/paginas_aluno/pag_inscricao_evento/info_evento/info_evento.dart';
 
 class Recomendados extends StatefulWidget {
   const Recomendados(
@@ -73,7 +73,8 @@ class _RecomendadosState extends State<Recomendados> {
                       //nome do Evento
                       title: Text(
                         widget.nomeEvento,
-                        style: GoogleFonts.raleway(
+                        style: TextStyle(
+                          fontFamily: Fontes.raleway,
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
                             color: Cores.preto),
@@ -82,7 +83,8 @@ class _RecomendadosState extends State<Recomendados> {
                       //descrição dele
                       subtitle: Text(
                         widget.descricao,
-                        style: GoogleFonts.raleway(
+                        style: TextStyle(
+                          fontFamily: Fontes.raleway,
                             fontSize: 7, color: Cores.preto),
                       ),
                       trailing: ElevatedButton(
@@ -100,7 +102,8 @@ class _RecomendadosState extends State<Recomendados> {
                           },
                           child: Text(
                             "Info",
-                            style: GoogleFonts.raleway(
+                            style: TextStyle(
+                              fontFamily: Fontes.raleway,
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 color: Cores.branco),

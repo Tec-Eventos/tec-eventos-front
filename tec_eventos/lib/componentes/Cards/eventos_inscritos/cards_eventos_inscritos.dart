@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
-import 'package:tec_eventos/paginas/pag_inscricao_evento/info_evento/info_evento.dart';
+import 'package:tec_eventos/fontes.dart';
+import 'package:tec_eventos/paginas_aluno/pag_inscricao_evento/info_evento/info_evento.dart';
 
 class CardEventosInscritos extends StatefulWidget {
   const CardEventosInscritos(
@@ -73,7 +73,8 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
                         SizedBox(
                           child: Text(
                             widget.nomeEvento,
-                            style: GoogleFonts.raleway(
+                            style: TextStyle(
+                              fontFamily: Fontes.raleway,
                               fontWeight: FontWeight.bold,
                               fontSize: 12,
                             ),
@@ -84,7 +85,8 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
                         //DIA QUE VAI ROLAR O EVENTO
                         Text(
                           widget.diasFaltam,
-                          style: GoogleFonts.raleway(
+                          style: TextStyle(
+                            fontFamily: Fontes.raleway,
                             fontWeight: FontWeight.bold,
                             fontSize: 13,
                             color: Cores.azul1E88E5,
@@ -96,13 +98,15 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
 
                         Text(
                           widget.diaRealizacao,
-                          style: GoogleFonts.inter(
+                          style: TextStyle(
+                            fontFamily: Fontes.inter,
                             fontSize: 9,
                           ),
                         ),
                         Text(
                           widget.horas,
-                          style: GoogleFonts.inter(
+                          style: TextStyle(
+                            fontFamily: Fontes.inter,
                             fontSize: 9,
                           ),
                         ),
@@ -123,7 +127,8 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
                             },
                             child: Text(
                               "Ver mais",
-                              style: GoogleFonts.raleway(
+                              style: TextStyle(
+                                fontFamily: Fontes.raleway,
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                   color: Cores.branco),

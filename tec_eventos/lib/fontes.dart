@@ -2,6 +2,8 @@ class Fontes {
   static String raleway = 'Raleway';
   static String ralewayBold = 'RalewayBold';
   static String inter = 'Inter';
+  static String cabinItalic = 'CabinItalic';
+  static String cabin = 'Cabin';
 }
 
 

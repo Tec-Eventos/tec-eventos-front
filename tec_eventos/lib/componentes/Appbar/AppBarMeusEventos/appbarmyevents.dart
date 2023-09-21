@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/fontes.dart';
 
 class AppBarMyEvents extends StatefulWidget {
   const AppBarMyEvents(
@@ -39,7 +40,8 @@ class _AppBarMyEventsState extends State<AppBarMyEvents> {
       ),
       title: Text(
         "Meus Eventos",
-        style: GoogleFonts.raleway(
+        style: TextStyle(
+            fontFamily: Fontes.raleway,
             fontWeight: FontWeight.bold, fontSize: 22, color: Cores.preto),
       ),
       actions: [
@@ -103,7 +105,8 @@ class _OptionMyEventsState extends State<OptionMyEvents> {
           const SizedBox(width: 10),
           Text(
             widget.nome,
-            style: GoogleFonts.raleway(
+            style: TextStyle(
+                fontFamily: Fontes.raleway,
                 fontSize: 17, fontWeight: FontWeight.bold, color: Cores.preto),
           )
         ],

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
-import 'package:tec_eventos/paginas/pag_inscricao_evento/info_evento/info_evento.dart';
+import 'package:tec_eventos/fontes.dart';
+import 'package:tec_eventos/paginas_aluno/pag_inscricao_evento/info_evento/info_evento.dart';
 
 class EventosAlta extends StatefulWidget {
   const EventosAlta(
@@ -78,7 +78,8 @@ class _EventosAltaState extends State<EventosAlta> {
                             borderRadius: BorderRadius.circular(50)),
                         child: Text(
                           widget.modalidade,
-                          style: GoogleFonts.raleway(
+                          style: TextStyle(
+                              fontFamily: Fontes.raleway,
                               fontSize: 12,
                               color: Cores.branco,
                               fontWeight: FontWeight.bold),
@@ -99,7 +100,8 @@ class _EventosAltaState extends State<EventosAlta> {
                             children: [
                               Text(
                                 widget.nomeEvento,
-                                style: GoogleFonts.raleway(
+                                style: TextStyle(
+                                    fontFamily: Fontes.raleway,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
                                     color: Cores.preto),
@@ -119,7 +121,8 @@ class _EventosAltaState extends State<EventosAlta> {
                             ),
                             Text(
                               "Marília, SP",
-                              style: GoogleFonts.raleway(
+                              style: TextStyle(
+                                  fontFamily: Fontes.raleway,
                                   fontSize: 12, color: Cores.azul42A5F5),
                             ),
                           ],
@@ -131,7 +134,8 @@ class _EventosAltaState extends State<EventosAlta> {
 
                         Text(
                           widget.descricao,
-                          style: GoogleFonts.raleway(
+                          style: TextStyle(
+                              fontFamily: Fontes.raleway,
                               fontSize: 12, color: Cores.preto),
                         ),
 
@@ -161,7 +165,8 @@ class _EventosAltaState extends State<EventosAlta> {
                                 },
                                 child: Text(
                                   "Ver mais",
-                                  style: GoogleFonts.raleway(
+                                  style: TextStyle(
+                                      fontFamily: Fontes.raleway,
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold,
                                       color: Cores.branco),

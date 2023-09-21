@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/fontes.dart';
 
 
 
@@ -33,7 +33,8 @@ class _CardEventosConcluidosState extends State<CardEventosConcluidos> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("UnivemFest",
-                            style: GoogleFonts.raleway(
+                            style: TextStyle(
+                              fontFamily: Fontes.raleway,
                                 fontSize: 17, fontWeight: FontWeight.bold)),
                         ElevatedButton(
                           onPressed: () {
@@ -53,7 +54,8 @@ class _CardEventosConcluidosState extends State<CardEventosConcluidos> {
                           ),
                           child: Text(
                             'Questionário',
-                            style: GoogleFonts.inter(
+                            style: TextStyle(
+                              fontFamily: Fontes.inter,
                                 fontSize: 17, color: Cores.azul42A5F5),
                           ),
                         )
@@ -110,10 +112,12 @@ class _CardEventosNaoPresentesState extends State<CardEventosNaoPresentes> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("UnivemFest",
-                            style: GoogleFonts.raleway(
+                            style: TextStyle(
+                              fontFamily: Fontes.raleway,
                                 fontSize: 17, fontWeight: FontWeight.bold)),
                         Text("17",
-                            style: GoogleFonts.raleway(
+                            style: TextStyle(
+                              fontFamily: Fontes.raleway,
                                 fontSize: 17, fontWeight: FontWeight.bold)),
                       ],
                     ),

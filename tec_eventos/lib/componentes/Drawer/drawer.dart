@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/paginas/all_pages.dart';
-import 'package:tec_eventos/paginas/eventos_inscritos/eventos_inscritos.dart';
-import 'package:tec_eventos/paginas/perfil/perfil.dart';
+import 'package:tec_eventos/all_pages.dart';
+import 'package:tec_eventos/paginas_aluno/eventos_inscritos/eventos_inscritos.dart';
+import 'package:tec_eventos/paginas_aluno/perfil/perfil.dart';
 
 class DrawerPages extends StatefulWidget {
   const DrawerPages({Key? key}) : super(key: key);
@@ -70,7 +69,8 @@ class _DrawerPagesState extends State<DrawerPages> {
               //nome do usuário
               accountName: Text(
                 'Gabriel',
-                style: GoogleFonts.raleway(
+                style: TextStyle(
+                    fontFamily: Fontes.raleway,
                     color: Colors.black,
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold),
@@ -87,7 +87,8 @@ class _DrawerPagesState extends State<DrawerPages> {
                       children: [
                         Text(
                           "Desempregado",
-                          style: GoogleFonts.raleway(color: Colors.black),
+                          style: TextStyle(
+                              fontFamily: Fontes.raleway, color: Colors.black),
                           textAlign: TextAlign.center,
                         ),
                       ],
@@ -97,14 +98,16 @@ class _DrawerPagesState extends State<DrawerPages> {
                       child: Row(
                         children: [
                           Text("${seguindo} seguindo",
-                              style: GoogleFonts.raleway(
+                              style: TextStyle(
+                                  fontFamily: Fontes.raleway,
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
                               textAlign: TextAlign.start),
                           const VerticalDivider(),
                           Text(
                             "${seguidores} seguidores",
-                            style: GoogleFonts.raleway(
+                            style: TextStyle(
+                                fontFamily: Fontes.raleway,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),
                             textAlign: TextAlign.start,
@@ -130,7 +133,8 @@ class _DrawerPagesState extends State<DrawerPages> {
                 leading: const Icon(Icons.confirmation_num_outlined,
                     color: Colors.black),
                 title: Text("Meus Eventos",
-                    style: GoogleFonts.inter(fontSize: 12)),
+                    style: TextStyle(fontFamily: Fontes.inter,
+                    fontSize: 12)),
                 trailing:
                     const Icon(Icons.arrow_forward_ios_outlined, size: 12),
                 onTap: () {
@@ -165,7 +169,8 @@ class _DrawerPagesState extends State<DrawerPages> {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Modo Escuro", style: GoogleFonts.inter(fontSize: 12)),
+                    Text("Modo Escuro", style: TextStyle(fontFamily: Fontes.inter,
+                    fontSize: 12)),
                     SizedBox(
                       height: 40,
                       child: LiteRollingSwitch(
@@ -194,7 +199,8 @@ class _DrawerPagesState extends State<DrawerPages> {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Sair", style: GoogleFonts.inter(fontSize: 12)),
+                    Text("Sair", style: TextStyle(fontFamily: Fontes.inter,
+                    fontSize: 12)),
                   ],
                 ),
                 onTap: () {
@@ -232,7 +238,8 @@ class MenuOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Icon(icone, color: Colors.black),
-      title: Text(opcao, style: GoogleFonts.inter(fontSize: 12)),
+      title: Text(opcao, style: TextStyle(fontFamily: Fontes.inter,
+      fontSize: 12)),
       trailing: const Icon(Icons.arrow_forward_ios_outlined, size: 12),
       onTap: () {
         Navigator.push(
@@ -261,7 +268,8 @@ class MenuOptionsAssetIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: ImageIcon(AssetImage(icone), color: Cores.preto),
-      title: Text(opcao, style: GoogleFonts.inter(fontSize: 12)),
+      title: Text(opcao, style: TextStyle(fontFamily: Fontes.inter,
+      fontSize: 12)),
       trailing: const Icon(Icons.arrow_forward_ios_outlined, size: 12),
       onTap: () {
         Navigator.push(

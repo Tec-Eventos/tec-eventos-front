@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
-import 'package:tec_eventos/paginas/pag_inscricao_evento/info_evento_pendentes/info_evento_pendente.dart';
+import 'package:tec_eventos/fontes.dart';
+import 'package:tec_eventos/paginas_aluno/pag_inscricao_evento/info_evento_pendentes/info_evento_pendente.dart';
 
 class CardPendentes extends StatefulWidget {
   const CardPendentes({Key? key}) : super(key: key);
@@ -36,13 +36,15 @@ class _CardPendentesState extends State<CardPendentes> {
               tileColor: Colors.transparent,
               leading: Text(
                 "Mês  \n 17",
-                style: GoogleFonts.raleway(
+                style: TextStyle(
+                  fontFamily: Fontes.raleway,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Cores.preto),
               ),
               title: Text("Evento, que vai acontecer ali e aqui",
-                  style: GoogleFonts.inter(
+                  style: TextStyle(
+                      fontFamily: Fontes.inter,
                       fontSize: 18, fontWeight: FontWeight.w300)),
               trailing: GestureDetector(
                 onTap: () {

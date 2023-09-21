@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
-import 'package:tec_eventos/paginas/perfil/editarPerfil/editar_perfil.dart';
+import 'package:tec_eventos/fontes.dart';
+import 'package:tec_eventos/paginas_aluno/perfil/editarPerfil/editar_perfil.dart';
 
 //classe da descricao de perfil do usuário / appbar
 class PerfilDescricao extends StatefulWidget {
@@ -78,7 +78,8 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
             SizedBox(height: MediaQuery.of(context).size.height / 50),
             Text(
               "Gabriel Felix",
-              style: GoogleFonts.raleway(
+              style: TextStyle(
+                fontFamily: Fontes.raleway,
                 fontSize: 16.0,
                 fontWeight: FontWeight.bold,
               ),
@@ -92,14 +93,16 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
                   children: [
                     Text(
                       "1000",
-                      style: GoogleFonts.raleway(
+                      style: TextStyle(
+                        fontFamily: Fontes.raleway,
                         fontSize: 12.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
                       "Seguindo",
-                      style: GoogleFonts.raleway(
+                      style: TextStyle(
+                        fontFamily: Fontes.raleway,
                         fontSize: 12.0,
                       ),
                     ),
@@ -112,14 +115,16 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
                   children: [
                     Text(
                       "1000",
-                      style: GoogleFonts.raleway(
+                      style: TextStyle(
+                        fontFamily: Fontes.raleway,
                         fontSize: 12.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
                       "Seguidores",
-                      style: GoogleFonts.raleway(
+                      style: TextStyle(
+                        fontFamily: Fontes.raleway,
                         fontSize: 12.0,
                       ),
                     ),
@@ -132,7 +137,8 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
 
             Text(
               "Desempregado",
-              style: GoogleFonts.raleway(
+              style: TextStyle(
+                fontFamily: Fontes.raleway,
                 fontSize: 13.0,
               ),
             ),
@@ -144,7 +150,8 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
                 const Icon(Icons.location_on_outlined),
                 Text(
                   "Marília-SP",
-                  style: GoogleFonts.raleway(
+                  style: TextStyle(
+                    fontFamily: Fontes.raleway,
                     fontSize: 13.0,
                   ),
                 ),

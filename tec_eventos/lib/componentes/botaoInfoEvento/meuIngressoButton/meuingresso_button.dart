@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/paginas/meuIngresso/meu_ingresso.dart';
+import 'package:tec_eventos/paginas_aluno/meuIngresso/meu_ingresso.dart';
 
 class MeuIngressoButton extends StatelessWidget {
   const MeuIngressoButton({super.key});

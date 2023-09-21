@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
-import 'package:tec_eventos/paginas/perfil/perfil.dart';
+import 'package:tec_eventos/fontes.dart';
+import 'package:tec_eventos/paginas_aluno/perfil/perfil.dart';
 
 class AppBarPages extends StatelessWidget {
   const AppBarPages({Key? key}) : super(key: key);
@@ -45,13 +45,13 @@ class AppBarPages extends StatelessWidget {
                 borderSide: BorderSide(color: Cores.branco, width: 1.0),
                 borderRadius: BorderRadius.circular(30),
               ),
-              labelStyle: GoogleFonts.raleway(fontSize: 12),
+              labelStyle: TextStyle(fontFamily: Fontes.raleway, fontSize: 12),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Cores.branco, width: 1.0),
                 borderRadius: BorderRadius.circular(30.0),
               ),
               hintText: "Pesquise eventos do seu interesse",
-              hintStyle: GoogleFonts.raleway(fontSize: 12),
+              hintStyle: TextStyle(fontFamily: Fontes.raleway, fontSize: 12),
             ),
           ),
         ),
