@@ -5,6 +5,7 @@ import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/pages/acesso/cadastro.dart';
 import 'package:tec_eventos/all_pages.dart';
+import 'package:tec_eventos/widgets/InputText/input_text.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -27,11 +28,6 @@ class _LoginPageState extends State<LoginPage> {
   //email = unicamp@gmail.com
   //user = unicamp;
   //senha = 1222
-
-  final controllerEmail = TextEditingController();
-  final controllerUser = TextEditingController();
-  final controllerSenha = TextEditingController();
-  bool passToggle = true;
 
   bool selectedValue = true;
   bool isChecked = false;
@@ -67,101 +63,21 @@ class _LoginPageState extends State<LoginPage> {
           ),
           Form(
             key: _formfield,
-            child: Column(
+            child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 20),
-                    child: TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      controller: controllerEmail,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.email_outlined),
-                        isDense: true,
-                        labelText: "Email",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30)),
-                        //   contentPadding: const EdgeInsets.only(
-                        //       top: 18.0, right: 20, bottom: 18.0, left: 40),
-                        // ),
-                      ),
-                      validator: (value) {
-                        bool emailValid = RegExp(
-                                r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-                            .hasMatch(value!);
-
-                        if (value.isEmpty) {
-                          return "Coloque o email";
-                        } else if (!emailValid) {
-                          return "Coloque um email válido";
-                        }
-                      },
-                    ),
-                  ),
-
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      child: InputTextEmail()),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 20),
-                    child: TextFormField(
-                      keyboardType: TextInputType.name,
-                      controller: controllerUser,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.person_outline_outlined),
-                        isDense: true,
-                        labelText: "Usuário",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30)),
-                      ),
-                    ),
-                  ),
-
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      child: InputTextName()),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 20),
-                    child: TextFormField(
-                      keyboardType: TextInputType.visiblePassword,
-                      controller: controllerSenha,
-                      obscureText: passToggle,
-                      decoration: InputDecoration(
-                        isDense: true,
-                        labelText: "Senha",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30)),
-                        prefixIcon: const Icon(Icons.lock),
-                        suffix: InkWell(
-                          onTap: () {
-                            setState(() {
-                              passToggle = !passToggle;
-                            });
-                          },
-                          child: Icon(passToggle
-                              ? Icons.visibility
-                              : Icons.visibility_off_outlined),
-                        ),
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Coloque a senha";
-                        } else if (controllerSenha.text.length < 6) {
-                          return "Senha curta, coloque acima de 6 caracteres";
-                        }
-                      },
-                    ),
-                  ),
-
-                  //   CaixaTexto(
-                  //     icon: Icons.email_outlined,
-                  //     hint: "E-mail",
-                  //     dadosUsuario: controllerEmail),
-                  // CaixaTexto(
-                  //     icon: Icons.person_2_outlined,
-                  //     hint: "Usuário",
-                  //     dadosUsuario: controllerUser),
-                  // CaixaTextoSenha(
-                  //     icon: Icons.lock_outlined,
-                  //     hint: "Senha",
-                  //     senhaUser: controllerSenha),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      child: InputTextPassword()),
                 ]),
           ),
           ListTile(
