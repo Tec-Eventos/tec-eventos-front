@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:tec_eventos/paginas_aluno/onBoarding/onboarding.dart';
+import 'package:tec_eventos/pages/paginas_aluno/onBoarding/onboarding.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key, required this.nextScreen}) : super(key: key);

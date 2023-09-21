@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:tec_eventos/componentes/Appbar/AppBarPaginaPrincipal/appbarpages.dart';
-import 'package:tec_eventos/componentes/Drawer/drawer.dart';
-import 'package:tec_eventos/componentes/bottomAppBar/bottom_appbar.dart';
-import 'package:tec_eventos/paginas_aluno/configuracoes/config.dart';
-import 'package:tec_eventos/paginas_aluno/notificacao_page/notification_page.dart';
-import 'package:tec_eventos/paginas_aluno/pag_eventos/eventos_page.dart';
-import 'package:tec_eventos/paginas_aluno/pag_principal/principal_page.dart';
-import 'package:tec_eventos/paginas_aluno/ranking_page/ranking.dart';
+import 'package:tec_eventos/widgets/Appbar/AppBarPaginaPrincipal/appbarpages.dart';
+import 'package:tec_eventos/widgets/Drawer/drawer.dart';
+import 'package:tec_eventos/widgets/bottomAppBar/bottom_appbar.dart';
+import 'package:tec_eventos/pages/paginas_aluno/configuracoes/config.dart';
+import 'package:tec_eventos/pages/paginas_aluno/notificacao_page/notification_page.dart';
+import 'package:tec_eventos/pages/paginas_aluno/pag_eventos/eventos_page.dart';
+import 'package:tec_eventos/pages/paginas_aluno/pag_principal/principal_page.dart';
+import 'package:tec_eventos/pages/paginas_aluno/ranking_page/ranking.dart';
 
 const List<Widget> listaPagesAlunos = [
   PrincipalPage(),
