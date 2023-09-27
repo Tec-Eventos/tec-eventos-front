@@ -4,8 +4,18 @@ import 'package:tec_eventos/pages/acesso/forgetPasswordProccess/envioEmail.dart'
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/pages/acesso/cadastro.dart';
-import 'package:tec_eventos/all_pages.dart';
+import 'package:tec_eventos/pages/all_pages.dart';
+import 'package:tec_eventos/pages/paginas_aluno/perfil/perfil.dart';
 import 'package:tec_eventos/widgets/InputText/input_text.dart';
+
+
+
+
+final controllerEmail = TextEditingController();
+final controllerSenha = TextEditingController();
+final controllerUser = TextEditingController();
+String userType = "";
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -19,6 +29,30 @@ Widget conteudoVerificacao = const EnvioEmail();
 
 class _LoginPageState extends State<LoginPage> {
   final _formfield = GlobalKey<FormState>();
+
+
+
+void validateUser(){
+  String email = controllerEmail.text;
+  String user = controllerUser.text;
+  String senha = controllerSenha.text;
+
+
+  if(email == "fgabrielmorais05@gmail.com" && user == "fgabrielmorais" && senha == "ggg111"){
+    setState((){
+      userType = "Aluno";
+    });
+  } else if(email == "unicamp@gmail.com" && user == "UnicampEvents" && senha == "uuu222"){
+    setState(() {
+      userType = "Instituição";
+    });
+  } else{
+    setState(() {
+      userType = "Desconhecido";
+    });
+  }
+}
+
   //acesso do ALUNO
   //email = bielzinho@gmail.com
   //user = fgabrielmorais;
@@ -63,21 +97,21 @@ class _LoginPageState extends State<LoginPage> {
           ),
           Form(
             key: _formfield,
-            child: const Column(
+            child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Padding(
                       padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      child: InputTextEmail()),
+                          const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      child: InputTextEmail(controllerEmail: controllerEmail)),
                   Padding(
                       padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      child: InputTextName()),
+                          const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      child: InputTextName(controllerUser: controllerUser,)),
                   Padding(
                       padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      child: InputTextPassword()),
+                          const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      child: InputTextPassword(controllerSenha: controllerSenha,)),
                 ]),
           ),
           ListTile(
@@ -226,12 +260,33 @@ class _LoginPageState extends State<LoginPage> {
               //user = unicamp;
               //senha = 1222
 
+
+
+
+            //validação do usuário
               if (_formfield.currentState!.validate()) {
+                validateUser();
+
+                if(userType == "Aluno"){
                 Navigator.push(
                     context,
                     PageTransition(
                         child: AllPages(paginaAtual: 0),
                         type: PageTransitionType.rightToLeft));
+                } else if(userType == "Instituição"){
+                     Navigator.push(
+                    context,
+                    PageTransition(
+                        child: const Perfil(),
+                        type: PageTransitionType.rightToLeft));
+                } else if(userType == "Desconhecido"){
+                  
+                 final snackbar = SnackBar(
+                  content: const Text("Usuário não encontrado"),
+                  action: SnackBarAction(label: "Ok", onPressed: (){}),);
+
+                  ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                }
 
                 // controllerEmail.clear();
                 // controllerUser.clear();

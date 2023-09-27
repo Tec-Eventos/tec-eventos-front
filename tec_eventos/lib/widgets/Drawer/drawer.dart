@@ -4,7 +4,7 @@ import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/all_pages.dart';
+import 'package:tec_eventos/pages/all_pages.dart';
 import 'package:tec_eventos/pages/paginas_aluno/eventos_inscritos/eventos_inscritos.dart';
 import 'package:tec_eventos/pages/paginas_aluno/perfil/perfil.dart';
 

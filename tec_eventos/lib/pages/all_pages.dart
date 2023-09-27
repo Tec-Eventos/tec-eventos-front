@@ -16,17 +16,11 @@ const List<Widget> listaPagesAlunos = [
   ConfigurationPage(),
 ];
 
-const List<Widget> listaPagesInstituicao = [
-  Ranking(),
-  NotificationPage(),
-  ConfigurationPage(),
-];
 
 class AllPages extends StatefulWidget {
-  AllPages({Key? key, required this.paginaAtual, this.tipoUser})
+  AllPages({Key? key, required this.paginaAtual})
       : super(key: key);
   int paginaAtual;
-  String? tipoUser;
 
   @override
   State<AllPages> createState() => _AllPagesState();

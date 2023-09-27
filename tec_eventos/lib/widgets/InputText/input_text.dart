@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:tec_eventos/all_pages.dart';
+import 'package:tec_eventos/pages/all_pages.dart';
 import 'package:tec_eventos/pages/paginas_aluno/perfil/perfil.dart';
 import 'package:tec_eventos/widgets/InputText/validations/validations_info.dart';
 
-final controllerEmail = TextEditingController();
-final controllerSenha = TextEditingController();
-final controllerUser = TextEditingController();
+
+
 
 class InputTextEmail extends StatelessWidget {
-  const InputTextEmail({super.key});
+  const InputTextEmail({super.key, required this.controllerEmail});
+
+  final TextEditingController controllerEmail;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,9 @@ class InputTextEmail extends StatelessWidget {
 }
 
 class InputTextPassword extends StatefulWidget {
-  const InputTextPassword({super.key});
+  const InputTextPassword({super.key, required this.controllerSenha});
+
+    final TextEditingController controllerSenha;
 
   @override
   State<InputTextPassword> createState() => _InputTextPasswordState();
@@ -46,7 +49,7 @@ class _InputTextPasswordState extends State<InputTextPassword> {
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: TextInputType.visiblePassword,
-      controller: controllerSenha,
+      controller: widget.controllerSenha,
       obscureText: passToggle,
       decoration: InputDecoration(
         isDense: true,
@@ -64,14 +67,16 @@ class _InputTextPasswordState extends State<InputTextPassword> {
         ),
       ),
       validator: (senha) {
-        return passwordValid(senha, controllerSenha);
+        return passwordValid(senha, widget.controllerSenha);
       },
     );
   }
 }
 
 class InputTextName extends StatelessWidget {
-  const InputTextName({super.key});
+  const InputTextName({super.key, required this.controllerUser});
+
+  final TextEditingController controllerUser;
 
   @override
   Widget build(BuildContext context) {
@@ -87,27 +92,3 @@ class InputTextName extends StatelessWidget {
     );
   }
 }
-
-// loginValid() {
-//   //acesso do ALUNO
-//   //email = bielzinho@gmail.com
-//   //user = fgabrielmorais;
-//   //senha = 123456
-
-//   //acesso da instituição
-//   //email = unicamp@gmail.com
-//   //user = unicamp;
-//   //senha = 122222
-
-//   if (controllerEmail == "bielzinho@gmail.com" &&
-//       controllerSenha == "123456" &&
-//       controllerUser == "fgabrielmorais") {
-//     print("Success");
-//   } else if (controllerEmail == "unicamp@gmail.com" &&
-//       controllerSenha == "122222" &&
-//       controllerUser == "unicamp") {
-//     print("Deu ruim");
-//   } else {
-//     print("${}");
-//   }
-// }

@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/all_pages.dart';
+import 'package:tec_eventos/pages/all_pages.dart';
 import 'package:tec_eventos/pages/paginas_aluno/configuracoes/feedback/feedback.dart';
 import 'package:tec_eventos/pages/paginas_aluno/configuracoes/privacidade/privacidade.dart';
 import 'package:tec_eventos/pages/paginas_aluno/perfil/perfil.dart';

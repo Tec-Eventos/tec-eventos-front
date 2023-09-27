@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/all_pages.dart';
+import 'package:tec_eventos/pages/all_pages.dart';
 import 'package:tec_eventos/widgets/InputText/input_text.dart';
 
 class Cadastro extends StatefulWidget {
@@ -45,29 +45,10 @@ class _CadastroState extends State<Cadastro> {
           ),
           Form(
             key: _formfield,
-            child: const Column(
+            child:  Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      child: InputTextEmail()),
-                  Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      child: InputTextEmail()),
-                  Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      child: InputTextEmail()),
-                  Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      child: InputTextName()),
-                  Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      child: InputTextPassword()),
+                
                 ]),
           ),
           const SizedBox(height: 30),
