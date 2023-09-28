@@ -69,7 +69,8 @@ class _PrincipalPageState extends State<PrincipalPage> {
                 "Eventos que você está inscrito",
                 style: TextStyle(
                     fontFamily: Fontes.raleway,
-                    fontSize: 18, fontWeight: FontWeight.bold),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
               ),
 
               //carrossel dos eventos que o usuário vai participar, mostrando os dias que faltam
@@ -106,7 +107,8 @@ class _PrincipalPageState extends State<PrincipalPage> {
                 "Eventos em alta",
                 style: TextStyle(
                     fontFamily: Fontes.raleway,
-                    fontSize: 18, fontWeight: FontWeight.bold),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
               ),
 
               //carrossel dos eventos que as pessoas mais fizeram inscrições
@@ -132,7 +134,8 @@ class _PrincipalPageState extends State<PrincipalPage> {
                 "Recomendados para você",
                 style: TextStyle(
                     fontFamily: Fontes.raleway,
-                    fontSize: 18, fontWeight: FontWeight.bold),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
               ),
 
               //carrossel dos cards recomendados para o aluno
@@ -157,7 +160,8 @@ class _PrincipalPageState extends State<PrincipalPage> {
                 "Algumas instituições",
                 style: TextStyle(
                     fontFamily: Fontes.raleway,
-                    fontSize: 18, fontWeight: FontWeight.bold),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
               ),
 
               //imagens das instituições parceiras

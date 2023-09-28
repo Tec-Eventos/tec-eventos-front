@@ -128,7 +128,7 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
                             child: Text(
                               "Ver mais",
                               style: TextStyle(
-                                fontFamily: Fontes.raleway,
+                                  fontFamily: Fontes.raleway,
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                   color: Cores.branco),
@@ -144,7 +144,7 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
                       widget.imagemEvento,
                       height: 175,
                       width: 160,
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                     ),
                     Container(
                       width: 160,

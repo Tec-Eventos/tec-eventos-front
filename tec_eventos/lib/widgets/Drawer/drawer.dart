@@ -133,8 +133,7 @@ class _DrawerPagesState extends State<DrawerPages> {
                 leading: const Icon(Icons.confirmation_num_outlined,
                     color: Colors.black),
                 title: Text("Meus Eventos",
-                    style: TextStyle(fontFamily: Fontes.inter,
-                    fontSize: 12)),
+                    style: TextStyle(fontFamily: Fontes.inter, fontSize: 12)),
                 trailing:
                     const Icon(Icons.arrow_forward_ios_outlined, size: 12),
                 onTap: () {
@@ -169,8 +168,9 @@ class _DrawerPagesState extends State<DrawerPages> {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Modo Escuro", style: TextStyle(fontFamily: Fontes.inter,
-                    fontSize: 12)),
+                    Text("Modo Escuro",
+                        style:
+                            TextStyle(fontFamily: Fontes.inter, fontSize: 12)),
                     SizedBox(
                       height: 40,
                       child: LiteRollingSwitch(
@@ -199,8 +199,9 @@ class _DrawerPagesState extends State<DrawerPages> {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Sair", style: TextStyle(fontFamily: Fontes.inter,
-                    fontSize: 12)),
+                    Text("Sair",
+                        style:
+                            TextStyle(fontFamily: Fontes.inter, fontSize: 12)),
                   ],
                 ),
                 onTap: () {
@@ -238,8 +239,8 @@ class MenuOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Icon(icone, color: Colors.black),
-      title: Text(opcao, style: TextStyle(fontFamily: Fontes.inter,
-      fontSize: 12)),
+      title:
+          Text(opcao, style: TextStyle(fontFamily: Fontes.inter, fontSize: 12)),
       trailing: const Icon(Icons.arrow_forward_ios_outlined, size: 12),
       onTap: () {
         Navigator.push(
@@ -268,8 +269,8 @@ class MenuOptionsAssetIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: ImageIcon(AssetImage(icone), color: Cores.preto),
-      title: Text(opcao, style: TextStyle(fontFamily: Fontes.inter,
-      fontSize: 12)),
+      title:
+          Text(opcao, style: TextStyle(fontFamily: Fontes.inter, fontSize: 12)),
       trailing: const Icon(Icons.arrow_forward_ios_outlined, size: 12),
       onTap: () {
         Navigator.push(
@@ -282,6 +283,7 @@ class MenuOptionsAssetIcon extends StatelessWidget {
   }
 }
 
+//SHOW DIALOG PARA SAIR DO APLICATIVO
 confirmacao(BuildContext context) {
   return showDialog(
       context: context,
@@ -297,9 +299,9 @@ confirmacao(BuildContext context) {
                   fontWeight: FontWeight.bold)),
           content: Text("Ao clicar em sim, você sairá do nosso aplicativo.",
               style: TextStyle(
-                  fontFamily: Fontes.inter,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold)),
+                fontFamily: Fontes.inter,
+                fontSize: 15,
+              )),
           actions: [
             TextButton(
                 onPressed: () {
