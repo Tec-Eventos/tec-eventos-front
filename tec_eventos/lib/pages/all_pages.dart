@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tec_eventos/pages/paginas_instituicao/page_configuracao_instituicao/page_configuracao_instituicao.dart';
+import 'package:tec_eventos/pages/paginas_instituicao/page_estatisticas/page_estatisticas.dart';
+import 'package:tec_eventos/pages/paginas_instituicao/page_principal_instituicao/page_principal_instituicao.dart';
 import 'package:tec_eventos/widgets/Appbar/AppBarPaginaPrincipal/appbarpages.dart';
 import 'package:tec_eventos/widgets/Drawer/drawer.dart';
 import 'package:tec_eventos/widgets/bottomAppBar/bottom_appbar.dart';
@@ -16,11 +19,19 @@ const List<Widget> listaPagesAlunos = [
   ConfigurationPage(),
 ];
 
+const List<Widget> listaPagesInstituicao = [
+  PrincipalPageInstituicao(),
+  EventosPage(),
+  PageEstatisticas(),
+  NotificationPage(),
+  PageConfiguracaoInstituicao(),
+];
 
 class AllPages extends StatefulWidget {
-  AllPages({Key? key, required this.paginaAtual})
+  AllPages({Key? key, required this.paginaAtual, this.tipoUser})
       : super(key: key);
   int paginaAtual;
+  String? tipoUser;
 
   @override
   State<AllPages> createState() => _AllPagesState();
@@ -66,11 +77,25 @@ class _AllPagesState extends State<AllPages> {
                   widget.paginaAtual = index;
                 });
               },
-              itemBuilder: (context, index) =>
-                  Paginas(paginas: listaPagesAlunos[index])),
+              itemBuilder: (context, index) {
+                if (widget.tipoUser == "Aluno") {
+                  return Paginas(paginas: listaPagesAlunos[index]);
+                } else if (widget.tipoUser == "Instituição") {
+                  return Paginas(paginas: listaPagesInstituicao[index]);
+                } else {
+                  return Container();
+                }
+              }),
         ),
-        bottomNavigationBar: BottomAppBarAluno(
-            paginaAtual: widget.paginaAtual, pageController: _pageController));
+        bottomNavigationBar: widget.tipoUser == "Aluno"
+            ? BottomAppBarAluno(
+                paginaAtual: widget.paginaAtual,
+                pageController: _pageController)
+            : widget.tipoUser == "Instituição"
+                ? BottomAppBarInstituicao(
+                    paginaAtual: widget.paginaAtual,
+                    pageController: _pageController)
+                : Container());
   }
 }
 
