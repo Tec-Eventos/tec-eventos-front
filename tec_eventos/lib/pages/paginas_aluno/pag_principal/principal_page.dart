@@ -118,7 +118,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                   children: [
                     EventosAlta(
                         imagemEvento:
-                            "https://i0.wp.com/eztravel.com.br/wp-content/uploads/2022/01/elizeu-dias-seq9dyzse6c-unsplash.jpeg",
+                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZh_ed8ebxamWQoJtWg8cF1fOvOYIEr0Tkaw17UpGV1RGydNI3TxyfoqwNTbvOxrpOMN0&usqp=CAU",
                         modalidade: "Competição",
                         nomeEvento: "Unvem Nasa",
                         descricao:
@@ -146,7 +146,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
                     Recomendados(
                         nomeEvento: "UnimarFest",
                         imagemEvento:
-                            "https://i0.wp.com/eztravel.com.br/wp-content/uploads/2022/01/elizeu-dias-seq9dyzse6c-unsplash.jpeg",
+                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZh_ed8ebxamWQoJtWg8cF1fOvOYIEr0Tkaw17UpGV1RGydNI3TxyfoqwNTbvOxrpOMN0&usqp=CAU",
                         imagemOrganizacao: "assets/UnimarIMG.png",
                         descricao:
                             "Venha ver nosso evento hoje, será muito legal!")

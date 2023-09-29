@@ -115,6 +115,7 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
                         ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 elevation: 2,
+                                backgroundColor: Cores.azul42A5F5,
                                 minimumSize: const Size(87, 17),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(7))),

@@ -123,7 +123,8 @@ class _EventosAltaState extends State<EventosAlta> {
                               "Marília, SP",
                               style: TextStyle(
                                   fontFamily: Fontes.raleway,
-                                  fontSize: 12, color: Cores.azul42A5F5),
+                                  fontSize: 12,
+                                  color: Cores.azul42A5F5),
                             ),
                           ],
                         ),
@@ -136,7 +137,8 @@ class _EventosAltaState extends State<EventosAlta> {
                           widget.descricao,
                           style: TextStyle(
                               fontFamily: Fontes.raleway,
-                              fontSize: 12, color: Cores.preto),
+                              fontSize: 12,
+                              color: Cores.preto),
                         ),
 
                         //BOTÃO PARA VER MAIS SOBRE O EVENTO
@@ -150,6 +152,7 @@ class _EventosAltaState extends State<EventosAlta> {
                             ),
                             ElevatedButton(
                                 style: ElevatedButton.styleFrom(
+                                    backgroundColor: Cores.azul42A5F5,
                                     elevation: 2,
                                     minimumSize: const Size(100, 18),
                                     shape: RoundedRectangleBorder(
