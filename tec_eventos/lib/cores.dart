@@ -27,7 +27,7 @@ class Cores {
   // }
   //
   // Future get modoEscuro => _modoEscuro;
-  //
+  //1976D2
 
   //Azul
   static Color azulClaro = const Color(0xff64B5F6);
@@ -39,7 +39,8 @@ class Cores {
   static Color azul45B0F0 = const Color(0xff45B0F0);
   static Color azul47BBEC = const Color(0xff47BBEC);
   static Color azul1565C0 = const Color(0xff1565C0);
-
+  static Color azulC8E6FC = const Color(0xffC8E6FC);
+  static Color azulAFDAFA = const Color(0xffAFDAFA);
   //Branco
   static Color branco = const Color(0xffFFFFFF);
   static Color brancoCinzento = const Color(0xffEEEEEE);

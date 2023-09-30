@@ -406,8 +406,9 @@ class _EditProfileUserState extends State<EditProfileUser> {
     }
   }
 
-  Future<void> _cropImage(File imgFile) async {
+   Future<void> _cropImage(File imgFile) async {
     try {
+      
       final croppedFile = await ImageCropper().cropImage(
           sourcePath: imgFile.path,
           aspectRatioPresets: Platform.isAndroid
@@ -447,3 +448,4 @@ class _EditProfileUserState extends State<EditProfileUser> {
     }
   }
 }
+
