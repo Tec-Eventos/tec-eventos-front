@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:tec_eventos/pages/all_pages.dart';
-import 'package:tec_eventos/pages/paginas_aluno/perfil/perfil.dart';
 import 'package:tec_eventos/widgets/InputText/validations/validations_info.dart';
-
-
-
 
 class InputTextEmail extends StatelessWidget {
   const InputTextEmail({super.key, required this.controllerEmail});
@@ -36,7 +30,7 @@ class InputTextEmail extends StatelessWidget {
 class InputTextPassword extends StatefulWidget {
   const InputTextPassword({super.key, required this.controllerSenha});
 
-    final TextEditingController controllerSenha;
+  final TextEditingController controllerSenha;
 
   @override
   State<InputTextPassword> createState() => _InputTextPasswordState();

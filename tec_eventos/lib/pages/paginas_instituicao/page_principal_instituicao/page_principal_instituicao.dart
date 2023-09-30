@@ -3,6 +3,7 @@ import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/widgets/Cards/cards_adicionados_recentemente_instituicao/cards_add_recentemente_instituicao.dart';
 import 'package:tec_eventos/widgets/Cards/cards_eventos_da_instituicao/cards_eventos_da_instituicao.dart';
+import 'package:tec_eventos/widgets/botao/botao.dart';
 
 class PrincipalPageInstituicao extends StatefulWidget {
   const PrincipalPageInstituicao({Key? key}) : super(key: key);
@@ -20,57 +21,66 @@ class _PrincipalPageInstituicaoState extends State<PrincipalPageInstituicao> {
         padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 23),
         scrollDirection: Axis.vertical,
         children: [
-        Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(24),
-              ),
-              child: Container(
-                height: 119,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(24),
-              gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [Cores.azulEscuroPerfilOption.withOpacity(0.38), Cores.azulAFDAFA.withOpacity(0.5), Cores.azulC8E6FC.withOpacity(0.4)],
-
-
-              )
-            ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Row(
-                    
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                       SizedBox(
-                        width: MediaQuery.of(context).size.width / 3,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text("Unicamp", style: TextStyle(fontSize: 25, fontFamily: Fontes.ralewayBold),),
-                            Text(
-                              "LoremIpsumLoremIpsumLoremIpsumLoremIpsumLorem",
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: Fontes.raleway,
-                                fontWeight: FontWeight.w500
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Image.asset("assets/unimarImagem.png", fit: BoxFit.cover, height: 100, width: 100,)
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                child: Container(
+                  height: 119,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(24),
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Cores.azulEscuroPerfilOption.withOpacity(0.38),
+                          Cores.azulAFDAFA.withOpacity(0.5),
+                          Cores.azulC8E6FC.withOpacity(0.4)
+                        ],
+                      )),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 3,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Unicamp",
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    fontFamily: Fontes.ralewayBold),
+                              ),
+                              Text(
+                                "LoremIpsumLoremIpsumLoremIpsumLoremIpsumLorem",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: Fontes.raleway,
+                                    fontWeight: FontWeight.w500),
+                              )
+                            ],
+                          ),
+                        ),
+                        Image.asset(
+                          "assets/unimarImagem.png",
+                          fit: BoxFit.contain,
+                          height: 100,
+                          width: 100,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 50),
               Text(
                 "Eventos que você está inscrito",
                 style: TextStyle(
@@ -91,6 +101,7 @@ class _PrincipalPageInstituicaoState extends State<PrincipalPageInstituicao> {
                   ),
                 ),
               ),
+              const SizedBox(height: 30),
               Text(
                 "Adicionados recentemente",
                 style: TextStyle(
@@ -107,45 +118,8 @@ class _PrincipalPageInstituicaoState extends State<PrincipalPageInstituicao> {
                   ),
                 ),
               ),
-              Center(
-                child: GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 61,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Cores.azul42A5F5),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 59,
-                          height: 61,
-                          decoration: BoxDecoration(
-                              color: Cores.azul42A5F5,
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5))),
-                          child: Icon(
-                            Icons.add,
-                            color: Cores.branco,
-                          ),
-                        ),
-                        const Spacer(),
-                        Text(
-                          "Adicionar evento",
-                          style: TextStyle(
-                              fontFamily: Fontes.ralewayBold,
-                              color: Cores.azul42A5F5,
-                              fontSize: 27),
-                        ),
-                        const Spacer()
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              const SizedBox(height: 50),
+              const Botao()
             ],
           )
         ],

@@ -3,7 +3,6 @@ import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/pages/all_pages.dart';
-import 'package:tec_eventos/widgets/InputText/input_text.dart';
 
 class Cadastro extends StatefulWidget {
   const Cadastro({Key? key}) : super(key: key);
@@ -45,11 +44,8 @@ class _CadastroState extends State<Cadastro> {
           ),
           Form(
             key: _formfield,
-            child:  Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                
-                ]),
+            child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch, children: []),
           ),
           const SizedBox(height: 30),
           GestureDetector(

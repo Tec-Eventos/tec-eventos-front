@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tec_eventos/pages/acesso/login.dart';
 import 'package:tec_eventos/pages/paginas_instituicao/page_configuracao_instituicao/page_configuracao_instituicao.dart';
 import 'package:tec_eventos/pages/paginas_instituicao/page_estatisticas/page_estatisticas.dart';
 import 'package:tec_eventos/pages/paginas_instituicao/page_principal_instituicao/page_principal_instituicao.dart';
@@ -43,6 +44,7 @@ class _AllPagesState extends State<AllPages> {
   @override
   void initState() {
     _pageController = PageController(initialPage: widget.paginaAtual);
+    widget.tipoUser = userType;
     super.initState();
   }
 

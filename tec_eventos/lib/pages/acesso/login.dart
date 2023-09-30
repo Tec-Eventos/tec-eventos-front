@@ -5,7 +5,6 @@ import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/pages/acesso/cadastro.dart';
 import 'package:tec_eventos/pages/all_pages.dart';
-import 'package:tec_eventos/pages/paginas_aluno/perfil/perfil.dart';
 import 'package:tec_eventos/widgets/InputText/input_text.dart';
 
 final controllerEmail = TextEditingController();

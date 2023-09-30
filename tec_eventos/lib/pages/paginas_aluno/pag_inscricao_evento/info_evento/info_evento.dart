@@ -76,7 +76,8 @@ class _InfoEventoState extends State<InfoEvento> {
                       "Informações do ingresso",
                       style: TextStyle(
                           fontFamily: Fontes.raleway,
-                          fontSize: 20, fontWeight: FontWeight.bold),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 20),
 
@@ -118,32 +119,35 @@ class _InfoEventoState extends State<InfoEvento> {
                       "Descrição",
                       style: TextStyle(
                           fontFamily: Fontes.raleway,
-                          fontSize: 20, fontWeight: FontWeight.bold),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 20),
                     Text(
                       "Um texto qualquer sobre a descrição do evento que está acontecendo em tal lugar e agora eu fiquei sem ideia então vou encher de lorem ipsum lorem lorem ipsum lorem ipsum pasdafsd dsdajk lorem.",
-                      style: TextStyle(
-                          fontFamily: Fontes.raleway,fontSize: 13),
+                      style:
+                          TextStyle(fontFamily: Fontes.raleway, fontSize: 13),
                     ),
                     const SizedBox(height: 50),
                     Text(
                       "Local",
                       style: TextStyle(
                           fontFamily: Fontes.raleway,
-                          fontSize: 20, fontWeight: FontWeight.bold),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 10),
                     Text(
                       "O evento acontecerá na universidade Univem em Marília, SP.",
-                      style: TextStyle(
-                          fontFamily: Fontes.raleway,fontSize: 13),
+                      style:
+                          TextStyle(fontFamily: Fontes.raleway, fontSize: 13),
                     ),
                     SizedBox(
                       width: 135,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Cores.branco,
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          elevation: 0,
+                          backgroundColor: Colors.transparent,
                           side: BorderSide(
                             color: Cores.azul42A5F5,
                           ),
@@ -177,10 +181,11 @@ class _InfoEventoState extends State<InfoEvento> {
                       "Imagens do local",
                       style: TextStyle(
                           fontFamily: Fontes.raleway,
-                          fontSize: 20, fontWeight: FontWeight.bold),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 10),
-                    SingleChildScrollView(
+                    const SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

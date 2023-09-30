@@ -70,6 +70,7 @@ class _AllPagesState extends State<AllPages> {
               onPageChanged: (index) {
                 setState(() {
                   widget.paginaAtual = index;
+                  
                 });
               },
               itemBuilder: (context, index) =>
