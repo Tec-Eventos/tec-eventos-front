@@ -38,6 +38,7 @@ class Botao extends StatelessWidget {
                 child: Icon(
                   Icons.add,
                   color: Cores.branco,
+                  size: 33,
                 ),
               ),
               const Spacer(),

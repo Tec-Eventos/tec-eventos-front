@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/pages/acesso/cadastro.dart';
-import 'package:tec_eventos/pages/paginas_aluno/pag_inscricao_evento/google_maps.dart';
-import 'package:tec_eventos/widgets/InputText/input_text.dart';
+import 'package:tec_eventos/widgets/AddImagensEventos/adicionar_imagens_eventos.dart';
+import 'package:tec_eventos/widgets/Appbar/AppBarPostarEventos/appbarpages_eventos.dart';
+import 'package:tec_eventos/widgets/InputTextPostarEvento/ingressos.dart';
+import 'package:tec_eventos/widgets/InputTextPostarEvento/tipo_pagamento.dart';
 import 'package:tec_eventos/widgets/Perfil_user/menu_perfil/favoritos.dart';
-import 'package:tec_eventos/widgets/botao/botao.dart';
-import 'package:tec_eventos/widgets/botaoInfoEvento/inscrever/inscrever.dart';
+
+TextEditingController controllerDescricao = TextEditingController();
+TextEditingController controllerCEP = TextEditingController();
 
 class PagePostarEvento extends StatefulWidget {
   const PagePostarEvento({super.key});
@@ -20,309 +21,373 @@ class _PagePostarEventoState extends State<PagePostarEvento> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: NestedScrollView(
-          floatHeaderSlivers: true,
-          headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            //AppBar
-            const AppBarPostarEvento()
-          ],
-          body: ListView(
-            scrollDirection: Axis.vertical,
-            children: [
-              //parte do nome, horário e organização do evento
-              ListTile(
-                shape: Border(bottom: BorderSide(color: Cores.cinza)),
-                style: ListTileStyle.drawer,
-                title: Text("10/10 às 10h",
-                    style: TextStyle(
-                        fontFamily: Fontes.raleway,
-                        fontSize: 18,
-                        color: Cores.cinza6A6666,
-                        fontWeight: FontWeight.bold)),
-                subtitle: Text("oioioi",
+      body: NestedScrollView(
+        floatHeaderSlivers: true,
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          //AppBar
+          const AppBarPostarEvento()
+        ],
+        body: ListView(
+          scrollDirection: Axis.vertical,
+          children: [
+            //parte do nome, horário e organização do evento
+            ListTile(
+              shape: Border(bottom: BorderSide(color: Cores.cinza)),
+              style: ListTileStyle.drawer,
+              title: Text("Informe a data e o horário",
+                  style: TextStyle(
+                      fontFamily: Fontes.raleway,
+                      fontSize: 18,
+                      color: Cores.cinza6A6666,
+                      fontWeight: FontWeight.bold)),
+              subtitle: Text("Nome do evento",
+                  style: TextStyle(
+                      fontFamily: Fontes.raleway,
+                      fontSize: 20,
+                      color: Cores.preto,
+                      fontWeight: FontWeight.bold)),
+              trailing: SizedBox(
+                width: 108,
+                height: 39,
+                child: InkWell(
+                    onTap: () {
+                      // Navigator.push(
+                      //     context,
+                      //     PageTransition(
+                      //         child: const PagePostarEvento(),
+                      //         type: PageTransitionType.bottomToTop));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Cores.preto),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add,
+                            size: 21,
+                            color: Cores.preto,
+                          ),
+                          Text(
+                            "Logo",
+                            style: TextStyle(
+                                fontFamily: Fontes.ralewayBold, fontSize: 18),
+                          )
+                        ],
+                      ),
+                    )),
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Informações do ingresso",
                     style: TextStyle(
                         fontFamily: Fontes.raleway,
                         fontSize: 20,
-                        color: Cores.preto,
-                        fontWeight: FontWeight.bold)),
-                trailing: Image.asset(
-                  "assets/unimarImagem.png",
-                  fit: BoxFit.scaleDown,
-                  height: 70,
-                  width: 70,
-                ),
-              ),
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 20),
 
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 30),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Informações do ingresso",
-                      style: TextStyle(
-                          fontFamily: Fontes.raleway,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 20),
+                  //parte dos ingressos restantes
+                  const CaixaTextoIngressos(),
 
-                    //parte dos ingressos restantes
-                    ListTile(
-                      leading: SizedBox(
-                        height: 40,
-                        width: 40,
-                        child: CircleAvatar(
-                            backgroundColor: Cores.azul42A5F5,
-                            child: Icon(
-                              Icons.chair_outlined,
-                              color: Cores.branco,
-                              size: 20,
-                            )),
-                      ),
-                      title: const Text("10 ingressos restantes"),
-                    ),
+                  //parte do preço
+                  const TipoPagamento(),
 
-                    //parte do preço
+                  const SizedBox(height: 20),
+                  Text(
+                    "Descrição",
+                    style: TextStyle(
+                        fontFamily: Fontes.raleway,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 20),
 
-                    ListTile(
-                      leading: SizedBox(
-                        height: 40,
-                        width: 40,
-                        child: CircleAvatar(
-                            backgroundColor: Cores.azul42A5F5,
-                            child: Icon(
-                              Icons.payments_outlined,
-                              color: Cores.branco,
-                              size: 20,
-                            )),
-                      ),
-                      title: const Text("Grátis"),
-                    ),
+                  TextFormField(
+                    maxLines: null,
+                    decoration: const InputDecoration(
+                        hintText:
+                            "Coloque mais informações sobre o evento aqui"),
+                  ),
 
-                    const SizedBox(height: 20),
-                    Text(
-                      "Descrição",
-                      style: TextStyle(
-                          fontFamily: Fontes.raleway,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 20),
-                    Text(
-                      "Um texto qualquer sobre a descrição do evento que está acontecendo em tal lugar e agora eu fiquei sem ideia então vou encher de lorem ipsum lorem lorem ipsum lorem ipsum pasdafsd dsdajk lorem.",
-                      style:
-                          TextStyle(fontFamily: Fontes.raleway, fontSize: 13),
-                    ),
-                    const SizedBox(height: 50),
-                    Text(
-                      "Local",
-                      style: TextStyle(
-                          fontFamily: Fontes.raleway,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      "O evento acontecerá na universidade Univem em Marília, SP.",
-                      style:
-                          TextStyle(fontFamily: Fontes.raleway, fontSize: 13),
-                    ),
-                    SizedBox(
-                      width: 160,
-                      child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          elevation: 0,
-                          backgroundColor: Colors.transparent,
-                          side: BorderSide(
-                            color: Cores.azul42A5F5,
-                          ),
+                  const SizedBox(height: 50),
+                  Text(
+                    "Local",
+                    style: TextStyle(
+                        fontFamily: Fontes.raleway,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+
+                  const SizedBox(height: 5),
+
+                  TextFormField(
+                    maxLines: null,
+                    decoration: const InputDecoration(
+                        hintText: "Coloque a localização do evento aqui"),
+                  ),
+                  SizedBox(
+                    width: 160,
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        elevation: 0,
+                        backgroundColor: Colors.transparent,
+                        side: BorderSide(
+                          color: Cores.azul42A5F5,
                         ),
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  contentPadding: const EdgeInsets.all(20),
-                                  shape: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  title: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      IconButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          icon: const Icon(Icons.arrow_back)),
-                                      const SizedBox(width: 10),
-                                      Text(
-                                        "Adicione o cep:",
-                                        style: TextStyle(
-                                            fontFamily: Fontes.inter,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ],
-                                  ),
-                                  content: TextFormField(
-                                    keyboardType: TextInputType.name,
-                                    // controller: controllerUser,
-                                    decoration: InputDecoration(
-                                      suffixIcon: const Icon(
-                                          Icons.location_on_outlined),
-                                      isDense: true,
-                                      labelText: "CEP",
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(30)),
+                      ),
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                contentPadding: const EdgeInsets.all(20),
+                                shape: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                                title: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    IconButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        icon: const Icon(Icons.arrow_back)),
+                                    const SizedBox(width: 10),
+                                    Text(
+                                      "Adicione o cep:",
+                                      style: TextStyle(
+                                          fontFamily: Fontes.inter,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w700),
                                     ),
+                                  ],
+                                ),
+                                content: TextFormField(
+                                  keyboardType: TextInputType.name,
+                                  // controller: controllerUser,
+                                  decoration: InputDecoration(
+                                    suffixIcon:
+                                        const Icon(Icons.location_on_outlined),
+                                    isDense: true,
+                                    labelText: "CEP",
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
                                   ),
-                                  actions: [
-                                    GestureDetector(
-                                      onTap: () {},
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 5, vertical: 10),
-                                        child: Container(
-                                          width: 282,
-                                          height: 52,
-                                          decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                  colors: [
-                                                    Cores.azul47BBEC,
-                                                    Cores.azul42A5F5,
-                                                  ],
-                                                  begin: Alignment.topLeft,
-                                                  end: Alignment.bottomRight),
-                                              borderRadius:
-                                                  BorderRadius.circular(20)),
-                                          child: Center(
-                                            child: Text(
-                                              "Confirmar",
-                                              style: TextStyle(
-                                                  fontFamily: Fontes.inter,
-                                                  fontSize: 28,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Cores.branco),
-                                            ),
+                                ),
+                                actions: [
+                                  GestureDetector(
+                                    onTap: () {},
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5, vertical: 10),
+                                      child: Container(
+                                        width: 282,
+                                        height: 52,
+                                        decoration: BoxDecoration(
+                                            gradient: LinearGradient(
+                                                colors: [
+                                                  Cores.azul47BBEC,
+                                                  Cores.azul42A5F5,
+                                                ],
+                                                begin: Alignment.topLeft,
+                                                end: Alignment.bottomRight),
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        child: Center(
+                                          child: Text(
+                                            "Confirmar",
+                                            style: TextStyle(
+                                                fontFamily: Fontes.inter,
+                                                fontSize: 28,
+                                                fontWeight: FontWeight.w500,
+                                                color: Cores.branco),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ],
-                                );
-                              });
+                                  ),
+                                ],
+                              );
+                            });
 
-                          // Navigator.push(
-                          //     context,
-                          //     PageTransition(
-                          //         child: const GooglePage(),
-                          //         type: PageTransitionType.bottomToTop));
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Icon(Icons.location_on_outlined,
+                        // Navigator.push(
+                        //     context,
+                        //     PageTransition(
+                        //         child: const GooglePage(),
+                        //         type: PageTransitionType.bottomToTop));
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Icon(Icons.location_on_outlined,
+                              color: Cores.azul42A5F5),
+                          Text(
+                            "Adicionar coordenada",
+                            style: TextStyle(
+                                fontFamily: Fontes.raleway,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w400,
                                 color: Cores.azul42A5F5),
-                            Text(
-                              "Adicionar coordenada",
-                              style: TextStyle(
-                                  fontFamily: Fontes.raleway,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w400,
-                                  color: Cores.azul42A5F5),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 50),
+                  Text(
+                    "Imagens do local",
+                    style: TextStyle(
+                        fontFamily: Fontes.raleway,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 10),
+                  const SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          AdicionarImagemEvento(),
+                          AdicionarImagemEvento(),
+                          AdicionarImagemEvento(),
+                          AdicionarImagemEvento(),
+                        ],
+                      )),
+
+                  const SizedBox(height: 30),
+
+                  Center(
+                    child: InkWell(
+                      onTap: () {
+                        // Navigator.push(
+                        //     context,
+                        //     PageTransition(
+                        //         child: const PagePostarEvento(),
+                        //         type: PageTransitionType.bottomToTop));
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 61,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Cores.azul42A5F5),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 59,
+                              height: 61,
+                              decoration: BoxDecoration(
+                                  color: Cores.azul42A5F5,
+                                  borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(5),
+                                      bottomLeft: Radius.circular(5))),
+                              child: Icon(
+                                Icons.qr_code_2_outlined,
+                                color: Cores.branco,
+                                size: 33,
+                              ),
                             ),
+                            const Spacer(),
+                            Text(
+                              "Gerar QRcode",
+                              style: TextStyle(
+                                  fontFamily: Fontes.ralewayBold,
+                                  color: Cores.azul42A5F5,
+                                  fontSize: 27),
+                            ),
+                            const Spacer()
                           ],
                         ),
                       ),
                     ),
-                    const SizedBox(height: 50),
-                    Text(
-                      "Imagens do local",
-                      style: TextStyle(
-                          fontFamily: Fontes.raleway,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 10),
-                    const SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
+                  ),
+
+                  const SizedBox(height: 30),
+
+                  Center(
+                    child: InkWell(
+                      onTap: () {
+                        // Navigator.push(
+                        //     context,
+                        //     PageTransition(
+                        //         child: const PagePostarEvento(),
+                        //         type: PageTransitionType.bottomToTop));
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 61,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Cores.azul42A5F5),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Favoritos(
-                                imgEvento: "assets/evento1.png",
-                                imgOrg: "assets/UnivemIMG.png"),
-                            Favoritos(
-                                imgEvento: "assets/evento1.png",
-                                imgOrg: "assets/UnivemIMG.png"),
-                            Favoritos(
-                                imgEvento: "assets/evento1.png",
-                                imgOrg: "assets/UnivemIMG.png"),
-                            Favoritos(
-                                imgEvento: "assets/evento1.png",
-                                imgOrg: "assets/UnivemIMG.png"),
-                            Favoritos(
-                                imgEvento: "assets/evento1.png",
-                                imgOrg: "assets/UnivemIMG.png"),
-                            Favoritos(
-                                imgEvento: "assets/evento1.png",
-                                imgOrg: "assets/UnivemIMG.png"),
+                            Container(
+                              width: 59,
+                              height: 61,
+                              decoration: BoxDecoration(
+                                  color: Cores.azul42A5F5,
+                                  borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(5),
+                                      bottomLeft: Radius.circular(5))),
+                              child: Icon(
+                                Icons.barcode_reader,
+                                color: Cores.branco,
+                                size: 33,
+                              ),
+                            ),
+                            const Spacer(),
+                            Text(
+                              "Gerar Código de barras",
+                              style: TextStyle(
+                                  fontFamily: Fontes.ralewayBold,
+                                  color: Cores.azul42A5F5,
+                                  fontSize: 18),
+                            ),
+                            const Spacer()
                           ],
-                        )),
-
-                    const Botao(),
-
-                    const SizedBox(height: 30),
-
-                    const Botao()
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-        bottomNavigationBar: const Inscrever());
-  }
-}
-
-class AppBarPostarEvento extends StatefulWidget {
-  const AppBarPostarEvento({super.key});
-
-  @override
-  State<AppBarPostarEvento> createState() => _AppBarPostarEventoState();
-}
-
-class _AppBarPostarEventoState extends State<AppBarPostarEvento> {
-  @override
-  Widget build(BuildContext context) {
-    double displayHeight = MediaQuery.of(context).size.height;
-
-    return SliverAppBar(
-      expandedHeight: displayHeight / 3,
-      flexibleSpace: const FlexibleSpaceBar(
-        background: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
-          child: Botao(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
         ),
       ),
-      floating: true,
-      snap: true,
-      pinned: true,
-      elevation: 0,
-      backgroundColor: Cores.brancoCinzento,
-      leading: IconButton(
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-        icon: Icon(
-          Icons.arrow_back_ios,
-          size: 30,
-          color: Cores.branco,
+      bottomNavigationBar: GestureDetector(
+        onTap: () {},
+        child: Container(
+          height: 64,
+          decoration: BoxDecoration(
+              color: Cores.azul42A5F5,
+              borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(15), topLeft: Radius.circular(15))),
+          child: Center(
+            child: Text(
+              "Postar Evento",
+              style: TextStyle(
+                  fontFamily: Fontes.raleway,
+                  fontSize: 29,
+                  fontWeight: FontWeight.bold,
+                  color: Cores.branco),
+              textAlign: TextAlign.center,
+            ),
+          ),
         ),
       ),
     );

@@ -68,32 +68,26 @@ class _EnvioEmailState extends State<EnvioEmail> {
         ),
       ),
       const SizedBox(height: 20),
-      GestureDetector(
-        onTap: () {
-          setState(() {
-            conteudoVerificacao = const VerificacaoCodigo();
-          });
-        },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Container(
-            width: 282,
-            height: 52,
-            decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-                  Cores.azul47BBEC,
-                  Cores.azul42A5F5,
-                ], begin: Alignment.topLeft, end: Alignment.bottomRight),
-                borderRadius: BorderRadius.circular(20)),
-            child: Center(
-              child: Text(
-                "Enviar",
-                style: TextStyle(
-                    fontFamily: Fontes.raleway,
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Cores.branco),
-              ),
+      Center(
+        child: SizedBox(
+          width: 282,
+          height: 52,
+          child: OutlinedButton(
+            style: OutlinedButton.styleFrom(
+              backgroundColor: Cores.azul42A5F5,
+            ),
+            onPressed: () {
+              setState(() {
+                conteudoVerificacao = const VerificacaoCodigo();
+              });
+            },
+            child: Text(
+              "Enviar",
+              style: TextStyle(
+                  fontFamily: Fontes.raleway,
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Cores.branco),
             ),
           ),
         ),

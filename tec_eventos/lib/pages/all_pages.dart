@@ -5,12 +5,13 @@ import 'package:tec_eventos/pages/paginas_instituicao/page_estatisticas/page_est
 import 'package:tec_eventos/pages/paginas_instituicao/page_principal_instituicao/page_principal_instituicao.dart';
 import 'package:tec_eventos/widgets/Appbar/AppBarPaginaPrincipal/appbarpages.dart';
 import 'package:tec_eventos/widgets/Drawer/drawer.dart';
-import 'package:tec_eventos/widgets/bottomAppBar/bottom_appbar.dart';
+import 'package:tec_eventos/widgets/bottomAppBar/bottom_appbar_aluno.dart';
 import 'package:tec_eventos/pages/paginas_aluno/configuracoes/config.dart';
 import 'package:tec_eventos/pages/paginas_aluno/notificacao_page/notification_page.dart';
 import 'package:tec_eventos/pages/paginas_aluno/pag_eventos/eventos_page.dart';
 import 'package:tec_eventos/pages/paginas_aluno/pag_principal/principal_page.dart';
 import 'package:tec_eventos/pages/paginas_aluno/ranking_page/ranking.dart';
+import 'package:tec_eventos/widgets/bottomAppBar/bottom_appbar_instituicao.dart';
 
 const List<Widget> listaPagesAlunos = [
   PrincipalPage(),
