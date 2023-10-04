@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
+import 'package:tec_eventos/pages/paginas_instituicao/page_lista_participantes/page_lista_participantes.dart';
 
 class CardsRecentesInstituicao extends StatelessWidget {
   const CardsRecentesInstituicao({super.key});
@@ -13,10 +15,11 @@ class CardsRecentesInstituicao extends StatelessWidget {
         width: 285,
         child: GestureDetector(
           onTap: () {
-            // Navigator.push(
-            //     context,
-            //     PageTransition(
-            //         child: navegacao, type: PageTransitionType.bottomToTop));
+            Navigator.push(
+                context,
+                PageTransition(
+                    child: const PageListaParticipantes(),
+                    type: PageTransitionType.bottomToTop));
           },
           child: Card(
             margin: const EdgeInsets.only(top: 20),
@@ -132,13 +135,12 @@ class CardsRecentesInstituicao extends StatelessWidget {
                                         borderRadius:
                                             BorderRadius.circular(7))),
                                 onPressed: () {
-                                  // Navigator.push(
-                                  //     context,
-                                  //     PageTransition(
-                                  //         child: navegacao,
-                                  //         type:
-                                  //             PageTransitionType
-                                  //                 .bottomToTop));
+                                  Navigator.push(
+                                      context,
+                                      PageTransition(
+                                          child: const PageListaParticipantes(),
+                                          type:
+                                              PageTransitionType.bottomToTop));
                                 },
                                 child: Text(
                                   "Ver lista",
