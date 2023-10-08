@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
-import 'package:tec_eventos/pages/acesso/login.dart';
+import 'package:tec_eventos/pages/paginas_globais/acesso/login.dart';
 import 'package:tec_eventos/fontes.dart';
 
 class OnBoarding extends StatefulWidget {

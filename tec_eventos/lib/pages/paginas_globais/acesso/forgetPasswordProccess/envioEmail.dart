@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tec_eventos/pages/acesso/forgetPasswordProccess/verificacao_codigo.dart';
-import 'package:tec_eventos/pages/acesso/login.dart';
+import 'package:tec_eventos/pages/paginas_globais/acesso/forgetPasswordProccess/verificacao_codigo.dart';
+import 'package:tec_eventos/pages/paginas_globais/acesso/login.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
 

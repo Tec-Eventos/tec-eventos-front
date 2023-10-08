@@ -1,11 +1,13 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
+import 'package:tec_eventos/pages/all_pages.dart';
+import 'package:tec_eventos/pages/paginas_instituicao/page_principal_instituicao/page_principal_instituicao.dart';
 import 'package:tec_eventos/widgets/AddImagensEventos/adicionar_imagens_eventos.dart';
 import 'package:tec_eventos/widgets/Appbar/AppBarPostarEventos/appbarpages_eventos.dart';
 import 'package:tec_eventos/widgets/InputTextPostarEvento/ingressos.dart';
 import 'package:tec_eventos/widgets/InputTextPostarEvento/tipo_pagamento.dart';
-import 'package:tec_eventos/widgets/Perfil_user/menu_perfil/favoritos.dart';
 
 TextEditingController controllerDescricao = TextEditingController();
 TextEditingController controllerCEP = TextEditingController();
@@ -34,18 +36,72 @@ class _PagePostarEventoState extends State<PagePostarEvento> {
             ListTile(
               shape: Border(bottom: BorderSide(color: Cores.cinza)),
               style: ListTileStyle.drawer,
-              title: Text("Informe a data e o horário",
-                  style: TextStyle(
-                      fontFamily: Fontes.raleway,
-                      fontSize: 18,
-                      color: Cores.cinza6A6666,
-                      fontWeight: FontWeight.bold)),
-              subtitle: Text("Nome do evento",
-                  style: TextStyle(
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 100,
+                    height: 20,
+                    child: TextFormField(
+                      style: TextStyle(
+                        fontFamily: Fontes.raleway,
+                        fontSize: 15,
+                        color: Cores.cinza6A6666,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      decoration: InputDecoration(
+                          hintText: "Data",
+                          hintStyle: TextStyle(
+                              fontFamily: Fontes.raleway,
+                              fontSize: 15,
+                              color: Cores.cinza6A6666,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                  Text("às",
+                      style: TextStyle(
+                        fontFamily: Fontes.raleway,
+                        fontSize: 18,
+                        color: Cores.cinza6A6666,
+                        fontWeight: FontWeight.bold,
+                      )),
+                  SizedBox(
+                    width: 100,
+                    height: 20,
+                    child: TextFormField(
+                      style: TextStyle(
+                          fontFamily: Fontes.raleway,
+                          fontSize: 15,
+                          color: Cores.cinza6A6666,
+                          fontWeight: FontWeight.bold),
+                      decoration: InputDecoration(
+                        hintText: "Horário",
+                        hintStyle: TextStyle(
+                            fontFamily: Fontes.raleway,
+                            fontSize: 15,
+                            color: Cores.cinza6A6666,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              subtitle: TextFormField(
+                style: TextStyle(
+                    fontFamily: Fontes.raleway,
+                    fontSize: 20,
+                    color: Cores.preto,
+                    fontWeight: FontWeight.bold),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Nome do evento",
+                  hintStyle: TextStyle(
                       fontFamily: Fontes.raleway,
                       fontSize: 20,
                       color: Cores.preto,
-                      fontWeight: FontWeight.bold)),
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
               trailing: SizedBox(
                 width: 108,
                 height: 39,
@@ -115,6 +171,7 @@ class _PagePostarEventoState extends State<PagePostarEvento> {
                   TextFormField(
                     maxLines: null,
                     decoration: const InputDecoration(
+                        border: InputBorder.none,
                         hintText:
                             "Coloque mais informações sobre o evento aqui"),
                   ),
@@ -133,6 +190,7 @@ class _PagePostarEventoState extends State<PagePostarEvento> {
                   TextFormField(
                     maxLines: null,
                     decoration: const InputDecoration(
+                        border: InputBorder.none,
                         hintText: "Coloque a localização do evento aqui"),
                   ),
                   SizedBox(
@@ -370,7 +428,18 @@ class _PagePostarEventoState extends State<PagePostarEvento> {
         ),
       ),
       bottomNavigationBar: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.success,
+            animType: AnimType.topSlide,
+            title: "Evento Cadastrado",
+            btnOkText: "Fechar",
+            barrierColor: Cores.branco.withOpacity(0.7),
+            btnOkOnPress: () {},
+            btnOkColor: Cores.azul42A5F5,
+          ).show();
+        },
         child: Container(
           height: 64,
           decoration: BoxDecoration(

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:tec_eventos/pages/acesso/login.dart';
-import 'package:tec_eventos/pages/paginas_instituicao/page_configuracao_instituicao/page_configuracao_instituicao.dart';
+import 'package:tec_eventos/pages/paginas_globais/acesso/login.dart';
+import 'package:tec_eventos/pages/paginas_globais/configuracoes/page_configuracao_instituicao.dart';
 import 'package:tec_eventos/pages/paginas_instituicao/page_estatisticas/page_estatisticas.dart';
 import 'package:tec_eventos/pages/paginas_instituicao/page_principal_instituicao/page_principal_instituicao.dart';
 import 'package:tec_eventos/widgets/Appbar/AppBarPaginaPrincipal/appbarpages.dart';
 import 'package:tec_eventos/widgets/Drawer/drawer.dart';
 import 'package:tec_eventos/widgets/bottomAppBar/bottom_appbar_aluno.dart';
-import 'package:tec_eventos/pages/paginas_aluno/configuracoes/config.dart';
+import 'package:tec_eventos/pages/paginas_globais/configuracoes/config.dart';
 import 'package:tec_eventos/pages/paginas_aluno/notificacao_page/notification_page.dart';
 import 'package:tec_eventos/pages/paginas_aluno/pag_eventos/eventos_page.dart';
 import 'package:tec_eventos/pages/paginas_aluno/pag_principal/principal_page.dart';
@@ -30,10 +30,8 @@ const List<Widget> listaPagesInstituicao = [
 ];
 
 class AllPages extends StatefulWidget {
-  AllPages({Key? key, required this.paginaAtual, this.tipoUser})
-      : super(key: key);
+  AllPages({Key? key, required this.paginaAtual}) : super(key: key);
   int paginaAtual;
-  String? tipoUser;
 
   @override
   State<AllPages> createState() => _AllPagesState();
@@ -41,11 +39,12 @@ class AllPages extends StatefulWidget {
 
 class _AllPagesState extends State<AllPages> {
   late PageController _pageController;
+  late String tipoUser;
   //controle das páginas
   @override
   void initState() {
     _pageController = PageController(initialPage: widget.paginaAtual);
-    widget.tipoUser = userType;
+    tipoUser = userType;
     super.initState();
   }
 
@@ -81,20 +80,20 @@ class _AllPagesState extends State<AllPages> {
                 });
               },
               itemBuilder: (context, index) {
-                if (widget.tipoUser == "Aluno") {
+                if (tipoUser == "Aluno") {
                   return Paginas(paginas: listaPagesAlunos[index]);
-                } else if (widget.tipoUser == "Instituição") {
+                } else if (tipoUser == "Instituição") {
                   return Paginas(paginas: listaPagesInstituicao[index]);
                 } else {
                   return Container();
                 }
               }),
         ),
-        bottomNavigationBar: widget.tipoUser == "Aluno"
+        bottomNavigationBar: tipoUser == "Aluno"
             ? BottomAppBarAluno(
                 paginaAtual: widget.paginaAtual,
                 pageController: _pageController)
-            : widget.tipoUser == "Instituição"
+            : tipoUser == "Instituição"
                 ? BottomAppBarInstituicao(
                     paginaAtual: widget.paginaAtual,
                     pageController: _pageController)

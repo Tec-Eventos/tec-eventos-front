@@ -16,10 +16,15 @@ class _PageListaParticipantesState extends State<PageListaParticipantes> {
         appBar: AppBar(
           backgroundColor: Cores.branco,
           elevation: 0,
-          leading: Icon(
-            Icons.arrow_back_ios_sharp,
-            size: 20,
-            color: Cores.preto,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios_sharp,
+              size: 20,
+              color: Cores.preto,
+            ),
           ),
           title: Text(
             "LISTA",
@@ -53,12 +58,13 @@ class _PageListaParticipantesState extends State<PageListaParticipantes> {
               ))),
         ),
         body: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
           scrollDirection: Axis.vertical,
           children: [
             SizedBox(
               height: 300,
               child: ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 children: const [
                   Participantes(),
                   Participantes(),
@@ -69,14 +75,32 @@ class _PageListaParticipantesState extends State<PageListaParticipantes> {
               ),
             ),
             const SizedBox(height: 50),
-            Container(
-              child: ListTile(
-                leading: Icon(
-                  Icons.play_circle_outline_rounded,
+            OutlinedButton(
+              onPressed: () {},
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(
                   color: Cores.preto,
-                  size: 30,
                 ),
-                title: Text("Iniciar evento"),
+                foregroundColor: Cores.azul1565C0,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.play_circle_outline,
+                      color: Cores.preto,
+                    ),
+                  ),
+                  Text(
+                    "Iniciar Evento",
+                    style: TextStyle(
+                      fontFamily: Fontes.ralewayBold,
+                      color: Cores.preto,
+                    ),
+                  )
+                ],
               ),
             ),
             const SizedBox(height: 50),
@@ -88,6 +112,7 @@ class _PageListaParticipantesState extends State<PageListaParticipantes> {
             SizedBox(
               height: 300,
               child: ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 children: const [
                   PresencaConfirmada(),
                   PresencaConfirmada(),
@@ -109,7 +134,7 @@ class Participantes extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Container(
-        width: 328,
+        width: 308,
         decoration: BoxDecoration(
             border: Border.all(
               color: Cores.preto,

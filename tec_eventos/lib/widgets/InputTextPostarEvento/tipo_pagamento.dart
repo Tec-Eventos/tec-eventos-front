@@ -31,6 +31,8 @@ class _TipoPagamentoState extends State<TipoPagamento> {
       title: DropdownButton<String>(
         value: dropdownValue,
         elevation: 0,
+        dropdownColor: Cores.branco,
+        isDense: false,
         onChanged: (String? newValue) {
           setState(() {
             dropdownValue = newValue!;

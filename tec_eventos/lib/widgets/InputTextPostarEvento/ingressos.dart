@@ -30,6 +30,7 @@ class _CaixaTextoIngressosState extends State<CaixaTextoIngressos> {
         keyboardType: TextInputType.number,
         controller: controllerIngressos,
         decoration: const InputDecoration(
+          border: InputBorder.none,
           hintText: "Informe a limitação de ingressos",
         ),
       ),

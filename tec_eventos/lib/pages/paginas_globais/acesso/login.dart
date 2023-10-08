@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:tec_eventos/pages/acesso/forgetPasswordProccess/envioEmail.dart';
+import 'package:tec_eventos/pages/paginas_globais/acesso/forgetPasswordProccess/envioEmail.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/pages/acesso/cadastro.dart';
+import 'package:tec_eventos/pages/paginas_globais/acesso/cadastro.dart';
 import 'package:tec_eventos/pages/all_pages.dart';
-import 'package:tec_eventos/widgets/InputText/input_text.dart';
+import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/input_text.dart';
 
 final controllerEmail = TextEditingController();
 final controllerSenha = TextEditingController();
@@ -268,13 +268,13 @@ class _LoginPageState extends State<LoginPage> {
                   Navigator.push(
                       context,
                       PageTransition(
-                          child: AllPages(paginaAtual: 0, tipoUser: userType),
+                          child: AllPages(paginaAtual: 0),
                           type: PageTransitionType.rightToLeft));
                 } else if (userType == "Instituição") {
                   Navigator.push(
                       context,
                       PageTransition(
-                          child: AllPages(paginaAtual: 0, tipoUser: userType),
+                          child: AllPages(paginaAtual: 0),
                           type: PageTransitionType.rightToLeft));
                 } else if (userType == "Desconhecido") {
                   final snackbar = SnackBar(

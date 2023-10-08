@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:pinput/pinput.dart';
-import 'package:tec_eventos/pages/acesso/forgetPasswordProccess/envioEmail.dart';
-import 'package:tec_eventos/pages/acesso/forgetPasswordProccess/redefinir_senha.dart';
+import 'package:tec_eventos/pages/paginas_globais/acesso/forgetPasswordProccess/envioEmail.dart';
+import 'package:tec_eventos/pages/paginas_globais/acesso/forgetPasswordProccess/redefinir_senha.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/pages/acesso/login.dart';
+import 'package:tec_eventos/pages/paginas_globais/acesso/login.dart';
 
 
 class VerificacaoCodigo extends StatefulWidget {

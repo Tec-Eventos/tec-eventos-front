@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tec_eventos/widgets/InputText/validations/validations_info.dart';
+import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/validations/validations_info.dart';
 
 class InputTextEmail extends StatelessWidget {
   const InputTextEmail({super.key, required this.controllerEmail});
