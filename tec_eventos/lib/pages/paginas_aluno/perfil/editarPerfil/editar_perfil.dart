@@ -19,7 +19,7 @@ class EditProfileUser extends StatefulWidget {
 }
 
 class _EditProfileUserState extends State<EditProfileUser> {
-  File? imagePerfil;
+   File? imagePerfil;
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +80,9 @@ class _EditProfileUserState extends State<EditProfileUser> {
                                       borderRadius: BorderRadius.circular(100),
                                       color: const Color(0xffEBEBEB),
                                     ),
-                                    child: const EditImagens()),
+                                    child: EditImagens(
+                                      imagePerfil: imagePerfil,
+                                    )),
                               ),
                             ],
                           ),

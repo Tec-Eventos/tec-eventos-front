@@ -1,10 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/function/adicionarImagem/img_gallery.dart';
 
 class EditImagens extends StatefulWidget {
-  const EditImagens({Key? key}) : super(key: key);
+  EditImagens({Key? key, required this.imagePerfil}) : super(key: key);
+  File? imagePerfil;
 
   @override
   _EditImagensState createState() => _EditImagensState();
@@ -186,5 +191,84 @@ class _EditImagensState extends State<EditImagens> {
             ),
           );
         });
+  }
+
+  final picker = ImagePicker();
+
+  refreshPerfilImage(File? newImage) {
+    if (newImage != null) {
+      setState(() {
+        widget.imagePerfil = newImage;
+      });
+    }
+  }
+
+  imgFromGallery() async {
+    try {
+      await picker
+          .pickImage(source: ImageSource.gallery, imageQuality: 50)
+          .then((value) {
+        if (value != null) {
+          cropImage(File(value.path));
+        }
+      });
+    } catch (e) {
+      print("Erro ao tentar pegar a imagem da galeria: $e");
+    }
+  }
+
+  imgFromCamera() async {
+    try {
+      await picker
+          .pickImage(source: ImageSource.camera, imageQuality: 50)
+          .then((value) {
+        if (value != null) {
+          cropImage(File(value.path));
+        }
+      });
+    } catch (e) {
+      print("Erro ao tentar tirar uma foto: $e");
+    }
+  }
+
+  Future<void> cropImage(File imgFile) async {
+    try {
+      final croppedFile = await ImageCropper().cropImage(
+          sourcePath: imgFile.path,
+          aspectRatioPresets: Platform.isAndroid
+              ? [
+                  CropAspectRatioPreset.square,
+                  CropAspectRatioPreset.ratio3x2,
+                  CropAspectRatioPreset.original,
+                  CropAspectRatioPreset.ratio4x3,
+                  CropAspectRatioPreset.ratio16x9
+                ]
+              : [
+                  CropAspectRatioPreset.original,
+                  CropAspectRatioPreset.square,
+                  CropAspectRatioPreset.ratio3x2,
+                  CropAspectRatioPreset.ratio4x3,
+                  CropAspectRatioPreset.ratio5x3,
+                  CropAspectRatioPreset.ratio5x4,
+                  CropAspectRatioPreset.ratio7x5,
+                  CropAspectRatioPreset.ratio16x9
+                ],
+          uiSettings: [
+            AndroidUiSettings(
+                toolbarTitle: "Tec!Eventos",
+                toolbarColor: Colors.blue,
+                toolbarWidgetColor: Colors.white,
+                initAspectRatio: CropAspectRatioPreset.original,
+                lockAspectRatio: false),
+          ]);
+
+      if (croppedFile != null) {
+        setState(() {
+          refreshPerfilImage(File(croppedFile.path));
+        });
+      }
+    } catch (e) {
+      print("Erro ao cortar imagem: $e");
+    }
   }
 }
