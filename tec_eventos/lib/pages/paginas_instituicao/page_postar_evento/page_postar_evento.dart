@@ -194,7 +194,7 @@ class _PagePostarEventoState extends State<PagePostarEvento> {
                         hintText: "Coloque a localização do evento aqui"),
                   ),
                   SizedBox(
-                    width: 160,
+                    width: MediaQuery.of(context).size.width / 2.3,
                     child: OutlinedButton(
                       style: OutlinedButton.styleFrom(
                         elevation: 0,
@@ -287,7 +287,7 @@ class _PagePostarEventoState extends State<PagePostarEvento> {
                         //         type: PageTransitionType.bottomToTop));
                       },
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Icon(Icons.location_on_outlined,
                               color: Cores.azul42A5F5),
