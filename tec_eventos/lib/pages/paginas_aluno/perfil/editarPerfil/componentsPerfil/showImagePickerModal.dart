@@ -1,135 +1,29 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:image_cropper/image_cropper.dart';
+import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:tec_eventos/cores.dart';
-import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/pages/paginas_aluno/pag_principal/principal_page.dart';
 
-class AppBarPostarEvento extends StatefulWidget {
-  const AppBarPostarEvento({super.key});
+class ShowImagePickerModal extends StatefulWidget {
+  ShowImagePickerModal({Key? key}) : super(key: key);
 
   @override
-  State<AppBarPostarEvento> createState() => _AppBarPostarEventoState();
+  State<ShowImagePickerModal> createState() => _ShowImagePickerModalState();
 }
 
-class _AppBarPostarEventoState extends State<AppBarPostarEvento> {
-  File? image;
+class _ShowImagePickerModalState extends State<ShowImagePickerModal> {
+  File? imagePerfil;
+
   @override
   Widget build(BuildContext context) {
+    return showImagePicker();
 
-
-
-    Widget ButtonImgEvent = Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Center(
-        child: InkWell(
-          onTap: () async{
-              Map<Permission, PermissionStatus> statuses = await [
-              Permission.storage,
-                  Permission.camera,
-            ].request();
-            if (statuses[Permission.storage]!.isGranted &&
-            statuses[Permission.camera]!.isGranted) {
-            showImagePicker();
-            } else {
-            print("Permissão negada!");
-            }
-          },
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: 61,
-            decoration: BoxDecoration(
-              border: Border.all(color: Cores.preto),
-              borderRadius: BorderRadius.circular(5),
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: 59,
-                  height: 61,
-                  decoration: BoxDecoration(
-                      color: Cores.preto,
-                      borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(5),
-                          bottomLeft: Radius.circular(5))),
-                  child: Icon(
-                    Icons.add,
-                    color: Cores.branco,
-                    size: 33,
-                  ),
-                ),
-                const Spacer(),
-                Text(
-                  "Imagem do evento",
-                  style: TextStyle(
-                      fontFamily: Fontes.ralewayBold,
-                      color: Cores.preto,
-                      fontSize: 27),
-                ),
-                const Spacer()
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-
-
-    Widget imagemEvento = Stack(
-
-          children: [
-            Image.file(
-              image!,
-              key: ValueKey(image!.path),
-              fit: BoxFit.fill,
-            ),
-
-            OutlinedButton(onPressed: (){}, child: Text("Remover imagem"))
-          ]
-        );
-
-
-    double displayHeight = MediaQuery.of(context).size.height;
-
-    return SliverAppBar(
-
-      expandedHeight: displayHeight / 3,
-      flexibleSpace: FlexibleSpaceBar(
-
-        background: image == null ? ButtonImgEvent : imagemEvento,
-      ),
-      floating: true,
-      snap: true,
-      pinned: true,
-      elevation: 0,
-      backgroundColor: Cores.brancoCinzento,
-      leading: IconButton(
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-        icon: Icon(
-          Icons.arrow_back_ios,
-          size: 30,
-          color: Cores.branco,
-        ),
-      ),
-    );
   }
 
-
-
   showImagePicker() {
-    showModalBottomSheet(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(15), topLeft: Radius.circular(15)),
-        ),
-        context: context,
-        builder: (builder) {
-          return SingleChildScrollView(
+    return
+         SingleChildScrollView(
             child: Card(
               elevation: 0,
               child: Container(
@@ -276,7 +170,7 @@ class _AppBarPostarEventoState extends State<AppBarPostarEvento> {
               ),
             ),
           );
-        });
+    ;
   }
 
   final picker = ImagePicker();
@@ -284,7 +178,7 @@ class _AppBarPostarEventoState extends State<AppBarPostarEvento> {
   refreshPerfilImage(File? newImage) {
     if (newImage != null) {
       setState(() {
-         image = newImage;
+        imagePerfil = newImage;
       });
     }
   }
@@ -358,6 +252,3 @@ class _AppBarPostarEventoState extends State<AppBarPostarEvento> {
     }
   }
 }
-
-
-

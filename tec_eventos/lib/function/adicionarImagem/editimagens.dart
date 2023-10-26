@@ -26,7 +26,7 @@ class _EditImagensState extends State<EditImagens> {
         ].request();
         if (statuses[Permission.storage]!.isGranted &&
             statuses[Permission.camera]!.isGranted) {
-          showImagePicker();
+          showImagePicker(imagePerfil: widget.imagePerfil);
         } else {
           print("Alou, ta podendo falar ou ta negando permissão?");
         }
@@ -35,7 +35,7 @@ class _EditImagensState extends State<EditImagens> {
     );
   }
 
-  showImagePicker() {
+  showImagePicker({File? imagePerfil}) {
     showModalBottomSheet(
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(

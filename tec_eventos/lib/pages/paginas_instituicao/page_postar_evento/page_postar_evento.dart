@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:tec_eventos/cores.dart';
@@ -20,6 +22,8 @@ class PagePostarEvento extends StatefulWidget {
 }
 
 class _PagePostarEventoState extends State<PagePostarEvento> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
