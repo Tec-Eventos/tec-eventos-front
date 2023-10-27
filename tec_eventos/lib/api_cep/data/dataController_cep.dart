@@ -1,22 +1,7 @@
-import 'dart:convert';
-import 'package:tec_eventos/api_cep/data/api_cep.dart';
-import 'package:tec_eventos/api_cep/model/cep_model.dart';
+import 'package:br_api/br_api.dart';
 
+callCep(cep) async {
+  final buscando_cep = await CepV2.searchCepV2(cep: cep);
 
-
-class CepController{
-final api_cep = API();
-
-Future<CEP?> getCEP (String cep) async{
-  try{
-    final response = await api_cep.get("https://viacep.com.br/ws/${cep}/json/");
-    print(response?.data.toString());
-   if(response?.statusCode == 200){
-      return CEP.fromJson(json.decode(json.encode(response?.data)));
-    }
-  } catch (e) {
-
-    rethrow;
-  }
-  }
+  return "${buscando_cep.street}, ${buscando_cep.neighborhood} - ${buscando_cep.city}-${buscando_cep.state}";
 }
