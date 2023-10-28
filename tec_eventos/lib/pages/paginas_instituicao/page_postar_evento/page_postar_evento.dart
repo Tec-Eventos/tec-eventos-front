@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:br_api/br_api.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:tec_eventos/cores.dart';

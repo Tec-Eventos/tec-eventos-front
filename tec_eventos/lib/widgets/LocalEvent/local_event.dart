@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:tec_eventos/api_cep/data/dataController_cep.dart';
+import 'package:tec_eventos/api_cep/model/cepModel.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
 
@@ -19,7 +19,7 @@ class _LocalEventState extends State<LocalEvent> {
     super.dispose();
   }
 
-
+  CEP? model = CEP();
   dynamic endereco = '';
   var maskcep = MaskTextInputFormatter(mask: '#####-###');
   late TextEditingController controllerCEP = TextEditingController();
@@ -27,6 +27,8 @@ class _LocalEventState extends State<LocalEvent> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('$endereco'),
         SizedBox(
@@ -44,6 +46,7 @@ class _LocalEventState extends State<LocalEvent> {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
+                      actionsAlignment: MainAxisAlignment.center,
                       contentPadding: const EdgeInsets.all(20),
                       shape: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20.0),
@@ -82,28 +85,25 @@ class _LocalEventState extends State<LocalEvent> {
                       actions: [
                         GestureDetector(
                           onTap: () async {
-                            final replace = int.tryParse(
-                                controllerCEP.text.replaceAll("-", ""));
-                            FutureBuilder(
-                                future: callCep(replace),
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    setState(() async {
-                                      endereco = await callCep(replace);
-                                    });
+                            model = await CepController().getCEP(controllerCEP
+                                .text
+                                .toString()
+                                .replaceAll("-", ""));
 
-                                    return endereco;
-                                  } else {
-                                    return const Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  }
-                                });
+                            setState(() {
+                              if (model?.logradouro == "" ||
+                                  model?.bairro == "" ||
+                                  model?.localidade == "" ||
+                                  model?.uf == "") {
+                                endereco =
+                                    "Não foi possivel encontrar o endereço";
+                              } else {
+                                endereco =
+                                    "${model?.logradouro}, ${model?.bairro} - ${model?.localidade}-${model?.uf} - ${model?.cep}";
+                              }
+                            });
 
-                            setState(
-                                () async => endereco = await callCep(replace));
-
-                            Navigator.of(context).pop();
+                            Navigator.pop(context);
                           },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
@@ -163,4 +163,3 @@ class _LocalEventState extends State<LocalEvent> {
     );
   }
 }
-
