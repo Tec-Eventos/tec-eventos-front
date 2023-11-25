@@ -80,7 +80,7 @@ class InputTextName extends StatelessWidget {
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.person_outline_outlined),
         isDense: true,
-        labelText: "Usuário",
+        labelText: "Nome",
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
       ),
     );

@@ -3,6 +3,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/pages/all_pages.dart';
+import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/input_text.dart';
 
 class Cadastro extends StatefulWidget {
   const Cadastro({Key? key}) : super(key: key);
@@ -44,8 +45,115 @@ class _CadastroState extends State<Cadastro> {
           ),
           Form(
             key: _formfield,
-            child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch, children: []),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    // controller: ,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.school_outlined),
+                      isDense: true,
+                      labelText: "RM",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                      //   contentPadding: const EdgeInsets.only(
+                      //       top: 18.0, right: 20, bottom: 18.0, left: 40),
+                      // ),
+                    ),
+                    // validator: () {},
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.name,
+                    // controller: ,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.person),
+                      isDense: true,
+                      labelText: "Nome",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                      //   contentPadding: const EdgeInsets.only(
+                      //       top: 18.0, right: 20, bottom: 18.0, left: 40),
+                      // ),
+                    ),
+                    // validator: () {},
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    // controller: ,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.email_outlined),
+                      isDense: true,
+                      labelText: "Email",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                      //   contentPadding: const EdgeInsets.only(
+                      //       top: 18.0, right: 20, bottom: 18.0, left: 40),
+                      // ),
+                    ),
+                    // validator: () {},
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.phone,
+                    // controller: ,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.phone),
+                      isDense: true,
+                      labelText: "Telefone",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                      //   contentPadding: const EdgeInsets.only(
+                      //       top: 18.0, right: 20, bottom: 18.0, left: 40),
+                      // ),
+                    ),
+                    // validator: () {},
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    // controller: ,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.edit_location_outlined),
+                      isDense: true,
+                      labelText: "CEP",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                      //   contentPadding: const EdgeInsets.only(
+                      //       top: 18.0, right: 20, bottom: 18.0, left: 40),
+                      // ),
+                    ),
+                    // validator: () {},
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.text,
+                    // controller: ,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.password),
+                      isDense: true,
+                      labelText: "Senha",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                      //   contentPadding: const EdgeInsets.only(
+                      //       top: 18.0, right: 20, bottom: 18.0, left: 40),
+                      // ),
+                    ),
+                    // validator: () {},
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.text,
+                    // controller: ,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.school_outlined),
+                      isDense: true,
+                      labelText: "Código Instituição",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                      //   contentPadding: const EdgeInsets.only(
+                      //       top: 18.0, right: 20, bottom: 18.0, left: 40),
+                      // ),
+                    ),
+                    // validator: () {},
+                  ),
+                ]),
           ),
           const SizedBox(height: 30),
           GestureDetector(
