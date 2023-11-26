@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tec_eventos/pages/paginas_globais/acesso/forms/login/login_aluno.dart';
 import 'package:tec_eventos/pages/paginas_globais/acesso/login.dart';
 import 'package:tec_eventos/pages/paginas_globais/configuracoes/page_configuracao_instituicao.dart';
 import 'package:tec_eventos/pages/paginas_instituicao/page_estatisticas/page_estatisticas.dart';

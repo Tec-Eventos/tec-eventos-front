@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:tec_eventos/pages/paginas_globais/acesso/forgetPasswordProccess/envioEmail.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/pages/paginas_globais/acesso/cadastro.dart';
-import 'package:tec_eventos/pages/all_pages.dart';
-import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/input_text.dart';
-
-final controllerEmail = TextEditingController();
-final controllerSenha = TextEditingController();
-final controllerUser = TextEditingController();
-String userType = "";
+import 'package:tec_eventos/pages/paginas_globais/acesso/forms/login/login_aluno.dart';
+import 'package:tec_eventos/pages/paginas_globais/acesso/forms/login/login_instituicao.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -19,48 +13,10 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-int mudancaBottomSheet = 0;
-Widget conteudoVerificacao = const EnvioEmail();
-
 class _LoginPageState extends State<LoginPage> {
-  final _formfield = GlobalKey<FormState>();
+  List<String> formularios = ['Aluno', 'Instituição'];
 
-  void validateUser() {
-    String email = controllerEmail.text;
-    String user = controllerUser.text;
-    String senha = controllerSenha.text;
-
-    if (email == "fgabrielmorais05@gmail.com" &&
-        user == "fgabrielmorais" &&
-        senha == "ggg111") {
-      setState(() {
-        userType = "Aluno";
-      });
-    } else if (email == "unicamp@gmail.com" &&
-        user == "UnicampEvents" &&
-        senha == "uuu222") {
-      setState(() {
-        userType = "Instituição";
-      });
-    } else {
-      setState(() {
-        userType = "Desconhecido";
-      });
-    }
-  }
-
-  //acesso do ALUNO
-  //email = bielzinho@gmail.com
-  //user = fgabrielmorais;
-  //senha = 1234
-
-  //acesso da instituição
-  //email = unicamp@gmail.com
-  //user = unicamp;
-  //senha = 1222
-
-  bool selectedValue = true;
-  bool isChecked = false;
+  String? selectedForm = 'Aluno';
 
   @override
   Widget build(BuildContext context) {
@@ -91,229 +47,37 @@ class _LoginPageState extends State<LoginPage> {
               fontSize: 28,
             ),
           ),
-          Form(
-            key: _formfield,
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20),
-                      child: InputTextEmail(controllerEmail: controllerEmail)),
-                  Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20),
-                      child: InputTextName(
-                        controllerUser: controllerUser,
-                      )),
-                  Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20),
-                      child: InputTextPassword(
-                        controllerSenha: controllerSenha,
-                      )),
-                ]),
-          ),
-          ListTile(
-            titleAlignment: ListTileTitleAlignment.center,
-            autofocus: true,
-            dense: true,
-            leading: Checkbox(
-              shape: const CircleBorder(),
-              activeColor: Cores.azul42A5F5,
-              value: isChecked,
-              onChanged: (value) {
-                isChecked = !isChecked;
-                setState(() {});
-              },
-            ),
-            title: Text(
-              "Lembrar-se de mim",
-              style: TextStyle(
-                fontFamily: Fontes.inter,
-                fontSize: 15,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-            child: GestureDetector(
-              onTap: () {
-                //a tela que aparecerá a respeito do usuário esquecer a senha
-                showModalBottomSheet(
-                    context: context,
-                    isScrollControlled: true,
-                    // padding: EdgeIn
-                    shape: const RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(25))),
-                    builder: (context) {
-                      return StatefulBuilder(builder:
-                          (BuildContext context, StateSetter setState) {
-                        return Padding(
-                          padding: MediaQuery.of(context).viewInsets,
-                          child: SizedBox(
-                            height: 371,
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: conteudoVerificacao,
-                            ),
+          Center(
+            child: SizedBox(
+              width: 200,
+              child: DropdownButtonFormField<String>(
+                padding: const EdgeInsets.all(20),
+                elevation: 0,
+                icon: Icon(
+                  Icons.keyboard_arrow_down_outlined,
+                  color: Cores.azul47BBEC,
+                ),
+                value: selectedForm,
+                items: formularios
+                    .map((formulario) => DropdownMenuItem<String>(
+                          value: formulario,
+                          child: Text(
+                            formulario,
+                            style: TextStyle(
+                                fontSize: 20, fontFamily: Fontes.inter),
                           ),
-                        );
-                      });
-                    });
-              },
-              child: Text(
-                'Esqueceu a senha?',
-                style: TextStyle(
-                  fontFamily: Fontes.inter,
-                  color: Cores.azul45B0F0,
-                  fontWeight: FontWeight.w400,
-                ),
-                textAlign: TextAlign.start,
+                        ))
+                    .toList(),
+                onChanged: (formulario) =>
+                    setState(() => selectedForm = formulario),
               ),
             ),
           ),
-          const SizedBox(height: 30),
-          Text(
-            "Faça login por outras mídias sociais",
-            style: TextStyle(
-              fontFamily: Fontes.inter,
-              fontSize: 15,
-              color: Cores.cinza,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 40),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Cores.cinza,
-                      child: Image.asset('assets/acesso/microsoft.png'),
-                    ),
-                    Text(
-                      'Microsoft',
-                      style: TextStyle(
-                        fontFamily: Fontes.inter,
-                        fontSize: 15,
-                        color: Cores.cinza,
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  width: 50,
-                ),
-                Column(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Cores.cinza,
-                      child: Image.asset(
-                        'assets/acesso/google.png',
-                      ),
-                    ),
-                    Text(
-                      'Google',
-                      style: TextStyle(
-                        fontFamily: Fontes.inter,
-                        fontSize: 15,
-                        color: Cores.cinza,
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  width: 50,
-                ),
-                Column(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Cores.cinza,
-                      child: Image.asset('assets/acesso/convidado.png'),
-                    ),
-                    Text(
-                      'Convidado',
-                      style: TextStyle(
-                        fontFamily: Fontes.inter,
-                        fontSize: 15,
-                        color: Cores.cinza,
-                      ),
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ),
-          GestureDetector(
-            onTap: () {
-              //acesso do ALUNO
-              //email = bielzinho@gmail.com
-              //user = fgabrielmorais;
-              //senha = 1234
-
-              //acesso da instituição
-              //email = unicamp@gmail.com
-              //user = unicamp;
-              //senha = 1222
-
-              //validação do usuário
-              if (_formfield.currentState!.validate()) {
-                validateUser();
-
-                if (userType == "Aluno") {
-                  Navigator.push(
-                      context,
-                      PageTransition(
-                          child: AllPages(paginaAtual: 0),
-                          type: PageTransitionType.rightToLeft));
-                } else if (userType == "Instituição") {
-                  Navigator.push(
-                      context,
-                      PageTransition(
-                          child: AllPages(paginaAtual: 0),
-                          type: PageTransitionType.rightToLeft));
-                } else if (userType == "Desconhecido") {
-                  final snackbar = SnackBar(
-                    content: const Text("Usuário não encontrado"),
-                    action: SnackBarAction(label: "Ok", onPressed: () {}),
-                  );
-
-                  ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                }
-
-                // controllerEmail.clear();
-                // controllerUser.clear();
-                // controllerSenha.clear();
-              }
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: Container(
-                width: 282,
-                height: 52,
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(colors: [
-                      Cores.azul47BBEC,
-                      Cores.azul42A5F5,
-                    ], begin: Alignment.topLeft, end: Alignment.bottomRight),
-                    borderRadius: BorderRadius.circular(20)),
-                child: Center(
-                  child: Text(
-                    "Login",
-                    style: TextStyle(
-                        fontFamily: Fontes.raleway,
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Cores.branco),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          if (selectedForm == "Aluno") ...[
+            const LoginAluno()
+          ] else if (selectedForm == "Instituição") ...[
+            const LoginInstituicao()
+          ],
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
             child: GestureDetector(
@@ -341,3 +105,139 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///FUNÇÃO DE ESQUECER A SENHA
+/// JUNTAMENTE DAS OUTRAS OPÇÕES DE LOGIN
+/// 
+/// 
+/// 
+// int mudancaBottomSheet = 0;
+// Widget conteudoVerificacao = const EnvioEmail();
+/// 
+///   Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+          //   child: GestureDetector(
+          //     onTap: () {
+          //       //a tela que aparecerá a respeito do usuário esquecer a senha
+          //       showModalBottomSheet(
+          //           context: context,
+          //           isScrollControlled: true,
+          //           // padding: EdgeIn
+          //           shape: const RoundedRectangleBorder(
+          //               borderRadius:
+          //                   BorderRadius.vertical(top: Radius.circular(25))),
+          //           builder: (context) {
+          //             return StatefulBuilder(builder:
+          //                 (BuildContext context, StateSetter setState) {
+          //               return Padding(
+          //                 padding: MediaQuery.of(context).viewInsets,
+          //                 child: SizedBox(
+          //                   height: 371,
+          //                   child: Padding(
+          //                     padding: const EdgeInsets.all(20.0),
+          //                     child: conteudoVerificacao,
+          //                   ),
+          //                 ),
+          //               );
+          //             });
+          //           });
+          //     },
+          //     child: Text(
+          //       'Esqueceu a senha?',
+          //       style: TextStyle(
+          //         fontFamily: Fontes.inter,
+          //         color: Cores.azul45B0F0,
+          //         fontWeight: FontWeight.w400,
+          //       ),
+          //       textAlign: TextAlign.start,
+          //     ),
+          //   ),
+          // ),
+          // const SizedBox(height: 30),
+          // Text(
+          //   "Faça login por outras mídias sociais",
+          //   style: TextStyle(
+          //     fontFamily: Fontes.inter,
+          //     fontSize: 15,
+          //     color: Cores.cinza,
+          //   ),
+          //   textAlign: TextAlign.center,
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(vertical: 40),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: [
+          //       Column(
+          //         children: [
+          //           CircleAvatar(
+          //             backgroundColor: Cores.cinza,
+          //             child: Image.asset('assets/acesso/microsoft.png'),
+          //           ),
+          //           Text(
+          //             'Microsoft',
+          //             style: TextStyle(
+          //               fontFamily: Fontes.inter,
+          //               fontSize: 15,
+          //               color: Cores.cinza,
+          //             ),
+          //           )
+          //         ],
+          //       ),
+          //       const SizedBox(
+          //         width: 50,
+          //       ),
+          //       Column(
+          //         children: [
+          //           CircleAvatar(
+          //             backgroundColor: Cores.cinza,
+          //             child: Image.asset(
+          //               'assets/acesso/google.png',
+          //             ),
+          //           ),
+          //           Text(
+          //             'Google',
+          //             style: TextStyle(
+          //               fontFamily: Fontes.inter,
+          //               fontSize: 15,
+          //               color: Cores.cinza,
+          //             ),
+          //           )
+          //         ],
+          //       ),
+          //       const SizedBox(
+          //         width: 50,
+          //       ),
+          //       Column(
+          //         children: [
+          //           CircleAvatar(
+          //             backgroundColor: Cores.cinza,
+          //             child: Image.asset('assets/acesso/convidado.png'),
+          //           ),
+          //           Text(
+          //             'Convidado',
+          //             style: TextStyle(
+          //               fontFamily: Fontes.inter,
+          //               fontSize: 15,
+          //               color: Cores.cinza,
+          //             ),
+          //           )
+          //         ],
+          //       ),
+          //     ],
+          //   ),
+          // ),
