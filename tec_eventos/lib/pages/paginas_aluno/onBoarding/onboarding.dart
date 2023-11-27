@@ -3,6 +3,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/pages/paginas_globais/acesso/login.dart';
 import 'package:tec_eventos/fontes.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoarding extends StatefulWidget {
   const OnBoarding({Key? key}) : super(key: key);
@@ -239,4 +240,6 @@ class _BotaoComecarState extends State<BotaoComecar> {
       ],
     );
   }
+
+
 }

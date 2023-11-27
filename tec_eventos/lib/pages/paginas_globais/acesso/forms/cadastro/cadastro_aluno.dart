@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/pages/all_pages.dart';
@@ -15,7 +16,6 @@ import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/inputs_aluno/
 import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/input_password.dart';
 import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/inputs_aluno/input_rmaluno.dart';
 import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/inputs_instituicao/input_instituicao.dart';
-import 'package:tec_eventos/pages/paginas_globais/acesso/forms/login/login_aluno.dart';
 
 class CadastroAluno extends StatefulWidget {
   const CadastroAluno({super.key});
@@ -79,11 +79,10 @@ class _CadastroAlunoState extends State<CadastroAluno> {
                               vertical: 10, horizontal: 20),
                           child: InputTextRmAluno(
                               controllerRmAluno: controllerRmAlunooo)),
-                      Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20),
-                          child: InputTextPassword(
-                              controllerSenha: controllerSenhaAluno)),
+                        InputTextSenhaCadastro(
+                        controllerSenha: controllerSenhaAluno,
+                        controllerConfirmSenha: controllerConfirmSenha,
+                      ),
                       // Padding(
                       //     padding: const EdgeInsets.symmetric(
                       //         vertical: 10, horizontal: 20),
@@ -96,7 +95,6 @@ class _CadastroAlunoState extends State<CadastroAluno> {
         GestureDetector(
           onTap: () {
             if (_formfield.currentState!.validate()) {
-              setState(() => userType = "Aluno");
               cadastrarAluno();
             }
           },
@@ -124,38 +122,20 @@ class _CadastroAlunoState extends State<CadastroAluno> {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-          child: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Text(
-              'Já tem uma conta? Faça o login',
-              style: TextStyle(
-                fontFamily: Fontes.inter,
-                color: Cores.azul45B0F0,
-                fontSize: 18,
-                fontWeight: FontWeight.w400,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
       ],
     );
   }
 
-  Future<void> cadastrarAluno() async {
+  Future<Widget> cadastrarAluno() async {
     final nome = controllerNomeAluno.text;
     final email = controllerEmailAluno.text;
-    final telefone = controllerTellAluno.text;
+    final telefone = controllerTellAluno.text.replaceAll(RegExp(r'[\s\(\)-]'), '');
     final cepAluno = controllerCEPAluno.text;
     final cdEscolar = int.tryParse(controllerInstAluno.text);
     final rmAluno = int.tryParse(controllerRmAlunooo.text) ?? 0;
     final senha = controllerSenhaAluno.text;
 
-    final body = {
+    final Map<String, dynamic> body = {
       "rm_aluno": rmAluno,
       "nome": nome,
       "email": email,
@@ -166,37 +146,54 @@ class _CadastroAlunoState extends State<CadastroAluno> {
     };
 
     //enviando a informação para o servidor
-    const url = 'http://dominio/aluno';
+    const url = 'http://192.168.1.112:8080/aluno';
     final uri = Uri.parse(url);
     final response = await http.post(uri,
         body: jsonEncode(body), headers: {'Content-Type': 'application/json'});
 
     //mostrando o retorno da requisição
     if (response.statusCode == 200) {
-      print('Sucesso na criação');
-
-      AwesomeDialog(
-        context: context,
-        dialogType: DialogType.success,
-        animType: AnimType.topSlide,
-        title: "Usuário Criado",
-        btnOkText: "Fechar",
-        barrierColor: Cores.branco.withOpacity(0.7),
-        btnOkOnPress: () {
-          Navigator.push(
-              context,
-              PageTransition(
-                  child: AllPages(paginaAtual: 0),
-                  type: PageTransitionType.rightToLeft));
-        },
-        btnOkColor: Cores.azul42A5F5,
-      ).show();
+      return showMessageSuccess();
     } else {
-      print('Falha na criação');
-      print(response.body);
+      return showMessageError();
     }
   }
 
-  void showMessageSuccess() {}
-  void showMessageError() {}
+  showMessageSuccess() {
+    return AwesomeDialog(
+      context: context,
+      dialogType: DialogType.success,
+      animType: AnimType.topSlide,
+      titleTextStyle:
+          TextStyle(fontFamily: Fontes.inter, fontWeight: FontWeight.w600),
+      title: "Usuário criado!",
+      btnOkText: "Prosseguir",
+      barrierColor: Cores.branco.withOpacity(0.7),
+      btnOkOnPress: () async {
+        const String userTypeKey = 'userType';
+        SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
+        await sharedPreferences.setString(userTypeKey, 'Aluno');
+
+        Navigator.push(
+            context,
+            PageTransition(
+                child: AllPages(paginaAtual: 0),
+                type: PageTransitionType.rightToLeft));
+      },
+      btnOkColor: Cores.azul42A5F5,
+    ).show();
+  }
+
+  showMessageError() {
+    final snackBar = SnackBar(
+      elevation: 0,
+      content: Text(
+        'Informações inválidas',
+        style: TextStyle(fontFamily: Fontes.inter, fontWeight: FontWeight.bold),
+      ),
+      backgroundColor: Cores.vermelho,
+    );
+    return ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
 }

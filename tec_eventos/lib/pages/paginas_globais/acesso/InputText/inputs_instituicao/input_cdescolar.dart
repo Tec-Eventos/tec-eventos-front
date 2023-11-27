@@ -16,6 +16,13 @@ class InputTextCdEscolar extends StatelessWidget {
         labelText: "Código Escolar",
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
       ),
+      validator: (cdEscolar) {
+        if (cdEscolar!.isEmpty) {
+          return "Informe o código escolar";
+        } else if (!RegExp(r'^[0-9]+$').hasMatch(cdEscolar)) {
+          return "Informe apenas dígitos";
+        }
+      },
     );
   }
 }

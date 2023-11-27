@@ -8,12 +8,11 @@ class InputTextCEP extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     var maskcep = MaskTextInputFormatter(mask: '#####-###');
 
     return TextFormField(
       keyboardType: TextInputType.number,
-      // inputFormatters: [maskcep],
+      inputFormatters: [maskcep],
       controller: controllerCEP,
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.location_on_outlined),
@@ -24,8 +23,16 @@ class InputTextCEP extends StatelessWidget {
         //       top: 18.0, right: 20, bottom: 18.0, left: 40),
         // ),
       ),
-      // validator: () {
-      // },
+      validator: (cep) {
+        if (cep!.isEmpty) {
+          return "Coloque um CEP";
+        } else if (cep.length < 9) {
+          return "Esse CEP não contém 9 dígitos";
+        } else if (!RegExp(r'^[0-9]+$').hasMatch(cep)) {
+          return "Informe apenas dígitos";
+        }
+        return null;
+      },
     );
   }
 }

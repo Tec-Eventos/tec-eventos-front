@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/pages/all_pages.dart';
+
 import 'package:tec_eventos/pages/paginas_globais/acesso/forms/cadastro/cadastro_aluno.dart';
 import 'package:tec_eventos/pages/paginas_globais/acesso/forms/cadastro/cadastro_instituicao.dart';
+import 'package:tec_eventos/pages/paginas_globais/acesso/login.dart';
 
 class Cadastro extends StatefulWidget {
   const Cadastro({Key? key}) : super(key: key);
@@ -86,7 +87,28 @@ class _CadastroState extends State<Cadastro> {
                 ]),
           ),
           const SizedBox(height: 30),
-
+          Padding(
+            padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        child: const LoginPage(),
+                        type: PageTransitionType.rightToLeft));
+              },
+              child: Text(
+                'Já possui uma conta? Faça Login',
+                style: TextStyle(
+                  fontFamily: Fontes.inter,
+                  color: Cores.azul45B0F0,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:tec_eventos/cores.dart';
 
 class InputTextTipoInstituicao extends StatefulWidget {
-  const InputTextTipoInstituicao(
+  InputTextTipoInstituicao(
       {super.key, required this.controllerTipoInstituicao});
-  final TextEditingController controllerTipoInstituicao;
+  TextEditingController controllerTipoInstituicao;
   @override
   State<InputTextTipoInstituicao> createState() =>
       _InputTextTipoInstituicaoState();
@@ -19,15 +19,23 @@ class _InputTextTipoInstituicaoState extends State<InputTextTipoInstituicao> {
       width: 200,
       child: DropdownButtonFormField(
         value: _selectedEscolas,
+        validator: (value) {
+          _selectedEscolas = value;
+          if (_selectedEscolas == null) {
+            return "Escolha uma das opções";
+          }
+          return null;
+        },
         items: _escolas
             .map((e) => DropdownMenuItem(
-                  child: Text(e),
                   value: e,
+                  child: Text(e),
                 ))
             .toList(),
         onChanged: (val) {
           setState(() {
             _selectedEscolas = val as String;
+            widget.controllerTipoInstituicao.text = _selectedEscolas!;
           });
         },
         icon: Icon(

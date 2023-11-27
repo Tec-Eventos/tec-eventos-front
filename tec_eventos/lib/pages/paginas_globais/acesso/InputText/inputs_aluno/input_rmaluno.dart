@@ -21,6 +21,15 @@ class _InputTextRmAlunoState extends State<InputTextRmAluno> {
         labelText: "RM",
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
       ),
+      validator: (rm) {
+        if (rm!.isEmpty) {
+          return "Informe o seu RM";
+        } else if (!RegExp(r'^[0-9]+$').hasMatch(rm)) {
+          return "Informe apenas dígitos";
+        } else if (rm.length < 5) {
+          return "RM inválido";
+        }
+      },
     );
   }
 }

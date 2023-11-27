@@ -55,7 +55,7 @@ class PageConfiguracaoInstituicao extends StatelessWidget {
           ),
 
           //SAIR
-          const ConfigGeralWithShowDialogExitApp(
+          const ConfigGeralWithShowDialogExitAccount(
               opcao: "Sair", icone: Icons.exit_to_app_outlined),
 
           //DELETAR A CONTA

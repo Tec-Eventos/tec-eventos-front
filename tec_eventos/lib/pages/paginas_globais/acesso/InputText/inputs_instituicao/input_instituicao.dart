@@ -15,6 +15,15 @@ class InputTextInstituicao extends StatelessWidget {
         labelText: "Instituição",
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
       ),
+      validator: (nome) {
+        if (nome!.isEmpty) {
+          return "Informe o nome da instituição";
+        } else if (!RegExp(r'^[a-zA-Z\s]+$').hasMatch(nome)) {
+          return "Nome de instituição inválido";
+        }
+
+        return null;
+      },
     );
   }
 }

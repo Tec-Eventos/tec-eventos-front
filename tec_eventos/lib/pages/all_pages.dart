@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tec_eventos/pages/paginas_globais/acesso/forms/login/login_aluno.dart';
-import 'package:tec_eventos/pages/paginas_globais/acesso/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tec_eventos/pages/paginas_globais/configuracoes/page_configuracao_instituicao.dart';
 import 'package:tec_eventos/pages/paginas_instituicao/page_estatisticas/page_estatisticas.dart';
 import 'package:tec_eventos/pages/paginas_instituicao/page_principal_instituicao/page_principal_instituicao.dart';
@@ -32,7 +31,7 @@ const List<Widget> listaPagesInstituicao = [
 
 class AllPages extends StatefulWidget {
   AllPages({Key? key, required this.paginaAtual}) : super(key: key);
-  int paginaAtual;
+   int paginaAtual;
 
   @override
   State<AllPages> createState() => _AllPagesState();
@@ -40,13 +39,20 @@ class AllPages extends StatefulWidget {
 
 class _AllPagesState extends State<AllPages> {
   late PageController _pageController;
-  late String tipoUser;
+  String? tipoUser;
   //controle das páginas
   @override
   void initState() {
     _pageController = PageController(initialPage: widget.paginaAtual);
-    tipoUser = userType;
+    _getUserType().then((value) => setState(() {
+          tipoUser = value.toString();
+        }));
     super.initState();
+  }
+
+  Future<String?> _getUserType() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('userType');
   }
 
   @override

@@ -3,6 +3,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/pages/paginas_aluno/perfil/editarPerfil/editar_perfil.dart';
+import 'package:tec_eventos/pages/paginas_globais/acesso/login.dart';
 
 //classe da descricao de perfil do usuário / appbar
 class PerfilDescricao extends StatefulWidget {

@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
             const LoginInstituicao()
           ],
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
             child: GestureDetector(
               onTap: () {
                 Navigator.push(

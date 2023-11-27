@@ -1,7 +1,14 @@
+import 'dart:convert';
+
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
+import 'package:tec_eventos/pages/all_pages.dart';
 import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/input_cep.dart';
 import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/input_email.dart';
 import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/input_password.dart';
@@ -10,16 +17,6 @@ import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/inputs_instit
 import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/inputs_instituicao/input_cnpj.dart';
 import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/inputs_instituicao/input_instituicao.dart';
 import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/inputs_instituicao/input_tipo_inst.dart';
-
-final controllerCNPJ = TextEditingController();
-final controllerNomeInstituicao = TextEditingController();
-final controllertipoInst = TextEditingController();
-final controllerCdEscolar = TextEditingController();
-final controllerEmailInstituicao = TextEditingController();
-final controllerTellInst = TextEditingController();
-final controllerCEPInst = TextEditingController();
-final controllerSenhaInst = TextEditingController();
-final controllerConfirmSenhaInst = TextEditingController();
 
 class CadastroInstituicao extends StatefulWidget {
   const CadastroInstituicao({super.key});
@@ -31,6 +28,15 @@ class CadastroInstituicao extends StatefulWidget {
 class _CadastroInstituicaoState extends State<CadastroInstituicao> {
   final _formfield = GlobalKey<FormState>();
 
+  final controllerCNPJ = TextEditingController();
+  final controllerNomeInstituicao = TextEditingController();
+  final controllertipoInst = TextEditingController();
+  final controllerCdEscolar = TextEditingController();
+  final controllerEmailInstituicao = TextEditingController();
+  final controllerTellInst = TextEditingController();
+  final controllerCEPInst = TextEditingController();
+  final controllerSenhaInst = TextEditingController();
+  final controllerConfirmSenhaInst = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -79,23 +85,19 @@ class _CadastroInstituicaoState extends State<CadastroInstituicao> {
                               vertical: 10, horizontal: 20),
                           child:
                               InputTextCEP(controllerCEP: controllerCEPInst)),
-                      Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20),
-                          child: InputTextPassword(
-                              controllerSenha: controllerSenhaInst)),
-                      Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20),
-                          child: InputTextPassword(
-                              controllerSenha: controllerConfirmSenhaInst)),
+                      InputTextSenhaCadastro(
+                        controllerSenha: controllerSenhaInst,
+                        controllerConfirmSenha: controllerConfirmSenhaInst,
+                      ),
                     ]).animate().fade(),
               ),
             )),
         const SizedBox(height: 30),
         GestureDetector(
           onTap: () {
-            if (_formfield.currentState!.validate()) {}
+            if (_formfield.currentState!.validate()) {
+              cadastrarInstituicao();
+            }
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -123,6 +125,80 @@ class _CadastroInstituicaoState extends State<CadastroInstituicao> {
         ),
       ],
     );
-    ;
+  }
+
+  Future<Widget> cadastrarInstituicao() async {
+    final cnpj = controllerCNPJ.text.replaceAll(RegExp(r'[./]'), '');
+    final nomeInst = controllerNomeInstituicao.text;
+    final tipoInst = controllertipoInst.text;
+    final cdEscolar = int.tryParse(controllerCdEscolar.text);
+    final emailInst = controllerEmailInstituicao.text;
+    final teleInst =
+        controllerTellInst.text.replaceAll(RegExp(r'[\s\(\)-]'), '');
+    final cepInst = controllerCEPInst.text.replaceAll('-', '');
+    final senhaInst = controllerSenhaInst.text;
+
+    final Map<String, dynamic> body = {
+      "cd_escolar": cdEscolar,
+      "cnpj": cnpj,
+      "instituicao": nomeInst,
+      "tipo_instituicao": tipoInst,
+      "cep_inst": cepInst,
+      "telefone": teleInst,
+      "email": emailInst,
+      "senha": senhaInst
+    };
+
+    //enviando a informação para o servidor
+    const url = 'http://192.168.1.112:8080/escola';
+    final uri = Uri.parse(url);
+    final response = await http.post(uri,
+        body: jsonEncode(body), headers: {'Content-Type': 'application/json'});
+
+    //mostrando o retorno da requisição
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return showMessageSuccess();
+    } else {
+      print(jsonEncode(body));
+      return showMessageError();
+    }
+  }
+
+  showMessageSuccess() {
+    return AwesomeDialog(
+      context: context,
+      dialogType: DialogType.success,
+      animType: AnimType.topSlide,
+      titleTextStyle:
+          TextStyle(fontFamily: Fontes.inter, fontWeight: FontWeight.w600),
+      title: "Instituição criada!",
+      btnOkText: "Prosseguir",
+      barrierColor: Cores.branco.withOpacity(0.7),
+      btnOkOnPress: () async {
+        const String userTypeKey = 'userType';
+        SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
+        await sharedPreferences.setString(userTypeKey, 'Instituição');
+
+        Navigator.push(
+            context,
+            PageTransition(
+                child: AllPages(paginaAtual: 0),
+                type: PageTransitionType.rightToLeft));
+      },
+      btnOkColor: Cores.azul42A5F5,
+    ).show();
+  }
+
+  showMessageError() {
+    final snackBar = SnackBar(
+      elevation: 0,
+      content: Text(
+        'Informações inválidas',
+        style: TextStyle(fontFamily: Fontes.inter, fontWeight: FontWeight.bold),
+      ),
+      backgroundColor: Cores.vermelho,
+    );
+    return ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

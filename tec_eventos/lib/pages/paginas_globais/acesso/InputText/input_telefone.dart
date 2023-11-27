@@ -12,7 +12,7 @@ class InputTextTelefone extends StatelessWidget {
 
     return TextFormField(
       keyboardType: TextInputType.phone,
-      // inputFormatters: [masktelefone],
+      inputFormatters: [masktelefone],
       controller: controllerTel,
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.phone),
@@ -23,8 +23,17 @@ class InputTextTelefone extends StatelessWidget {
         //       top: 18.0, right: 20, bottom: 18.0, left: 40),
         // ),
       ),
-      // validator: () {
-      // },
+      validator: (telefone) {
+        if (telefone!.isEmpty) {
+          return 'Coloque um número de telefone';
+        } else if (telefone.length != 10) {
+          return 'Número inválido';
+        } else if (!RegExp(r'^[0-9]+$').hasMatch(telefone)) {
+          return "Informe apenas dígitos";
+        }
+
+        return null;
+      },
     );
   }
 }

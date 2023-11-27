@@ -13,9 +13,18 @@ class InputTextName extends StatelessWidget {
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.person_outline_outlined),
         isDense: true,
-        labelText: "Nome",
+        labelText: "Nome completo",
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
       ),
+      validator: (nome) {
+        if (nome!.isEmpty) {
+          return "Informe o nome completo";
+        } else if (!RegExp(r'^[a-zA-Z\s]+$').hasMatch(nome)) {
+          return "Nome inválido";
+        }
+
+        return null;
+      },
     );
   }
 }
