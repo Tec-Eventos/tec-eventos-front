@@ -18,7 +18,7 @@ class AlunoModel {
   final int cdEscolar;
 
   factory AlunoModel.fromJson(Map<String, dynamic> json) => AlunoModel(
-        rmAluno: json["rm_aluno"] ,
+        rmAluno: json["rm_aluno"],
         nome: json["nome"],
         email: json["email"],
         telefone: json["telefone"],

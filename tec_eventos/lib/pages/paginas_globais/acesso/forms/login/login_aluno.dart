@@ -4,11 +4,12 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tec_eventos/aluno_provider.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/pages/all_pages.dart';
-import 'package:tec_eventos/pages/paginas_aluno/perfil/perfil.dart';
 import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/input_email.dart';
 import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/inputs_aluno/input_name.dart';
 import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/input_password.dart';
@@ -30,19 +31,53 @@ class LoginAluno extends StatefulWidget {
 class _LoginAlunoState extends State<LoginAluno> {
   final _formfield = GlobalKey<FormState>();
 
-  // void validateAluno() {
-  //   if (controllerEmailAluno.text == "o@gmail.com" &&
-  //       controllerNomeAluno.text == "oi" &&
-  //       controllerRmAluno.text == "21" &&
-  //       controllerSenhaAluno.text == "123456") {
-  //     setState(() => userType = "Aluno");
-  //   } else {
-  //     setState(() => userType = "Desconhecido");
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
+    Future<bool> login() async {
+      const String userTypeKey = 'userType';
+      const String nomeKey = 'nome';
+      const String emailKey = 'email';
+      const String rmAlunoKey = 'rm_aluno';
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+
+      String nome = controllerNomeAluno.text;
+      String email = controllerEmailAluno.text;
+      int rmAluno = int.parse(controllerRmAluno.text);
+      String senha = controllerSenhaAluno.text;
+
+      final body = {
+        "nome": nome,
+        "email": email,
+        "rm_aluno": rmAluno,
+        "senha": senha
+      };
+
+      var url = Uri.parse('http://192.168.1.112:8080/loginAluno');
+      var response = await http.post(url,
+          body: jsonEncode(body),
+          headers: {'Content-Type': 'application/json'});
+
+      if (response.statusCode == 200) {
+        await sharedPreferences.setString(userTypeKey, 'Aluno');
+        await sharedPreferences.setString(nomeKey, nome);
+        await sharedPreferences.setString(emailKey, email);
+        await sharedPreferences.setInt(rmAlunoKey, rmAluno);
+
+        Provider.of<AlunoProvider>(context, listen: false)
+            .acessarLogin(nome, email, rmAluno, senha);
+        //SE A OPÇÃO LEMBRAR-SE DE MIM ESTIVER ATIVADA
+        if (isChecked) {
+          await sharedPreferences.setString(
+              'token', "Token ${jsonDecode(response.body)['token']}");
+        }
+
+        return true;
+      } else {
+        return false;
+      }
+    }
+
     return Column(
       children: [
         Form(
@@ -155,34 +190,4 @@ class _LoginAlunoState extends State<LoginAluno> {
     ),
     backgroundColor: Cores.vermelho,
   );
-
-  Future<bool> login() async {
-    const String userTypeKey = 'userType';
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-
-    final body = {
-      "nome": controllerNomeAluno.text,
-      "email": controllerEmailAluno.text,
-      "rm_aluno": int.parse(controllerRmAluno.text),
-      "senha": controllerSenhaAluno.text
-    };
-
-    var url = Uri.parse('http://192.168.1.112:8080/loginAluno');
-    var response = await http.post(url,
-        body: jsonEncode(body), headers: {'Content-Type': 'application/json'});
-
-    if (response.statusCode == 200) {
-      await sharedPreferences.setString(userTypeKey, 'Aluno');
-
-      //SE A OPÇÃO LEMBRAR-SE DE MIM ESTIVER ATIVADA
-      if (isChecked) {
-        await sharedPreferences.setString(
-            'token', "Token ${jsonDecode(response.body)['token']}");
-      }
-
-      return true;
-    } else {
-      return false;
-    }
-  }
 }

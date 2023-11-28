@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tec_eventos/aluno_provider.dart';
 import 'package:tec_eventos/pages/all_pages.dart';
 import 'package:tec_eventos/pages/paginas_aluno/onBoarding/onboarding.dart';
 import 'package:tec_eventos/pages/paginas_aluno/perfil/perfil.dart';
@@ -18,7 +20,7 @@ class _SplashState extends State<Splash> {
   void initState() {
     super.initState();
 
-    verificarToken().then((value) {
+    verificarUsuario().then((value) {
       if (value) {
         Navigator.pushReplacement(
             context,
@@ -63,13 +65,21 @@ class _SplashState extends State<Splash> {
     ));
   }
 
-  Future<bool> verificarToken() async {
+  Future<bool> verificarUsuario() async {
     SharedPreferences sharedPreference = await SharedPreferences.getInstance();
 
     if (sharedPreference.getString('token') == null &&
-        sharedPreference.getString('user') == null) {
+        sharedPreference.getString('userType') == null) {
       return false;
     } else {
+      if (sharedPreference.getString('userType') == 'Aluno') {
+        String? nomeKey = sharedPreference.getString('nome');
+        String? emailKey = sharedPreference.getString('email');
+        int? rmAlunoKey = sharedPreference.getInt('rm_aluno');
+
+        Provider.of<AlunoProvider>(context, listen: false)
+            .acessarLogin(nomeKey!, emailKey!, rmAlunoKey!, '');
+      } else {}
       return true;
     }
   }

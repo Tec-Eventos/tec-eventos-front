@@ -39,7 +39,7 @@ class _InputTextPasswordState extends State<InputTextPassword> {
         ),
       ),
       validator: (senha) {
-        return passwordValid(senha, widget.controllerSenha);
+        return passworValidLogin(senha, widget.controllerSenha);
       },
     );
   }
@@ -133,9 +133,23 @@ class _InputTextSenhaCadastroState extends State<InputTextSenhaCadastro> {
   }
 }
 
+passworValidLogin(value, TextEditingController controllerSenha) {
+  String pattern =
+      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~_-]).{8,}$';
+  RegExp regExp = RegExp(pattern);
+
+  if (value!.isEmpty) {
+    return "Coloque a senha";
+  } else if (controllerSenha.text.length < 6) {
+    return "Senha curta, coloque acima de 6 caracteres";
+  } else if (!regExp.hasMatch(value)) {
+    return "Senha inválida";
+  }
+}
+
 passwordValid(value, TextEditingController controllerSenha) {
   String pattern =
-      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~_-]).{8,}$';
   RegExp regExp = RegExp(pattern);
 
   if (value!.isEmpty) {
