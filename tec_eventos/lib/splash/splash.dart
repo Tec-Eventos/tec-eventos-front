@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tec_eventos/aluno_provider.dart';
+import 'package:tec_eventos/utils/providers/aluno_provider.dart';
 import 'package:tec_eventos/pages/all_pages.dart';
 import 'package:tec_eventos/pages/paginas_aluno/onBoarding/onboarding.dart';
 import 'package:tec_eventos/pages/paginas_aluno/perfil/perfil.dart';

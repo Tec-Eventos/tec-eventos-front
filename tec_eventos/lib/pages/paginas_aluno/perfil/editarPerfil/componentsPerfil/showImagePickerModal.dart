@@ -81,14 +81,14 @@ class _ShowImagePickerModalState extends State<ShowImagePickerModal> {
                                     Container(
                                       width: 55,
                                       height: 55,
+                                      decoration: const BoxDecoration(
+                                        color: Color(0xffE3F2FD),
+                                        shape: BoxShape.circle,
+                                      ),
                                       child: const Icon(
                                         Icons.add_photo_alternate_outlined,
                                         size: 25,
                                         color: Color(0xff1565C0),
-                                      ),
-                                      decoration: const BoxDecoration(
-                                        color: Color(0xffE3F2FD),
-                                        shape: BoxShape.circle,
                                       ),
                                     ),
                                     const SizedBox(
@@ -134,14 +134,14 @@ class _ShowImagePickerModalState extends State<ShowImagePickerModal> {
                                     Container(
                                       width: 55,
                                       height: 55,
+                                      decoration: const BoxDecoration(
+                                        color: Color(0xffE3F2FD),
+                                        shape: BoxShape.circle,
+                                      ),
                                       child: Icon(
                                         Icons.add_a_photo_outlined,
                                         size: 25,
                                         color: Cores.azul1565C0,
-                                      ),
-                                      decoration: const BoxDecoration(
-                                        color: Color(0xffE3F2FD),
-                                        shape: BoxShape.circle,
                                       ),
                                     ),
                                     const SizedBox(
@@ -170,7 +170,7 @@ class _ShowImagePickerModalState extends State<ShowImagePickerModal> {
               ),
             ),
           );
-    ;
+
   }
 
   final picker = ImagePicker();

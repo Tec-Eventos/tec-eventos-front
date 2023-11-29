@@ -24,10 +24,11 @@ class InputTextCEP extends StatelessWidget {
         // ),
       ),
       validator: (cep) {
-        if (cep!.isEmpty) {
+        cep = cep!.replaceAll('-', '');
+        if (cep.isEmpty) {
           return "Coloque um CEP";
-        } else if (cep.length < 9) {
-          return "Esse CEP não contém 9 dígitos";
+        } else if (cep.length < 8) {
+          return "Esse CEP não contém 8 dígitos";
         } else if (!RegExp(r'^[0-9]+$').hasMatch(cep)) {
           return "Informe apenas dígitos";
         }

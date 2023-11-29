@@ -29,9 +29,7 @@ class _MultipleImagesEventState extends State<MultipleImagesEvent> {
             ),
             TextButton(
                 onPressed: () async {
-                  final files = await imageHelper.pickImage(multiple: true);
-                  setState(
-                      () => _images = files.map((e) => File(e.path)).toList());
+                  sendImages();
                 },
                 child: const Text('Selecione mais imagens'))
           ],
@@ -56,5 +54,10 @@ class _MultipleImagesEventState extends State<MultipleImagesEvent> {
         ),
       ],
     );
+  }
+
+  Future<void> sendImages() async {
+    final files = await imageHelper.pickImage(multiple: true);
+    setState(() => _images = files.map((e) => File(e.path)).toList());
   }
 }

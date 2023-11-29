@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tec_eventos/aluno_provider.dart';
+import 'package:tec_eventos/utils/providers/aluno_provider.dart';
 import 'package:tec_eventos/splash/splash.dart';
 import 'package:provider/provider.dart';
+import 'package:tec_eventos/utils/providers/instituicao_provider.dart';
 
 void main() async {
   //runApp(const Splash(nextScreen: false,));
@@ -17,7 +18,8 @@ void main() async {
 
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(create: (_) => AlunoProvider())
+      ChangeNotifierProvider(create: (_) => AlunoProvider()),
+      ChangeNotifierProvider(create: (_) => InstituicaoProvider())
     ],
     child: const MyApp(),
   ));

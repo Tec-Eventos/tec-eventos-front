@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import 'package:tec_eventos/aluno_provider.dart';
+import 'package:tec_eventos/utils/providers/aluno_provider.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/pages/paginas_aluno/perfil/editarPerfil/editar_perfil.dart';

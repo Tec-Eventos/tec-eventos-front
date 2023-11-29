@@ -4,12 +4,14 @@ import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
 
 class QrCodeIngresso extends StatelessWidget {
-  const QrCodeIngresso({super.key});
+  const QrCodeIngresso({super.key, this.valorQrCode});
+
+  final String? valorQrCode;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 194,
+      height: 170,
       decoration: BoxDecoration(color: Cores.branco, boxShadow: [
         BoxShadow(
             color: Cores.cinzaD8D7D7, blurRadius: 4, offset: const Offset(0, 4)
@@ -20,7 +22,7 @@ class QrCodeIngresso extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
               "Ingresso - QRcode",
@@ -38,7 +40,7 @@ class QrCodeIngresso extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Gabriel Felix",
+                      "Nome do aluno",
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: 17,
@@ -68,30 +70,30 @@ class QrCodeIngresso extends StatelessWidget {
                 ),
                 BarcodeWidget(
                   barcode: Barcode.qrCode(),
-                  data: "https://www.instagram.com/fgabrielmorais/?hl=pt-br",
+                  data: valorQrCode!,
                   drawText: false,
                   width: 90,
                   height: 85,
                 )
               ],
             ),
-            GestureDetector(
-              onTap: () {},
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.file_download_outlined,
-                      size: 25, color: Cores.azul1565C0),
-                  Text("Baixar QrCode",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontFamily: Fontes.ralewayBold,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22,
-                          color: Cores.azul1565C0)),
-                ],
-              ),
-            ),
+            // GestureDetector(
+            //   onTap: () {},
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       Icon(Icons.file_download_outlined,
+            //           size: 25, color: Cores.azul1565C0),
+            //       Text("Baixar QrCode",
+            //           textAlign: TextAlign.center,
+            //           style: TextStyle(
+            //               fontFamily: Fontes.ralewayBold,
+            //               fontWeight: FontWeight.bold,
+            //               fontSize: 22,
+            //               color: Cores.azul1565C0)),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ),

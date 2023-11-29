@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/fontes.dart';
 
 class CaixaTextoIngressos extends StatefulWidget {
-  const CaixaTextoIngressos({super.key});
+   const CaixaTextoIngressos({super.key, required this.controllerIngressos});
 
+  final TextEditingController controllerIngressos;
   @override
   State<CaixaTextoIngressos> createState() => _CaixaTextoIngressosState();
 }
@@ -11,7 +13,7 @@ class CaixaTextoIngressos extends StatefulWidget {
 class _CaixaTextoIngressosState extends State<CaixaTextoIngressos> {
   @override
   Widget build(BuildContext context) {
-    TextEditingController controllerIngressos = TextEditingController();
+    
 
     return ListTile(
       leading: SizedBox(
@@ -28,11 +30,12 @@ class _CaixaTextoIngressosState extends State<CaixaTextoIngressos> {
       ),
       title: TextFormField(
         keyboardType: TextInputType.number,
-        controller: controllerIngressos,
-        decoration: const InputDecoration(
-          border: InputBorder.none,
-          hintText: "Informe a limitação de ingressos",
-        ),
+        controller: widget.controllerIngressos,
+        decoration: InputDecoration(
+            border: InputBorder.none,
+            hintText: "Informe a limitação de ingressos",
+            hintStyle: TextStyle(
+                fontFamily: Fontes.inter, fontWeight: FontWeight.w600)),
       ),
     );
   }

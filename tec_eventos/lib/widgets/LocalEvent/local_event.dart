@@ -6,8 +6,9 @@ import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
 
 class LocalEvent extends StatefulWidget {
-  const LocalEvent({super.key});
+  const LocalEvent({super.key, required this.controllerCEP});
 
+  final TextEditingController controllerCEP;
   @override
   State<LocalEvent> createState() => _LocalEventState();
 }
@@ -15,14 +16,12 @@ class LocalEvent extends StatefulWidget {
 class _LocalEventState extends State<LocalEvent> {
   @override
   void dispose() {
-    controllerCEP.dispose();
     super.dispose();
   }
 
   CEP? model = CEP();
   dynamic endereco = '';
   var maskcep = MaskTextInputFormatter(mask: '#####-###');
-  late TextEditingController controllerCEP = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,7 @@ class _LocalEventState extends State<LocalEvent> {
       children: [
         Text('$endereco'),
         SizedBox(
-          width: MediaQuery.of(context).size.width / 2.3,
+          width: MediaQuery.of(context).size.width / 1.8,
           child: OutlinedButton(
             style: OutlinedButton.styleFrom(
               elevation: 0,
@@ -53,27 +52,26 @@ class _LocalEventState extends State<LocalEvent> {
                       ),
                       title: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: const Icon(Icons.arrow_back)),
-                          const SizedBox(width: 10),
                           Text(
                             "Adicione o cep:",
                             style: TextStyle(
                                 fontFamily: Fontes.inter,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700),
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold),
                           ),
+                          IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: const Icon(Icons.close)),
                         ],
                       ),
                       content: TextField(
                         keyboardType: TextInputType.number,
                         inputFormatters: [maskcep],
-                        controller: controllerCEP,
+                        controller: widget.controllerCEP,
                         decoration: InputDecoration(
                           suffixIcon: const Icon(Icons.location_on_outlined),
                           isDense: true,
@@ -85,24 +83,7 @@ class _LocalEventState extends State<LocalEvent> {
                       actions: [
                         GestureDetector(
                           onTap: () async {
-                            model = await CepController().getCEP(controllerCEP
-                                .text
-                                .toString()
-                                .replaceAll("-", ""));
-
-                            setState(() {
-                              if (model?.logradouro == "" ||
-                                  model?.bairro == "" ||
-                                  model?.localidade == "" ||
-                                  model?.uf == "") {
-                                endereco =
-                                    "Não foi possivel encontrar o endereço";
-                              } else {
-                                endereco =
-                                    "${model?.logradouro}, ${model?.bairro} - ${model?.localidade}-${model?.uf} - ${model?.cep}";
-                              }
-                            });
-
+                            sendCepEvent();
                             Navigator.pop(context);
                           },
                           child: Padding(
@@ -136,12 +117,6 @@ class _LocalEventState extends State<LocalEvent> {
                       ],
                     );
                   });
-
-              // Navigator.push(
-              //     context,
-              //     PageTransition(
-              //         child: const GooglePage(),
-              //         type: PageTransitionType.bottomToTop));
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -151,8 +126,8 @@ class _LocalEventState extends State<LocalEvent> {
                   "Adicionar coordenada",
                   style: TextStyle(
                       fontFamily: Fontes.raleway,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w400,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
                       color: Cores.azul42A5F5),
                 ),
               ],
@@ -161,5 +136,22 @@ class _LocalEventState extends State<LocalEvent> {
         ),
       ],
     );
+  }
+
+  Future<void> sendCepEvent() async {
+    model = await CepController()
+        .getCEP(widget.controllerCEP.text.toString().replaceAll("-", ""));
+
+    setState(() {
+      if (model?.logradouro == "" ||
+          model?.bairro == "" ||
+          model?.localidade == "" ||
+          model?.uf == "") {
+        endereco = "Não foi possivel encontrar o endereço";
+      } else {
+        endereco =
+            "${model?.logradouro}, ${model?.bairro} - ${model?.localidade}-${model?.uf} - ${model?.cep}";
+      }
+    });
   }
 }

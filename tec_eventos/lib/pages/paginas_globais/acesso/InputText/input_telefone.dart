@@ -24,9 +24,11 @@ class InputTextTelefone extends StatelessWidget {
         // ),
       ),
       validator: (telefone) {
-        if (telefone!.isEmpty) {
+        telefone = telefone!.replaceAll(RegExp(r'[\s\(\)-]'), '');
+
+        if (telefone.isEmpty) {
           return 'Coloque um número de telefone';
-        } else if (telefone.length != 10) {
+        } else if (telefone.length < 11) {
           return 'Número inválido';
         } else if (!RegExp(r'^[0-9]+$').hasMatch(telefone)) {
           return "Informe apenas dígitos";

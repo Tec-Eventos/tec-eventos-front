@@ -6,7 +6,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tec_eventos/aluno_provider.dart';
+import 'package:tec_eventos/utils/providers/aluno_provider.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/pages/all_pages.dart';
@@ -59,13 +59,17 @@ class _LoginAlunoState extends State<LoginAluno> {
           headers: {'Content-Type': 'application/json'});
 
       if (response.statusCode == 200) {
-        await sharedPreferences.setString(userTypeKey, 'Aluno');
+        await sharedPreferences.setString(userTypeKey, 'Instituição');
         await sharedPreferences.setString(nomeKey, nome);
         await sharedPreferences.setString(emailKey, email);
         await sharedPreferences.setInt(rmAlunoKey, rmAluno);
 
-        Provider.of<AlunoProvider>(context, listen: false)
-            .acessarLogin(nome, email, rmAluno, senha);
+        Provider.of<AlunoProvider>(context, listen: false).acessarLogin(
+          nome,
+          email,
+          rmAluno,
+          senha,
+        );
         //SE A OPÇÃO LEMBRAR-SE DE MIM ESTIVER ATIVADA
         if (isChecked) {
           await sharedPreferences.setString(

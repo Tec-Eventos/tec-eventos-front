@@ -15,6 +15,7 @@ import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/input_telefon
 import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/inputs_aluno/input_name.dart';
 import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/input_password.dart';
 import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/inputs_aluno/input_rmaluno.dart';
+import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/inputs_instituicao/input_cdescolar.dart';
 import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/inputs_instituicao/input_instituicao.dart';
 
 class CadastroAluno extends StatefulWidget {
@@ -72,14 +73,14 @@ class _CadastroAlunoState extends State<CadastroAluno> {
                       Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 20),
-                          child: InputTextInstituicao(
-                              controllerInstituicao: controllerInstAluno)),
+                          child: InputTextCdEscolar(
+                              controllerCdEscolar: controllerInstAluno)),
                       Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 20),
                           child: InputTextRmAluno(
                               controllerRmAluno: controllerRmAlunooo)),
-                        InputTextSenhaCadastro(
+                      InputTextSenhaCadastro(
                         controllerSenha: controllerSenhaAluno,
                         controllerConfirmSenha: controllerConfirmSenha,
                       ),
@@ -129,8 +130,9 @@ class _CadastroAlunoState extends State<CadastroAluno> {
   Future<Widget> cadastrarAluno() async {
     final nome = controllerNomeAluno.text;
     final email = controllerEmailAluno.text;
-    final telefone = controllerTellAluno.text.replaceAll(RegExp(r'[\s\(\)-]'), '');
-    final cepAluno = controllerCEPAluno.text;
+    final telefone =
+        controllerTellAluno.text.replaceAll(RegExp(r'[\s\(\)-]'), '');
+    final cepAluno = controllerCEPAluno.text.replaceAll("-", "");
     final cdEscolar = int.tryParse(controllerInstAluno.text);
     final rmAluno = int.tryParse(controllerRmAlunooo.text) ?? 0;
     final senha = controllerSenhaAluno.text;

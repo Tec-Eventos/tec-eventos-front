@@ -1,8 +1,11 @@
 import "package:flutter/material.dart";
 import "package:tec_eventos/cores.dart";
+import "package:tec_eventos/fontes.dart";
 
 class TipoPagamento extends StatefulWidget {
-  const TipoPagamento({super.key});
+  const TipoPagamento({super.key, required this.controllerPreco});
+
+  final TextEditingController controllerPreco;
 
   @override
   State<TipoPagamento> createState() => _TipoPagamentoState();
@@ -11,9 +14,8 @@ class TipoPagamento extends StatefulWidget {
 class _TipoPagamentoState extends State<TipoPagamento> {
   final List<String> opcaoPagamento = <String>['Pago', 'Gratuito'];
   bool shouldShowInput = false;
-  String dropdownValue = "Gratuito";
-  TextEditingController controllerPreco = TextEditingController();
-
+  String? selectedPagamento = 'Gratuito';
+  
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -28,34 +30,47 @@ class _TipoPagamentoState extends State<TipoPagamento> {
               size: 20,
             )),
       ),
-      title: DropdownButton<String>(
-        value: dropdownValue,
+      title: DropdownButtonFormField<String>(
+        decoration: const InputDecoration(
+          border: InputBorder.none,
+        ),
+        value: selectedPagamento,
         elevation: 0,
         dropdownColor: Cores.branco,
         isDense: false,
-        onChanged: (String? newValue) {
-          setState(() {
-            dropdownValue = newValue!;
-            shouldShowInput = (dropdownValue == 'Pago');
-          });
-        },
-        items: opcaoPagamento.map<DropdownMenuItem<String>>((String value) {
+        items: opcaoPagamento.map<DropdownMenuItem<String>>((opcaoPagamento) {
           return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value),
+            value: opcaoPagamento,
+            child: Text(
+              opcaoPagamento,
+              style: TextStyle(
+                  fontFamily: Fontes.inter, fontWeight: FontWeight.w600),
+            ),
           );
         }).toList(),
+        onChanged: (opcaoPagamento) {
+          setState(() {
+            selectedPagamento = opcaoPagamento;
+            shouldShowInput = (selectedPagamento == 'Pago');
+          });
+        },
       ),
       trailing: shouldShowInput
           ? SizedBox(
               width: 100,
               child: TextFormField(
                 keyboardType: TextInputType.number,
-                controller: controllerPreco,
+                controller: widget.controllerPreco,
                 decoration: const InputDecoration(
+                  alignLabelWithHint: true,
                   border: InputBorder.none,
+                  hintText: "00.00",
+                  hintStyle: TextStyle(
+                    fontSize: 20,
+                  ),
                   prefixIcon: Icon(
                     Icons.attach_money_rounded,
+                    size: 25,
                   ),
                 ),
               ))

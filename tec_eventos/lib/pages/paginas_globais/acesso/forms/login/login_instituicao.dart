@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
@@ -13,6 +14,7 @@ import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/input_email.d
 import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/inputs_instituicao/input_instituicao.dart';
 import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/input_password.dart';
 import 'package:tec_eventos/pages/paginas_globais/acesso/forms/cadastro/cadastro_instituicao.dart';
+import 'package:tec_eventos/utils/providers/instituicao_provider.dart';
 
 final controllerNomeInst = TextEditingController();
 final controllerCdEscolar = TextEditingController();
@@ -149,13 +151,22 @@ class _LoginInstituicaoState extends State<LoginInstituicao> {
 
   Future<bool> login() async {
     const String userTypeKey = 'userType';
+    const String nomeKey = 'nome';
+    const String emailKey = 'email';
+    const String cdEscolarKey = 'cd_escolar';
+
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
+    int cdEscolar = int.parse(controllerCdEscolar.text);
+    String nome = controllerNomeInst.text;
+    String email = controllerEmailInst.text;
+    String senha = controllerSenhaInst.text;
+
     final body = {
-      "cd_escolar": int.tryParse(controllerCdEscolar.text),
-      "instituicao": controllerNomeInst.text,
-      "email": controllerEmailInst.text,
-      "senha": controllerSenhaInst.text
+      "cd_escolar": cdEscolar,
+      "instituicao": nome,
+      "email": email,
+      "senha": senha
     };
 
     var url = Uri.parse('http://192.168.1.112:8080/loginEscola');
@@ -164,7 +175,12 @@ class _LoginInstituicaoState extends State<LoginInstituicao> {
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       await sharedPreferences.setString(userTypeKey, 'Instituição');
+      await sharedPreferences.setString(nomeKey, nome);
+      await sharedPreferences.setString(emailKey, email);
+      await sharedPreferences.setInt(cdEscolarKey, cdEscolar);
 
+      Provider.of<InstituicaoProvider>(context, listen: false)
+          .acessarLogin(cdEscolar, nome, email);
       //SE A OPÇÃO LEMBRAR-SE DE MIM ESTIVER ATIVADA
       if (isChecked) {
         await sharedPreferences.setString(
