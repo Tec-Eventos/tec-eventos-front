@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/gerador_id_evento.dart';
+import 'package:tec_eventos/utils/gerador_id_evento.dart';
 import 'package:tec_eventos/pages/paginas_aluno/meuIngresso/QrCodeIngresso/qrcode_ingresso.dart';
 import 'package:tec_eventos/widgets/AddImagensEventos/adicionar_imagens_eventos.dart';
 import 'package:tec_eventos/widgets/Appbar/AppBarPostarEventos/appbarpages_eventos.dart';
