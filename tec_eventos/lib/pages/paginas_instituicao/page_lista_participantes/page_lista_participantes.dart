@@ -77,116 +77,130 @@ class _PageListaParticipantesState extends State<PageListaParticipantes> {
               ),
             ))),
       ),
-      body: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        child: ListView(
-          children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 400,
-              child: ListView.separated(
-                  itemBuilder: (BuildContext context, int inscritos) {
-                    return ListTile(
-                      selected: selecionadas.contains(listPresenca[inscritos]),
-                      selectedTileColor: Colors.indigo[50],
-                      onLongPress: () {
-                        setState(() {
-                          (selecionadas.contains(listPresenca[inscritos]))
-                              ? selecionadas.remove(listPresenca[inscritos])
-                              : selecionadas.add(listPresenca[inscritos]);
-                        });
-                      },
-                      autofocus: true,
-                      dense: true,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          side: BorderSide(
-                            color: Cores.preto,
-                          )),
-                      visualDensity: VisualDensity.comfortable,
-                      titleAlignment: ListTileTitleAlignment.center,
-                      leading: const CircleAvatar(
-                        backgroundImage: AssetImage("assets/imgPerfil.png"),
-                      ),
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            listPresenca[inscritos].nomeAluno,
-                            style: TextStyle(
-                              color: Cores.preto,
-                              fontFamily: Fontes.raleway,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 15,
-                            ),
-                          ),
-                          Text(
-                            " - ${listPresenca[inscritos].rmAluno}",
-                            style: TextStyle(
-                              color: Cores.preto,
-                              fontFamily: Fontes.inter,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 13,
-                            ),
-                          ),
-                          if (presentes.lista
-                              .contains(listPresenca[inscritos])) ...[
-                            Icon(
-                              Icons.circle,
-                              color: Cores.azul42A5F5,
-                              size: 8,
-                            )
-                          ]
-                        ],
-                      ),
-                      subtitle: Text(
-                        "Aluno",
-                        style: TextStyle(
+      body: Column(
+        children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 200,
+            child: ListView.separated(
+                itemBuilder: (BuildContext context, int inscritos) {
+                  return ListTile(
+                    selected: selecionadas.contains(listPresenca[inscritos]),
+                    selectedTileColor: Colors.indigo[50],
+                    onTap: () {
+                      setState(() {
+                        (selecionadas.contains(listPresenca[inscritos]))
+                            ? selecionadas.remove(listPresenca[inscritos])
+                            : selecionadas.add(listPresenca[inscritos]);
+                      });
+
+                      print(selecionadas);
+                    },
+                    autofocus: true,
+                    dense: true,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        side: BorderSide(
                           color: Cores.preto,
-                          fontFamily: Fontes.raleway,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
+                        )),
+                    visualDensity: VisualDensity.comfortable,
+                    titleAlignment: ListTileTitleAlignment.center,
+                    leading: const CircleAvatar(
+                      backgroundImage: AssetImage("assets/imgPerfil.png"),
+                    ),
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          listPresenca[inscritos].nomeAluno,
+                          style: TextStyle(
+                            color: Cores.preto,
+                            fontFamily: Fontes.raleway,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
+                          ),
                         ),
+                        Text(
+                          " - ${listPresenca[inscritos].rmAluno}",
+                          style: TextStyle(
+                            color: Cores.preto,
+                            fontFamily: Fontes.inter,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 13,
+                          ),
+                        ),
+                        if (presentes.lista
+                            .contains(listPresenca[inscritos])) ...[
+                          Icon(
+                            Icons.circle,
+                            color: Cores.azul42A5F5,
+                            size: 8,
+                          )
+                        ]
+                      ],
+                    ),
+                    subtitle: Text(
+                      "Aluno",
+                      style: TextStyle(
+                        color: Cores.preto,
+                        fontFamily: Fontes.raleway,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
                       ),
-                      trailing: selecionadas.contains(listPresenca[inscritos])
-                          ? CircleAvatar(
-                              backgroundColor: Cores.verde,
-                              child: Icon(Icons.check, color: Cores.branco),
-                            )
-                              .animate()
-                              .fade(duration: const Duration(milliseconds: 100))
-                          : null,
-                    );
-                  },
-                  padding: const EdgeInsets.all(16),
-                  separatorBuilder: (_, __) => Divider(),
-                  itemCount: listPresenca.length),
-            ),
-            OutlinedButton(
-                onPressed: () {
-                  presentes.saveAll(selecionadas);
-                  setState(() {
-                    selecionadas = [];
-                  });
+                    ),
+                    trailing: selecionadas.contains(listPresenca[inscritos])
+                        ? CircleAvatar(
+                            backgroundColor: Cores.verde,
+                            child: Icon(Icons.check, color: Cores.branco),
+                          )
+                            .animate()
+                            .fade(duration: const Duration(milliseconds: 100))
+                        : null,
+                  );
                 },
-                child: Text("Iniciar evento")),
-            Consumer<PresentesRepository>(builder: (context, presentes, child) {
-              return presentes.lista.isEmpty
-                  ? ListTile(
-                      leading: Icon(Icons.person),
-                      title: Text("Evento não iniciado"),
-                    )
-                  : SizedBox(
-                      child: ListView.builder(
-                          itemCount: presentes.lista.length,
-                          itemBuilder: (_, index) {
-                            return CardPresencaConfirmada(
-                                inscritos: presentes.lista[index]);
-                          }),
-                    );
-            }),
-          ],
-        ),
+                padding: const EdgeInsets.all(16),
+                separatorBuilder: (_, __) => Divider(),
+                itemCount: listPresenca.length),
+          ),
+          OutlinedButton(
+              onPressed: () {
+                presentes.saveAll(selecionadas);
+                // setState(() {
+                //   selecionadas = [];
+                // });
+              },
+              child: Text("Iniciar evento")),
+          Text("Presenças confirmadas"),
+          Consumer<PresentesRepository>(builder: (context, presentes, child) {
+            return presentes.lista.isEmpty
+                ? const ListTile(
+                    leading: Icon(Icons.person),
+                    title: Text("Evento não iniciado"),
+                  )
+                : Container(
+                    height: 300,
+                    child: ListView.separated(
+                        itemBuilder: (BuildContext context, int index) {
+                          return CardPresencaConfirmada(
+                              inscritos: presentes.lista[index]);
+                        },
+                        separatorBuilder: (_, __) => Divider(),
+                        itemCount: presentes.lista.length),
+                  );
+
+            // : Column(
+            //     children: [
+            //       Expanded(
+            //         child: ListView.builder(
+            //             itemCount: presentes.lista.length,
+            //             itemBuilder: (_, index) {
+            //               return Text('oi');
+            //             }),
+            //       ),
+            //     ],
+            //   );
+          }),
+        ],
       ),
     );
   }
@@ -204,65 +218,52 @@ class CardPresencaConfirmada extends StatefulWidget {
 class _CardPresencaConfirmadaState extends State<CardPresencaConfirmada> {
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      autofocus: true,
-      dense: true,
-      visualDensity: VisualDensity.comfortable,
-      titleAlignment: ListTileTitleAlignment.center,
-      leading: const CircleAvatar(
-        backgroundImage: AssetImage("assets/imgPerfil.png"),
-      ),
-      title: Row(
-        children: [
-          Text(
-            widget.inscritos.nomeAluno,
-            style: TextStyle(
-              color: Cores.preto,
-              fontFamily: Fontes.raleway,
-              fontWeight: FontWeight.w600,
-              fontSize: 13,
-            ),
-          ),
-          Text(
-            " - ${widget.inscritos.rmAluno}",
-            style: TextStyle(
-              color: Cores.preto,
-              fontFamily: Fontes.raleway,
-              fontWeight: FontWeight.w600,
-              fontSize: 13,
-            ),
-          ),
-        ],
-      ),
-      subtitle: Text(
-        "Aluno",
-        style: TextStyle(
-          color: Cores.preto,
-          fontFamily: Fontes.raleway,
-          fontWeight: FontWeight.w400,
-          fontSize: 13,
+    return SizedBox(
+      width: MediaQuery.of(context).size.width / 1,
+      child: ListTile(
+        autofocus: true,
+        dense: true,
+        visualDensity: VisualDensity.comfortable,
+        titleAlignment: ListTileTitleAlignment.center,
+        leading: const CircleAvatar(
+          backgroundImage: AssetImage("assets/imgPerfil.png"),
         ),
-      ),
-      trailing: Row(
-        children: [
-          Icon(
-            Icons.check_rounded,
-            size: 30,
-            color: Cores.verde,
+        title: Row(
+          children: [
+            Text(
+              widget.inscritos.nomeAluno,
+              style: TextStyle(
+                color: Cores.preto,
+                fontFamily: Fontes.raleway,
+                fontWeight: FontWeight.w600,
+                fontSize: 13,
+              ),
+            ),
+            Text(
+              " - ${widget.inscritos.rmAluno}",
+              style: TextStyle(
+                color: Cores.preto,
+                fontFamily: Fontes.raleway,
+                fontWeight: FontWeight.w600,
+                fontSize: 13,
+              ),
+            ),
+          ],
+        ),
+        subtitle: Text(
+          "Aluno",
+          style: TextStyle(
+            color: Cores.preto,
+            fontFamily: Fontes.raleway,
+            fontWeight: FontWeight.w400,
+            fontSize: 13,
           ),
-          // PopupMenuButton(
-          //     icon: Icon(Icons.more_vert),
-          //     itemBuilder: (context) => [
-          //           PopupMenuItem(
-          //               child: ListTile(
-          //             title: Text("Não esteve presente"),
-          //             onTap: () {
-          //               Provider.of<PresentesRepository>(context, listen: false)
-          //                   .remove(widget.inscritos);
-          //             },
-          //           ))
-          //         ])
-        ],
+        ),
+        trailing: Icon(
+          Icons.check_rounded,
+          size: 30,
+          color: Cores.verde,
+        ),
       ),
     );
   }

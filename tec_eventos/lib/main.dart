@@ -22,7 +22,8 @@ void main() async {
     providers: [
       ChangeNotifierProvider(create: (context) => AlunoProvider()),
       ChangeNotifierProvider(create: (context) => InstituicaoProvider()),
-      ChangeNotifierProvider(create: (context) => PresentesRepository()),
+      ChangeNotifierProvider<PresentesRepository>(
+          create: (context) => PresentesRepository()),
     ],
     child: const MyApp(),
   ));

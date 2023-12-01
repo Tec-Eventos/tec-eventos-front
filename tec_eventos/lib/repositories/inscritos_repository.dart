@@ -8,7 +8,7 @@ class InscritosRepository {
     InscritosEventosModel(
         cdEvento: 24571, nomeAluno: "vielzinho", rmAluno: 31088)
   ];
-
+}
   // List<InscritosEventosModel> get listPresenca => _listPresenca;
 
   // InscritosRepository() {
@@ -18,4 +18,4 @@ class InscritosRepository {
   // _setupListPresencaTable() async{
 
   // }
-}
+

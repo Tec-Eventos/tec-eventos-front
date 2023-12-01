@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:tec_eventos/models/inscritos_evento_model.dart';
 
 class PresentesRepository extends ChangeNotifier {
-  List<InscritosEventosModel> _lista = [];
+   List<InscritosEventosModel> _lista = [];
 
   UnmodifiableListView<InscritosEventosModel> get lista =>
       UnmodifiableListView(_lista);
