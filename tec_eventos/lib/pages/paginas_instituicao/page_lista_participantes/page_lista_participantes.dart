@@ -16,12 +16,17 @@ class PageListaParticipantes extends StatefulWidget {
 
 class _PageListaParticipantesState extends State<PageListaParticipantes> {
   List<InscritosEventosModel> selecionadas = [];
-  final listPresenca = InscritosRepository.listPresenca;
+  late List<InscritosEventosModel> listPresenca;
+
+  //variáveis de repositório
   late PresentesRepository presentes;
+  late InscritosRepository inscritosRepository;
 
   @override
   Widget build(BuildContext context) {
     presentes = Provider.of<PresentesRepository>(context);
+    inscritosRepository = Provider.of<InscritosRepository>(context);
+    listPresenca = inscritosRepository.listPresenca;
 
     return Scaffold(
       appBar: AppBar(
@@ -77,10 +82,11 @@ class _PageListaParticipantesState extends State<PageListaParticipantes> {
               ),
             ))),
       ),
-      body: Column(
+      body: ListView(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        scrollDirection: Axis.vertical,
         children: [
           SizedBox(
-            width: MediaQuery.of(context).size.width,
             height: 200,
             child: ListView.separated(
                 itemBuilder: (BuildContext context, int inscritos) {
@@ -106,6 +112,8 @@ class _PageListaParticipantesState extends State<PageListaParticipantes> {
                     visualDensity: VisualDensity.comfortable,
                     titleAlignment: ListTileTitleAlignment.center,
                     leading: const CircleAvatar(
+                      //usar como background, o Image.network, que retornará a url da imagem da api.
+
                       backgroundImage: AssetImage("assets/imgPerfil.png"),
                     ),
                     title: Row(
@@ -158,7 +166,7 @@ class _PageListaParticipantesState extends State<PageListaParticipantes> {
                         : null,
                   );
                 },
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.only(top: 10),
                 separatorBuilder: (_, __) => Divider(),
                 itemCount: listPresenca.length),
           ),
@@ -177,14 +185,13 @@ class _PageListaParticipantesState extends State<PageListaParticipantes> {
                     leading: Icon(Icons.person),
                     title: Text("Evento não iniciado"),
                   )
-                : Container(
-                    height: 300,
-                    child: ListView.separated(
+                : SizedBox(
+                    height: 500,
+                    child: ListView.builder(
                         itemBuilder: (BuildContext context, int index) {
                           return CardPresencaConfirmada(
                               inscritos: presentes.lista[index]);
                         },
-                        separatorBuilder: (_, __) => Divider(),
                         itemCount: presentes.lista.length),
                   );
 
@@ -218,51 +225,74 @@ class CardPresencaConfirmada extends StatefulWidget {
 class _CardPresencaConfirmadaState extends State<CardPresencaConfirmada> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width / 1,
-      child: ListTile(
-        autofocus: true,
-        dense: true,
-        visualDensity: VisualDensity.comfortable,
-        titleAlignment: ListTileTitleAlignment.center,
-        leading: const CircleAvatar(
-          backgroundImage: AssetImage("assets/imgPerfil.png"),
-        ),
-        title: Row(
-          children: [
-            Text(
-              widget.inscritos.nomeAluno,
-              style: TextStyle(
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width / 1,
+        child: ListTile(
+          autofocus: true,
+          dense: true,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+              side: BorderSide(
                 color: Cores.preto,
-                fontFamily: Fontes.raleway,
-                fontWeight: FontWeight.w600,
-                fontSize: 13,
-              ),
-            ),
-            Text(
-              " - ${widget.inscritos.rmAluno}",
-              style: TextStyle(
-                color: Cores.preto,
-                fontFamily: Fontes.raleway,
-                fontWeight: FontWeight.w600,
-                fontSize: 13,
-              ),
-            ),
-          ],
-        ),
-        subtitle: Text(
-          "Aluno",
-          style: TextStyle(
-            color: Cores.preto,
-            fontFamily: Fontes.raleway,
-            fontWeight: FontWeight.w400,
-            fontSize: 13,
+              )),
+          visualDensity: VisualDensity.comfortable,
+          titleAlignment: ListTileTitleAlignment.center,
+          leading: const CircleAvatar(
+            //usar como background, o Image.network, que retornará a url da imagem da api.
+            backgroundImage: AssetImage("assets/imgPerfil.png"),
           ),
-        ),
-        trailing: Icon(
-          Icons.check_rounded,
-          size: 30,
-          color: Cores.verde,
+          title: Row(
+            children: [
+              Text(
+                widget.inscritos.nomeAluno,
+                style: TextStyle(
+                  color: Cores.preto,
+                  fontFamily: Fontes.raleway,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 15,
+                ),
+              ),
+              Text(
+                " - ${widget.inscritos.rmAluno}",
+                style: TextStyle(
+                  color: Cores.preto,
+                  fontFamily: Fontes.raleway,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 15,
+                ),
+              ),
+            ],
+          ),
+          subtitle: Text(
+            "Aluno",
+            style: TextStyle(
+              color: Cores.preto,
+              fontFamily: Fontes.raleway,
+              fontWeight: FontWeight.w400,
+              fontSize: 14,
+            ),
+          ),
+          trailing: Icon(
+            Icons.check_rounded,
+            size: 30,
+            color: Cores.verdeClaro,
+          ),
+
+          // PopupMenuButton(
+          //     icon: Icon(Icons.more_vert),
+          //     itemBuilder: (context) => [
+          //           PopupMenuItem(
+          //               child: ListTile(
+          //             title: Text("Marcar como não presente!"),
+          //             onTap: () {
+          //               Provider.of<PresentesRepository>(context,
+          //                       listen: false)
+          //                   .remove(widget.inscritos);
+          //             },
+          //           ))
+          //         ])
         ),
       ),
     );

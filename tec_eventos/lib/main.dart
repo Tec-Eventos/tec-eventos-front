@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tec_eventos/repositories/inscritos_repository.dart';
 import 'package:tec_eventos/repositories/presentes_repository.dart';
 import 'package:tec_eventos/utils/providers/aluno_provider.dart';
@@ -22,8 +21,8 @@ void main() async {
     providers: [
       ChangeNotifierProvider(create: (context) => AlunoProvider()),
       ChangeNotifierProvider(create: (context) => InstituicaoProvider()),
-      ChangeNotifierProvider<PresentesRepository>(
-          create: (context) => PresentesRepository()),
+      ChangeNotifierProvider(create: (context) => InscritosRepository()),
+      ChangeNotifierProvider(create: (context) => PresentesRepository()),
     ],
     child: const MyApp(),
   ));

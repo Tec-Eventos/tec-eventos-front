@@ -1,34 +1,6 @@
 import 'package:flutter/material.dart';
 
 class Cores {
-  // late Color Branco;
-  //
-  // late Future<bool?> _modoEscuro;
-  //
-  //
-  // Cores(){
-  //   _modoEscuro = GetCores();
-  //   modoEscuro == true ? Branco = Color(0xFF000000) : Branco = Color(0xFFFaFaFa);
-  // }
-  //
-  // Future<bool?> GetCores() async{
-  //   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-  //   final SharedPreferences prefs = await _prefs;
-  //
-  //   final bool? modoEscuro = prefs.getBool('modo_escuro');
-  //
-  //   if(modoEscuro == true || modoEscuro == false){
-  //     return modoEscuro;
-  //   }
-  //   else{
-  //     prefs.setBool("modoEscuro", false);
-  //     return false;
-  //   }
-  // }
-  //
-  // Future get modoEscuro => _modoEscuro;
-  //1976D2
-
   //Azul
   static Color azulClaro = const Color(0xff64B5F6);
   static Color azulCinzento = const Color(0xffBBDEFB);
@@ -62,6 +34,7 @@ class Cores {
 
   //Verde
   static Color verde = const Color(0xff137B02);
+  static Color verdeClaro = const Color(0xff64d05b);
 
   //Vermelho
   static Color vermelho = const Color(0xffE50F0F);

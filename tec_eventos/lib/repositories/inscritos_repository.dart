@@ -1,21 +1,35 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:tec_eventos/models/inscritos_evento_model.dart';
+import 'package:http/http.dart' as http;
 
-class InscritosRepository {
-  static List<InscritosEventosModel> listPresenca = [
-    InscritosEventosModel(
-        cdEvento: 24571, nomeAluno: "Bielzinho", rmAluno: 21088),
-    InscritosEventosModel(
-        cdEvento: 24571, nomeAluno: "vielzinho", rmAluno: 31088)
-  ];
+class InscritosRepository extends ChangeNotifier {
+  List<InscritosEventosModel> _listPresenca = [];
+
+  List<InscritosEventosModel> get listPresenca => _listPresenca;
+
+  InscritosRepository() {
+    _setupListPresencaTable();
+    // _setupDadosListPresencaInscritos();
+  }
+
+  _setupDadosListPresencaInscritos(String cdEvento) async {
+    String uri = 'http://192.168.1.112:8080/listaPresenca/$cdEvento';
+
+    final response = await http.get(Uri.parse(uri));
+
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+      final List<dynamic> participantesEvento = json['data'];
+
+      participantesEvento.forEach((alunos) {
+        final cdEvento = alunos['cd_evento'];
+        final nome = alunos['nome'];
+        final rmAluno = alunos['rm_aluno'];
+      });
+    }
+  }
+
+  _setupListPresencaTable() async {}
 }
-  // List<InscritosEventosModel> get listPresenca => _listPresenca;
-
-  // InscritosRepository() {
-  //   _setupListPresencaTable();
-  // }
-
-  // _setupListPresencaTable() async{
-
-  // }
-
