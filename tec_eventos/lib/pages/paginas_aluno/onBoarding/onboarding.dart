@@ -193,6 +193,7 @@ class _BotaoProximoState extends State<BotaoProximo> {
             duration: const Duration(milliseconds: 300), curve: Curves.ease);
       },
       style: ElevatedButton.styleFrom(
+        backgroundColor: Cores.azul42A5F5,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(15.0))),
       ),
@@ -240,6 +241,4 @@ class _BotaoComecarState extends State<BotaoComecar> {
       ],
     );
   }
-
-
 }

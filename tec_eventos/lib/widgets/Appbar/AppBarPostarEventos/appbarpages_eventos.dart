@@ -1,4 +1,9 @@
 import 'dart:io';
+import 'dart:io';
+import 'dart:typed_data';
+import 'package:dio/dio.dart' as dio;
+import 'package:http_parser/http_parser.dart' show MediaType;
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:tec_eventos/cores.dart';
@@ -17,6 +22,7 @@ class EventsImage extends StatefulWidget {
 }
 
 class _EventsImageState extends State<EventsImage> {
+  dio.Dio dioInstance = dio.Dio();
   File? _image;
 
   @override
@@ -98,6 +104,40 @@ class _EventsImageState extends State<EventsImage> {
 
       if (croppedFile != null) {
         setState(() => _image = File(croppedFile.path));
+      }
+
+      try {
+        String filename = _image!.path.split('/').last;
+
+        // Cria um objeto FormData e adiciona a instância de MultipartFile a ele
+        dio.FormData formData = dio.FormData.fromMap({
+          "cd_evento": 33,
+          "imagem": await dio.MultipartFile.fromFile(
+            _image!.path,
+            filename: filename,
+            contentType: MediaType('image', 'jpg'),
+          ),
+          "principal": 1,
+          "logo_evento": 0,
+        });
+
+        // Faça a solicitação POST com o FormData contendo a imagem
+        dio.Response response = await dioInstance.post(
+          "http://192.168.1.112:8080/upload",
+          data: formData,
+          options: dio.Options(
+            headers: {
+              'accept': '*/*',
+              'Content-Type': 'multipart/form-data',
+            },
+          ),
+        );
+
+        // Lide com a resposta conforme necessário
+        print("Resposta: ${response.data}");
+      } catch (e) {
+        // Lide com erros, se houverem
+        print("Erro: $e");
       }
     }
   }
