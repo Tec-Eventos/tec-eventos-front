@@ -290,7 +290,12 @@ class _PagePostarEventoState extends State<PagePostarEvento> {
                     Center(
                       child: InkWell(
                         onTap: () async {
-                          dialogQrCode(context, controllerQrCode);
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return DialogQrCode(
+                                    controllerQrCode: controllerQrCode);
+                              });
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width,
