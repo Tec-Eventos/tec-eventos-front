@@ -1,21 +1,117 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/data/http/http_client.dart';
+import 'package:tec_eventos/data/repositories/events_repository.dart';
 import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/pages/paginas_aluno/pag_inscricao_evento/info_evento/info_evento.dart';
+import 'package:tec_eventos/utils/stores/events_store.dart';
+import 'package:tec_eventos/widgets/Cards/cardLoading/card_loading.dart';
+
+class RowEventosEmAlta extends StatefulWidget {
+  const RowEventosEmAlta({super.key});
+
+  @override
+  State<RowEventosEmAlta> createState() => _RowEventosEmAltaState();
+}
+
+class _RowEventosEmAltaState extends State<RowEventosEmAlta> {
+  final EventsStore store = EventsStore(
+    repository: EventsRepository(
+      client: HttpClient(),
+    ),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    store.getEvents();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      height: 380,
+      child: AnimatedBuilder(
+          animation:
+              Listenable.merge([store.isLoading, store.erro, store.state]),
+          builder: (context, child) {
+            if (store.isLoading.value) {
+              return ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: const [
+                    CardLoading(),
+                    CardLoading(),
+                  ]);
+            }
+
+            if (store.erro.value.isNotEmpty) {
+              return Center(
+                child: Text(
+                  store.erro.value,
+                  style: TextStyle(
+                    color: Cores.preto,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                    fontFamily: Fontes.raleway,
+                  ),
+                ),
+              );
+            }
+
+            if (store.state.value.isEmpty) {
+              return Center(
+                child: Text(
+                  'Nenhum evento inscrito',
+                  style: TextStyle(
+                      color: Cores.preto,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: Fontes.raleway,
+                      fontSize: 20),
+                ),
+              );
+            } else {
+              return SizedBox(
+                height: 100,
+                child: ListView.builder(
+                  padding: const EdgeInsets.all(16),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: store.state.value.length,
+                  itemBuilder: (_, index) {
+                    final item = store.state.value[index];
+
+                    return EventosAlta(
+                      imagemEvento: item.imagemEvento,
+                      nomeEvento: item.nomeEvento,
+                      descricao: item.descricao,
+                      organizacaoImagem: item.logoEvento,
+                      dataRealizacao: item.dataEvento,
+                      horario: item.horario,
+                    );
+                  },
+                ),
+              );
+            }
+          }),
+    );
+  }
+}
 
 class EventosAlta extends StatefulWidget {
   const EventosAlta(
       {Key? key,
       required this.imagemEvento,
-      required this.modalidade,
       required this.nomeEvento,
       required this.descricao,
-      required this.organizacaoImagem})
+      required this.organizacaoImagem,
+      required this.dataRealizacao,
+      required this.horario})
       : super(key: key);
 
   final String imagemEvento,
-      modalidade,
+      dataRealizacao,
+      horario,
       nomeEvento,
       descricao,
       organizacaoImagem;
@@ -34,10 +130,12 @@ class _EventosAltaState extends State<EventosAlta> {
         nomeEvento: widget.nomeEvento,
         horarioRealizacao: "10:00");
 
+    final urlImage = 'http://192.168.1.112:8080/imagem/';
     return Padding(
       padding: const EdgeInsets.only(right: 15, top: 10, bottom: 10),
       child: SizedBox(
         width: 285,
+        height: 190,
         child: GestureDetector(
           onTap: () {
             Navigator.push(
@@ -63,29 +161,10 @@ class _EventosAltaState extends State<EventosAlta> {
                   alignment: Alignment.bottomRight,
                   children: [
                     Image.network(
-                      widget.imagemEvento,
+                      urlImage + widget.imagemEvento,
                       height: 158,
                       width: 285,
-                      fit: BoxFit.fill,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: 95,
-                        height: 15,
-                        decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(50)),
-                        child: Text(
-                          widget.modalidade,
-                          style: TextStyle(
-                              fontFamily: Fontes.raleway,
-                              fontSize: 12,
-                              color: Cores.branco,
-                              fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
+                      fit: BoxFit.cover,
                     ),
                   ],
                 ),
@@ -139,14 +218,16 @@ class _EventosAltaState extends State<EventosAlta> {
                               fontFamily: Fontes.raleway,
                               fontSize: 12,
                               color: Cores.preto),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
                         ),
 
                         //BOTÃO PARA VER MAIS SOBRE O EVENTO
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Image.asset(
-                              widget.organizacaoImagem,
+                            Image.network(
+                              urlImage + widget.organizacaoImagem,
                               height: 19,
                               width: 62,
                             ),

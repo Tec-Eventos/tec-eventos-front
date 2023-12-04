@@ -1,8 +1,107 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/data/http/http_client.dart';
+import 'package:tec_eventos/data/repositories/events_repository.dart';
 import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/pages/paginas_aluno/pag_inscricao_evento/info_evento/info_evento.dart';
+import 'package:tec_eventos/utils/stores/events_store.dart';
+import 'package:tec_eventos/widgets/Cards/cardLoading/card_loading.dart';
+
+class RowCardEventosInscritos extends StatefulWidget {
+  const RowCardEventosInscritos({super.key});
+
+  @override
+  State<RowCardEventosInscritos> createState() =>
+      _RowCardEventosInscritosState();
+}
+
+class _RowCardEventosInscritosState extends State<RowCardEventosInscritos> {
+  final EventsStore store = EventsStore(
+    repository: EventsRepository(
+      client: HttpClient(),
+    ),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    store.getEvents();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      child: AnimatedBuilder(
+          animation:
+              Listenable.merge([store.isLoading, store.erro, store.state]),
+          builder: (context, child) {
+            if (store.isLoading.value) {
+              return ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: const [
+                    CardLoading(),
+                    CardLoading(),
+                  ]);
+            }
+
+            if (store.erro.value.isNotEmpty) {
+              return Center(
+                child: Text(
+                  "Erro na requisição",
+                  style: TextStyle(
+                    color: Cores.preto,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                    fontFamily: Fontes.raleway,
+                  ),
+                ),
+              );
+            }
+
+            if (store.state.value.isEmpty) {
+              return Center(
+                child: Text(
+                  'Nenhum evento inscrito',
+                  style: TextStyle(
+                      color: Cores.preto,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: Fontes.raleway,
+                      fontSize: 20),
+                ),
+              );
+            } else {
+              return SizedBox(
+                height: 210,
+                child: ListView.separated(
+                  separatorBuilder: (context, index) => const Divider(),
+                  padding: const EdgeInsets.all(16),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: store.state.value.length,
+                  itemBuilder: (_, index) {
+                    final item = store.state.value[index];
+
+                    if (item != null) {
+                      return CardEventosInscritos(
+                          nomeEvento: item.nomeEvento,
+                          diasFaltam: "É HOJE",
+                          diaRealizacao: item.dataEvento,
+                          horas: item.horario,
+                          imagemEvento: item.imagemEvento,
+                          organizacao: item.logoEvento);
+                    } else {
+                      return Container();
+                    }
+                  },
+                ),
+              );
+            }
+          }),
+    );
+  }
+}
 
 class CardEventosInscritos extends StatefulWidget {
   const CardEventosInscritos(
@@ -36,10 +135,11 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
         nomeEvento: widget.nomeEvento,
         horarioRealizacao: widget.horas);
 
+    const urlImage = 'http://192.168.1.112:8080/imagem/';
     return Padding(
       padding: const EdgeInsets.only(right: 15, top: 10, bottom: 10),
       child: SizedBox(
-        height: 160,
+        height: 131,
         child:
             //CUSTOMIZAÇÃO DO CARD
             GestureDetector(
@@ -142,14 +242,14 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
                   alignment: Alignment.bottomCenter,
                   children: [
                     Image.network(
-                      widget.imagemEvento,
-                      height: 175,
-                      width: 160,
+                      urlImage + widget.imagemEvento,
                       fit: BoxFit.cover,
+                      width: 160,
+                      height: MediaQuery.of(context).size.height / 1,
                     ),
                     Container(
                       width: 160,
-                      height: 30,
+                      height: 25,
                       decoration: const BoxDecoration(
                         boxShadow: [
                           BoxShadow(
@@ -162,10 +262,9 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
                       ),
 
                       //imagem da organização do evento
-                      child: Image.asset(
-                        widget.organizacao,
-                        height: 16,
-                        width: 46,
+                      child: Image.network(
+                        urlImage + widget.organizacao,
+                        fit: BoxFit.scaleDown,
                         alignment: Alignment.center,
                       ),
                     ),
@@ -176,6 +275,6 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
           ),
         ),
       ),
-    );
+    ).animate().slideX();
   }
 }

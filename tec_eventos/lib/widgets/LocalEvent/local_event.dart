@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:tec_eventos/api_cep/data/dataController_cep.dart';
-import 'package:tec_eventos/api_cep/model/cepModel.dart';
+
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/data/dataController_cep.dart';
+import 'package:tec_eventos/data/models/cepModel.dart';
 import 'package:tec_eventos/fontes.dart';
 
 class LocalEvent extends StatefulWidget {

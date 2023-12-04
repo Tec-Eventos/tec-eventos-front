@@ -1,7 +1,6 @@
 import 'dart:convert';
-
-import 'package:tec_eventos/api_cep/data/api.dart';
-import 'package:tec_eventos/api_cep/model/cepModel.dart';
+import 'package:tec_eventos/data/api.dart';
+import 'package:tec_eventos/data/models/cepModel.dart';
 
 class CepController {
   final api = API();

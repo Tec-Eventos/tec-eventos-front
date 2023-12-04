@@ -85,7 +85,7 @@ class _PrincipalPageInstituicaoState extends State<PrincipalPageInstituicao> {
                 ),
                 const SizedBox(height: 50),
                 Text(
-                  "Eventos que você está inscrito",
+                  "Eventos de sua instituição",
                   style: TextStyle(
                       fontFamily: Fontes.raleway,
                       fontSize: 18,

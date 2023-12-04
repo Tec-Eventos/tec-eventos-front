@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:tec_eventos/models/inscritos_evento_model.dart';
+import 'package:tec_eventos/data/models/inscritos_evento_model.dart';
 import 'package:http/http.dart' as http;
 
 class InscritosRepository extends ChangeNotifier {

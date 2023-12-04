@@ -69,6 +69,7 @@ dependencies:
   cpf_cnpj_validator: ^2.0.0
   provider: ^6.1.1
   http_parser: ^4.0.2
+  shimmer: ^3.0.0
   
 
 flutter_native_splash:

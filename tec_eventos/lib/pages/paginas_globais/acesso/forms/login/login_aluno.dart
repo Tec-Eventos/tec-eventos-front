@@ -59,7 +59,7 @@ class _LoginAlunoState extends State<LoginAluno> {
           headers: {'Content-Type': 'application/json'});
 
       if (response.statusCode == 200) {
-        await sharedPreferences.setString(userTypeKey, 'Instituição');
+        await sharedPreferences.setString(userTypeKey, 'Aluno');
         await sharedPreferences.setString(nomeKey, nome);
         await sharedPreferences.setString(emailKey, email);
         await sharedPreferences.setInt(rmAlunoKey, rmAluno);

@@ -3,7 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/models/inscritos_evento_model.dart';
+import 'package:tec_eventos/data/models/inscritos_evento_model.dart';
 import 'package:tec_eventos/repositories/inscritos_repository.dart';
 import 'package:tec_eventos/repositories/presentes_repository.dart';
 
