@@ -49,7 +49,7 @@ class _InfoEventoPendentesState extends State<InfoEventoPendentes> {
                 fit: BoxFit.scaleDown,
                 height: 70,
                 width: 70,
-              ),
+              ),  
             ),
 
             Padding(
@@ -126,7 +126,7 @@ class _InfoEventoPendentesState extends State<InfoEventoPendentes> {
                     style: TextStyle(fontFamily: Fontes.raleway, fontSize: 13),
                   ),
                   SizedBox(
-                    width: 135,
+                    width: 150,
                     child: OutlinedButton(
                       style: OutlinedButton.styleFrom(
                         elevation: 0,

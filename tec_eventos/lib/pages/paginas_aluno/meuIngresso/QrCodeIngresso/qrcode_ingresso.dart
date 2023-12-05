@@ -11,7 +11,7 @@ class QrCodeIngresso extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 170,
+      height: 220,
       decoration: BoxDecoration(color: Cores.branco, boxShadow: [
         BoxShadow(
             color: Cores.cinzaD8D7D7, blurRadius: 4, offset: const Offset(0, 4)
@@ -81,23 +81,23 @@ class QrCodeIngresso extends StatelessWidget {
                 )
               ],
             ),
-            // GestureDetector(
-            //   onTap: () {},
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: [
-            //       Icon(Icons.file_download_outlined,
-            //           size: 25, color: Cores.azul1565C0),
-            //       Text("Baixar QrCode",
-            //           textAlign: TextAlign.center,
-            //           style: TextStyle(
-            //               fontFamily: Fontes.ralewayBold,
-            //               fontWeight: FontWeight.bold,
-            //               fontSize: 22,
-            //               color: Cores.azul1565C0)),
-            //     ],
-            //   ),
-            // ),
+            GestureDetector(
+              onTap: () {},
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.file_download_outlined,
+                      size: 25, color: Cores.azul1565C0),
+                  Text("Baixar QrCode",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontFamily: Fontes.ralewayBold,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22,
+                          color: Cores.azul1565C0)),
+                ],
+              ),
+            ),
           ],
         ),
       ),

@@ -80,7 +80,6 @@ class _LocalEventState extends State<LocalEvent> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(30)),
                         ),
-                        
                       ),
                       actions: [
                         GestureDetector(
@@ -128,7 +127,7 @@ class _LocalEventState extends State<LocalEvent> {
                   "Adicionar coordenada",
                   style: TextStyle(
                       fontFamily: Fontes.raleway,
-                      fontSize: 15,
+                      fontSize: 12,
                       fontWeight: FontWeight.w600,
                       color: Cores.azul42A5F5),
                 ),

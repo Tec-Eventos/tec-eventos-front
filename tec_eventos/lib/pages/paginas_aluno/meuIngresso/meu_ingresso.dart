@@ -43,8 +43,10 @@ class MeuIngresso extends StatelessWidget {
             TicketIngresso(),
 
             //Ingresso via QrCode
-            QrCodeIngresso(),
-          ],
+            QrCodeIngresso(valorQrCode: "Gabriel Morais Felix"),
+        
+        
+         ],
         ),
       ),
     );

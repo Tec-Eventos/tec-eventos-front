@@ -106,7 +106,7 @@ class CardEventosParaVoce extends StatefulWidget {
 class _CardEventosParaVoceState extends State<CardEventosParaVoce> {
   @override
   Widget build(BuildContext context) {
-    const urlImage = 'https://api-tec-eventos-i6hr.onrender.com/imagem';
+    const urlImage = 'https://api-tec-eventos-i6hr.onrender.com/imagem/';
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: SizedBox(
