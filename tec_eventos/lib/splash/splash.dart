@@ -7,6 +7,7 @@ import 'package:tec_eventos/utils/providers/aluno_provider.dart';
 import 'package:tec_eventos/pages/all_pages.dart';
 import 'package:tec_eventos/pages/paginas_aluno/onBoarding/onboarding.dart';
 import 'package:tec_eventos/pages/paginas_aluno/perfil/perfil.dart';
+import 'package:tec_eventos/utils/providers/instituicao_provider.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -78,8 +79,15 @@ class _SplashState extends State<Splash> {
         int? rmAlunoKey = sharedPreference.getInt('rm_aluno');
 
         Provider.of<AlunoProvider>(context, listen: false)
-            .acessarLogin(nomeKey!, emailKey!, rmAlunoKey!, '');
-      } else {}
+            .acessarInfos(nomeKey!, emailKey!, rmAlunoKey!);
+      } else {
+        String? nomeKey = sharedPreference.getString('nome');
+        String? emailKey = sharedPreference.getString('email');
+        int? cdEscolarKey = sharedPreference.getInt('cd_escolar');
+
+        Provider.of<InstituicaoProvider>(context, listen: false)
+            .acessarInfos(cdEscolarKey!, nomeKey!, emailKey!);
+      }
       return true;
     }
   }

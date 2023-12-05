@@ -3,7 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/repositories/postar_evento_repository.dart';
+import 'package:tec_eventos/data/repositories/postar_evento_repository.dart';
 
 class DialogQrCode extends StatelessWidget {
   const DialogQrCode({super.key, required this.controllerQrCode});
@@ -51,35 +51,7 @@ class DialogQrCode extends StatelessWidget {
       ),
       actions: [
         GestureDetector(
-          onTap: () async {
-            bool? deuCerto =
-                await PostarEventoRepository().sendQrCode(controllerQrCode);
-
-            if (deuCerto == true) {
-              final snackBar = SnackBar(
-                elevation: 0,
-                content: Text(
-                  'Deu certo, paizão',
-                  style: TextStyle(
-                      fontFamily: Fontes.inter, fontWeight: FontWeight.bold),
-                ),
-                backgroundColor: Cores.verdeClaro,
-              );
-
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            } else {
-              final snackBar = SnackBar(
-                elevation: 0,
-                content: Text(
-                  'Deu errado, paizão',
-                  style: TextStyle(
-                      fontFamily: Fontes.inter, fontWeight: FontWeight.bold),
-                ),
-                backgroundColor: Cores.vermelho,
-              );
-
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            }
+          onTap: () {
             Navigator.pop(context);
           },
           child: Padding(

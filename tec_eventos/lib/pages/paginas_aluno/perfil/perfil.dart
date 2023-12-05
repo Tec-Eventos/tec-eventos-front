@@ -47,7 +47,7 @@ class _PerfilState extends State<Perfil> {
           floatHeaderSlivers: true,
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
                 //Classe da appbar da página. Juntamente da descrição de perfil.PerfilDescricao(),
-                const PerfilDescricao(),
+                const PerfilDescricao()
               ],
           body: Column(
             children: [

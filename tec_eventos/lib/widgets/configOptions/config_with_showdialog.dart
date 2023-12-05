@@ -92,7 +92,7 @@ class _ConfigGeralWithShowDialogExitAccountState
 
   Future<bool> sair() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.clear();
+    sharedPreferences.clear();
     return true;
   }
 }

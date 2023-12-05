@@ -68,15 +68,6 @@ class _BottomAppBarInstituicaoState extends State<BottomAppBarInstituicao> {
                     color: Cores.azul42A5F5),
               ),
               GButton(
-                icon: Icons.query_stats_outlined,
-                text: 'Estatísticas',
-                textStyle: TextStyle(
-                    fontFamily: Fontes.raleway,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                    color: Cores.azul42A5F5),
-              ),
-              GButton(
                 icon: Icons.notifications_none_outlined,
                 text: 'Notificação',
                 textStyle: TextStyle(

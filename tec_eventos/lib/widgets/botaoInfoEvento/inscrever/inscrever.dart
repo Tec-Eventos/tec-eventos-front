@@ -1,21 +1,22 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/pages/paginas_aluno/pagamento/metodospagamento.dart';
+import 'package:tec_eventos/utils/providers/aluno_provider.dart';
+import 'package:http/http.dart' as http;
 
 class Inscrever extends StatelessWidget {
-  const Inscrever({super.key});
-
+  const Inscrever({super.key, required this.cdEvento});
+  final int cdEvento;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context,
-            PageTransition(
-                child: MetodosPagamento(),
-                type: PageTransitionType.bottomToTop));
+      onTap: () async {
+        await inscrevendoAluno(context);
       },
       child: Container(
         height: 64,
@@ -36,5 +37,25 @@ class Inscrever extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<bool?> inscrevendoAluno(BuildContext context) async {
+    final cdevento = cdEvento;
+    final rmAluno = Provider.of<AlunoProvider>(context, listen: false).rmAluno;
+    final url = "http://192.168.1.112:8080/inscricaoEvento";
+
+    final body = {
+      "cd_evento": cdevento,
+      "rm_aluno": rmAluno,
+    };
+
+    final response = await http.post(Uri.parse(url),
+        body: jsonEncode(body), headers: {'Content-Type': 'application/json'});
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      print("Aluno inscrito! ${response.body}");
+    } else {
+      print("Alguma coisa deu errado");
+    }
   }
 }

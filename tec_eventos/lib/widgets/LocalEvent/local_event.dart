@@ -80,6 +80,7 @@ class _LocalEventState extends State<LocalEvent> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(30)),
                         ),
+                        
                       ),
                       actions: [
                         GestureDetector(

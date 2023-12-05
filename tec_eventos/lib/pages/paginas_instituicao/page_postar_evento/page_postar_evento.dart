@@ -1,11 +1,12 @@
-import 'dart:convert';
 import 'dart:io';
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:tec_eventos/cores.dart';
+import 'package:tec_eventos/data/repositories/postar_evento_repository.dart';
 import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/utils/gerador_id_evento.dart';
+import 'package:tec_eventos/pages/paginas_instituicao/page_postar_evento/input_text/data.dart';
+import 'package:tec_eventos/pages/paginas_instituicao/page_postar_evento/input_text/hora.dart';
+import 'package:tec_eventos/pages/paginas_instituicao/page_postar_evento/input_text/nome_evento.dart';
 import 'package:tec_eventos/pages/paginas_aluno/meuIngresso/QrCodeIngresso/qrcode_ingresso.dart';
 import 'package:tec_eventos/widgets/AddImagensEventos/adicionar_imagens_eventos.dart';
 import 'package:tec_eventos/widgets/Appbar/AppBarPostarEventos/appbarpages_eventos.dart';
@@ -13,7 +14,7 @@ import 'package:tec_eventos/widgets/InputTextPostarEvento/ingressos.dart';
 import 'package:tec_eventos/widgets/InputTextPostarEvento/tipo_pagamento.dart';
 import 'package:tec_eventos/widgets/LocalEvent/local_event.dart';
 import 'package:tec_eventos/widgets/gerarQrCodeButton/dialogQrCode/dialog_qrcode.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart' as dio;
 
 TextEditingController controllerDataEvento = TextEditingController();
 TextEditingController controllerHorarioEvento = TextEditingController();
@@ -26,6 +27,8 @@ TextEditingController controllerPrecoIngresso = TextEditingController();
 TextEditingController controllerDescricaoEvento = TextEditingController();
 TextEditingController controllerCEPEvento = TextEditingController();
 TextEditingController controllerQrCode = TextEditingController();
+File? image;
+File? imageLogo;
 
 class PagePostarEvento extends StatefulWidget {
   const PagePostarEvento({super.key});
@@ -39,6 +42,7 @@ class _PagePostarEventoState extends State<PagePostarEvento> {
   final List<String> privacidadeEvento = <String>['Público', 'Privado'];
   bool shouldShowInput = false;
   String? selectedPrivacidade = 'Público';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,27 +64,7 @@ class _PagePostarEventoState extends State<PagePostarEvento> {
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        width: 100,
-                        height: 20,
-                        child: TextFormField(
-                          keyboardType: TextInputType.text,
-                          controller: controllerDataEvento,
-                          style: TextStyle(
-                            fontFamily: Fontes.raleway,
-                            fontSize: 15,
-                            color: Cores.cinza6A6666,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          decoration: InputDecoration(
-                              hintText: "Data",
-                              hintStyle: TextStyle(
-                                  fontFamily: Fontes.raleway,
-                                  fontSize: 15,
-                                  color: Cores.cinza6A6666,
-                                  fontWeight: FontWeight.bold)),
-                        ),
-                      ),
+                      DataInput(controllerDataEvento: controllerDataEvento),
                       Text("às",
                           style: TextStyle(
                             fontFamily: Fontes.raleway,
@@ -88,104 +72,68 @@ class _PagePostarEventoState extends State<PagePostarEvento> {
                             color: Cores.cinza6A6666,
                             fontWeight: FontWeight.bold,
                           )),
-                      SizedBox(
-                        width: 100,
-                        height: 20,
-                        child: TextFormField(
-                          keyboardType: TextInputType.text,
-                          controller: controllerHorarioEvento,
-                          style: TextStyle(
-                              fontFamily: Fontes.raleway,
-                              fontSize: 15,
-                              color: Cores.cinza6A6666,
-                              fontWeight: FontWeight.bold),
-                          decoration: InputDecoration(
-                            hintText: "Horário",
-                            hintStyle: TextStyle(
-                                fontFamily: Fontes.raleway,
-                                fontSize: 15,
-                                color: Cores.cinza6A6666,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
+                      HoraInput(controllerHorario: controllerHorarioEvento),
                     ],
                   ),
-                  subtitle: TextFormField(
-                    keyboardType: TextInputType.name,
-                    controller: controllerNomeEvento,
-                    style: TextStyle(
-                        fontFamily: Fontes.raleway,
-                        fontSize: 20,
-                        color: Cores.preto,
-                        fontWeight: FontWeight.bold),
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Nome do evento",
-                      hintStyle: TextStyle(
-                          fontFamily: Fontes.raleway,
-                          fontSize: 20,
-                          color: Cores.preto,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
+                  subtitle: NomeEventoInput(
+                      controllerNomeEvento: controllerNomeEvento),
                   trailing: const LogoImage()),
 
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 200,
-                    child: DropdownButtonFormField<String>(
-                      decoration: const InputDecoration(
-                        prefixIcon: Icon(Icons.lock_outline_rounded),
-                        border: InputBorder.none,
-                      ),
-                      value: selectedPrivacidade,
-                      elevation: 0,
-                      dropdownColor: Cores.branco,
-                      isDense: false,
-                      items: privacidadeEvento
-                          .map<DropdownMenuItem<String>>((privacidadeEvento) {
-                        return DropdownMenuItem<String>(
-                          value: privacidadeEvento,
-                          child: Text(
-                            privacidadeEvento,
-                            style: TextStyle(
-                                fontFamily: Fontes.inter,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (privacidadeEvento) {
-                        setState(() {
-                          selectedPrivacidade = privacidadeEvento as String;
-                          controllerPrivacidadeEvento.text =
-                              selectedPrivacidade!;
-                          shouldShowInput = (selectedPrivacidade == 'Privado');
-                        });
-                      },
-                    ),
-                  ),
-                  if (shouldShowInput) ...[
-                    Padding(
-                      padding: const EdgeInsets.only(left: 18.0),
-                      child: SizedBox(
-                          width: 200,
-                          child: TextFormField(
-                            keyboardType: TextInputType.visiblePassword,
-                            controller: controllerSenhaPrivEvento,
-                            decoration: InputDecoration(
-                              alignLabelWithHint: true,
-                              hintText: "Informe a senha do evento",
-                              hintStyle: TextStyle(
-                                  fontSize: 13, fontFamily: Fontes.raleway),
-                            ),
-                          )),
-                    )
-                  ]
-                ],
-              ),
+              // Column(
+              //   crossAxisAlignment: CrossAxisAlignment.start,
+              //   children: [
+              //     SizedBox(
+              //       width: 200,
+              //       child: DropdownButtonFormField<String>(
+              //         decoration: const InputDecoration(
+              //           prefixIcon: Icon(Icons.lock_outline_rounded),
+              //           border: InputBorder.none,
+              //         ),
+              //         value: selectedPrivacidade,
+              //         elevation: 0,
+              //         dropdownColor: Cores.branco,
+              //         isDense: false,
+              //         items: privacidadeEvento
+              //             .map<DropdownMenuItem<String>>((privacidadeEvento) {
+              //           return DropdownMenuItem<String>(
+              //             value: privacidadeEvento,
+              //             child: Text(
+              //               privacidadeEvento,
+              //               style: TextStyle(
+              //                   fontFamily: Fontes.inter,
+              //                   fontWeight: FontWeight.w600),
+              //             ),
+              //           );
+              //         }).toList(),
+              //         onChanged: (privacidadeEvento) {
+              //           setState(() {
+              //             selectedPrivacidade = privacidadeEvento as String;
+              //             controllerPrivacidadeEvento.text =
+              //                 selectedPrivacidade!;
+              //             shouldShowInput = (selectedPrivacidade == 'Privado');
+              //           });
+              //         },
+              //       ),
+              //     ),
+              //     if (shouldShowInput) ...[
+              //       Padding(
+              //         padding: const EdgeInsets.only(left: 18.0),
+              //         child: SizedBox(
+              //             width: 200,
+              //             child: TextFormField(
+              //               keyboardType: TextInputType.visiblePassword,
+              //               controller: controllerSenhaPrivEvento,
+              //               decoration: InputDecoration(
+              //                 alignLabelWithHint: true,
+              //                 hintText: "Informe a senha do evento",
+              //                 hintStyle: TextStyle(
+              //                     fontSize: 13, fontFamily: Fontes.raleway),
+              //               ),
+              //             )),
+              //       )
+              //     ]
+              //   ],
+              // ),
 
               Padding(
                 padding:
@@ -207,7 +155,28 @@ class _PagePostarEventoState extends State<PagePostarEvento> {
                         controllerIngressos: controllerQntdIngresso),
 
                     //parte do preço
-                    TipoPagamento(controllerPreco: controllerPrecoIngresso),
+
+                    ListTile(
+                        leading: SizedBox(
+                          height: 40,
+                          width: 40,
+                          child: CircleAvatar(
+                              backgroundColor: Cores.azul42A5F5,
+                              child: Icon(
+                                Icons.payments_outlined,
+                                color: Cores.branco,
+                                size: 20,
+                              )),
+                        ),
+                        title: Text(
+                          "Gratuito",
+                          style: TextStyle(
+                            fontFamily: Fontes.raleway,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        )),
+                    // TipoPagamento(controllerPreco: controllerPrecoIngresso),
 
                     const SizedBox(height: 20),
                     Text(
@@ -226,6 +195,11 @@ class _PagePostarEventoState extends State<PagePostarEvento> {
                           border: InputBorder.none,
                           hintText:
                               "Coloque mais informações sobre o evento aqui"),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Coloque a descrição do evento";
+                        }
+                      },
                     ),
 
                     const SizedBox(height: 50),
@@ -240,7 +214,7 @@ class _PagePostarEventoState extends State<PagePostarEvento> {
                     const SizedBox(height: 5),
                     LocalEvent(controllerCEP: controllerCEPEvento),
 
-                    const SizedBox(height: 50),
+                    const SizedBox(height: 30),
 
                     const MultipleImagesEvent(),
 
@@ -345,17 +319,37 @@ class _PagePostarEventoState extends State<PagePostarEvento> {
       ),
       bottomNavigationBar: GestureDetector(
         onTap: () async {
-          cadastrarEvento();
-          // AwesomeDialog(
-          //   context: context,
-          //   dialogType: DialogType.success,
-          //   animType: AnimType.topSlide,
-          //   title: "Evento Cadastrado",
-          //   btnOkText: "Fechar",
-          //   barrierColor: Cores.branco.withOpacity(0.7),
-          //   btnOkOnPress: () {},
-          //   btnOkColor: Cores.azul42A5F5,
-          // ).show();
+          FocusScopeNode currentFocus = FocusScope.of(context);
+          if (!currentFocus.hasPrimaryFocus) {
+            currentFocus.unfocus();
+          }
+
+          List<String> partes = controllerDataEvento.text.split('/');
+
+          DateTime data =
+              DateTime.parse("${_formatarData(controllerDataEvento.text)}");
+          String dataFormatada =
+              "${data.year}-${_doisDigitos(data.month)}-${_doisDigitos(data.day)}";
+
+          String horaFormatada = _formatarHora(controllerHorarioEvento.text);
+
+          // controllerDataEvento.text
+          // controllerDataEvento.text
+
+          PostarEventoRepository().cadastrarEvento(
+            data: dataFormatada,
+            horario: horaFormatada,
+            nomeEvento: controllerNomeEvento.text,
+            senhaEvento: '',
+            ingressosQntd: int.parse(controllerQntdIngresso.text),
+            preco: 0.0,
+            descricao: controllerDescricaoEvento.text,
+            localEvento: controllerCEPEvento.text.replaceAll("-", ""),
+            qrCode: controllerQrCode.text,
+            imagePrincipal: image!,
+            imagelogo: imageLogo!,
+            context: context,
+          );
         },
         child: Container(
           height: 64,
@@ -379,71 +373,18 @@ class _PagePostarEventoState extends State<PagePostarEvento> {
     );
   }
 
-  Future<void> cadastrarEvento() async {
-    GeradorDeID gerador = GeradorDeID();
-
-    final idEvento = gerador.gerarIDUnico();
-    final cdInstituicao = 17154741;
-    final data = controllerDataEvento.text;
-    final horario = controllerHorarioEvento.text;
-    final nomeEvento = controllerNomeEvento.text;
-    final tipoPrivacidade = controllerPrivacidadeEvento.text;
-    final senhaEvento = controllerSenhaPrivEvento.text;
-    final ingressosQntd = int.tryParse(controllerQntdIngresso.text);
-    final tipoPagamento = controllerTipoIngresso.text;
-    final precoIngresso = controllerPrecoIngresso.text;
-    final descricaoEvento = controllerDescricaoEvento.text;
-    final localEvento = controllerCEPEvento.text.replaceAll("-", "");
-    final valorQrEvento = controllerQrCode.text;
-
-    final Map<String, dynamic> body = {
-      "cd_evento": idEvento,
-      "cd_instituicao": cdInstituicao,
-      "nome_evento": nomeEvento,
-      "data_evento": data,
-      "horario": horario,
-      "quantidade_ingressos": ingressosQntd,
-      "descricao": descricaoEvento,
-      "cep": localEvento,
-      "senha": senhaEvento
-    };
-
-    final url = Uri.parse('http://192.168.1.112:8080/event');
-    final response = await http.post(url,
-        body: jsonEncode(body), headers: {'Content-Type': 'application/json'});
-
-    if (response.statusCode == 200) {
-      return showMessageSuccess();
-    } else {
-      return showMessageError();
-    }
+  String _formatarData(String dataString) {
+    List<String> partes = dataString.split('/');
+    return "${partes[2]}-${_doisDigitos(int.parse(partes[1]))}-${_doisDigitos(int.parse(partes[0]))}";
   }
 
-  showMessageSuccess() {
-    return AwesomeDialog(
-      context: context,
-      dialogType: DialogType.success,
-      animType: AnimType.topSlide,
-      titleTextStyle:
-          TextStyle(fontFamily: Fontes.inter, fontWeight: FontWeight.w600),
-      title: "Evento Criado!",
-      btnOkText: "Prosseguir",
-      barrierColor: Cores.branco.withOpacity(0.7),
-      btnOkOnPress: () {},
-      btnOkColor: Cores.azul42A5F5,
-    ).show();
+  String _formatarHora(String horaString) {
+    List<String> partes = horaString.split('h');
+    return "${_doisDigitos(int.parse(partes[0]))}:${_doisDigitos(int.parse(partes[1]))}:00";
   }
 
-  showMessageError() {
-    final snackBar = SnackBar(
-      elevation: 0,
-      content: Text(
-        'Informações inválidas',
-        style: TextStyle(fontFamily: Fontes.inter, fontWeight: FontWeight.bold),
-      ),
-      backgroundColor: Cores.vermelho,
-    );
-    return ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  String _doisDigitos(int numero) {
+    return numero.toString().padLeft(2, '0');
   }
 }
 
@@ -451,45 +392,51 @@ class LogoImage extends StatefulWidget {
   const LogoImage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _LogoImageState createState() => _LogoImageState();
 }
 
 class _LogoImageState extends State<LogoImage> {
-  File? _image;
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      width: 108,
+      height: 36,
       child: Column(
         children: [
-          _image != null
-              ? FittedBox(
-                  fit: BoxFit.fill,
-                  child: Image.file(
-                    _image!,
-                    width: 108,
-                    height: 36,
-                  ),
+          imageLogo != null
+              ? Column(
+                  children: [
+                    Image.file(
+                      imageLogo!,
+                      fit: BoxFit.contain,
+                      width: 108,
+                      height: 36,
+                    ),
+                  ],
                 )
-              : ElevatedButton.icon(
-                  onPressed: () async {
-                    sendImageLogo();
-                  },
-                  style: ButtonStyle(
-                    elevation: MaterialStateProperty.all(0),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            side: BorderSide(color: Cores.preto))),
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Cores.branco),
-                  ),
-                  icon: Icon(Icons.add, color: Cores.preto),
-                  label: Text(
-                    'Logo',
-                    style: TextStyle(
-                      color: Cores.preto,
-                      fontFamily: Fontes.ralewayBold,
+              : SizedBox(
+                  height: 35,
+                  child: ElevatedButton.icon(
+                    onPressed: () async {
+                      sendImageLogo();
+                    },
+                    style: ButtonStyle(
+                      elevation: MaterialStateProperty.all(0),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              side: BorderSide(color: Cores.preto))),
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Cores.branco),
+                    ),
+                    icon: Icon(Icons.add, color: Cores.preto),
+                    label: Text(
+                      'Logo',
+                      style: TextStyle(
+                        color: Cores.preto,
+                        fontFamily: Fontes.ralewayBold,
+                      ),
                     ),
                   ),
                 ),
@@ -507,11 +454,104 @@ class _LogoImageState extends State<LogoImage> {
       );
 
       if (croppedFile != null) {
-        setState(() => _image = File(croppedFile.path));
+        setState(() => imageLogo = File(croppedFile.path));
       }
     }
   }
 }
 
-//envio de imagens - LOGO
- 
+class EventsImage extends StatefulWidget {
+  const EventsImage({
+    super.key,
+  });
+
+  @override
+  State<EventsImage> createState() => _EventsImageState();
+}
+
+class _EventsImageState extends State<EventsImage> {
+  dio.Dio dioInstance = dio.Dio();
+
+  @override
+  Widget build(BuildContext context) {
+    double displayHeight = MediaQuery.of(context).size.height;
+    return SliverAppBar(
+        expandedHeight: displayHeight / 3,
+        flexibleSpace: FlexibleSpaceBar(
+          background: image != null
+              ? FittedBox(
+                  fit: BoxFit.cover,
+                  child: Image.file(image!),
+                )
+              : Center(
+                  child: ElevatedButton.icon(
+                    onPressed: () async {
+                      sendImagePrincipal();
+                    },
+                    style: ButtonStyle(
+                      elevation: MaterialStateProperty.all(0),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              side: BorderSide(color: Cores.preto))),
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Cores.branco),
+                    ),
+                    icon: Icon(Icons.add, color: Cores.preto),
+                    label: Text(
+                      'Imagem do Evento',
+                      style: TextStyle(
+                        color: Cores.preto,
+                        fontFamily: Fontes.ralewayBold,
+                      ),
+                    ),
+                  ),
+                ),
+        ),
+        floating: true,
+        snap: true,
+        pinned: true,
+        elevation: 0,
+        backgroundColor: Cores.branco,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            size: 30,
+            color: Cores.preto,
+          ),
+        ),
+        actions: [
+          image != null
+              ? IconButton(
+                  onPressed: () {
+                    sendImagePrincipal();
+                  },
+                  icon: Icon(
+                    Icons.edit,
+                    size: 25,
+                    color: Cores.preto,
+                  ))
+              : Container(),
+        ]);
+  }
+
+  sendImagePrincipal() async {
+    final files = await imageHelper.pickImage();
+    if (files.isNotEmpty) {
+      final croppedFile = await imageHelper.crop(
+        file: files.first,
+        cropStyle: CropStyle.rectangle,
+      );
+
+      FocusScopeNode currentFocus = FocusScope.of(context);
+      currentFocus.unfocus();
+
+      if (croppedFile != null) {
+        return setState(() => image = File(croppedFile.path));
+      }
+    }
+  }
+}

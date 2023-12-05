@@ -6,6 +6,7 @@ import 'package:tec_eventos/data/http/http_client.dart';
 import 'package:tec_eventos/data/repositories/events_repository.dart';
 import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/pages/paginas_aluno/pag_inscricao_evento/info_evento/info_evento.dart';
+import 'package:tec_eventos/pages/paginas_aluno/pag_inscricao_evento/info_evento_pendentes/info_evento_pendente.dart';
 import 'package:tec_eventos/utils/stores/events_store.dart';
 import 'package:tec_eventos/widgets/Cards/cardLoading/card_loading.dart';
 
@@ -87,10 +88,13 @@ class _RowCardEventosInscritosState extends State<RowCardEventosInscritos> {
                       return CardEventosInscritos(
                           nomeEvento: item.nomeEvento,
                           diasFaltam: "É HOJE",
-                          diaRealizacao: item.dataEvento,
-                          horas: item.horario,
+                          diaRealizacao: item.dataEvento.toString(),
+                          horas: item.horario.toString(),
                           imagemEvento: item.imagemEvento,
-                          organizacao: item.logoEvento);
+                          organizacao: item.logoEvento,
+                          cdEvento: item.cdEvento,
+                          descricao: item.descricao,
+                          ingressos: item.quantidadeIngressos);
                     } else {
                       return Container();
                     }
@@ -111,15 +115,16 @@ class CardEventosInscritos extends StatefulWidget {
       required this.diaRealizacao,
       required this.horas,
       required this.imagemEvento,
-      required this.organizacao})
+      required this.organizacao,
+      required this.descricao,
+      required this.cdEvento,
+      required this.ingressos})
       : super(key: key);
 
-  final String nomeEvento,
-      diasFaltam,
-      diaRealizacao,
-      horas,
-      imagemEvento,
-      organizacao;
+  final String nomeEvento, diasFaltam, imagemEvento, organizacao, descricao;
+
+  final String diaRealizacao, horas;
+  final int cdEvento, ingressos;
 
   @override
   State<CardEventosInscritos> createState() => _CardEventosInscritosState();
@@ -128,14 +133,28 @@ class CardEventosInscritos extends StatefulWidget {
 class _CardEventosInscritosState extends State<CardEventosInscritos> {
   @override
   Widget build(BuildContext context) {
+    DateTime data = DateTime.parse(widget.diaRealizacao).toLocal();
+    String dataFormatada = "${data.day}/${data.month}/${data.year}";
+
+    TimeOfDay hora = TimeOfDay(
+      hour: int.parse(widget.horas.split(":")[0]),
+      minute: int.parse(widget.horas.split(":")[1]),
+    );
+
+    String horaFormatada =
+        "${hora.hour}h${hora.minute.toString().padLeft(2, '0')}";
+
     final InfoEvento navegacao = InfoEvento(
         imagemEvento: widget.imagemEvento,
         imagemOrganizacao: widget.organizacao,
         diaRealizacao: widget.diaRealizacao,
         nomeEvento: widget.nomeEvento,
-        horarioRealizacao: widget.horas);
+        horarioRealizacao: widget.horas,
+        descricao: widget.descricao,
+        cdEvento: widget.cdEvento,
+        ingressos: widget.ingressos);
 
-    const urlImage = 'http://192.168.1.112:8080/imagem/';
+    const urlImage = 'https://api-tec-eventos-i6hr.onrender.com/imagem/';
     return Padding(
       padding: const EdgeInsets.only(right: 15, top: 10, bottom: 10),
       child: SizedBox(
@@ -147,7 +166,8 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
             Navigator.push(
                 context,
                 PageTransition(
-                    child: navegacao, type: PageTransitionType.bottomToTop));
+                    child: const InfoEventoPendentes(),
+                    type: PageTransitionType.bottomToTop));
           },
           child: Card(
             margin: const EdgeInsets.only(top: 20),
@@ -197,14 +217,14 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
                         //DIA EM ESPECÍFICO, COM DATA E HORÁRIO
 
                         Text(
-                          widget.diaRealizacao,
+                          dataFormatada,
                           style: TextStyle(
                             fontFamily: Fontes.inter,
                             fontSize: 9,
                           ),
                         ),
                         Text(
-                          widget.horas,
+                          horaFormatada,
                           style: TextStyle(
                             fontFamily: Fontes.inter,
                             fontSize: 9,
@@ -223,7 +243,7 @@ class _CardEventosInscritosState extends State<CardEventosInscritos> {
                               Navigator.push(
                                   context,
                                   PageTransition(
-                                      child: navegacao,
+                                      child: const InfoEventoPendentes(),
                                       type: PageTransitionType.bottomToTop));
                             },
                             child: Text(

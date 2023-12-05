@@ -122,7 +122,7 @@ class _InfoEventoPendentesState extends State<InfoEventoPendentes> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    "O evento acontecerá na universidade Univem em Marília, SP.",
+                    "Confira onde o evento será realizado.",
                     style: TextStyle(fontFamily: Fontes.raleway, fontSize: 13),
                   ),
                   SizedBox(

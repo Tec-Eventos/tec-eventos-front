@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
+import 'package:tec_eventos/pages/paginas_aluno/pag_inscricao_evento/info_evento/info_evento.dart';
+import 'package:tec_eventos/pages/paginas_aluno/pag_inscricao_evento/info_evento_pendentes/info_evento_pendente.dart';
 import 'package:tec_eventos/pages/paginas_aluno/perfil/perfil.dart';
 
 class CardsEventosInstituicao extends StatelessWidget {
@@ -20,7 +22,7 @@ class CardsEventosInstituicao extends StatelessWidget {
             Navigator.push(
                 context,
                 PageTransition(
-                    child: const Perfil(),
+                    child: const InfoEventoPendentes(),
                     type: PageTransitionType.bottomToTop));
           },
           child: Card(
@@ -99,7 +101,7 @@ class CardsEventosInstituicao extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   PageTransition(
-                                      child: const Perfil(),
+                                      child: const InfoEventoPendentes(),
                                       type: PageTransitionType.bottomToTop));
                             },
                             child: Row(

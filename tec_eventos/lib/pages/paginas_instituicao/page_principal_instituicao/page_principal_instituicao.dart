@@ -19,6 +19,14 @@ class _PrincipalPageInstituicaoState extends State<PrincipalPageInstituicao> {
   @override
   Widget build(BuildContext context) {
     return Consumer<InstituicaoProvider>(builder: (context, user, _) {
+      if (user.cdEscolar == null ||
+          user.nomeInstituicao == null ||
+          user.emailInstituicao == null) {
+        return const Center(
+            child:
+                CircularProgressIndicator()); // ou outro indicador de carregamento
+      }
+
       return Expanded(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 23),
@@ -51,33 +59,38 @@ class _PrincipalPageInstituicaoState extends State<PrincipalPageInstituicao> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
-                            width: MediaQuery.of(context).size.width / 3,
+                            width: MediaQuery.of(context).size.width / 2.1,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  user.nomeInstituicao,
+                                  user.nomeInstituicao ?? "Sem nome",
                                   style: TextStyle(
-                                      fontSize: 25,
+                                      fontSize: 20,
                                       fontFamily: Fontes.ralewayBold),
                                 ),
                                 Text(
-                                  user.emailInstituicao,
+                                  user.emailInstituicao ?? "Sem email",
                                   style: TextStyle(
-                                      fontSize: 12,
+                                      fontSize: 15,
                                       fontFamily: Fontes.raleway,
                                       fontWeight: FontWeight.w500),
                                 )
                               ],
                             ),
                           ),
-                          Image.asset(
-                            "assets/unimarImagem.png",
-                            fit: BoxFit.contain,
-                            height: 100,
-                            width: 100,
+                          Icon(
+                            Icons.school,
+                            size: 50,
+                            color: Cores.azulEscuroPerfilOption,
                           )
+                          // Image.asset(
+                          //   "assets/unimarImagem.png",
+                          //   fit: BoxFit.contain,
+                          //   height: 100,
+                          //   width: 100,
+                          // )
                         ],
                       ),
                     ),

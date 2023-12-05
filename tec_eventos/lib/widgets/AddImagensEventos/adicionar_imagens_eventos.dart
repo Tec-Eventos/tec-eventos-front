@@ -27,6 +27,9 @@ class _MultipleImagesEventState extends State<MultipleImagesEvent> {
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
+            const SizedBox(
+              width: 20,
+            ),
             TextButton(
                 onPressed: () async {
                   sendImages();

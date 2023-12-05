@@ -17,6 +17,8 @@ import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/inputs_instit
 import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/inputs_instituicao/input_cnpj.dart';
 import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/inputs_instituicao/input_instituicao.dart';
 import 'package:tec_eventos/pages/paginas_globais/acesso/InputText/inputs_instituicao/input_tipo_inst.dart';
+import 'package:tec_eventos/pages/paginas_globais/acesso/forms/login/login_aluno.dart';
+import 'package:tec_eventos/pages/paginas_globais/acesso/login.dart';
 
 class CadastroInstituicao extends StatefulWidget {
   const CadastroInstituicao({super.key});
@@ -149,14 +151,25 @@ class _CadastroInstituicaoState extends State<CadastroInstituicao> {
       "senha": senhaInst
     };
 
+    final bodyCEP = {
+      "cep": int.parse(cepInst),
+      "logradouro": '',
+      "complemento": '',
+      "bairro": '',
+      "cidade": '',
+      "estado": '',
+    };
+
+    final responseCEP = await _requisicaoCEP(bodyCEP);
     //enviando a informação para o servidor
-    const url = 'http://192.168.1.112:8080/escola';
+    const url = 'https://api-tec-eventos-i6hr.onrender.com/escola';
     final uri = Uri.parse(url);
     final response = await http.post(uri,
         body: jsonEncode(body), headers: {'Content-Type': 'application/json'});
 
     //mostrando o retorno da requisição
-    if (response.statusCode == 200 || response.statusCode == 201) {
+    if (response.statusCode == 200 ||
+        response.statusCode == 201 && responseCEP == 200) {
       return showMessageSuccess();
     } else {
       print(jsonEncode(body));
@@ -180,11 +193,10 @@ class _CadastroInstituicaoState extends State<CadastroInstituicao> {
             await SharedPreferences.getInstance();
         await sharedPreferences.setString(userTypeKey, 'Instituição');
 
-        Navigator.push(
+        Navigator.pushReplacement(
             context,
             PageTransition(
-                child: AllPages(paginaAtual: 0),
-                type: PageTransitionType.rightToLeft));
+                child: LoginPage(), type: PageTransitionType.bottomToTop));
       },
       btnOkColor: Cores.azul42A5F5,
     ).show();
@@ -200,5 +212,20 @@ class _CadastroInstituicaoState extends State<CadastroInstituicao> {
       backgroundColor: Cores.vermelho,
     );
     return ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  Future<int?> _requisicaoCEP(var body) async {
+    final response = await http.post(
+        Uri.parse('https://api-tec-eventos-i6hr.onrender.com/endereco'),
+        body: jsonEncode(body),
+        headers: {'Content-Type': 'application/json'});
+
+    if (response.statusCode == 200) {
+      print("CEP inserido:" + response.body);
+      return response.statusCode;
+    } else {
+      print("Deu ruim no CEP:" + response.body);
+      return response.statusCode;
+    }
   }
 }

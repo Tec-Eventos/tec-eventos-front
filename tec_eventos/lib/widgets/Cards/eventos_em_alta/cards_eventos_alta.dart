@@ -3,9 +3,11 @@ import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/data/http/http_client.dart';
 import 'package:tec_eventos/data/repositories/events_repository.dart';
+import 'package:tec_eventos/data/repositories/inst_events_repository.dart';
 import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/pages/paginas_aluno/pag_inscricao_evento/info_evento/info_evento.dart';
 import 'package:tec_eventos/utils/stores/events_store.dart';
+import 'package:tec_eventos/utils/stores/inst_event_store.dart';
 import 'package:tec_eventos/widgets/Cards/cardLoading/card_loading.dart';
 
 class RowEventosEmAlta extends StatefulWidget {
@@ -16,8 +18,8 @@ class RowEventosEmAlta extends StatefulWidget {
 }
 
 class _RowEventosEmAltaState extends State<RowEventosEmAlta> {
-  final EventsStore store = EventsStore(
-    repository: EventsRepository(
+  final InstEventsStore store = InstEventsStore(
+    repository: InstEventsRepository(
       client: HttpClient(),
     ),
   );
@@ -25,7 +27,7 @@ class _RowEventosEmAltaState extends State<RowEventosEmAlta> {
   @override
   void initState() {
     super.initState();
-    store.getEvents();
+    store.getEventsInst();
   }
 
   @override
@@ -86,8 +88,10 @@ class _RowEventosEmAltaState extends State<RowEventosEmAlta> {
                       nomeEvento: item.nomeEvento,
                       descricao: item.descricao,
                       organizacaoImagem: item.logoEvento,
-                      dataRealizacao: item.dataEvento,
-                      horario: item.horario,
+                      dataRealizacao: item.dataEvento.toString(),
+                      horario: item.horario.toString(),
+                      cdEvento: item.cdEvento,
+                      ingressos: item.quantidadeIngressos,
                     );
                   },
                 ),
@@ -106,15 +110,15 @@ class EventosAlta extends StatefulWidget {
       required this.descricao,
       required this.organizacaoImagem,
       required this.dataRealizacao,
-      required this.horario})
+      required this.horario,
+      required this.cdEvento,
+      required this.ingressos})
       : super(key: key);
 
-  final String imagemEvento,
-      dataRealizacao,
-      horario,
-      nomeEvento,
-      descricao,
-      organizacaoImagem;
+  final String imagemEvento, nomeEvento, descricao, organizacaoImagem;
+
+  final String dataRealizacao, horario;
+  final int cdEvento, ingressos;
 
   @override
   State<EventosAlta> createState() => _EventosAltaState();
@@ -124,13 +128,17 @@ class _EventosAltaState extends State<EventosAlta> {
   @override
   Widget build(BuildContext context) {
     final InfoEvento navegacao = InfoEvento(
-        imagemEvento: widget.imagemEvento,
-        imagemOrganizacao: widget.organizacaoImagem,
-        diaRealizacao: "10/06",
-        nomeEvento: widget.nomeEvento,
-        horarioRealizacao: "10:00");
+      imagemEvento: widget.imagemEvento,
+      imagemOrganizacao: widget.organizacaoImagem,
+      diaRealizacao: widget.dataRealizacao,
+      nomeEvento: widget.nomeEvento,
+      horarioRealizacao: widget.horario,
+      cdEvento: widget.cdEvento,
+      descricao: widget.descricao,
+      ingressos: widget.ingressos,
+    );
 
-    final urlImage = 'http://192.168.1.112:8080/imagem/';
+    final urlImage = 'https://api-tec-eventos-i6hr.onrender.com/imagem/';
     return Padding(
       padding: const EdgeInsets.only(right: 15, top: 10, bottom: 10),
       child: SizedBox(
@@ -211,7 +219,6 @@ class _EventosAltaState extends State<EventosAlta> {
                         const SizedBox(height: 5),
 
                         //DIA EM ESPECÍFICO, COM DATA E HORÁRIO
-
                         Text(
                           widget.descricao,
                           style: TextStyle(

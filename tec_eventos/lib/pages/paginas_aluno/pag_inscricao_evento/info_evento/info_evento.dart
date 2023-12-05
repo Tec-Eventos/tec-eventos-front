@@ -4,8 +4,10 @@ import 'package:tec_eventos/widgets/Perfil_user/menu_perfil/favoritos.dart';
 import 'package:tec_eventos/widgets/botaoInfoEvento/inscrever/inscrever.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
-
+import 'package:intl/intl.dart';
 import 'package:tec_eventos/pages/paginas_aluno/pag_inscricao_evento/google_maps.dart';
+
+final urlImage = 'https://api-tec-eventos-i6hr.onrender.com/imagem/';
 
 class InfoEvento extends StatefulWidget {
   const InfoEvento(
@@ -14,13 +16,17 @@ class InfoEvento extends StatefulWidget {
       required this.imagemOrganizacao,
       required this.diaRealizacao,
       required this.nomeEvento,
-      required this.horarioRealizacao});
+      required this.horarioRealizacao,
+      required this.descricao,
+      required this.cdEvento,
+      required this.ingressos});
 
   final String imagemEvento;
   final String imagemOrganizacao;
   final String diaRealizacao;
   final String horarioRealizacao;
-  final String nomeEvento;
+  final String nomeEvento, descricao;
+  final int cdEvento, ingressos;
 
   @override
   State<InfoEvento> createState() => _InfoEventoState();
@@ -31,6 +37,15 @@ class _InfoEventoState extends State<InfoEvento> {
   Widget build(BuildContext context) {
     // double displayWidth = MediaQuery.of(context).size.width;
 
+    DateTime data = DateTime.parse(widget.diaRealizacao).toLocal();
+    String dataFormatada = "${data.day}/${data.month}/${data.year}";
+
+    TimeOfDay hora = TimeOfDay(
+      hour: int.parse(widget.horarioRealizacao.split(":")[0]),
+      minute: int.parse(widget.horarioRealizacao.split(":")[1]),
+    );
+    String horaFormatada =
+        "${hora.hour}h${hora.minute.toString().padLeft(2, '0')}";
     return Scaffold(
         body: NestedScrollView(
           floatHeaderSlivers: true,
@@ -45,33 +60,45 @@ class _InfoEventoState extends State<InfoEvento> {
               ListTile(
                 shape: Border(bottom: BorderSide(color: Cores.cinza)),
                 style: ListTileStyle.drawer,
-                title: Text(
-                    "${widget.diaRealizacao} às ${widget.horarioRealizacao}",
+                title: Text("${dataFormatada} às ${horaFormatada}",
                     style: TextStyle(
                         fontFamily: Fontes.raleway,
-                        fontSize: 18,
+                        fontSize: 20,
                         color: Cores.cinza6A6666,
                         fontWeight: FontWeight.bold)),
                 subtitle: Text(widget.nomeEvento,
                     style: TextStyle(
                         fontFamily: Fontes.raleway,
-                        fontSize: 20,
+                        fontSize: 22,
                         color: Cores.preto,
                         fontWeight: FontWeight.bold)),
-                trailing: Image.asset(
-                  widget.imagemOrganizacao,
-                  fit: BoxFit.scaleDown,
-                  height: 70,
-                  width: 70,
+                trailing: Padding(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: Image.network(
+                    urlImage + widget.imagemOrganizacao,
+                    fit: BoxFit.contain,
+                    height: 90,
+                    width: 90,
+                  ),
                 ),
               ),
 
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 30),
+                padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const SizedBox(height: 20),
+                    Text(
+                      "${widget.cdEvento}",
+                      style: TextStyle(
+                        fontFamily: Fontes.ralewayBold,
+                        fontSize: 15,
+                      ),
+                    ),
+
+                    const SizedBox(height: 20),
+
                     Text(
                       "Informações do ingresso",
                       style: TextStyle(
@@ -82,36 +109,49 @@ class _InfoEventoState extends State<InfoEvento> {
                     const SizedBox(height: 20),
 
                     //parte dos ingressos restantes
-                    ListTile(
-                      leading: SizedBox(
-                        height: 40,
-                        width: 40,
-                        child: CircleAvatar(
-                            backgroundColor: Cores.azul42A5F5,
-                            child: Icon(
-                              Icons.chair_outlined,
-                              color: Cores.branco,
-                              size: 20,
-                            )),
-                      ),
-                      title: const Text("10 ingressos restantes"),
+
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 40,
+                          width: 40,
+                          child: CircleAvatar(
+                              backgroundColor: Cores.azul42A5F5,
+                              child: Icon(
+                                Icons.chair_outlined,
+                                color: Cores.branco,
+                                size: 20,
+                              )),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Text('${widget.ingressos}'),
+                      ],
                     ),
-
-                    //parte do preço
-
-                    ListTile(
-                      leading: SizedBox(
-                        height: 40,
-                        width: 40,
-                        child: CircleAvatar(
-                            backgroundColor: Cores.azul42A5F5,
-                            child: Icon(
-                              Icons.payments_outlined,
-                              color: Cores.branco,
-                              size: 20,
-                            )),
-                      ),
-                      title: const Text("Grátis"),
+                    const SizedBox(height: 20),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 40,
+                          width: 40,
+                          child: CircleAvatar(
+                              backgroundColor: Cores.azul42A5F5,
+                              child: Icon(
+                                Icons.payments_outlined,
+                                color: Cores.branco,
+                                size: 20,
+                              )),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        const Text("Grátis"),
+                      ],
                     ),
 
                     const SizedBox(height: 20),
@@ -124,7 +164,7 @@ class _InfoEventoState extends State<InfoEvento> {
                     ),
                     const SizedBox(height: 20),
                     Text(
-                      "Um texto qualquer sobre a descrição do evento que está acontecendo em tal lugar e agora eu fiquei sem ideia então vou encher de lorem ipsum lorem lorem ipsum lorem ipsum pasdafsd dsdajk lorem.",
+                      widget.descricao,
                       style:
                           TextStyle(fontFamily: Fontes.raleway, fontSize: 13),
                     ),
@@ -138,7 +178,7 @@ class _InfoEventoState extends State<InfoEvento> {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      "O evento acontecerá na universidade Univem em Marília, SP.",
+                      "Confira o local onde o evento ocorrerá",
                       style:
                           TextStyle(fontFamily: Fontes.raleway, fontSize: 13),
                     ),
@@ -176,6 +216,7 @@ class _InfoEventoState extends State<InfoEvento> {
                         ),
                       ),
                     ),
+
                     const SizedBox(height: 50),
                     Text(
                       "Imagens do local",
@@ -216,7 +257,7 @@ class _InfoEventoState extends State<InfoEvento> {
             ],
           ),
         ),
-        bottomNavigationBar: const Inscrever());
+        bottomNavigationBar: Inscrever(cdEvento: widget.cdEvento));
   }
 }
 
@@ -238,7 +279,7 @@ class _AppBarEventosInfoState extends State<AppBarEventosInfo> {
       expandedHeight: displayHeight / 3,
       flexibleSpace: FlexibleSpaceBar(
         background: Image.network(
-          widget.imagem,
+          urlImage + widget.imagem,
           fit: BoxFit.cover,
           width: double.infinity,
         ),
@@ -255,7 +296,7 @@ class _AppBarEventosInfoState extends State<AppBarEventosInfo> {
         icon: Icon(
           Icons.arrow_back_ios,
           size: 30,
-          color: Cores.branco,
+          color: Cores.preto,
         ),
       ),
     );

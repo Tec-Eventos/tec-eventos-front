@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/data/http/http_client.dart';
 import 'package:tec_eventos/data/repositories/events_repository.dart';
+import 'package:tec_eventos/data/repositories/inst_events_repository.dart';
 import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/utils/stores/events_store.dart';
+import 'package:tec_eventos/utils/stores/inst_event_store.dart';
 import 'package:tec_eventos/widgets/Cards/cardLoading/card_loading.dart';
 
 class RowCardEventosParaVoce extends StatefulWidget {
@@ -14,8 +16,8 @@ class RowCardEventosParaVoce extends StatefulWidget {
 }
 
 class _RowCardEventosParaVoceState extends State<RowCardEventosParaVoce> {
-  final EventsStore store = EventsStore(
-    repository: EventsRepository(
+  final InstEventsStore store = InstEventsStore(
+    repository: InstEventsRepository(
       client: HttpClient(),
     ),
   );
@@ -23,7 +25,7 @@ class _RowCardEventosParaVoceState extends State<RowCardEventosParaVoce> {
   @override
   void initState() {
     super.initState();
-    store.getEvents();
+    store.getEventsInst();
   }
 
   @override
@@ -41,7 +43,7 @@ class _RowCardEventosParaVoceState extends State<RowCardEventosParaVoce> {
             if (store.erro.value.isNotEmpty) {
               return Center(
                 child: Text(
-                  "Erro na requisição",
+                  store.erro.value,
                   style: TextStyle(
                     color: Cores.preto,
                     fontWeight: FontWeight.w600,
@@ -104,7 +106,7 @@ class CardEventosParaVoce extends StatefulWidget {
 class _CardEventosParaVoceState extends State<CardEventosParaVoce> {
   @override
   Widget build(BuildContext context) {
-    const urlImage = 'http://192.168.1.112:8080/imagem/';
+    const urlImage = 'https://api-tec-eventos-i6hr.onrender.com/imagem';
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: SizedBox(

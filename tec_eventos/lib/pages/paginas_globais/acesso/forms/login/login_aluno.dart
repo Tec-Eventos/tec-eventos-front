@@ -53,7 +53,7 @@ class _LoginAlunoState extends State<LoginAluno> {
         "senha": senha
       };
 
-      var url = Uri.parse('http://192.168.1.112:8080/loginAluno');
+      var url = Uri.parse('https://api-tec-eventos-i6hr.onrender.com/loginAluno');
       var response = await http.post(url,
           body: jsonEncode(body),
           headers: {'Content-Type': 'application/json'});
@@ -64,11 +64,10 @@ class _LoginAlunoState extends State<LoginAluno> {
         await sharedPreferences.setString(emailKey, email);
         await sharedPreferences.setInt(rmAlunoKey, rmAluno);
 
-        Provider.of<AlunoProvider>(context, listen: false).acessarLogin(
+        Provider.of<AlunoProvider>(context, listen: false).acessarInfos(
           nome,
           email,
           rmAluno,
-          senha,
         );
         //SE A OPÇÃO LEMBRAR-SE DE MIM ESTIVER ATIVADA
         if (isChecked) {

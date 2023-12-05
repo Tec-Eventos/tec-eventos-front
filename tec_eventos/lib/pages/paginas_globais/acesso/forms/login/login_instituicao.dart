@@ -169,7 +169,7 @@ class _LoginInstituicaoState extends State<LoginInstituicao> {
       "senha": senha
     };
 
-    var url = Uri.parse('http://192.168.1.112:8080/loginEscola');
+    var url = Uri.parse('https://api-tec-eventos-i6hr.onrender.com/loginEscola');
     var response = await http.post(url,
         body: jsonEncode(body), headers: {'Content-Type': 'application/json'});
 
@@ -179,8 +179,10 @@ class _LoginInstituicaoState extends State<LoginInstituicao> {
       await sharedPreferences.setString(emailKey, email);
       await sharedPreferences.setInt(cdEscolarKey, cdEscolar);
 
+      print(sharedPreferences.setString(nomeKey, nome));
       Provider.of<InstituicaoProvider>(context, listen: false)
-          .acessarLogin(cdEscolar, nome, email);
+          .acessarInfos(cdEscolar, nome, email);
+
       //SE A OPÇÃO LEMBRAR-SE DE MIM ESTIVER ATIVADA
       if (isChecked) {
         await sharedPreferences.setString(

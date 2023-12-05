@@ -3,9 +3,11 @@ import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/data/http/http_client.dart';
 import 'package:tec_eventos/data/repositories/events_repository.dart';
+import 'package:tec_eventos/data/repositories/inst_events_repository.dart';
 import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/pages/paginas_aluno/pag_inscricao_evento/info_evento/info_evento.dart';
 import 'package:tec_eventos/utils/stores/events_store.dart';
+import 'package:tec_eventos/utils/stores/inst_event_store.dart';
 import 'package:tec_eventos/widgets/Cards/cardLoading/card_loading.dart';
 
 class RowEventosRecomendados extends StatefulWidget {
@@ -16,8 +18,8 @@ class RowEventosRecomendados extends StatefulWidget {
 }
 
 class _RowEventosRecomendadosState extends State<RowEventosRecomendados> {
-  final EventsStore store = EventsStore(
-    repository: EventsRepository(
+  final InstEventsStore store = InstEventsStore(
+    repository: InstEventsRepository(
       client: HttpClient(),
     ),
   );
@@ -25,7 +27,7 @@ class _RowEventosRecomendadosState extends State<RowEventosRecomendados> {
   @override
   void initState() {
     super.initState();
-    store.getEvents();
+    store.getEventsInst();
   }
 
   @override
@@ -85,6 +87,10 @@ class _RowEventosRecomendadosState extends State<RowEventosRecomendados> {
                       imagemEvento: item.imagemEvento,
                       imagemOrganizacao: item.logoEvento,
                       descricao: item.descricao,
+                      cdEvento: item.cdEvento,
+                      data: item.dataEvento.toString(),
+                      horario: item.horario.toString(),
+                      ingressos: item.quantidadeIngressos,
                     );
                   },
                 ),
@@ -101,11 +107,16 @@ class Recomendados extends StatefulWidget {
       required this.nomeEvento,
       required this.imagemEvento,
       required this.imagemOrganizacao,
-      required this.descricao})
+      required this.descricao,
+      required this.horario,
+      required this.data,
+      required this.cdEvento,
+      required this.ingressos})
       : super(key: key);
 
   final String nomeEvento, imagemEvento, imagemOrganizacao, descricao;
-
+  final String horario, data;
+  final int cdEvento, ingressos;
   @override
   State<Recomendados> createState() => _RecomendadosState();
 }
@@ -114,13 +125,17 @@ class _RecomendadosState extends State<Recomendados> {
   @override
   Widget build(BuildContext context) {
     final InfoEvento navegacao = InfoEvento(
-        imagemEvento: widget.imagemEvento,
-        imagemOrganizacao: widget.imagemOrganizacao,
-        diaRealizacao: "10/06",
-        nomeEvento: widget.nomeEvento,
-        horarioRealizacao: "10:00");
+      imagemEvento: widget.imagemEvento,
+      imagemOrganizacao: widget.imagemOrganizacao,
+      diaRealizacao: widget.data,
+      nomeEvento: widget.nomeEvento,
+      horarioRealizacao: widget.horario,
+      cdEvento: widget.cdEvento,
+      descricao: widget.descricao,
+      ingressos: widget.ingressos,
+    );
 
-    final urlImage = 'http://192.168.1.112:8080/imagem/';
+    final urlImage = 'https://api-tec-eventos-i6hr.onrender.com/imagem/';
     return Padding(
       padding: const EdgeInsets.only(right: 15, top: 10, bottom: 10),
       child: SizedBox(

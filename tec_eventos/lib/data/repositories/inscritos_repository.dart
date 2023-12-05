@@ -15,7 +15,7 @@ class InscritosRepository extends ChangeNotifier {
   }
 
   _setupDadosListPresencaInscritos(String cdEvento) async {
-    String uri = 'http://192.168.1.112:8080/listaPresenca/$cdEvento';
+    String uri = 'https://api-tec-eventos-i6hr.onrender.com/listaPresenca/$cdEvento';
 
     final response = await http.get(Uri.parse(uri));
 

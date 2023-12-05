@@ -24,14 +24,13 @@ const List<Widget> listaPagesAlunos = [
 const List<Widget> listaPagesInstituicao = [
   PrincipalPageInstituicao(),
   EventosPage(),
-  PageEstatisticas(),
   NotificationPage(),
   PageConfiguracaoInstituicao(),
 ];
 
 class AllPages extends StatefulWidget {
   AllPages({Key? key, required this.paginaAtual}) : super(key: key);
-   int paginaAtual;
+  int paginaAtual;
 
   @override
   State<AllPages> createState() => _AllPagesState();
@@ -61,6 +60,14 @@ class _AllPagesState extends State<AllPages> {
     super.dispose();
   }
 
+  int qntdPages() {
+    if (tipoUser == "Aluno") {
+      return listaPagesAlunos.length;
+    } else {
+      return listaPagesInstituicao.length;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,7 +86,7 @@ class _AllPagesState extends State<AllPages> {
           //aqui é o corpo da página, ou seja,
           //onde vai ficar o conteúdo dela, deixe ela dentro de um ListView com o Axis.vertical.
           body: PageView.builder(
-              itemCount: listaPagesAlunos.length,
+              itemCount: qntdPages(),
               controller: _pageController,
               onPageChanged: (index) {
                 setState(() {

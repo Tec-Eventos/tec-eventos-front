@@ -5,23 +5,24 @@ import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/repositories/postar_evento_repository.dart';
+import 'package:tec_eventos/data/repositories/postar_evento_repository.dart';
 import 'package:tec_eventos/utils/image_helper.dart';
 
 final imageHelper = ImageHelper();
 
 class EventsImage extends StatefulWidget {
-  const EventsImage({
+  EventsImage({
     super.key,
+    this.image,
   });
 
+  File? image;
   @override
   State<EventsImage> createState() => _EventsImageState();
 }
 
 class _EventsImageState extends State<EventsImage> {
   dio.Dio dioInstance = dio.Dio();
-  File? _image;
 
   @override
   Widget build(BuildContext context) {
@@ -29,43 +30,15 @@ class _EventsImageState extends State<EventsImage> {
     return SliverAppBar(
         expandedHeight: displayHeight / 3,
         flexibleSpace: FlexibleSpaceBar(
-          background: _image != null
+          background: widget.image != null
               ? FittedBox(
                   fit: BoxFit.cover,
-                  child: Image.file(_image!),
+                  child: Image.file(widget.image!),
                 )
               : Center(
                   child: ElevatedButton.icon(
                     onPressed: () async {
-                      bool? deuCerto = await sendImagePrincipal();
-
-                      if (deuCerto == true) {
-                        final snackBar = SnackBar(
-                          elevation: 0,
-                          content: Text(
-                            'Deu certo, paizão',
-                            style: TextStyle(
-                                fontFamily: Fontes.inter,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          backgroundColor: Cores.verdeClaro,
-                        );
-
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      } else {
-                        final snackBar = SnackBar(
-                          elevation: 0,
-                          content: Text(
-                            'Deu errado, paizão',
-                            style: TextStyle(
-                                fontFamily: Fontes.inter,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          backgroundColor: Cores.vermelho,
-                        );
-
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      }
+                      sendImagePrincipal();
                     },
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all(0),
@@ -103,7 +76,7 @@ class _EventsImageState extends State<EventsImage> {
           ),
         ),
         actions: [
-          _image != null
+          widget.image != null
               ? IconButton(
                   onPressed: () {
                     sendImagePrincipal();
@@ -117,7 +90,7 @@ class _EventsImageState extends State<EventsImage> {
         ]);
   }
 
-  Future<bool?> sendImagePrincipal() async {
+  sendImagePrincipal() async {
     final files = await imageHelper.pickImage();
     if (files.isNotEmpty) {
       final croppedFile = await imageHelper.crop(
@@ -129,10 +102,8 @@ class _EventsImageState extends State<EventsImage> {
       currentFocus.unfocus();
 
       if (croppedFile != null) {
-        setState(() => _image = File(croppedFile.path));
+        return setState(() => widget.image = File(croppedFile.path));
       }
-
-      return PostarEventoRepository().sendImage(_image);
     }
   }
 }

@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-
-class EventsModel {
+class InstituicaoEventsModel {
   final int cdEvento;
   final String nomeEvento;
   final int cdInstituicao;
@@ -9,14 +7,14 @@ class EventsModel {
   final int quantidadeIngressos;
   final String descricao;
   final String cepEvento;
-  final double? preco;
-  final String? senhaEvento;
+  final double preco;
+  final String senhaEvento;
   final String instituicao;
   final String tipoInstituicao;
   final String imagemEvento;
   final String logoEvento;
 
-  EventsModel({
+  InstituicaoEventsModel({
     required this.cdEvento,
     required this.nomeEvento,
     required this.cdInstituicao,
@@ -33,8 +31,8 @@ class EventsModel {
     required this.logoEvento,
   });
 
-  factory EventsModel.fromMap(Map<String, dynamic> map) {
-    return EventsModel(
+  factory InstituicaoEventsModel.fromMap(Map<String, dynamic> map) {
+    return InstituicaoEventsModel(
       cdEvento: map['cd_evento'],
       nomeEvento: map['nome_evento'],
       cdInstituicao: map['cd_instituicao'],

@@ -61,10 +61,14 @@ class QrCodeIngresso extends StatelessWidget {
                           fontStyle: FontStyle.normal),
                     ),
 
-                    Image.asset(
-                      "assets/UnivemImagem.png",
-                      width: 108,
-                      height: 36,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12.0),
+                      child: Image.asset(
+                        "assets/t!e_logo.png",
+                        width: 108,
+                        alignment: Alignment.bottomLeft,
+                        height: 36,
+                      ),
                     ),
                   ],
                 ),

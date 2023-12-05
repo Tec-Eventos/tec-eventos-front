@@ -3,7 +3,7 @@ import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
 
 class CaixaTextoIngressos extends StatefulWidget {
-   const CaixaTextoIngressos({super.key, required this.controllerIngressos});
+  const CaixaTextoIngressos({super.key, required this.controllerIngressos});
 
   final TextEditingController controllerIngressos;
   @override
@@ -13,8 +13,6 @@ class CaixaTextoIngressos extends StatefulWidget {
 class _CaixaTextoIngressosState extends State<CaixaTextoIngressos> {
   @override
   Widget build(BuildContext context) {
-    
-
     return ListTile(
       leading: SizedBox(
         height: 40,
@@ -32,10 +30,16 @@ class _CaixaTextoIngressosState extends State<CaixaTextoIngressos> {
         keyboardType: TextInputType.number,
         controller: widget.controllerIngressos,
         decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: "Informe a limitação de ingressos",
-            hintStyle: TextStyle(
-                fontFamily: Fontes.inter, fontWeight: FontWeight.w600)),
+          border: InputBorder.none,
+          hintText: "Informe a limitação de ingressos",
+          hintStyle:
+              TextStyle(fontFamily: Fontes.inter, fontWeight: FontWeight.w600),
+        ),
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "Informe a quantidade de ingressos";
+          }
+        },
       ),
     );
   }
