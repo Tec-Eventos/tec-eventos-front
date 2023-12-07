@@ -36,13 +36,17 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
+  // static final coresColorScheme = ColorScheme.fromSwatch(
+  //     primarySwatch: Colors.amber, backgroundColor: Colors.purple);
+
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Projeto Tec!Eventos',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        useMaterial3: false,
       ),
       home: const Splash(),
     );
