@@ -1,20 +1,19 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
-import 'package:flutter_credit_card/credit_card_form.dart';
-import 'package:flutter_credit_card/credit_card_model.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tec_eventos/features/payment/presentation/providers/payment_provider.dart';
 
-import 'package:tec_eventos/pages/paginas_aluno/pagamento/metodospagamento.dart';
-
-class CardsComponent extends StatefulWidget {
+/// Componente que exibe a tela de cadastro de novo cartão de crédito do Aluno.
+class CardsComponent extends ConsumerStatefulWidget {
+  /// Construtor padrão.
   const CardsComponent({Key? key}) : super(key: key);
 
   @override
-  State<CardsComponent> createState() => _CardsComponentState();
+  ConsumerState<CardsComponent> createState() => _CardsComponentState();
 }
 
-class _CardsComponentState extends State<CardsComponent> {
+class _CardsComponentState extends ConsumerState<CardsComponent> {
   String cardNumber = '';
   String expiryDate = '';
   String cardHolderName = '';
@@ -23,6 +22,62 @@ class _CardsComponentState extends State<CardsComponent> {
   bool isCvvFocused = false;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  void onCreditCardModelChange(CreditCardModel? creditCardModel) {
+    if (creditCardModel == null) return;
+    setState(() {
+      cardNumber = creditCardModel.cardNumber;
+      expiryDate = creditCardModel.expiryDate;
+      cardHolderName = creditCardModel.cardHolderName;
+      cvvCode = creditCardModel.cvvCode;
+      isCvvFocused = creditCardModel.isCvvFocused;
+    });
+  }
+
+  Future<void> _adicionarCartao() async {
+    if (!formKey.currentState!.validate()) {
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.error,
+        animType: AnimType.topSlide,
+        title: "Inválido",
+        desc: "Opss... Algo deu errado. Verifique os dados do cartão.",
+        btnOkOnPress: () {},
+        btnOkColor: const Color(0xff1565C0),
+      ).show();
+      return;
+    }
+
+    try {
+      await ref.read(savedPaymentMethodsListProvider.notifier).addCard(
+            cardHolder: cardHolderName,
+            cardNumber: cardNumber,
+            expiryDate: expiryDate,
+            cvv: cvvCode,
+          );
+
+      if (mounted) {
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.success,
+          animType: AnimType.topSlide,
+          title: "Válido",
+          desc: "Cartão adicionado com sucesso",
+          btnOkText: "Confirmar",
+          btnOkOnPress: () {
+            Navigator.pop(context);
+          },
+          btnOkColor: const Color(0xff1565C0),
+        ).show();
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Erro ao salvar cartão: $e')),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +100,10 @@ class _CardsComponentState extends State<CardsComponent> {
         title: const Text(
           "Adicionar Cartão",
           style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 22),
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
+          ),
         ),
         centerTitle: true,
       ),
@@ -53,9 +111,7 @@ class _CardsComponentState extends State<CardsComponent> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
-              height: 41,
-            ),
+            const SizedBox(height: 41),
             Stack(
               children: [
                 Container(
@@ -71,7 +127,7 @@ class _CardsComponentState extends State<CardsComponent> {
                 ),
                 Column(
                   children: [
-                    Container(
+                    SizedBox(
                       height: 230,
                       child: CreditCardWidget(
                         cardNumber: cardNumber,
@@ -86,62 +142,61 @@ class _CardsComponentState extends State<CardsComponent> {
                         obscureCardNumber: false,
                         obscureCardCvv: false,
                         textStyle: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold),
-                        onCreditCardWidgetChange: (CreditCardBrand) {},
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        onCreditCardWidgetChange: (brand) {},
                       ),
                     ),
-                    const SizedBox(
-                      height: 30,
-                    ),
+                    const SizedBox(height: 30),
                     Container(
                       padding: const EdgeInsets.only(bottom: 30),
                       width: MediaQuery.of(context).size.width / 1.10,
                       decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: Colors.transparent,
-                            width: 3,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: const Offset(0, 3),
-                            )
-                          ]),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.transparent, width: 3),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: const Offset(0, 3),
+                          )
+                        ],
+                      ),
                       child: CreditCardForm(
                         cardNumber: cardNumber,
                         expiryDate: expiryDate,
                         cardHolderName: cardHolderName,
                         cvvCode: cvvCode,
                         onCreditCardModelChange: onCreditCardModelChange,
-                        themeColor: Colors.white,
                         formKey: formKey,
-                        cardNumberDecoration: const InputDecoration(
+                        inputConfiguration: const InputConfiguration(
+                          cardNumberDecoration: InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Cartão',
-                            hintText: 'xxxx xxxx xxxx xxxx'),
-                        expiryDateDecoration: const InputDecoration(
+                            hintText: 'xxxx xxxx xxxx xxxx',
+                          ),
+                          expiryDateDecoration: InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'Data expedição',
-                            hintText: 'xx/xx'),
-                        cvvCodeDecoration: const InputDecoration(
+                            hintText: 'xx/xx',
+                          ),
+                          cvvCodeDecoration: InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: 'CVV',
-                            hintText: 'xxx'),
-                        cardHolderDecoration: const InputDecoration(
-                          border: UnderlineInputBorder(),
-                          labelText: 'Nome',
+                            hintText: 'xxx',
+                          ),
+                          cardHolderDecoration: InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: 'Nome',
+                          ),
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 30,
-                    ),
+                    const SizedBox(height: 30),
                     ElevatedButton.icon(
                       icon: const Icon(
                         Icons.add,
@@ -149,50 +204,17 @@ class _CardsComponentState extends State<CardsComponent> {
                         size: 20,
                       ),
                       style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.only(
-                            top: 18, bottom: 18, left: 90, right: 90),
+                        padding: const EdgeInsets.only(top: 18, bottom: 18, left: 90, right: 90),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0),
                         ),
-                        primary: const Color(0xff1565C0),
+                        backgroundColor: const Color(0xff1565C0),
                       ),
                       label: const Text(
                         "Adicionar novo cartão",
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.w800),
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800),
                       ),
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          // String cardNumberValue = cardNumber;
-                          AwesomeDialog(
-                            context: context,
-                            dialogType: DialogType.success,
-                            animType: AnimType.topSlide,
-                            title: "Válido",
-                            btnOkText: "Confirmar",
-                            desc: "Cartão adicionado com sucesso",
-                            btnOkOnPress: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MetodosPagamento()),
-                              );
-                            },
-                            btnOkColor: const Color(0xff1565C0),
-                          ).show();
-                        } else {
-                          AwesomeDialog(
-                            context: context,
-                            dialogType: DialogType.error,
-                            animType: AnimType.topSlide,
-                            title: "Inválido",
-                            desc: "Opss... Algo deu errado",
-                            btnOkOnPress: () {},
-                            btnCancelOnPress: () {},
-                            btnOkColor: const Color(0xff1565C0),
-                          ).show();
-                        }
-                      },
+                      onPressed: _adicionarCartao,
                     ),
                   ],
                 ),
@@ -202,15 +224,5 @@ class _CardsComponentState extends State<CardsComponent> {
         ),
       ),
     );
-  }
-
-  void onCreditCardModelChange(CreditCardModel creditCardModel) {
-    setState(() {
-      cardNumber = creditCardModel.cardNumber;
-      expiryDate = creditCardModel.expiryDate;
-      cardHolderName = creditCardModel.cardHolderName;
-      cvvCode = creditCardModel.cvvCode;
-      isCvvFocused = creditCardModel.isCvvFocused;
-    });
   }
 }

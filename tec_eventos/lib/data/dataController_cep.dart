@@ -15,5 +15,6 @@ class CepController {
     } catch (e) {
       rethrow;
     }
+    return null;
   }
 }

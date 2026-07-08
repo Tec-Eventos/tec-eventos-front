@@ -1,28 +1,69 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:tec_eventos/cores.dart';
-import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/pages/paginas_aluno/perfil/editarPerfil/editar_perfil.dart';
+import 'package:tec_eventos/core/theme/cores.dart';
+import 'package:tec_eventos/core/theme/fontes.dart';
+import 'package:tec_eventos/features/profile/domain/entities/user_profile.dart';
+import 'package:tec_eventos/features/profile/presentation/providers/profile_provider.dart';
+import 'package:tec_eventos/features/profile/presentation/screens/edit_profile_screen.dart';
 
-//classe da descricao de perfil do usuário / appbar
-class PerfilDescricao extends StatefulWidget {
+/// Exibe o cabeçalho e descrição do perfil do usuário em formato SliverAppBar.
+///
+/// Consome o [profileProvider] para exibir foto, nome, seguidores, e-mail e localização.
+class PerfilDescricao extends ConsumerWidget {
+  /// Construtor padrão da descrição do perfil.
   const PerfilDescricao({Key? key}) : super(key: key);
 
-  @override
-  State<PerfilDescricao> createState() => _PerfilDescricaoState();
-}
+  /// Retorna o [ImageProvider] apropriado baseado no caminho da imagem de avatar.
+  ImageProvider _getAvatarImage(String path) {
+    if (path.startsWith('assets/')) {
+      return AssetImage(path);
+    } else {
+      return FileImage(File(path));
+    }
+  }
 
-class _PerfilDescricaoState extends State<PerfilDescricao> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final profileState = ref.watch(profileProvider);
+
+    return profileState.when(
+      data: (profile) => _buildAppBar(context, profile),
+      loading: () => const SliverAppBar(
+        backgroundColor: Cores.azulBebe,
+        expandedHeight: 85,
+        bottom: PreferredSize(
+          preferredSize: Size.square(250),
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
+        ),
+      ),
+      error: (error, _) => SliverAppBar(
+        backgroundColor: Cores.azulBebe,
+        expandedHeight: 85,
+        bottom: PreferredSize(
+          preferredSize: const Size.square(250),
+          child: Center(
+            child: Text('Erro ao carregar dados: $error'),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAppBar(BuildContext context, UserProfile profile) {
     return SliverAppBar(
       floating: false,
       backgroundColor: Cores.azulBebe,
       expandedHeight: 85,
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(40),
-              bottomRight: Radius.circular(40))),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(40),
+          bottomRight: Radius.circular(40),
+        ),
+      ),
       leading: IconButton(
         icon: const Icon(
           Icons.arrow_back_ios,
@@ -33,7 +74,6 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
           Navigator.pop(context);
         },
       ),
-
       actions: [
         Builder(
           builder: (BuildContext context) {
@@ -53,38 +93,35 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
           },
         ),
       ],
-
-      //inicio das informações do usuário
       bottom: PreferredSize(
         preferredSize: const Size.square(250),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //descrição do perfil dentro do PrefferedSize
             GestureDetector(
               onTap: () {
                 Navigator.push(
-                    context,
-                    PageTransition(
-                        child: const EditProfileUser(),
-                        type: PageTransitionType.rightToLeft));
+                  context,
+                  PageTransition(
+                    child: const EditProfileUser(),
+                    type: PageTransitionType.rightToLeft,
+                  ),
+                );
               },
-              child: const CircleAvatar(
+              child: CircleAvatar(
                 radius: 50.0,
-                backgroundImage: AssetImage("assets/imgPerfil.png"),
+                backgroundImage: _getAvatarImage(profile.avatarUrl),
               ),
             ),
-
             SizedBox(height: MediaQuery.of(context).size.height / 50),
             Text(
-              'Nome Usuário',
-              style: TextStyle(
+              profile.name,
+              style: const TextStyle(
                 fontFamily: Fontes.raleway,
                 fontSize: 16.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
-
             SizedBox(height: MediaQuery.of(context).size.height / 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -92,14 +129,14 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
                 Column(
                   children: [
                     Text(
-                      "1000",
-                      style: TextStyle(
+                      profile.followingCount.toString(),
+                      style: const TextStyle(
                         fontFamily: Fontes.raleway,
                         fontSize: 12.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
+                    const Text(
                       "Seguindo",
                       style: TextStyle(
                         fontFamily: Fontes.raleway,
@@ -108,20 +145,24 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
                     ),
                   ],
                 ),
-                const VerticalDivider(
-                  color: Colors.amber,
+                const SizedBox(
+                  height: 24,
+                  child: VerticalDivider(
+                    color: Colors.amber,
+                    thickness: 1.5,
+                  ),
                 ),
                 Column(
                   children: [
                     Text(
-                      "1000",
-                      style: TextStyle(
+                      profile.followersCount.toString(),
+                      style: const TextStyle(
                         fontFamily: Fontes.raleway,
                         fontSize: 12.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
+                    const Text(
                       "Seguidores",
                       style: TextStyle(
                         fontFamily: Fontes.raleway,
@@ -132,32 +173,29 @@ class _PerfilDescricaoState extends State<PerfilDescricao> {
                 )
               ],
             ),
-
             SizedBox(height: MediaQuery.of(context).size.height / 50),
-
             Text(
-              'usuario@gmail.com',
-              style: TextStyle(
+              profile.email,
+              style: const TextStyle(
                 fontFamily: Fontes.raleway,
                 fontSize: 13.0,
               ),
             ),
-
             SizedBox(height: MediaQuery.of(context).size.height / 200),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.location_on_outlined),
+                const Icon(Icons.location_on_outlined, size: 16),
+                const SizedBox(width: 4),
                 Text(
-                  "Marília-SP",
-                  style: TextStyle(
+                  profile.city,
+                  style: const TextStyle(
                     fontFamily: Fontes.raleway,
                     fontSize: 13.0,
                   ),
                 ),
               ],
             ),
-
             SizedBox(height: MediaQuery.of(context).size.height / 40),
           ],
         ),

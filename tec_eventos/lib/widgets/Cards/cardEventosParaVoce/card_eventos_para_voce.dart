@@ -1,244 +1,218 @@
 import 'package:flutter/material.dart';
-import 'package:tec_eventos/cores.dart';
-import 'package:tec_eventos/data/http/http_client.dart';
-import 'package:tec_eventos/data/repositories/events_repository.dart';
-import 'package:tec_eventos/data/repositories/inst_events_repository.dart';
-import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/utils/stores/events_store.dart';
-import 'package:tec_eventos/utils/stores/inst_event_store.dart';
-import 'package:tec_eventos/widgets/Cards/cardLoading/card_loading.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:tec_eventos/core/theme/cores.dart';
+import 'package:tec_eventos/core/theme/fontes.dart';
+import 'package:tec_eventos/features/events/domain/entities/app_event.dart';
+import 'package:tec_eventos/features/events/presentation/providers/events_provider.dart';
+import 'package:tec_eventos/pages/paginas_aluno/pag_inscricao_evento/info_evento/info_evento.dart';
 
-class RowCardEventosParaVoce extends StatefulWidget {
+/// Exibe uma linha horizontal com os cartões de eventos disponíveis para o Aluno.
+///
+/// Consome reativamente o [alunoEventsListProvider] para atualizar a exibição.
+class RowCardEventosParaVoce extends ConsumerWidget {
+  /// Construtor padrão.
   const RowCardEventosParaVoce({super.key});
 
   @override
-  State<RowCardEventosParaVoce> createState() => _RowCardEventosParaVoceState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final eventsAsync = ref.watch(alunoEventsListProvider);
 
-class _RowCardEventosParaVoceState extends State<RowCardEventosParaVoce> {
-  final InstEventsStore store = InstEventsStore(
-    repository: InstEventsRepository(
-      client: HttpClient(),
-    ),
-  );
-
-  @override
-  void initState() {
-    super.initState();
-    store.getEventsInst();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
-      child: AnimatedBuilder(
-          animation:
-              Listenable.merge([store.isLoading, store.erro, store.state]),
-          builder: (context, child) {
-            if (store.isLoading.value) {
-              return const Center(child: CircularProgressIndicator());
-            }
-
-            if (store.erro.value.isNotEmpty) {
-              return Center(
+      child: eventsAsync.when(
+        data: (events) {
+          if (events.isEmpty) {
+            return const Center(
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 24.0),
                 child: Text(
-                  store.erro.value,
+                  'Nenhum evento disponível no momento.',
                   style: TextStyle(
                     color: Cores.preto,
                     fontWeight: FontWeight.w600,
-                    fontSize: 20,
                     fontFamily: Fontes.raleway,
+                    fontSize: 16,
                   ),
                 ),
-              );
-            }
+              ),
+            );
+          }
 
-            if (store.state.value.isEmpty) {
-              return Center(
-                child: Text(
-                  'Nenhum evento inscrito',
-                  style: TextStyle(
-                      color: Cores.preto,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: Fontes.raleway,
-                      fontSize: 20),
-                ),
-              );
-            } else {
-              return SizedBox(
-                height: 330,
-                child: ListView.separated(
-                  separatorBuilder: (context, index) => const Divider(),
-                  // padding: const EdgeInsets.all(16),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: store.state.value.length,
-                  itemBuilder: (_, index) {
-                    final item = store.state.value[index];
-
-                    if (item != null) {
-                      return CardEventosParaVoce(
-                        imagemEvento: item.imagemEvento,
-                        nomeEvento: item.nomeEvento,
-                      );
-                    } else {
-                      return Container();
-                    }
-                  },
-                ),
-              );
-            }
-          }),
+          return SizedBox(
+            height: 330,
+            child: ListView.separated(
+              separatorBuilder: (context, index) => const SizedBox(width: 12),
+              scrollDirection: Axis.horizontal,
+              itemCount: events.length,
+              itemBuilder: (context, index) {
+                final event = events[index];
+                return CardEventosParaVoce(event: event);
+              },
+            ),
+          );
+        },
+        loading: () => const Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 24.0),
+            child: CircularProgressIndicator(),
+          ),
+        ),
+        error: (error, _) => Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24.0),
+            child: Text(
+              'Erro ao carregar eventos: $error',
+              style: const TextStyle(
+                color: Colors.red,
+                fontWeight: FontWeight.w600,
+                fontSize: 14,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
 
-class CardEventosParaVoce extends StatefulWidget {
-  const CardEventosParaVoce(
-      {super.key, required this.imagemEvento, required this.nomeEvento});
+/// Cartão individual que exibe detalhes básicos de um evento.
+class CardEventosParaVoce extends StatelessWidget {
+  /// A entidade de evento a ser exibida.
+  final AppEvent event;
 
-  final String imagemEvento, nomeEvento;
+  /// Construtor padrão do cartão.
+  const CardEventosParaVoce({
+    super.key,
+    required this.event,
+  });
 
-  @override
-  State<CardEventosParaVoce> createState() => _CardEventosParaVoceState();
-}
-
-class _CardEventosParaVoceState extends State<CardEventosParaVoce> {
   @override
   Widget build(BuildContext context) {
     const urlImage = 'https://api-tec-eventos-i6hr.onrender.com/imagem/';
+
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: SizedBox(
         width: 219,
         child: Card(
-          margin: const EdgeInsets.only(top: 20),
           shadowColor: Cores.preto,
-          borderOnForeground: false,
           clipBehavior: Clip.hardEdge,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
           color: Colors.white,
-          elevation: 6,
-          child:
-              // COMPONENTES QUE VÃO ESTAR DENTRO DO CARD
-              Column(
+          elevation: 4,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  Image.network(
-                    urlImage + widget.imagemEvento,
-                    width: MediaQuery.of(context).size.width / 1,
-                    height: 126,
-                    fit: BoxFit.cover,
-                  ),
-                ],
+              Image.network(
+                urlImage + event.imagemEvento,
+                height: 126,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => Container(
+                  height: 126,
+                  color: Colors.grey.shade200,
+                  child: const Icon(Icons.image, color: Colors.grey),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      //NOME DA INSTITUIÇÃO
-                      SizedBox(
-                        child: Row(
-                          children: [
-                            Text(
-                              widget.nomeEvento,
-                              style: TextStyle(
-                                  fontFamily: Fontes.raleway,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: Cores.preto),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      event.nomeEvento,
+                      style: const TextStyle(
+                        fontFamily: Fontes.raleway,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Cores.preto,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 5),
+                    Row(
+                      children: [
+                        const Text(
+                          "Local:",
+                          style: TextStyle(
+                            fontFamily: Fontes.inter,
+                            fontSize: 12,
+                            color: Cores.preto,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            event.instituicao.isNotEmpty ? event.instituicao : "Marília, SP",
+                            style: const TextStyle(
+                              fontFamily: Fontes.inter,
+                              fontSize: 12,
+                              color: Cores.azul42A5F5,
                             ),
-                          ],
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Restantes:",
+                          style: TextStyle(
+                            fontFamily: Fontes.inter,
+                            fontSize: 12,
+                            color: Cores.preto,
+                          ),
+                        ),
+                        Text(
+                          "${event.quantidadeIngressos} vagas",
+                          style: const TextStyle(
+                            fontFamily: Fontes.inter,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Center(
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              child: InfoEvento(
+                                imagemEvento: event.imagemEvento,
+                                imagemOrganizacao: event.logoEvento,
+                                diaRealizacao: event.dataEvento,
+                                nomeEvento: event.nomeEvento,
+                                horarioRealizacao: event.horario,
+                                descricao: event.descricao,
+                                cdEvento: event.cdEvento,
+                                ingressos: event.quantidadeIngressos,
+                              ),
+                              type: PageTransitionType.rightToLeft,
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          "Saiba mais",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Cores.azul42A5F5,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                      const SizedBox(height: 5),
-                      //DIA QUE VAI ROLAR O EVENTO
-
-                      Row(
-                        children: [
-                          Text(
-                            "Local:",
-                            style: TextStyle(
-                                fontFamily: Fontes.inter,
-                                fontSize: 12,
-                                color: Cores.preto),
-                          ),
-                          const SizedBox(width: 10),
-                          Text(
-                            "Marília, SP",
-                            style: TextStyle(
-                                fontFamily: Fontes.inter,
-                                fontSize: 12,
-                                color: Cores.azul42A5F5),
-                          ),
-                        ],
-                      ),
-
-                      const SizedBox(height: 5),
-
-                      //DIA EM ESPECÍFICO, COM DATA E HORÁRIO
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Pessoas que se \ninscreveram:",
-                            style: TextStyle(
-                                fontFamily: Fontes.inter,
-                                fontSize: 12,
-                                color: Cores.preto),
-                          ),
-                          Stack(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 0),
-                                child: CircleAvatar(
-                                  child: Image.asset("assets/imgPerfil.png"),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: CircleAvatar(
-                                  child: Image.asset("assets/imgPerfil.png"),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 40),
-                                child: CircleAvatar(
-                                  child: Image.asset("assets/imgPerfil.png"),
-                                ),
-                              ),
-                              // Padding(
-                              //   padding: const EdgeInsets.only(
-                              //     left: 7,
-                              //   ),
-                              //   child: Text(
-                              //     "+5",
-                              //     textAlign: TextAlign.center,
-                              //     style: TextStyle(
-                              //         fontFamily: Fontes.inter,
-                              //         fontSize: 20,
-                              //         color: Cores.preto),
-                              //   ),
-                            ],
-                          )
-                        ],
-                      ),
-
-                      //BOTÃO PARA VER MAIS SOBRE O EVENTO
-                      TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Saiba mais",
-                            style: TextStyle(
-                                fontSize: 15, color: Cores.azul42A5F5),
-                          ))
-                    ]),
+                    )
+                  ],
+                ),
               ),
             ],
           ),

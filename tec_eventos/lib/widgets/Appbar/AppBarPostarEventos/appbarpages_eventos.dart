@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/data/repositories/postar_evento_repository.dart';
 import 'package:tec_eventos/utils/image_helper.dart';
 
 final imageHelper = ImageHelper();

@@ -44,7 +44,7 @@ class PrecosComponent extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(50.0),
           ),
-          primary: Color(0xff1565C0),
+          backgroundColor: Color(0xff1565C0),
         ),
       ),
     );
