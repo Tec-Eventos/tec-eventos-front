@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:get/get_utils/get_utils.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/data/repositories/postar_evento_repository.dart';
 
 class DialogQrCode extends StatelessWidget {
   const DialogQrCode({super.key, required this.controllerQrCode});

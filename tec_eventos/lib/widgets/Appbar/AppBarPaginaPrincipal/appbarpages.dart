@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/pages/paginas_aluno/perfil/perfil.dart';
+
+import 'package:tec_eventos/features/profile/presentation/screens/profile_screen.dart';
 
 class AppBarPages extends StatelessWidget {
   const AppBarPages({Key? key}) : super(key: key);
@@ -61,8 +62,8 @@ class AppBarPages extends StatelessWidget {
           onPressed: () {
             Navigator.push(
                 context,
-                PageTransition(
-                    child: const Perfil(),
+                 PageTransition(
+                    child: const ProfileScreen(),
                     type: PageTransitionType.rightToLeft));
           },
           icon: Icon(Icons.account_circle_outlined,

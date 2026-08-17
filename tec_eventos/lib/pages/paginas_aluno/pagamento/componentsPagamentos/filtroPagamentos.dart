@@ -25,7 +25,7 @@ class FiltroPagamento extends StatelessWidget {
            ElevatedButton(
              style: ElevatedButton.styleFrom(
                elevation: 0,
-               primary: isSelected ? Color(0xffE3F2FD) : Color(0xffE9E9E9),
+               backgroundColor: isSelected ? Color(0xffE3F2FD) : Color(0xffE9E9E9),
                shape: CircleBorder(),
              ),
              onPressed: onFilterSelected,

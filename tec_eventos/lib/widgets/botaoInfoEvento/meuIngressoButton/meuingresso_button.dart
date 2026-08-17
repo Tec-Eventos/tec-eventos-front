@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/pages/paginas_aluno/meuIngresso/meu_ingresso.dart';
+import 'package:tec_eventos/features/ingressos/presentation/screens/meu_ingresso_screen.dart';
 
 class MeuIngressoButton extends StatelessWidget {
   const MeuIngressoButton({super.key});
@@ -14,7 +14,7 @@ class MeuIngressoButton extends StatelessWidget {
         Navigator.push(
             context,
             PageTransition(
-                child: const MeuIngresso(),
+                child: const MeuIngressoScreen(),
                 type: PageTransitionType.bottomToTop));
       },
       child: Container(

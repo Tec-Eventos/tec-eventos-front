@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:tec_eventos/cores.dart';
-import 'package:tec_eventos/fontes.dart';
+import 'package:tec_eventos/core/theme/cores.dart';
+import 'package:tec_eventos/core/theme/fontes.dart';
 
-class BottomAppBarInstituicao extends StatefulWidget {
-  BottomAppBarInstituicao(
-      {Key? key, required this.paginaAtual, required this.pageController})
-      : super(key: key);
+/// Barra de navegação inferior da Instituição.
+class BottomAppBarInstituicao extends StatelessWidget {
+  /// O índice da página atualmente selecionada.
+  final int paginaAtual;
 
-  int paginaAtual;
-  PageController pageController;
+  /// Controlador de página associado ao PageView principal.
+  final PageController pageController;
 
-  @override
-  _BottomAppBarInstituicaoState createState() =>
-      _BottomAppBarInstituicaoState();
-}
+  /// Construtor padrão da barra de navegação.
+  const BottomAppBarInstituicao({
+    Key? key,
+    required this.paginaAtual,
+    required this.pageController,
+  }) : super(key: key);
 
-class _BottomAppBarInstituicaoState extends State<BottomAppBarInstituicao> {
   @override
   Widget build(BuildContext context) {
     double displayWidth = MediaQuery.of(context).size.width;
@@ -48,50 +49,51 @@ class _BottomAppBarInstituicaoState extends State<BottomAppBarInstituicao> {
             duration: const Duration(milliseconds: 400),
             tabBackgroundColor: Colors.grey[100]!,
             color: Cores.preto,
-            tabs: [
+            tabs: const [
               GButton(
                 icon: Icons.home_outlined,
                 text: 'Página Inicial',
                 textStyle: TextStyle(
-                    fontFamily: Fontes.raleway,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                    color: Cores.azul42A5F5),
+                  fontFamily: Fontes.raleway,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: Cores.azul42A5F5,
+                ),
               ),
               GButton(
                 icon: Icons.confirmation_num_outlined,
                 text: 'Eventos',
                 textStyle: TextStyle(
-                    fontFamily: Fontes.raleway,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                    color: Cores.azul42A5F5),
+                  fontFamily: Fontes.raleway,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: Cores.azul42A5F5,
+                ),
               ),
               GButton(
                 icon: Icons.notifications_none_outlined,
                 text: 'Notificação',
                 textStyle: TextStyle(
-                    fontFamily: Fontes.raleway,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                    color: Cores.azul42A5F5),
+                  fontFamily: Fontes.raleway,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: Cores.azul42A5F5,
+                ),
               ),
               GButton(
                 icon: Icons.settings_outlined,
                 text: 'Configurações',
                 textStyle: TextStyle(
-                    fontFamily: Fontes.raleway,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                    color: Cores.azul42A5F5),
+                  fontFamily: Fontes.raleway,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: Cores.azul42A5F5,
+                ),
               ),
             ],
-            selectedIndex: widget.paginaAtual,
+            selectedIndex: paginaAtual,
             onTabChange: (index) {
-              setState(() {
-                widget.paginaAtual = index;
-                widget.pageController.jumpToPage(index);
-              });
+              pageController.jumpToPage(index);
             },
           ),
         ),

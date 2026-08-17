@@ -86,6 +86,8 @@ class API {
       case DioExceptionType.connectionError:
         // TODO: Handle this case.
         break;
+      default:
+        break;
     }
 
     log("=====FIM ERRO=====");

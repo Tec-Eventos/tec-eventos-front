@@ -1,37 +1,46 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:provider/provider.dart';
-import 'package:tec_eventos/cores.dart';
-import 'package:tec_eventos/fontes.dart';
-import 'package:tec_eventos/pages/paginas_aluno/pagamento/metodospagamento.dart';
-import 'package:tec_eventos/utils/providers/aluno_provider.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tec_eventos/core/auth/auth_provider.dart';
+import 'package:tec_eventos/core/network/http_client_provider.dart';
+import 'package:tec_eventos/core/theme/cores.dart';
+import 'package:tec_eventos/core/theme/fontes.dart';
 
-class Inscrever extends StatelessWidget {
-  const Inscrever({super.key, required this.cdEvento});
+/// Botão de inscrição no Evento.
+///
+/// Consome o [authProvider] para obter o RM do aluno autenticado
+/// e o [httpClientProvider] para realizar a requisição à API.
+class Inscrever extends ConsumerWidget {
   final int cdEvento;
+
+  const Inscrever({
+    super.key,
+    required this.cdEvento,
+  });
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () async {
-        await inscrevendoAluno(context);
+        await _inscreverAluno(context, ref);
       },
       child: Container(
         height: 64,
-        decoration: BoxDecoration(
-            color: Cores.azul42A5F5,
-            borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(15), topLeft: Radius.circular(15))),
-        child: Center(
+        decoration: const BoxDecoration(
+          color: Cores.azul42A5F5,
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(15),
+            topLeft: Radius.circular(15),
+          ),
+        ),
+        child: const Center(
           child: Text(
             "Inscrever-se",
             style: TextStyle(
-                fontFamily: Fontes.raleway,
-                fontSize: 29,
-                fontWeight: FontWeight.bold,
-                color: Cores.branco),
+              fontFamily: Fontes.raleway,
+              fontSize: 29,
+              fontWeight: FontWeight.bold,
+              color: Cores.branco,
+            ),
             textAlign: TextAlign.center,
           ),
         ),
@@ -39,23 +48,47 @@ class Inscrever extends StatelessWidget {
     );
   }
 
-  Future<bool?> inscrevendoAluno(BuildContext context) async {
-    final cdevento = cdEvento;
-    final rmAluno = Provider.of<AlunoProvider>(context, listen: false).rmAluno;
-    final url = "http://192.168.1.112:8080/inscricaoEvento";
+  Future<void> _inscreverAluno(BuildContext context, WidgetRef ref) async {
+    final auth = ref.read(authProvider).value;
+    if (auth == null || !auth.isAuthenticated) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Faça login para se inscrever no evento.')),
+      );
+      return;
+    }
 
-    final body = {
-      "cd_evento": cdevento,
-      "rm_aluno": rmAluno,
-    };
+    final rmAluno = auth.rm;
+    if (rmAluno == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Apenas alunos podem se inscrever.')),
+      );
+      return;
+    }
 
-    final response = await http.post(Uri.parse(url),
-        body: jsonEncode(body), headers: {'Content-Type': 'application/json'});
+    try {
+      final client = ref.read(httpClientProvider);
+      await client.post('/inscricaoEvento', data: {
+        "cd_evento": cdEvento,
+        "rm_aluno": rmAluno,
+      });
 
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      print("Aluno inscrito! ${response.body}");
-    } else {
-      print("Alguma coisa deu errado");
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Inscrição realizada com sucesso!'),
+            backgroundColor: Colors.green,
+          ),
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Erro ao se inscrever: ${e.toString().replaceAll('Failure: ', '')}'),
+            backgroundColor: Cores.vermelho,
+          ),
+        );
+      }
     }
   }
 }

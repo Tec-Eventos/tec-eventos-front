@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
-import 'package:tec_eventos/cores.dart';
-import 'package:tec_eventos/fontes.dart';
+import 'package:tec_eventos/core/theme/cores.dart';
+import 'package:tec_eventos/core/theme/fontes.dart';
 import 'package:tec_eventos/data/models/inscritos_evento_model.dart';
 import 'package:tec_eventos/data/repositories/inscritos_repository.dart';
 import 'package:tec_eventos/data/repositories/presentes_repository.dart';
 
+/// Tela da instituição para visualizar a lista de participantes inscritos em um evento
+/// e controlar o lançamento de presenças em tempo real.
 class PageListaParticipantes extends StatefulWidget {
+  /// Construtor padrão da tela.
   const PageListaParticipantes({super.key});
 
   @override
@@ -15,10 +18,9 @@ class PageListaParticipantes extends StatefulWidget {
 }
 
 class _PageListaParticipantesState extends State<PageListaParticipantes> {
-  List<InscritosEventosModel> selecionadas = [];
+  final List<InscritosEventosModel> selecionadas = [];
   late List<InscritosEventosModel> listPresenca;
 
-  //variáveis de repositório
   late PresentesRepository presentes;
   late InscritosRepository inscritosRepository;
 
@@ -36,13 +38,13 @@ class _PageListaParticipantesState extends State<PageListaParticipantes> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios_sharp,
             size: 20,
             color: Cores.preto,
           ),
         ),
-        title: Text(
+        title: const Text(
           "LISTA",
           style: TextStyle(
             fontFamily: Fontes.raleway,
@@ -54,25 +56,25 @@ class _PageListaParticipantesState extends State<PageListaParticipantes> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(
+            icon: const Icon(
               Icons.qr_code_2_outlined,
               color: Cores.preto,
             ),
           )
         ],
         bottom: PreferredSize(
-            preferredSize: const Size(0, 50),
-            child: Center(
-                child: Container(
+          preferredSize: const Size(0, 50),
+          child: Center(
+            child: Container(
               height: 40,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
                     color: Cores.azul1565C0,
                   ),
                 ),
               ),
-              child: Text(
+              child: const Text(
                 "Participantes",
                 style: TextStyle(
                   fontFamily: Fontes.ralewayBold,
@@ -80,174 +82,178 @@ class _PageListaParticipantesState extends State<PageListaParticipantes> {
                   fontSize: 20,
                 ),
               ),
-            ))),
+            ),
+          ),
+        ),
       ),
       body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         scrollDirection: Axis.vertical,
         children: [
           SizedBox(
             height: 200,
             child: ListView.separated(
-                itemBuilder: (BuildContext context, int inscritos) {
-                  return ListTile(
-                    selected: selecionadas.contains(listPresenca[inscritos]),
-                    selectedTileColor: Colors.indigo[50],
-                    onTap: () {
-                      setState(() {
-                        (selecionadas.contains(listPresenca[inscritos]))
-                            ? selecionadas.remove(listPresenca[inscritos])
-                            : selecionadas.add(listPresenca[inscritos]);
-                      });
+              itemBuilder: (BuildContext context, int index) {
+                final item = listPresenca[index];
+                final isSelected = selecionadas.contains(item);
 
-                      print(selecionadas);
-                    },
-                    autofocus: true,
-                    dense: true,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        side: BorderSide(
+                return ListTile(
+                  selected: isSelected,
+                  selectedTileColor: Colors.indigo[50],
+                  onTap: () {
+                    setState(() {
+                      if (isSelected) {
+                        selecionadas.remove(item);
+                      } else {
+                        selecionadas.add(item);
+                      }
+                    });
+                  },
+                  autofocus: true,
+                  dense: true,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    side: const BorderSide(
+                      color: Cores.preto,
+                    ),
+                  ),
+                  visualDensity: VisualDensity.comfortable,
+                  titleAlignment: ListTileTitleAlignment.center,
+                  leading: const CircleAvatar(
+                    backgroundImage: AssetImage("assets/imgPerfil.png"),
+                  ),
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        item.nomeAluno,
+                        style: const TextStyle(
                           color: Cores.preto,
-                        )),
-                    visualDensity: VisualDensity.comfortable,
-                    titleAlignment: ListTileTitleAlignment.center,
-                    leading: const CircleAvatar(
-                      //usar como background, o Image.network, que retornará a url da imagem da api.
-
-                      backgroundImage: AssetImage("assets/imgPerfil.png"),
-                    ),
-                    title: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          listPresenca[inscritos].nomeAluno,
-                          style: TextStyle(
-                            color: Cores.preto,
-                            fontFamily: Fontes.raleway,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 15,
-                          ),
+                          fontFamily: Fontes.raleway,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
                         ),
-                        Text(
-                          " - ${listPresenca[inscritos].rmAluno}",
-                          style: TextStyle(
-                            color: Cores.preto,
-                            fontFamily: Fontes.inter,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 13,
-                          ),
-                        ),
-                        if (presentes.lista
-                            .contains(listPresenca[inscritos])) ...[
-                          Icon(
-                            Icons.circle,
-                            color: Cores.azul42A5F5,
-                            size: 8,
-                          )
-                        ]
-                      ],
-                    ),
-                    subtitle: Text(
-                      "Aluno",
-                      style: TextStyle(
-                        color: Cores.preto,
-                        fontFamily: Fontes.raleway,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
                       ),
+                      Text(
+                        " - ${item.rmAluno}",
+                        style: const TextStyle(
+                          color: Cores.preto,
+                          fontFamily: Fontes.inter,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 13,
+                        ),
+                      ),
+                      if (presentes.lista.contains(item)) ...[
+                        const SizedBox(width: 5),
+                        const Icon(
+                          Icons.circle,
+                          color: Cores.azul42A5F5,
+                          size: 8,
+                        )
+                      ]
+                    ],
+                  ),
+                  subtitle: const Text(
+                    "Aluno",
+                    style: TextStyle(
+                      color: Cores.preto,
+                      fontFamily: Fontes.raleway,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14,
                     ),
-                    trailing: selecionadas.contains(listPresenca[inscritos])
-                        ? CircleAvatar(
-                            backgroundColor: Cores.verde,
-                            child: Icon(Icons.check, color: Cores.branco),
-                          )
-                            .animate()
-                            .fade(duration: const Duration(milliseconds: 100))
-                        : null,
-                  );
-                },
-                padding: const EdgeInsets.only(top: 10),
-                separatorBuilder: (_, __) => Divider(),
-                itemCount: listPresenca.length),
-          ),
-          OutlinedButton(
-              onPressed: () {
-                presentes.saveAll(selecionadas);
-                // setState(() {
-                //   selecionadas = [];
-                // });
+                  ),
+                  trailing: isSelected
+                      ? CircleAvatar(
+                          backgroundColor: Cores.verde,
+                          child: const Icon(Icons.check, color: Cores.branco),
+                        ).animate().fade(duration: const Duration(milliseconds: 100))
+                      : null,
+                );
               },
-              child: Text("Iniciar evento")),
-          Text("Presenças confirmadas"),
-          Consumer<PresentesRepository>(builder: (context, presentes, child) {
-            return presentes.lista.isEmpty
-                ? const ListTile(
-                    leading: Icon(Icons.person),
-                    title: Text("Evento não iniciado"),
-                  )
-                : SizedBox(
-                    height: 500,
-                    child: ListView.builder(
+              padding: const EdgeInsets.only(top: 10),
+              separatorBuilder: (_, __) => const Divider(),
+              itemCount: listPresenca.length,
+            ),
+          ),
+          const SizedBox(height: 20),
+          OutlinedButton(
+            onPressed: () {
+              presentes.saveAll(selecionadas);
+            },
+            child: const Text("Iniciar evento"),
+          ),
+          const SizedBox(height: 30),
+          const Text(
+            "Presenças confirmadas",
+            style: TextStyle(
+              fontFamily: Fontes.ralewayBold,
+              fontSize: 16,
+              color: Cores.preto,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Consumer<PresentesRepository>(
+            builder: (context, repo, child) {
+              return repo.lista.isEmpty
+                  ? const ListTile(
+                      leading: Icon(Icons.person),
+                      title: Text("Evento não iniciado"),
+                    )
+                  : SizedBox(
+                      height: 500,
+                      child: ListView.builder(
                         itemBuilder: (BuildContext context, int index) {
                           return CardPresencaConfirmada(
-                              inscritos: presentes.lista[index]);
+                            inscritos: repo.lista[index],
+                          );
                         },
-                        itemCount: presentes.lista.length),
-                  );
-
-            // : Column(
-            //     children: [
-            //       Expanded(
-            //         child: ListView.builder(
-            //             itemCount: presentes.lista.length,
-            //             itemBuilder: (_, index) {
-            //               return Text('oi');
-            //             }),
-            //       ),
-            //     ],
-            //   );
-          }),
+                        itemCount: repo.lista.length,
+                      ),
+                    );
+            },
+          ),
         ],
       ),
     );
   }
 }
 
-class CardPresencaConfirmada extends StatefulWidget {
-  InscritosEventosModel inscritos;
+/// Card de exibição para alunos que tiveram sua presença confirmada no evento.
+class CardPresencaConfirmada extends StatelessWidget {
+  /// O participante inscrito associado ao card.
+  final InscritosEventosModel inscritos;
 
-  CardPresencaConfirmada({super.key, required this.inscritos});
+  /// Construtor padrão do card de presença confirmada.
+  const CardPresencaConfirmada({
+    super.key,
+    required this.inscritos,
+  });
 
-  @override
-  State<CardPresencaConfirmada> createState() => _CardPresencaConfirmadaState();
-}
-
-class _CardPresencaConfirmadaState extends State<CardPresencaConfirmada> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: SizedBox(
-        width: MediaQuery.of(context).size.width / 1,
+        width: MediaQuery.of(context).size.width,
         child: ListTile(
           autofocus: true,
           dense: true,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-              side: BorderSide(
-                color: Cores.preto,
-              )),
+            borderRadius: BorderRadius.circular(15),
+            side: const BorderSide(
+              color: Cores.preto,
+            ),
+          ),
           visualDensity: VisualDensity.comfortable,
           titleAlignment: ListTileTitleAlignment.center,
           leading: const CircleAvatar(
-            //usar como background, o Image.network, que retornará a url da imagem da api.
             backgroundImage: AssetImage("assets/imgPerfil.png"),
           ),
           title: Row(
             children: [
               Text(
-                widget.inscritos.nomeAluno,
-                style: TextStyle(
+                inscritos.nomeAluno,
+                style: const TextStyle(
                   color: Cores.preto,
                   fontFamily: Fontes.raleway,
                   fontWeight: FontWeight.w600,
@@ -255,8 +261,8 @@ class _CardPresencaConfirmadaState extends State<CardPresencaConfirmada> {
                 ),
               ),
               Text(
-                " - ${widget.inscritos.rmAluno}",
-                style: TextStyle(
+                " - ${inscritos.rmAluno}",
+                style: const TextStyle(
                   color: Cores.preto,
                   fontFamily: Fontes.raleway,
                   fontWeight: FontWeight.w600,
@@ -265,7 +271,7 @@ class _CardPresencaConfirmadaState extends State<CardPresencaConfirmada> {
               ),
             ],
           ),
-          subtitle: Text(
+          subtitle: const Text(
             "Aluno",
             style: TextStyle(
               color: Cores.preto,
@@ -274,25 +280,11 @@ class _CardPresencaConfirmadaState extends State<CardPresencaConfirmada> {
               fontSize: 14,
             ),
           ),
-          trailing: Icon(
+          trailing: const Icon(
             Icons.check_rounded,
             size: 30,
             color: Cores.verdeClaro,
           ),
-
-          // PopupMenuButton(
-          //     icon: Icon(Icons.more_vert),
-          //     itemBuilder: (context) => [
-          //           PopupMenuItem(
-          //               child: ListTile(
-          //             title: Text("Marcar como não presente!"),
-          //             onTap: () {
-          //               Provider.of<PresentesRepository>(context,
-          //                       listen: false)
-          //                   .remove(widget.inscritos);
-          //             },
-          //           ))
-          //         ])
         ),
       ),
     );

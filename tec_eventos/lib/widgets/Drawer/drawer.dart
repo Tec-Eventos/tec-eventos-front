@@ -5,8 +5,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:tec_eventos/cores.dart';
 import 'package:tec_eventos/fontes.dart';
 import 'package:tec_eventos/pages/all_pages.dart';
-import 'package:tec_eventos/pages/paginas_aluno/eventos_inscritos/eventos_inscritos.dart';
-import 'package:tec_eventos/pages/paginas_aluno/perfil/perfil.dart';
+import 'package:tec_eventos/features/profile/presentation/screens/profile_screen.dart';
 
 class DrawerPages extends StatefulWidget {
   const DrawerPages({Key? key}) : super(key: key);
@@ -53,7 +52,7 @@ class _DrawerPagesState extends State<DrawerPages> {
                   Navigator.push(
                       context,
                       PageTransition(
-                          child: const Perfil(),
+                          child: const ProfileScreen(),
                           type: PageTransitionType.rightToLeft));
                 },
 
@@ -140,7 +139,7 @@ class _DrawerPagesState extends State<DrawerPages> {
                   Navigator.push(
                       context,
                       PageTransition(
-                          child: const EventosInscritos(),
+                          child: const AllPages(paginaAtual: 1),
                           type: PageTransitionType.rightToLeft));
                 },
               ),
